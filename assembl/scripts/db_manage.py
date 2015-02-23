@@ -10,13 +10,13 @@ import time
 from pyramid.paster import get_appsettings
 import transaction
 from sqlalchemy import create_engine as create_engine_sqla
+from sqlalchemy.orm import sessionmaker
 from alembic.migration import MigrationContext
 
 from ..lib.migration import bootstrap_db, bootstrap_db_data
 from ..lib.sqla import configure_engine, mark_changed
 from ..lib.zmqlib import configure_zmq
 from ..lib.config import set_config
-from sqlalchemy.orm import sessionmaker
 
 init_instructions = [
     "user_create('%(db_user)s', '%(db_password)s')",

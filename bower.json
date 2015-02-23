@@ -44,5 +44,8 @@
     "fixtures": "~1.5.3",
     "jquery-oembed-all": "https://github.com/swergas/jquery-oembed-all.git#initially-visible-option",
     "bootstrap-growl": "~1.1.0"
+  },
+  "resolutions": {
+    "underscore": "~1.7.0"
   }
 }

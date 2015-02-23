@@ -536,7 +536,7 @@ def bower_cmd(cmd, relative_path='.'):
             print "Bower not present, installing..."
             execute(install_bower)
         with cd(relative_path):
-            run(' '.join((node_cmd, bower_cmd, cmd)))
+            run(' '.join((node_cmd, bower_cmd, '--allow-root',cmd)))
 
 
 @task

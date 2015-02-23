@@ -63,22 +63,24 @@ def main(global_config, **settings):
             callback=authentication_callback)
         config.set_authentication_policy(auth_policy)
         config.set_authorization_policy(ACLAuthorizationPolicy())
-    # ensure default roles and permissions at startup
-    from models import get_session_maker
-    from .models.auth import (
-        populate_default_roles, populate_default_permissions)
-    with transaction.manager:
-        session = get_session_maker()
-        populate_default_roles(session)
-        populate_default_permissions(session)
-        from .lib.config import set_config
-        # aqsm needs config information
-        set_config(settings)
-        from .semantic.virtuoso_mapping import AssemblQuadStorageManager
-        aqsm = AssemblQuadStorageManager()
-        aqsm.ensure_discussion_storage(None)
-        # But we do want the registry settings later
-        set_config(None)
+
+    if settings.get('skip_ensure_default_roles_at_startup', False):
+        # ensure default roles and permissions at startup
+        from models import get_session_maker
+        from .models.auth import (
+            populate_default_roles, populate_default_permissions)
+        with transaction.manager:
+            session = get_session_maker()
+            populate_default_roles(session)
+            populate_default_permissions(session)
+            from .lib.config import set_config
+            # aqsm needs config information
+            set_config(settings)
+            from .semantic.virtuoso_mapping import AssemblQuadStorageManager
+            aqsm = AssemblQuadStorageManager()
+            aqsm.ensure_discussion_storage(None)
+            # But we do want the registry settings later
+            set_config(None)
 
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_static_view('widget', 'widget', cache_max_age=3600)

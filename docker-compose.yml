@@ -1,0 +1,36 @@
+#
+# Configuration for docker-compose
+#
+# Run: docker-compose up -d
+#
+
+
+assembl:
+    build: .
+    links:
+        - memcached
+        - redis
+        - virtuoso
+
+celeryimap:
+    image: assembl_assembl
+    command: "venv/bin/celery worker -l info -A assembl.tasks.imap
+                -c 1 -b 'redis://redis_1:6379/0' -Q imap"
+    # TODO: set a non-root user and remove this
+    environment:
+        C_FORCE_ROOT: 1
+    links:
+        - redis
+
+# TODO: other celery tasks
+
+virtuoso:
+    build: dockerfiles/virtuoso
+
+memcached:
+    # TODO what version of memcached is used in production?
+    image: memcached:latest
+
+redis:
+    # TODO what version of redis is used in production?
+    image: redis:latest
