@@ -1,5 +1,7 @@
 ## Assembl
 
+[![Join the chat at https://gitter.im/ImaginationForPeople/assembl](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ImaginationForPeople/assembl?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Coverage Status](https://coveralls.io/repos/ImaginationForPeople/assembl/badge.png)](https://coveralls.io/r/ImaginationForPeople/assembl)
 
 **Prerequisites**
