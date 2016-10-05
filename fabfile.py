@@ -5,20 +5,16 @@ from __future__ import with_statement
 from os import getenv
 from platform import system
 from time import sleep, strftime
-import pipes
 from ConfigParser import ConfigParser, SafeConfigParser, NoOptionError
-from StringIO import StringIO
+
 # Importing the "safe" os.path commands
 from os.path import join, dirname, split, normpath
 # Other calls to os.path rarely mostly don't work remotely. Use locally only.
 import os.path
-from distutils.version import LooseVersion
 
-import fabric.operations
-from fabric.operations import put, get
-from fabric.api import *
 from fabric.colors import yellow, cyan, red, green
 from fabric.contrib.files import *
+
 
 def realpath(path):
     return run("python -c 'import os,sys;print os.path.realpath(sys.argv[1])' " + path)
@@ -27,8 +23,10 @@ def realpath(path):
 def is_file(path):
     return run("test -f " + path, quiet=True).succeeded
 
+
 def is_dir(path):
     return run("test -d " + path, quiet=True).succeeded
+
 
 def getmtime(path):
     if env.mac:
@@ -47,8 +45,6 @@ def database_start():
     Makes sure the database server is running
     """
     sanitize_env()
-    if using_virtuoso():
-        execute(supervisor_process_start, 'virtuoso')
 
 
 @task
@@ -56,13 +52,11 @@ def supervisor_restart():
     "Restart supervisor itself."
     sanitize_env()
     with hide('running', 'stdout'):
-        supervisord_cmd_result = venvcmd("supervisorctl shutdown")
+        venvcmd("supervisorctl shutdown")
     # Another supervisor,upstart, etc may be watching it, give it a little while
     # Ideally we should wait, but I didn't have time to code it.
-    sleep(30);
-    # If supervisor is already started, this will do nothing
-    if using_virtuoso():
-        execute(supervisor_process_start, 'virtuoso')
+    sleep(30)
+
 
 def is_supervisor_running():
     with settings(warn_only=True), hide('running', 'stdout', 'stderr'):
@@ -71,6 +65,7 @@ def is_supervisor_running():
             return False
         else:
             return True
+
 
 def supervisor_process_start(process_name):
     """
@@ -99,12 +94,12 @@ def supervisor_process_start(process_name):
         match = status_regex.match(status_cmd_result)
         if match:
             status = match.group(1)
-            if(status == 'RUNNING'):
+            if status == 'RUNNING':
                 print(green("%s is running" % process_name))
                 break
-            elif(status == 'STOPPED'):
+            elif status == 'STOPPED':
                 venvcmd("supervisorctl start %s" % process_name)
-            elif(status == 'STARTING'):
+            elif status == 'STARTING':
                 print(status)
             else:
                 print("unexpected status: %s" % status)
@@ -136,15 +131,15 @@ def supervisor_process_stop(process_name):
         match = status_regex.match(status_cmd_result)
         if match:
             status = match.group(1)
-            if(status == 'STOPPED'):
+            if status == 'STOPPED':
                 print(green("%s is stopped" % process_name))
                 break
-            if(status == 'FATAL'):
+            if status == 'FATAL':
                 print(red("%s had a fatal error" % process_name))
                 break
-            elif(status == 'RUNNING'):
+            elif status == 'RUNNING':
                 venvcmd("supervisorctl stop %s" % process_name)
-            elif(status == 'STOPPING'):
+            elif status == 'STOPPING':
                 print(status)
             else:
                 print("unexpected status: %s" % status)
@@ -188,7 +183,9 @@ def filter_autostart_processes(processes):
 
 @task
 def app_majorupdate():
-    "This update is so major that assembl needs to be put in maintenance mode. Only for production."
+    """
+    This update is so major that assembl needs to be put in maintenance mode. Only for production.
+    """
     sanitize_env()
     execute(database_dump)
     execute(updatemaincode)
@@ -205,8 +202,11 @@ def app_majorupdate():
             venvcmd("supervisorctl reread")
             venvcmd("supervisorctl update")
             processes = filter_autostart_processes([
-                "celery_imap", "changes_router", "celery_notification_dispatch",
-                "celery_notify"])
+                "celery_imap",
+                "changes_router",
+                "celery_notification_dispatch",
+                "celery_notify"
+            ])
             venvcmd("supervisorctl restart " + " ".join(processes))
             maintenance_mode_stop()
     execute(webservers_reload)
@@ -233,7 +233,8 @@ def app_reload():
             venvcmd("supervisorctl restart " + " ".join(processes))
             if env.uses_uwsgi:
                 venvcmd("supervisorctl restart prod:uwsgi")
-    """ This will log everyone out, hopefully the code is now resilient enough
+    """
+    This will log everyone out, hopefully the code is now resilient enough
     that it isn't necessary
     if env.uses_memcache:
         flushmemcache()
@@ -257,12 +258,13 @@ def venv_prefix():
     return '. %(venvpath)s/bin/activate' % env
 
 
-def get_db_dump_name():
-    return 'assembl-virtuoso-backup.bp'
+# def get_db_dump_name():
+#    return 'assembl-virtuoso-backup.bp'
 
 
-def remote_db_path():
-    return join(env.projectpath, get_db_dump_name())
+# def remote_db_path():
+#:w
+#     return join(env.projectpath, get_db_dump_name())
 
 
 def printenv():
@@ -304,7 +306,7 @@ def update_pip_requirements(force_reinstall=False):
         cmd = "%(venvpath)s/bin/pip install --ignore-installed -r %(projectpath)s/requirements.txt" % env
     else:
         cmd = "%(venvpath)s/bin/pip install -r %(projectpath)s/requirements.txt" % env
-        run("yes w | %s" % cmd)
+    run("yes w | %s" % cmd)
 
 
 @task
@@ -335,7 +337,7 @@ def app_db_install():
     """
     execute(database_create)
     print(cyan('Installing database'))
-    venvcmd('assembl-db-manage %s bootstrap' % (env.ini_file))
+    venvcmd('assembl-db-manage %s bootstrap' % env.ini_file)
 
 
 @task
@@ -390,7 +392,9 @@ def compile_javascript():
 
 @task
 def compile_javascript_tests():
-    """Generates unified javascript test file"""
+    """
+    Generates unified javascript test file
+    """
     sanitize_env()
     with cd(env.projectpath):
         with cd('assembl/static/js'):
@@ -412,11 +416,10 @@ def tests():
 def bootstrap(projectpath):
     """
     Creates the virtualenv and install the app from env URL
-
     takes the same arguments at env_dev, but projectpath is mandatory
     """
     sanitize_env()
-    #env.projectname = "assembl"
+
     assert projectpath, "projectpath is mandatory, and corresponds to the directory where assembl will be installed"
 
     execute(skeleton_env, projectpath)
@@ -471,7 +474,7 @@ def updatemaincode():
 def app_setup():
     venvcmd('pip install -e ./')
     execute(setup_var_directory)
-    venvcmd('assembl-ini-files %s' % (env.ini_file))
+    venvcmd('assembl-ini-files %s' % env.ini_file)
 
 
 @task
@@ -508,21 +511,23 @@ def app_update_dependencies(force_reinstall=False):
     sanitize_env()
     execute(update_vendor_themes)
     execute(update_pip_requirements, force_reinstall=force_reinstall)
-    #Nodeenv is installed by python , so this must be after update_pip_requirements
+    # Nodeenv is installed by python , so this must be after update_pip_requirements
     execute(update_node, force_reinstall=force_reinstall)
-    #bower is installed by node, so this must be after update_node
+    # bower is installed by node, so this must be after update_node
     execute(update_bower)
     execute(update_bower_requirements, force_reinstall=force_reinstall)
     execute(update_npm_requirements, force_reinstall=force_reinstall)
+
 
 @task
 def app_reinstall_all_dependencies():
     """
     Reinstall all python and javascript dependencies.
-    Usefull after a OS upgrade, node upgrade, etc.
+    Useful after a OS upgrade, node upgrade, etc.
     """
     sanitize_env()
     execute(app_update_dependencies, force_reinstall=True)
+
 
 @task
 def update_node(force_reinstall=False):
@@ -536,13 +541,14 @@ def update_node(force_reinstall=False):
     match = node_version_cmd_regex.match(node_version_cmd_result)
     if not match or force_reinstall:
         print(cyan('Upgrading node'))
-        #Because otherwise node may be busy
+        # Because otherwise node may be busy
         supervisor_process_stop('dev:gulp')
         venvcmd("nodeenv --node=6.1.0 --npm=3.8.6 --python-virtualenv assembl/static/js")
         with cd(get_node_base_path()):
             venvcmd("npm install reinstall -g", chdir=False)
     else:
         print(green('Node version ok'))
+
 
 @task
 def app_compile():
@@ -576,12 +582,11 @@ def app_compile_noupdate():
 def app_compile_nodbupdate():
     """Separated mostly for tests, which need to run alembic manually"""
     sanitize_env()
-    if using_virtuoso():
-        execute(install_or_updgrade_virtuoso)
     execute(app_setup)
     execute(compile_stylesheets)
     execute(compile_messages)
     execute(compile_javascript)
+
 
 @task
 def webservers_reload():
@@ -589,18 +594,20 @@ def webservers_reload():
     Reload the webserver stack.
     """
     sanitize_env()
+    # TO FIX: apache_files is never initialized or set
+    # if env.uses_apache:
+    #     print(cyan("Reloading apache"))
+    #     # Apache (sudo is part of command line here because we don't have full
+    #     # sudo access
+    #     for f in apache_files:
+    #         if exists(f):
+    #             run('sudo %s reload' % (f,))
+    #             break
     if env.uses_apache:
-        print(cyan("Reloading apache"))
-        # Apache (sudo is part of command line here because we don't have full
-        # sudo access
-        for f in apache_files:
-            if exists(f):
-                run('sudo %s reload' % (f,))
-                break
+        print(red("Reload of apache is not yet implemented!"))
 
     if env.uses_ngnix:
-        # Nginx (sudo is part of command line here because we don't have full
-        # sudo access
+        # Nginx (sudo is part of command line here because we don't have full sudo access)
         print(cyan("Reloading nginx"))
         if exists('/etc/init.d/nginx'):
             run('sudo /etc/init.d/nginx reload')
@@ -612,12 +619,15 @@ def webservers_stop():
     """
     Stop all webservers
     """
+    # TO FIX: apache_files is never initialized or set
+    # if env.uses_apache:
+    #    # Apache
+    #    for f in apache_files:
+    #        if exists(f):
+    #            run('sudo %s stop' % (f,))
+    #            break
     if env.uses_apache:
-        # Apache
-        for f in apache_files:
-            if exists(f):
-                run('sudo %s stop' % (f,))
-                break
+        print(red("Stop of apache is not yet implemented!"))
 
     if env.uses_ngnix:
         # Nginx
@@ -631,12 +641,15 @@ def webservers_start():
     """
     Start all webservers
     """
+    # TO FIX: apache_files is never initialized or set
+    # if env.uses_apache:
+    #     # Apache
+    #     for f in apache_files:
+    #         if exists(f):
+    #             run('sudo %s start' % (f,))
+    #             break
     if env.uses_apache:
-        # Apache
-        for f in apache_files:
-            if exists(f):
-                run('sudo %s start' % (f,))
-                break
+        print(red("Start of apache is not yet implemented!"))
 
     if env.uses_ngnix:
         # Nginx
@@ -656,10 +669,11 @@ def install_basetools():
         run('cd /tmp; curl -O https://bootstrap.pypa.io/get-pip.py')
         sudo('python /tmp/get-pip.py')
         sudo('pip install virtualenv')
+        sudo('brew install gpg')
     else:
         sudo('apt-get install -y python-virtualenv python-pip')
         sudo('apt-get install -y git')
-        # sudo('apt-get install -y gettext')
+        sudo('apt-get install -y gnupg')
 
 
 def install_bower():
@@ -671,17 +685,21 @@ def update_bower():
     with cd(get_node_base_path()):
         venvcmd('npm update bower po2json', chdir=False)
 
+
 def get_node_base_path():
     return normpath(join(
             env.projectpath, 'assembl', 'static', 'js'))
+
 
 def get_node_modules_path():
     return normpath(join(
             get_node_base_path(), 'node_modules'))
 
+
 def get_node_bin_path():
     return normpath(join(
             get_node_modules_path(), '.bin'))
+
 
 def bower_cmd(cmd, relative_path='.'):
     with cd(env.projectpath):
@@ -694,6 +712,7 @@ def bower_cmd(cmd, relative_path='.'):
             print("Running a bower command in path %s" % relative_path)
             venvcmd(' '.join(("node", bower_cmd, '--allow-root', cmd)), chdir=False)
 
+
 def _bower_foreach_do(cmd):
     bower_cmd(cmd)
     bower_cmd(cmd, 'assembl/static/widget/card')
@@ -703,9 +722,12 @@ def _bower_foreach_do(cmd):
     bower_cmd(cmd, 'assembl/static/widget/creativity')
     bower_cmd(cmd, 'assembl/static/widget/share')
 
+
 @task
 def update_bower_requirements(force_reinstall=False):
-    """ Normally not called manually """
+    """
+    Normally not called manually
+    """
     sanitize_env()
     execute(_bower_foreach_do, 'prune')
     if force_reinstall:
@@ -713,9 +735,12 @@ def update_bower_requirements(force_reinstall=False):
     else:
         execute(_bower_foreach_do, 'update')
 
+
 @task
 def update_npm_requirements(force_reinstall=False):
-    """ Normally not called manually """
+    """
+    Normally not called manually
+    """
     sanitize_env()
     with cd(get_node_base_path()):
         if force_reinstall:
@@ -723,6 +748,7 @@ def update_npm_requirements(force_reinstall=False):
             venvcmd('reinstall', chdir=False)
         else:
             venvcmd('npm update', chdir=False)
+
 
 def _install_builddeps():
     print(cyan('Installing compilers and required libraries'))
@@ -755,8 +781,7 @@ def _install_builddeps():
         # glibtoolize, bison, flex, gperf are on osx by default.
         # brew does not know aclocal, autoheader...
         # They exist on macports, but do we want to install that?
-        if not (exists('/usr/lib/libiodbc.2.dylib') or
-                exists('/usr/local/lib/libiodbc.2.dylib')):
+        if not (exists('/usr/lib/libiodbc.2.dylib') or exists('/usr/local/lib/libiodbc.2.dylib')):
             run('brew install libiodbc')
             # may require a sudo
             if not run('brew link libiodbc', quiet=True):
@@ -768,13 +793,14 @@ def _install_builddeps():
         sudo('apt-get install -y automake bison flex gperf  libxml2-dev libssl-dev libreadline-dev gawk')
         sudo('apt-get install -y graphviz libgraphviz-dev pkg-config')
         sudo('apt-get install -y liblapack-dev libatlas-dev libblas-dev gfortran')
-        print "We are still trying to get some requirements right for linux,"\
-            "See http://www.scipy.org/scipylib/building/linux.html for details."
+        print("We are still trying to get some requirements right for linux,"
+              "See http://www.scipy.org/scipylib/building/linux.html for details.")
 
         # Runtime requirements (even in develop)
         sudo('apt-get install -y redis-server memcached unixodbc-dev')
     execute(install_database)
     execute(update_python_package_builddeps)
+
 
 @task
 def install_builddeps():
@@ -808,27 +834,31 @@ def start_edit_fontello_fonts():
     try:
         import requests
     except ImportError:
-        raise RuntimeError(
-            "Please 'pip install requests' in your main environment")
-    font_dir = join(
-        env.projectpath, 'assembl', 'static', 'css', 'fonts')
+        raise RuntimeError("Please 'pip install requests' in your main environment")
+    font_dir = join(env.projectpath, 'assembl', 'static', 'css', 'fonts')
     config_file = join(font_dir, 'config.json')
     id_file = join(font_dir, 'fontello.id')
-    r = requests.post("http://fontello.com",
-                    files={'config': open(config_file)})
+    r = requests.post(
+        "http://fontello.com",
+        files={
+            'config': open(config_file)
+        }
+    )
     if not r.ok:
         raise RuntimeError("Could not get the ID")
     fid = r.text
     with open(id_file, 'w') as f:
         f.write(fid)
-    if (env.host_string == 'localhost'):
+    if env.host_string == 'localhost':
         import webbrowser
         webbrowser.open('http://fontello.com/' + fid)
 
 
 @task
 def compile_fontello_fonts():
-    """Compile the fontello fonts once you have edited them in Fontello. Run start_edit_fontello_fonts first."""
+    """
+    Compile the fontello fonts once you have edited them in Fontello. Run start_edit_fontello_fonts first.
+    """
     sanitize_env()
     from zipfile import ZipFile
     from StringIO import StringIO
@@ -836,11 +866,8 @@ def compile_fontello_fonts():
     try:
         import requests
     except ImportError:
-        raise RuntimeError(
-            "Please 'pip install requests' in your main environment")
-    font_dir = join(
-        env.projectpath, 'assembl', 'static', 'css', 'fonts')
-    config_file = join(font_dir, 'config.json')
+        raise RuntimeError("Please 'pip install requests' in your main environment")
+    font_dir = join(env.projectpath, 'assembl', 'static', 'css', 'fonts')
     id_file = join(font_dir, 'fontello.id')
     assert os.path.exists(id_file)
     with open(id_file) as f:
@@ -872,14 +899,18 @@ def check_and_create_database_user():
         checkUser = venvcmd('assembl-pypsql -1 -u {user} -p {password} -n {host} "{command}"'.format(
             command="SELECT 1 FROM pg_roles WHERE rolname='%s'" % (env.db_user),
             python=env.venvpath + "/bin/python", password=env.db_password,
-            host=env.db_host, user=env.db_user, projectpath=env.projectpath))
+            host=env.db_host, user=env.db_user, projectpath=env.projectpath
+        ))
     if checkUser.failed:
         print(yellow("User does not exist"))
-        run_db_command(as_venvcmd('assembl-pypsql -u {db_user} "{command}"'.format(
-            command="CREATE USER %s WITH CREATEDB ENCRYPTED PASSWORD '%s'; COMMIT;" % (
-                env.db_user, env.db_password,),
-            db_user=system_db_user())))
-        # run_db_command("bash -c 'psql -n -d postgres -c \"CREATE USER %s WITH CREATEDB ENCRYPTED PASSWORD \\\'%s\\\';\"'" % (env.db_user, env.db_password))
+        run_db_command(
+            as_venvcmd(
+                'assembl-pypsql -u {db_user} "{command}"'.format(
+                    command="CREATE USER %s WITH CREATEDB ENCRYPTED PASSWORD '%s'; COMMIT;" % (env.db_user, env.db_password),
+                    db_user=system_db_user()
+                 )
+            )
+        )
     else:
         print(green("User exists and can connect"))
 
@@ -888,71 +919,48 @@ def database_create_postgres():
     execute(check_and_create_database_user)
 
     with settings(warn_only=True):
-        checkDatabase = venvcmd('assembl-pypsql -1 -u {user} -p {password} -n {host} "{command}"'.format(
-            command="SELECT 1 FROM pg_database WHERE datname='%s'" % (env.db_name),
-            password=env.db_password, host=env.db_host, user=env.db_user))
-    if checkDatabase.failed:
+        check_database = venvcmd(
+            'assembl-pypsql -1 -u {user} -p {password} -n {host} "{command}"'.format(
+                command="SELECT 1 FROM pg_database WHERE datname='%s'" % env.db_name,
+                password=env.db_password, host=env.db_host, user=env.db_user
+            )
+        )
+    if check_database.failed:
         print(yellow("Cannot connect to database, trying to create"))
-        createDatabase = run(
-        "PGPASSWORD=%s createdb --username=%s  --host=%s --encoding=UNICODE --template=template0 --owner=%s %s" % (
-            env.db_password, env.db_user, env.db_host, env.db_user, env.db_name))
-        if createDatabase.succeeded:
+        create_database = run(
+             "PGPASSWORD=%s createdb --username=%s  --host=%s --encoding=UNICODE --template=template0 --owner=%s %s" % (env.db_password,
+                                                                                                                        env.db_user,
+                                                                                                                        env.db_host,
+                                                                                                                        env.db_user,
+                                                                                                                        env.db_name)
+        )
+        if create_database.succeeded:
             print(green("Database created successfully!"))
     else:
         print(green("Database exists and user can connect"))
 
 
-
 @task
 def database_create():
-    """Create the database for this assembl instance"""
+    """
+    Create the database for this assembl instance
+    """
     sanitize_env()
-    if using_virtuoso():
-        execute(database_create_virtuoso)
-    else:
-        execute(database_create_postgres)
+    execute(database_create_postgres)
 
 
-def virtuoso_db_directory():
-    return join(env.projectpath, 'var/db')
-
-
-def database_dump_virtuoso():
-    if not exists(env.dbdumps_dir):
-        run('mkdir -m700 %s' % env.dbdumps_dir)
-
-    execute(supervisor_process_start, 'virtuoso')
-
-    filename = 'db_%s.bp' % strftime('%Y%m%d')
-    absolute_path = join(env.dbdumps_dir, filename)
-
-    # Dump
-    with prefix(venv_prefix()), cd(env.projectpath):
-        backup_output = venvcmd('assembl-db-manage %s backup' % (env.ini_file)
-            )
-    if backup_output.failed:
-        print(red('Failed virtuoso backup'))
-        exit()
-    backup_file_path = join(virtuoso_db_directory(), backup_output)
-    # Move to dbdumps_dir
-    with settings(warn_only=True):
-        move_result = run('mv %s %s' % (backup_file_path, absolute_path))
-    if move_result.failed:
-        print(red('Virtuoso backup did not error, but unable to move the file from %s to %s.\nYou may need to clear the file %s manually or your next backup will fail.' % (backup_file_path, absolute_path, backup_file_path)))
-        exit()
-
-    # Make symlink to latest
-    with cd(env.dbdumps_dir):
-        run('ln -sf %s %s' % (absolute_path, remote_db_path()))
-
-
-def database_dump_postgres():
+def database_dump_postgres(use_gpg):
     if not exists(env.dbdumps_dir):
         run('mkdir -m700 %s' % env.dbdumps_dir)
 
     filename = 'db_%s.sql' % strftime('%Y%m%d')
     compressed_filename = '%s.pgdump' % filename
     absolute_path = os.path.join(env.dbdumps_dir, compressed_filename)
+
+    # Encrypting backup file
+    if use_gpg:
+        run('gpg -c %s && rm -f %s' % (absolute_path, absolute_path))
+        absolute_path += '.gpg'
 
     # Dump
     with prefix(venv_prefix()), cd(env.projectpath):
@@ -965,43 +973,16 @@ def database_dump_postgres():
 
     # Make symlink to latest
     with cd(env.dbdumps_dir):
-        run('ln -sf %s %s' % (absolute_path, remote_db_path()))
+        run('ln -sf %s %s' % (absolute_path, absolute_path))
 
 
 @task
-def database_dump():
+def database_dump(use_gpg=True):
     """
     Dumps the database on remote site
     """
     sanitize_env()
-    if using_virtuoso():
-        database_dump_virtuoso()
-    else:
-        database_dump_postgres()
-
-
-@task
-def database_download():
-    """
-    Dumps and downloads the database from the target server
-    """
-    sanitize_env()
-    destination = join('./', get_db_dump_name())
-    if is_link(destination):
-        print('Clearing symlink at %s to make way for downloaded file' % (destination))
-        local('rm %s' % (destination))
-    execute(database_dump)
-    get(remote_db_path(), destination)
-
-
-@task
-def database_upload():
-    """
-    Uploads a local database backup to the target environment's server
-    """
-    sanitize_env()
-    if(env.wsginame != 'dev.wsgi'):
-        put(get_db_dump_name(), remote_db_path())
+    database_dump_postgres(use_gpg)
 
 
 @task
@@ -1010,81 +991,39 @@ def database_delete():
     Deletes the database instance
     """
     sanitize_env()
-    if(env.is_production_env is True):
+    if env.is_production_env is True:
         abort(red("You are not allowed to delete the database of a production " +
-                "environment.  If this is a server restore situation, you " +
-                "have to temporarily declare env.is_production_env = False " +
-                "in the environment"))
-    if using_virtuoso():
-        execute(database_delete_virtuoso)
-    else:
-        execute(database_delete_postgres)
+                  "environment.  If this is a server restore situation, you " +
+                  "have to temporarily declare env.is_production_env = False " +
+                  "in the environment"))
+    execute(database_delete_postgres)
 
-
-def database_delete_virtuoso():
-    execute(ensure_virtuoso_not_running)
-    with cd(virtuoso_db_directory()):
-        run('rm -f *.db *.trx *.lck *.trx *.pxa *.log')
 
 
 def database_delete_postgres():
     execute(check_and_create_database_user)
 
     with settings(warn_only=True), hide('stdout'):
-        checkDatabase = venvcmd('assembl-pypsql -1 -u {user} -p {password} -n {host} "{command}"'.format(
-            command="SELECT 1 FROM pg_database WHERE datname='%s'" % (env.db_name),
-            password=env.db_password, host=env.db_host, user=env.db_user))
+        checkDatabase = venvcmd(
+            'assembl-pypsql -1 -u {user} -p {password} -n {host} "{command}"'.format(
+                command="SELECT 1 FROM pg_database WHERE datname='%s'" % (env.db_name),
+                password=env.db_password, host=env.db_host, user=env.db_user
+            )
+        )
     if not checkDatabase.failed:
         print(yellow("Cannot connect to database, trying to create"))
-        deleteDatabase = run('PGPASSWORD=%s dropdb --username=%s %s' % (
-            env.db_password, env.db_user, env.db_name))
-        if deleteDatabase.succeeded:
+        delete_database = run('PGPASSWORD=%s dropdb --username=%s %s' % (env.db_password, env.db_user, env.db_name))
+        if delete_database.succeeded:
             print(green("Database deleted successfully!"))
     else:
         print(green("Database does not exist"))
 
 
-def database_restore_virtuoso():
-    if(env.is_production_env is True):
-        abort(red("You are not allowed to restore a database to a production " +
-                "environment.  If this is a server restore situation, you " +
-                "have to temporarily declare env.is_production_env = False " +
-                "in the environment"))
-    env.debug = True
-
-    # if(env.wsginame != 'dev.wsgi'):
-    #    execute(webservers_stop)
-    with prefix(venv_prefix()), cd(virtuoso_db_directory()):
-        venvcmd("supervisorctl stop virtuoso")
-    # Drop db
-    with cd(virtuoso_db_directory()), settings(warn_only=True):
-        run('rm -f *.db *.trx')
-
-    # Make symlink to latest
-    # this MUST match the code in db_manage or virtuoso will refuse to restore
-    restore_dump_prefix = "assembl-virtuoso-backup"
-    restore_dump_name = restore_dump_prefix + "1.bp"
-    with cd(virtuoso_db_directory()):
-        run('cat %s > %s' % (remote_db_path(), join(virtuoso_db_directory(), restore_dump_name)))
-    # Restore data
-    with prefix(venv_prefix()), cd(virtuoso_db_directory()):
-        venvcmd("supervisorctl stop virtuoso")
-        run("%s +configfile %s +restore-backup %s" % (
-            get_virtuoso_exec(), join(virtuoso_db_directory(), 'virtuoso.ini'),
-        restore_dump_prefix))
-
-    # clean up
-    with cd(virtuoso_db_directory()):
-        run('rm  %s' % (join(virtuoso_db_directory(), restore_dump_name)))
-
-    execute(supervisor_process_start, 'virtuoso')
-
-
-def database_restore_postgres():
+def database_restore_postgres(postgres_dump_file, use_gpg):
     assert(env.wsginame in ('staging.wsgi', 'dev.wsgi'))
     env.debug = True
 
-    if(env.wsginame != 'dev.wsgi'):
+    if env.wsginame != 'dev.wsgi':
         execute(webservers_stop)
 
     # Drop db
@@ -1101,6 +1040,15 @@ def database_restore_postgres():
     # Create db
     execute(database_create)
 
+    # We unencrypt the file
+    if not os.path.isfile(postgres_dump_file):
+        print("%s is not a valid postgres dump file or does not exist")
+        exit()
+
+    if use_gpg:
+        absolute_path = postgres_dump_file[:-4]
+        run('gpg -d --output %s %s && rm -f %s' % (absolute_path, postgres_dump_file, postgres_dump_file))
+
     # Restore data
     with prefix(venv_prefix()), cd(env.projectpath):
         run('PGPASSWORD=%s pg_restore --host=%s --dbname=%s -U%s --schema=public %s' % (
@@ -1108,23 +1056,20 @@ def database_restore_postgres():
                                                   env.db_host,
                                                   env.db_name,
                                                   env.db_user,
-                                                  remote_db_path())
-        )
+                                                  absolute_path
+        ))
 
-    if(env.wsginame != 'dev.wsgi'):
+    if env.wsginame != 'dev.wsgi':
         execute(webservers_start)
 
 
 @task
-def database_restore():
+def database_restore(postgres_dump_file='', use_gpg=True):
     """
     Restores the database backed up on the remote server
     """
     sanitize_env()
-    if using_virtuoso():
-        database_restore_virtuoso()
-    else:
-        database_restore_postgres()
+    database_restore_postgres(postgres_dump_file, use_gpg)
 
 
 def get_config():
@@ -1148,25 +1093,8 @@ def setup_var_directory():
     run('mkdir -p %s' % normpath(join(env.projectpath, 'var', 'db')))
 
 
-def get_virtuoso_root():
-    if env.vroot == 'system':
-        return '/usr/local/virtuoso-opensource' if env.mac else '/usr'
-    if env.vroot[0] != '/':
-        return normpath(join(env.projectpath, env.vroot))
-    return env.vroot
-
-
-def get_virtuoso_exec():
-    virtuoso_exec = join(get_virtuoso_root(), 'bin', 'virtuoso-t')
-    return virtuoso_exec
-
 def get_supervisord_conf():
     return join(env.projectpath, "supervisord.conf")
-
-def get_virtuoso_src():
-    if env.vsrc[0] != '/':
-        return normpath(join(env.projectpath, env.vsrc))
-    return env.vsrc
 
 
 @task
@@ -1180,89 +1108,6 @@ def flushmemcache():
         wait_str = "" if env.mac else "-q 2"
         run('echo "flush_all" | nc %s 127.0.0.1 11211' % wait_str)
 
-
-def ensure_virtuoso_not_running():
-    if not using_virtuoso():
-        return
-    # We do not want to start supervisord if not already running
-    pidfile = join(env.projectpath, 'var/run/supervisord.pid')
-    if not exists(pidfile):
-        return
-    pid = run('cat ' + pidfile)
-    # Really running or stale?
-    ps = run('ps ' + pid, quiet=True)
-    if ps.failed:
-        run('rm ' + pidfile)
-        return
-    execute(supervisor_process_stop, 'virtuoso')
-
-
-def virtuoso_reconstruct_save_db(try_backup=True):
-    execute(ensure_virtuoso_not_running)
-    with cd(virtuoso_db_directory()):
-        with settings(command_timeout=300):
-            if try_backup:
-                backup = run('%s +backup-dump +foreground' % (
-                    get_virtuoso_exec(),), quiet=True)
-                if not backup.failed:
-                    return
-                print "ERROR: Normal backup failed."
-            # these were created by previous attempt
-            run('rm -f virtuoso-temp.db virtuoso.pxa virtuoso.trx virtuoso.lck')
-            run('%s +crash-dump +foreground' % (get_virtuoso_exec(),))
-
-
-def virtuoso_reconstruct_restore_db(transition_6_to_7=False):
-    execute(ensure_virtuoso_not_running)
-    with cd(virtuoso_db_directory()):
-        run('mv virtuoso.db virtuoso_backup.db')
-    trflag = '+log6' if transition_6_to_7 else ''
-    with cd(virtuoso_db_directory()):
-        with settings(command_timeout=300):
-            r = run('%s +restore-crash-dump +foreground %s' % (
-                get_virtuoso_exec(), trflag), timeout=30)
-    execute(supervisor_process_start, 'virtuoso')
-    with cd(virtuoso_db_directory()):
-        run('rm virtuoso_backup.db')
-
-
-@task
-def virtuoso_reconstruct_db():
-    """Rebuild the virtuoso database from a backup dump."""
-    sanitize_env()
-    execute(database_dump)
-    # Here we set a higher command_timeout env variable than default (which is 30), because the reconstruction of the database can take a long time.
-    # http://docs.fabfile.org/en/1.10/usage/env.html#command-timeout
-    # http://docs.fabfile.org/en/1.10/api/core/context_managers.html#fabric.context_managers.settings
-    with settings(command_timeout=300):
-        virtuoso_reconstruct_save_db(True)
-        virtuoso_reconstruct_restore_db()
-    execute(app_reload)
-
-
-@task
-def virtuoso_major_reconstruct_db():
-    """Rebuild the virtuoso database from a crash dump. Sometimes worth running twice."""
-    sanitize_env()
-    execute(database_dump)
-    # Here we set a higher command_timeout env variable than default (which is 30), because the reconstruction of the database can take a long time.
-    # http://docs.fabfile.org/en/1.10/usage/env.html#command-timeout
-    # http://docs.fabfile.org/en/1.10/api/core/context_managers.html#fabric.context_managers.settings
-    with settings(command_timeout=300):
-        virtuoso_reconstruct_save_db(False)
-        virtuoso_reconstruct_restore_db()
-    execute(app_reload)
-
-
-def install_or_updgrade_virtuoso():
-    with settings(warn_only=True), hide('warnings', 'stdout', 'stderr'):
-        ls_cmd = run("ls %s" % get_virtuoso_exec())
-        ls_supervisord_conf_cmd = run("ls %s" % get_supervisord_conf())
-    if ls_cmd.failed or ls_supervisord_conf_cmd.failed:
-        print(red("Virtuso not installed, installing."))
-        execute(virtuoso_source_install)
-    else:
-        execute(virtuoso_source_upgrade)
 
 def install_postgres():
     """
@@ -1281,91 +1126,12 @@ def install_database():
     Install the database server
     """
     sanitize_env()
-    if using_virtuoso():
-        install_or_updgrade_virtuoso()
-    else:
-        install_postgres()
+    install_postgres()
 
-
-@task
-def virtuoso_source_upgrade():
-    """Upgrades the virtuoso server.  Currently doesn't check if we are already using the latest version."""
-    sanitize_env()
-    # Virtuoso must be running before the process starts, so that we can
-    # gracefully stop it later to ensure there is no trx file active.
-    # trx files are not compatible between virtuoso versions
-    supervisor_process_start('virtuoso')
-    execute(virtuoso_source_install)
-    # Makes sure there is no trx file with content
-    supervisor_process_stop('virtuoso')
-    # If we ran this, there is a strong chance we just reconfigured the ini file
-    # Make sure the virtuoso.ini and supervisor.ini reflects the changes
-    execute(app_setup)
-    execute(supervisor_restart)
-
-@task
-def virtuoso_source_install():
-    """Install the virtuoso server locally, normally not called directly (use virtuoso_source_upgrade instead)"""
-    sanitize_env()
-    virtuoso_root = get_virtuoso_root()
-    virtuoso_src = get_virtuoso_src()
-    branch = env.vbranch
-
-    if exists(virtuoso_src):
-        with cd(virtuoso_src):
-            already_built = exists('binsrc/virtuoso/virtuoso-t')
-            current_checkout = run('git rev-parse HEAD')
-            if already_built and current_checkout == branch:
-                return
-            run('git fetch')
-            run('git checkout ' + branch)
-            new_checkout = run('git rev-parse HEAD')
-            if already_built and new_checkout == current_checkout:
-                return
-    else:
-        run('mkdir -p ' + dirname(virtuoso_src))
-        virtuso_github = 'https://github.com/openlink/virtuoso-opensource.git'
-        run('git clone %s %s' % (virtuso_github, virtuoso_src))
-        with cd(virtuoso_src):
-            run('git checkout ' + branch)
-    with cd(virtuoso_src):
-        if not exists(join(virtuoso_src, 'configure')):
-            run('./autogen.sh')
-        else:
-            # Otherwise, it simply doesn't always work...
-            run('make distclean')
-        # This does not work if we change the path or anything else in local.ini
-        # if exists(join(virtuoso_src, 'config.status')):
-        #    run('./config.status --recheck')
-        # else:
-
-        conf_command = './configure --with-readline --enable-maintainer-mode --prefix ' + virtuoso_root
-        if env.mac:
-            # this needs to be kept up to date. I'd automate if we were keeping virtuoso
-            conf_command += " --enable-openssl=/usr/local/Cellar/openssl/1.0.2g"
-        run(conf_command)
-
-        run("""physicalCpuCount=$([[ $(uname) = 'Darwin' ]] &&
-                       sysctl -n hw.physicalcpu_max ||
-                       nproc)
-               make -j $(($physicalCpuCount + 1))""")
-        need_sudo = False
-        if not exists(virtuoso_root):
-            if not run('mkdir -p ' + virtuoso_root, quiet=True).succeeded:
-                need_sudo = True
-                sudo('mkdir -p ' + virtuoso_root)
-        else:
-            need_sudo = run('touch ' + virtuoso_root, quiet=True).failed
-        execute(ensure_virtuoso_not_running)
-        if need_sudo:
-            sudo('checkinstall')
-        else:
-            run('make install')
 
 def get_vendor_config():
     config = SafeConfigParser()
-    vendor_config_path = normpath(join(
-            env.projectpath, 'vendor_config.ini'))
+    vendor_config_path = normpath(join(env.projectpath, 'vendor_config.ini'))
     fp = StringIO()
     with settings(warn_only=True):
         get_retval = get(vendor_config_path, fp)
@@ -1379,7 +1145,9 @@ def get_vendor_config():
 
 @task
 def update_vendor_themes():
-    """Update optional themes in assembl/static/css/themes/vendor"""
+    """
+    Update optional themes in assembl/static/css/themes/vendor
+    """
     sanitize_env()
     config = get_vendor_config()
     config_section_name = 'theme_repositories'
@@ -1424,13 +1192,14 @@ def sanitize_env():
     for name in (
             "uses_memcache ", "uses_uwsgi", "uses_apache", "uses_ngnix",
             "uses_global_supervisor", "using_virtuoso", "uses_apache",
-            "uses_ngnix", "mac", "is_production_env"):
+            "uses_ngnix", "mac", "is_production_env"
+    ):
         setattr(env, name, bool(getattr(env, name, False)))
     if not isinstance(env.hosts, list):
         env.hosts = getattr(env, "hosts", "").split()
 
 
-# # Server scenarios
+# Server scenarios
 def skeleton_env(projectpath, venvpath=None):
     """
     Minimal environement to allow git operations, apt-get and the like
@@ -1442,15 +1211,13 @@ def skeleton_env(projectpath, venvpath=None):
     env.gitrepo = getenv("GITREPO", "https://github.com/assembl/assembl.git")
     env.gitbranch = getenv("GITBRANCH", "master")
 
-    #Are we on localhost
-    if set(env.hosts) - set(['localhost']) == set():
-        #WARNING:  This code will run locally, NOT on the remote server,
+    # Are we on localhost
+    if set(env.hosts) - {'localhost'} == set():
+        # WARNING:  This code will run locally, NOT on the remote server,
         # so it's only valid if we are connecting to localhost
         env.mac = system().startswith('Darwin')
     else:
         env.mac = False
-
-    env.using_virtuoso = False
 
 
 # # Server scenarios
@@ -1485,7 +1252,6 @@ def commonenv(projectpath, venvpath=None):
 
     env.dbdumps_dir = join(projectpath, '%s_dumps' % env.projectname)
 
-
     env.uses_memcache = True
     env.uses_uwsgi = False
     env.uses_apache = False
@@ -1493,22 +1259,13 @@ def commonenv(projectpath, venvpath=None):
     # Where do we find the virtuoso binaries
     env.uses_global_supervisor = False
     env.system_db_user = None
-    env.using_virtuoso = ''
 
     # Minimal dependencies versions
-
-
-def using_virtuoso():
-    if env.using_virtuoso is '':
-        env.using_virtuoso = env.sqlalchemy_url.startswith('virtuoso')
-    return env.using_virtuoso
 
 
 def system_db_user():
     if env.system_db_user:
         return env.system_db_user
-    if using_virtuoso():
-        return None
     if env.mac:
         # Brew uses user
         return None
@@ -1531,7 +1288,7 @@ def build_doc():
         run('rm -rf doc/autodoc doc/jsdoc')
         venvcmd('./assembl/static/js/node_modules/.bin/jsdoc -t ./assembl/static/js/node_modules/jsdoc-rst-template/template/ --recurse assembl/static/js/app -d ./doc/jsdoc/')
         venvcmd('env SPHINX_APIDOC_OPTIONS="members,show-inheritance" sphinx-apidoc -e -f -o doc/autodoc assembl')
-        venvcmd('python assembl/scripts/make_er_diagram.py %s -o doc/er_diagram' % (env.ini_file))
+        venvcmd('python assembl/scripts/make_er_diagram.py %s -o doc/er_diagram' % env.ini_file)
         venvcmd('sphinx-build doc assembl/static/techdocs')
 
 
@@ -1539,7 +1296,9 @@ def build_doc():
 
 @task
 def devenv(projectpath=None):
-    "Alias of env_dev for backward compatibility"
+    """
+    Alias of env_dev for backward compatibility
+    """
     execute(env_dev, projectpath)
 
 
@@ -1595,6 +1354,7 @@ def env_testing(projectpath=None):
     env.uses_ngnix = False
 
     env.gitbranch = getenv("GITBRANCH", "develop")
+
 
 @task
 def env_coeus_assembl():
@@ -1684,6 +1444,7 @@ def env_bluenove_discussions():
     env.uses_uwsgi = True
     env.gitbranch = getenv("GITBRANCH", "master")
 
+
 @task
 def env_bluenove_assembl2():
     """
@@ -1705,6 +1466,7 @@ def env_bluenove_assembl2():
     env.uses_uwsgi = True
     env.gitbranch = getenv("GITBRANCH", "master")
 
+
 @task
 def env_bluenove_agora2():
     """
@@ -1725,6 +1487,7 @@ def env_bluenove_agora2():
     env.uses_ngnix = True
     env.uses_uwsgi = True
     env.gitbranch = getenv("GITBRANCH", "master")
+
 
 @task
 def env_paris_debat():
