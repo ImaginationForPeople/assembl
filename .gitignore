@@ -97,3 +97,6 @@ htmlcov/
 .gtm/
 doc/autodoc
 doc/jsdoc
+
+# vim
+.ropeproject

@@ -9,6 +9,7 @@ from time import sleep, strftime
 import pipes
 from ConfigParser import ConfigParser, SafeConfigParser, NoOptionError
 from StringIO import StringIO
+
 # Importing the "safe" os.path commands
 from os.path import join, dirname, split, normpath
 # Other calls to os.path rarely mostly don't work remotely. Use locally only.
@@ -688,10 +689,15 @@ def install_basetools():
         assert path_pip == '/usr/local/bin/pip',\
             "Make sure homebrew is in the bash path, got " + path_pip
         run('pip install virtualenv')
+        run('cd /tmp; curl -O https://bootstrap.pypa.io/get-pip.py')
+        sudo('python /tmp/get-pip.py')
+        sudo('pip install virtualenv')
+        sudo('brew install gpg')
     else:
         sudo('apt-get install -y python-virtualenv python-pip')
         sudo('apt-get install -y git')
         # sudo('apt-get install -y gettext')
+        sudo('apt-get install -y gnupg')
 
 
 def install_bower():
@@ -975,13 +981,18 @@ def database_dump_virtuoso():
         run('ln -sf %s %s' % (absolute_path, remote_db_path()))
 
 
-def database_dump_postgres():
+def database_dump_postgres(use_gpg):
     if not exists(env.dbdumps_dir):
         run('mkdir -m700 %s' % env.dbdumps_dir)
 
     filename = 'db_%s.sql' % strftime('%Y%m%d')
     compressed_filename = '%s.pgdump' % filename
     absolute_path = os.path.join(env.dbdumps_dir, compressed_filename)
+
+    # Encrypting backup file
+    if use_gpg:
+        run('gpg -c %s && rm -f %s' % (absolute_path, absolute_path))
+        absolute_path += '.gpg'
 
     # Dump
     with prefix(venv_prefix()), cd(env.projectpath):
@@ -998,7 +1009,7 @@ def database_dump_postgres():
 
 
 @task
-def database_dump():
+def database_dump(use_gpg=True):
     """
     Dumps the database on remote site
     """
@@ -1006,7 +1017,7 @@ def database_dump():
     if using_virtuoso():
         database_dump_virtuoso()
     else:
-        database_dump_postgres()
+        database_dump_postgres(use_gpg)
 
 
 @task
@@ -1109,7 +1120,7 @@ def database_restore_virtuoso():
     execute(supervisor_process_start, 'virtuoso')
 
 
-def database_restore_postgres():
+def database_restore_postgres(postgres_dump_file, use_gpg):
     assert(env.wsginame in ('staging.wsgi', 'dev.wsgi'))
     env.debug = True
 
@@ -1130,6 +1141,16 @@ def database_restore_postgres():
     # Create db
     execute(database_create)
 
+    # We unencrypt the file
+    if not os.path.isfile(postgres_dump_file):
+        print("%s is not a valid postgres dump file or does not exist")
+        exit()
+
+    absolute_path = postgres_dump_file
+    if use_gpg:
+        absolute_path = postgres_dump_file[:-4]
+        run('gpg -d --output %s %s && rm -f %s' % (absolute_path, postgres_dump_file, postgres_dump_file))
+
     # Restore data
     with prefix(venv_prefix()), cd(env.projectpath):
         run('PGPASSWORD=%s pg_restore --host=%s --dbname=%s -U%s --schema=public %s' % (
@@ -1137,15 +1158,15 @@ def database_restore_postgres():
                                                   env.db_host,
                                                   env.db_name,
                                                   env.db_user,
-                                                  remote_db_path())
-        )
+                                                  absolute_path
+        ))
 
     if(env.wsginame != 'dev.wsgi'):
         execute(webservers_start)
 
 
 @task
-def database_restore():
+def database_restore(postgres_dump_file='', use_gpg=True):
     """
     Restores the database backed up on the remote server
     """
@@ -1153,7 +1174,7 @@ def database_restore():
     if using_virtuoso():
         database_restore_virtuoso()
     else:
-        database_restore_postgres()
+        database_restore_postgres(postgres_dump_file, use_gpg)
 
 
 def get_config():
