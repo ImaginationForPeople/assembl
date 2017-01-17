@@ -931,6 +931,8 @@ def install_redis():
     """
     Install redis server
     """
+    if env.docker:
+        return
     print(cyan('Installing redis server'))
     if env.mac:
         run('brew install redis')
