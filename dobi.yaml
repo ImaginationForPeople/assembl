@@ -66,6 +66,7 @@ job=fabric-shell:
     mounts: [source, wheels]
     interactive: true
     command: "bash"
+    description: "Open a shell to run fabric tasks"
 
 image=webapp:
     image: assembl-dev
@@ -84,7 +85,9 @@ compose=devenv:
     files: [docker-compose.yml]
     project: '{project}'
     depends: [webapp]
+    description: "Start a development environment"
 
 
 alias=init:
     tasks: [build-wheels, setup-postgres]
+    description: "Initialize a new environment from a checkout"
