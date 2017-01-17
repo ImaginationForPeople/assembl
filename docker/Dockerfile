@@ -34,18 +34,15 @@ RUN     /etc/init.d/ssh start && \
            /etc/init.d/ssh stop
 RUN     /etc/init.d/ssh start && \
            ssh-keyscan localhost && \
-           /etc/init.d/postgresql start && \
            fab devenv bootstrap_from_checkout && \
            fab devenv set_file_permissions && \
            . venv/bin/activate && \
            assembl-add-user --email root@localhost --name "Admin" --username admin --password admin local.ini && \
            supervisorctl shutdown && \
-           /etc/init.d/postgresql stop && \
            /etc/init.d/ssh stop
 
 ENV     IN_DOCKER=1
 CMD     /etc/init.d/ssh start && \
-        /etc/init.d/postgresql start && \
         /etc/init.d/nginx start && \
         . venv/bin/activate && \
         supervisord && \

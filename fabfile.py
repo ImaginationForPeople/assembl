@@ -1489,6 +1489,8 @@ def install_database():
     Install the database server
     """
     sanitize_env()
+    if env.docker:
+        return
     if using_virtuoso():
         install_or_updgrade_virtuoso()
     else:
