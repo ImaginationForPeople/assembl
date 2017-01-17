@@ -947,6 +947,8 @@ def install_memcached():
     """
     Install memcached server
     """
+    if env.docker:
+        return
     print(cyan('Installing memcached'))
     if env.mac:
         run('brew install memcached')
@@ -1770,6 +1772,8 @@ def skeleton_env(projectpath, venvpath=None):
         env.mac = system().startswith('Darwin')
     else:
         env.mac = False
+
+    env.docker = getenv("IN_DOCKER")
 
     env.using_virtuoso = False
 

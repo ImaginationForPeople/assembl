@@ -3,5 +3,7 @@ version: "2.0"
 
 services:
   redis:
-    image: redis:3.0
+    image: redis:3.0-alpine
 
+  memcached:
+    image: memcached:1.4-alpine

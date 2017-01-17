@@ -43,8 +43,8 @@ RUN     /etc/init.d/ssh start && \
            /etc/init.d/postgresql stop && \
            /etc/init.d/ssh stop
 
+ENV     IN_DOCKER=1
 CMD     /etc/init.d/ssh start && \
-        /etc/init.d/memcached start && \
         /etc/init.d/postgresql start && \
         /etc/init.d/nginx start && \
         . venv/bin/activate && \
