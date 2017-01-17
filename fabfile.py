@@ -596,6 +596,18 @@ def app_update_dependencies(force_reinstall=False):
     execute(update_bower_requirements, force_reinstall=force_reinstall)
     execute(update_npm_requirements, force_reinstall=force_reinstall)
 
+
+@task
+def install_js_deps():
+    """
+    Install or update node, bower, and packages.
+    """
+    execute(update_node)
+    execute(update_bower)
+    execute(update_bower_requirements)
+    execute(update_npm_requirements)
+
+
 @task
 def app_reinstall_all_dependencies():
     """

@@ -10,3 +10,9 @@ services:
 
   database:
     image: postgres:9.5.5-alpine
+
+  assembl:
+    image: assembl-dev:latest
+    volumes: ['.:/opt/assembl']
+    command: "/opt/assembl/venv/bin/pserve --reload development.ini"
+    ports: ['6543:6543']

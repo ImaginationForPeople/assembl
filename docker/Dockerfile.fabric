@@ -12,7 +12,8 @@ RUN     DEBIAN_FRONTEND=noninteractive \
             python-psycopg2 \
             unixodbc \
             postgresql-client \
-            libxslt1.1
+            libxslt1.1 \
+            git
 
 RUN     ssh-keygen -P '' -f ~/.ssh/id_rsa && \
         cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys

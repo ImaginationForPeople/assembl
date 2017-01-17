@@ -52,6 +52,14 @@ job=wheel-shell:
     command: "bash"
 
 
+#
+# Webapp setup
+#
+job=webapp-setup:
+    use: faber
+    mounts: [source, wheels]
+    interactive: true
+    command: "fab devenv install_js_deps app_compile_nodbupdate"
 
 job=fabric-shell:
     use: faber
@@ -59,7 +67,24 @@ job=fabric-shell:
     interactive: true
     command: "bash"
 
+image=webapp:
+    image: assembl-dev
+    tags: ['latest']
+    context: docker/
+    dockerfile: Dockerfile.webapp
+
+job=webapp-shell:
+    use: webapp
+    mounts: [source, wheels]
+    interactive: true
+    command: "bash"
+
 
 compose=devenv:
     files: [docker-compose.yml]
-    project: '{unique}'
+    project: '{project}'
+    depends: [webapp]
+
+
+alias=init:
+    tasks: [build-wheels, setup-postgres]
