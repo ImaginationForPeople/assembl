@@ -1,0 +1,34 @@
+
+# TODO: use alpine
+FROM    ubuntu:16.04
+
+RUN     DEBIAN_FRONTEND=noninteractive \
+        apt-get update && apt-get install -y \
+            build-essential \
+            python-pip \
+            python-dev \
+            git \
+            libxml2-dev libxmlsec1-dev \
+            unixodbc-dev \
+            libpq-dev \
+            libmemcached-dev \
+            libzmq3-dev \
+            libhiredis-dev \
+            libffi-dev \
+            libgraphviz-dev \
+            libxslt1-dev \
+            libssl-dev \
+            libreadline-dev \
+            liblapack-dev \
+            libatlas-dev \
+            libblas-dev
+
+# pandoc
+# automake bison flex gperf gawk
+# graphviz pkg-config phantomjs
+# gfortran
+
+
+RUN     pip install pip==9.0.1 && \
+        pip install wheel
+WORKDIR /opt/wheels

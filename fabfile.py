@@ -403,6 +403,20 @@ def app_db_install():
 
 
 @task
+def setup_postgresql_docker():
+    """
+    Setup a remote postgresql server running in docker.
+    """
+    # TODO: move these into the Dockerfile.fabric
+    execute(build_virtualenv)
+    execute(app_setup)
+    # end
+    execute(check_and_create_database_user)
+    execute(app_db_install)
+    execute(database_dump)
+
+
+@task
 def make_messages():
     """
     Run *.po file generation for translation
@@ -536,7 +550,7 @@ def updatemaincode():
 
 
 def app_setup():
-    venvcmd('pip install -e ./')
+    venvcmd('pip install --find-links=/opt/wheels -e ./')
     execute(setup_var_directory)
     venvcmd('assembl-ini-files %s' % (env.ini_file))
 
@@ -1822,7 +1836,7 @@ def commonenv(projectpath, venvpath=None):
     # Where do we find the virtuoso binaries
     env.uses_global_supervisor = False
     env.postgres_db_user = None
-    env.postgres_db_password = None
+    env.postgres_db_password = "assembl"
     env.using_virtuoso = ''
 
     # Minimal dependencies versions

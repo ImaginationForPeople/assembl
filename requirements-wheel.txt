@@ -1,0 +1,5 @@
+-r requirements-base.txt
+
+git+https://github.com/maparent/fuxi.git#egg=fuxi
+git+https://github.com/assembl/python-social-auth.git@assembl#egg=python_social_auth
+git+https://github.com/maparent/virtuoso-python#egg=virtuoso

@@ -9,4 +9,4 @@ services:
     image: memcached:1.4-alpine
 
   database:
-    image: postgres:9.6-alpine
+    image: postgres:9.5.5-alpine

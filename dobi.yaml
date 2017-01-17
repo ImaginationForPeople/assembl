@@ -1,0 +1,65 @@
+
+meta:
+    project: assembl
+
+
+mount=source:
+    bind: .
+    path: /opt/assembl
+
+mount=wheels:
+    bind: wheels/
+    path: /opt/wheels
+
+image=faber:
+    image: assembl-faber
+    context: docker/
+    dockerfile: Dockerfile.fabric
+
+#
+# Create a database image with the correct user and fixtures loaded
+#
+job=setup-postgres:
+    use: faber
+    mounts: [source, wheels]
+    net-mode: '{project}_default'
+    command: "fab devenv setup_postgresql_docker"
+    depends: [empty-database]
+
+compose=empty-database:
+    files: [docker/compose/empty-db.yaml]
+    project: '{project}'
+
+#
+# Build local wheels so that dev dependencies don't need to be installed in the 
+# runtime image.
+#
+image=wheeler:
+    image: assembl-wheeler
+    context: docker/
+    dockerfile: Dockerfile.wheel
+
+job=build-wheels:
+    use: wheeler
+    mounts: [wheels, source]
+    interactive: true
+    command: "pip wheel -w /opt/wheels/ -r /opt/assembl/requirements-wheel.txt"
+
+job=wheel-shell:
+    use: wheeler
+    mounts: [wheels, source]
+    interactive: true
+    command: "bash"
+
+
+
+job=fabric-shell:
+    use: faber
+    mounts: [source, wheels]
+    interactive: true
+    command: "bash"
+
+
+compose=devenv:
+    files: [docker-compose.yml]
+    project: '{unique}'
