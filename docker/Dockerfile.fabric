@@ -1,0 +1,28 @@
+
+# TODO: use alpine
+FROM    ubuntu:16.04
+
+RUN     DEBIAN_FRONTEND=noninteractive \
+        apt-get update && apt-get install -y \
+            fabric \
+            openssh-server \
+            sudo \
+            python-virtualenv \
+            python-pip \
+            python-psycopg2 \
+            unixodbc \
+            postgresql-client \
+            libxslt1.1 \
+            git
+
+RUN     ssh-keygen -P '' -f ~/.ssh/id_rsa && \
+        cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+RUN     /etc/init.d/ssh start && \
+        ssh-keyscan localhost && \
+        /etc/init.d/ssh stop
+
+ENV     PIP_FIND_LINKS=/opt/wheels IN_DOCKER=1
+COPY    entrypoint.sh /docker/entrypoint.sh
+WORKDIR /opt/assembl
+ENTRYPOINT ["/docker/entrypoint.sh"]

@@ -1,0 +1,93 @@
+
+meta:
+    project: assembl
+
+
+mount=source:
+    bind: .
+    path: /opt/assembl
+
+mount=wheels:
+    bind: wheels/
+    path: /opt/wheels
+
+image=faber:
+    image: assembl-faber
+    context: docker/
+    dockerfile: Dockerfile.fabric
+
+#
+# Create a database image with the correct user and fixtures loaded
+#
+job=setup-postgres:
+    use: faber
+    mounts: [source, wheels]
+    net-mode: '{project}_default'
+    command: "fab devenv setup_postgresql_docker"
+    depends: [empty-database]
+
+compose=empty-database:
+    files: [docker/compose/empty-db.yaml]
+    project: '{project}'
+
+#
+# Build local wheels so that dev dependencies don't need to be installed in the 
+# runtime image.
+#
+image=wheeler:
+    image: assembl-wheeler
+    context: docker/
+    dockerfile: Dockerfile.wheel
+
+job=build-wheels:
+    use: wheeler
+    mounts: [wheels, source]
+    interactive: true
+    command: "pip wheel -w /opt/wheels/ -r /opt/assembl/requirements-wheel.txt"
+
+job=wheel-shell:
+    use: wheeler
+    mounts: [wheels, source]
+    interactive: true
+    command: "bash"
+
+
+#
+# Webapp setup
+#
+job=webapp-setup:
+    use: faber
+    mounts: [source, wheels]
+    interactive: true
+    command: "fab devenv install_js_deps app_compile_nodbupdate"
+
+job=fabric-shell:
+    use: faber
+    mounts: [source, wheels]
+    interactive: true
+    command: "bash"
+    description: "Open a shell to run fabric tasks"
+
+image=webapp:
+    image: assembl-dev
+    tags: ['latest']
+    context: docker/
+    dockerfile: Dockerfile.webapp
+
+job=webapp-shell:
+    use: webapp
+    mounts: [source, wheels]
+    interactive: true
+    command: "bash"
+
+
+compose=devenv:
+    files: [docker-compose.yml]
+    project: '{project}'
+    depends: [webapp]
+    description: "Start a development environment"
+
+
+alias=init:
+    tasks: [build-wheels, setup-postgres]
+    description: "Initialize a new environment from a checkout"

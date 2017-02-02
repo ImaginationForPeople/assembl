@@ -102,3 +102,6 @@ htmlcov/
 .gtm/
 doc/autodoc
 doc/jsdoc
+
+wheels/
+.dobi/

@@ -1,0 +1,5 @@
+
+version: "2.0"
+services:
+  database:
+    image: postgres:9.5.5-alpine
