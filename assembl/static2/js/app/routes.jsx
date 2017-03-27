@@ -35,6 +35,11 @@ const DebateChild = (props) => {
 
 export default (
   <Router>
+    <Route component={App}>
+      <Route component={Main}>
+        <Route path=":slug/home" component={Home} />
+      </Route>
+    </Route>
     <Route path="/v2/styleguide" component={Styleguide} />
     <Route path="/v2/" component={App}>
       <Route path=":slug/login" component={Login} />

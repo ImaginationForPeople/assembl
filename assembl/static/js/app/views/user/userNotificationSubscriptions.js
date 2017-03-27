@@ -70,7 +70,11 @@ var Notification = Marionette.ItemView.extend({
         console.error('ERROR: userNotification', resp)
       }
     });
-  }
+  },
+  updateRole: function(role) {
+    this.role = role;
+    this.render();
+  },
 });
 
 var Notifications = Marionette.CollectionView.extend({
@@ -87,8 +91,14 @@ var Notifications = Marionette.CollectionView.extend({
        }
   },
   collectionEvents: {
-      'reset': 'render'
-    }
+    'reset': 'render'
+  },
+  updateRole: function(role) {
+    this.childViewOptions.role = role;
+    this.children.each(function(child) {
+      child.updateRole(role);
+    });
+  },
 });
 
 /**
@@ -156,8 +166,11 @@ var TemplateSubscription = Marionette.ItemView.extend({
         console.error('ERROR: userNewSubscription', resp)
       }
     })
-  }
-
+  },
+  updateRole: function(role) {
+    this.role = role;
+    this.render();
+  },
 });
 
 var TemplateSubscriptions = Marionette.CollectionView.extend({
@@ -168,6 +181,7 @@ var TemplateSubscriptions = Marionette.CollectionView.extend({
   childView: TemplateSubscription,
   initialize: function(options) {
     var addableGlobalSubscriptions = new Backbone.Collection();
+    this.notificationTemplates = options.notificationTemplates;
 
     options.notificationTemplates.each(function(template) {
       var alreadyPresent = options.notificationsUser.find(function(subscription) {
@@ -194,8 +208,14 @@ var TemplateSubscriptions = Marionette.CollectionView.extend({
 
   },
   collectionEvents: {
-      'reset': 'render'
-    }
+    'reset': 'render'
+  },
+  updateRole: function(role) {
+    this.childViewOptions.role = role;
+    this.children.each(function(child) {
+      child.updateRole(role);
+    });
+  },
 });
 
 /**
@@ -271,6 +291,7 @@ var Subscriber = Marionette.ItemView.extend({
   initialize: function(options) {
     this.roles = options.roles;
     this.role = options.role;
+    this.parent = options.parent;
 
     var analytics = Analytics.getInstance();
     analytics.changeCurrentPage(analytics.pages.NOTIFICATION_SETTINGS);
@@ -291,6 +312,7 @@ var Subscriber = Marionette.ItemView.extend({
 
     if (this.role) {
       this.roles.UnsubscribeUserFromDiscussion();
+      this.parent.updateRole(null);
     }
   },
 
@@ -311,6 +333,7 @@ var Subscriber = Marionette.ItemView.extend({
                 success: function(model, resp) {
                   that.roles.add(model);
                   analytics.trackEvent(analytics.events.JOIN_DISCUSSION);
+                  that.parent.updateRole(model);
                 },
                 error: function(model, resp) {
                   console.error('ERROR: joinDiscussion->subscription', resp);
@@ -347,26 +370,27 @@ var userNotificationSubscriptions = Marionette.LayoutView.extend({
            collectionManager.getConnectedSocketPromise(),
             function(NotificationsUser, notificationTemplates, allRoles, socket) {
 
-              var subscriber = new Subscriber({
+              that.subscriber = new Subscriber({
+                parent: that,
                 role: allRoles.isUserSubscribedToDiscussion(),
-                roles: allRoles
+                roles: allRoles,
               });
-              that.getRegion('userSubscriber').show(subscriber);
+              that.getRegion('userSubscriber').show(that.subscriber);
 
-              var templateSubscriptions = new TemplateSubscriptions({
+              that.templateSubscriptions = new TemplateSubscriptions({
                 notificationTemplates: notificationTemplates,
                 notificationsUser: NotificationsUser,
                 role: allRoles.isUserSubscribedToDiscussion(),
                 roles: allRoles
               });
-              that.getRegion('templateSubscription').show(templateSubscriptions);
+              that.getRegion('templateSubscription').show(that.templateSubscriptions);
 
-              var userNotification = new Notifications({
+              that.userNotification = new Notifications({
                 notificationsUser: NotificationsUser,
                 role: allRoles.isUserSubscribedToDiscussion(),
                 roles: allRoles
               });
-              that.getRegion('userNotifications').show(userNotification);
+              that.getRegion('userNotifications').show(that.userNotification);
 
             });
 
@@ -377,6 +401,36 @@ var userNotificationSubscriptions = Marionette.LayoutView.extend({
     emailAccount.fetch();
 
     this.notifByEmail.show(notificationByEmails);
+  },
+
+  updateRole: function(role) {
+    var that = this,
+        allRoles = this.userNotification.childViewOptions.roles,
+        notificationTemplates = this.templateSubscriptions.notificationTemplates;
+    this.userNotification.updateRole(role);
+    this.templateSubscriptions.updateRole(role);
+    if (this.role == null && role != null) {
+      // rebuild the notification collections
+      this.getRegion('userNotifications').reset();
+      this.getRegion('templateSubscription').reset();
+      var collectionManager = new CollectionManager();
+      collectionManager.getNotificationsUserCollectionPromise(true).then(function(NotificationsUser) {
+        that.userNotification = new Notifications({
+          notificationsUser: NotificationsUser,
+          role: role,
+          roles: allRoles,
+        });
+        that.getRegion('userNotifications').show(that.userNotification);
+
+        that.templateSubscriptions = new TemplateSubscriptions({
+          notificationTemplates: notificationTemplates,
+          notificationsUser: NotificationsUser,
+          role: role,
+          roles: allRoles
+        });
+        that.getRegion('templateSubscription').show(that.templateSubscriptions);
+      });
+    }
   },
 
   serializeData: function() {
