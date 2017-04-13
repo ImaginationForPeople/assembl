@@ -1,4 +1,5 @@
 
+from sqlalchemy import desc
 from sqlalchemy.orm.exc import NoResultFound
 import graphene
 from graphene.relay import Node
@@ -176,7 +177,18 @@ class Idea(SecureObjectType, SQLAlchemyObjectType):
     class Meta:
         model = models.Idea
         interfaces = (Node, )
-        only_fields = ('id', )
+        only_fields = ('id', 'short_title', )
+
+    posts = SQLAlchemyConnectionField(PostConnection)
+
+    def resolve_posts(self, args, context, info):
+        connection_type = info.return_type.graphene_type  # this is PostConnection
+        model = connection_type._meta.node._meta.model  # this is models.PostUnion
+        query = self.get_related_posts_query(
+            ).filter(model.publication_state == models.PublicationStates.PUBLISHED
+            ).order_by(desc(model.creation_date), model.id)
+        # pagination is done after that, no need to do it ourself
+        return query
 
 
 class Question(SecureObjectType, SQLAlchemyObjectType):
@@ -186,17 +198,29 @@ class Question(SecureObjectType, SQLAlchemyObjectType):
         only_fields = ('id', )
 
     title = graphene.String(lang=graphene.String())
-    posts = graphene.List(PropositionPost, random=graphene.Boolean())  # TODO should be a real ConnectionField
+    posts = SQLAlchemyConnectionField(PostConnection, random=graphene.Boolean())
 
     def resolve_title(self, args, context, info):
         title = resolve_langstring(self.title, args.get('lang'))
         return title
 
     def resolve_posts(self, args, context, info):
-        # TODO if args.get('random') return 10 posts, the first ones are the posts created by the user,
-        # then the remaining ones are in random order
-        # if random is False, return all the posts in creation_date desc order
-        return []
+        random = args.get('random', False)
+        # TODO
+        # If random is True returns 10 posts, the first one is the latest post created by the user,
+        # then the remaining ones are in random order.
+        # If random is False, return all the posts in creation_date desc order.
+        if random:
+            return []
+        else:
+            connection_type = info.return_type.graphene_type  # this is PostConnection
+            model = connection_type._meta.node._meta.model  # this is models.PostUnion
+            query = self.get_related_posts_query(
+                ).filter(model.publication_state == models.PublicationStates.PUBLISHED
+                ).order_by(desc(model.creation_date), model.id)
+
+        # pagination is done after that, no need to do it ourself
+        return query
 
 
 class Thematic(SecureObjectType, SQLAlchemyObjectType):
@@ -239,40 +263,42 @@ class Thematic(SecureObjectType, SQLAlchemyObjectType):
 
 class Query(graphene.ObjectType):
     node = Node.Field()
-    posts = SQLAlchemyConnectionField(PostConnection)#, idea_id=graphene.ID())
-    # ideas = SQLAlchemyConnectionField(Idea)
+    posts = SQLAlchemyConnectionField(PostConnection, idea_id=graphene.ID())
+    ideas = SQLAlchemyConnectionField(Idea)
     thematics = graphene.List(Thematic, identifier=graphene.String())
     # agent_profiles = SQLAlchemyConnectionField(AgentProfile)
 
     def resolve_ideas(self, args, context, info):
-        # TODO do we need to do a special query to only retrieve ideas
-        # associated to the RootIdea?
         connection_type = info.return_type.graphene_type  # this is IdeaConnection
         model = connection_type._meta.node._meta.model  # this is models.Idea
         query = get_query(model, context)
         discussion_id = context.matchdict['discussion_id']
-        query = query.filter(model.discussion_id == discussion_id
-            ).filter(model.hidden == False
-            ).filter(model.tombstone_condition())
-
+        discussion = models.Discussion.get(discussion_id)
+        root_idea_id = discussion.root_idea.id
+        descendants_query = model.get_descendants_query(
+            root_idea_id, inclusive=False)
+        query = query.filter(model.id.in_(descendants_query)
+            ).filter(model.hidden == False).order_by(model.id)
         # pagination is done after that, no need to do it ourself
         return query
 
     def resolve_posts(self, args, context, info):
         connection_type = info.return_type.graphene_type  # this is PostConnection
         model = connection_type._meta.node._meta.model  # this is models.PostUnion
-        query = get_query(model, context)
         discussion_id = context.matchdict['discussion_id']
-        query = query.filter(model.discussion_id == discussion_id
-            ).filter(model.hidden == False
-            ).filter(model.tombstone_condition()
-            ).filter(model.publication_state == models.PublicationStates.PUBLISHED)
+        idea_id = args.get('idea_id', None)
+        if idea_id is not None:
+            id_ = int(Node.from_global_id(idea_id)[1])
+            idea = models.Idea.get(id_)
+            if idea.discussion_id != discussion_id:
+                return None
+        else:
+            discussion = models.Discussion.get(discussion_id)
+            idea = discussion.root_idea
 
-        # TODO filter posts for a specific idea
-        # idea_id = args.get('idea_id', None)
-        # if idea_id is not None:
-        #     id_ = int(Node.from_global_id(idea_id)[1])
-        #     query = query.filter(model.idea_content_links? idea_id? == id_)
+        query = idea.get_related_posts_query(
+            ).filter(model.publication_state == models.PublicationStates.PUBLISHED
+            ).order_by(desc(model.creation_date), model.id)
 
         # pagination is done after that, no need to do it ourself
         return query
@@ -329,6 +355,7 @@ class CreateThematic(graphene.Mutation):
     def mutate(root, args, context, info):
         cls = models.Thematic
         discussion_id = context.matchdict['discussion_id']
+        discussion = models.Discussion.get(discussion_id)
         user_id = context.authenticated_userid or Everyone
 
         permissions = get_permissions(user_id, discussion_id)
@@ -363,11 +390,36 @@ class CreateThematic(graphene.Mutation):
 
                 kwargs['video_html_code'] = video['html_code']
 
+            # Our thematic, because it inherits from Idea, needs to be
+            # associated to the root idea of the discussion.
+            # We create a hidden root thematic, corresponding to the
+            # `identifier` phase, child of the root idea,
+            # and add our thematic as a child of this root thematic.
+            root_thematic = [idea
+                             for idea in discussion.root_idea.get_children()
+                             if getattr(idea, 'identifier', '') == identifier]
+            if not root_thematic:
+                short_title = u'Phase {}'.format(identifier)
+                root_thematic = cls(
+                    discussion_id=discussion_id,
+                    short_title=short_title,
+                    title=langstring_from_input_entries(
+                        [{'locale_code': 'en', 'value': short_title}]),
+                    identifier=identifier,
+                    hidden=True)
+                discussion.root_idea.children.append(root_thematic)
+            else:
+                root_thematic = root_thematic[0]
+
+            # take the first entry and set it for short_title
+            short_title = title_entries[0]['value']
             saobj = cls(
                 discussion_id=discussion_id,
                 title=title_langstring,
+                short_title=short_title,
                 identifier=identifier,
                 **kwargs)
+            root_thematic.children.append(saobj)
             db = saobj.db
             db.add(saobj)
             db.flush()
@@ -389,7 +441,7 @@ class CreateThematic(graphene.Mutation):
 
 # TODO UpdateThematic and questions
 # TODO DeleteThematic, raise exception if questions associated with it
-# TODO CreateProposal which publish the post
+# TODO CreatePost which publish the post
 # TODO AddSentimentToPost
 
 
@@ -404,13 +456,16 @@ Schema = graphene.Schema(query=Query, mutation=Mutations)
 $ pshell local.ini
 import json
 from assembl.graphql.schema import Schema as schema
-
-from assembl.tests.utils import PyramidWebTestRequest
-request = PyramidWebTestRequest.blank('/', method="POST")
-request.matchdict = {"discussion_id": 16}
+from webtest import TestRequest
+request = TestRequest.blank('/', method="POST")
+request.matchdict = {"discussion_id": 6}
 # take the first sysadmin:
 userid = models.User.default_db.query(models.User).join(models.User.roles).filter(models.Role.id == 7)[0:1][0].id
 request.authenticated_userid = userid
+
+# and after that, execute a query or mutation....
+# For mutations, see examples in tests/test_graphql.py (replace graphql_request by request)
+# In pshell, you need to db.commit() if you want a mutation to be persistent.
 
 #print the schema as text:
 print str(schema)
@@ -419,6 +474,9 @@ print str(schema)
 
 #get node:
 print json.dumps(schema.execute('query { node(id:"UG9zdDoyMzU5") { ... on Post { id, creator { name } } } }', context_value=request).data, indent=2)
+
+# get posts for a specific idea:
+print json.dumps(schema.execute('query { node(id:"SWRlYToyNDU0") { ... on Idea { id, posts { edges { node { ... on PostInterface { subject, body, creationDate, creator { name } } } } } } } }', context_value=request).data, indent=2)
 
 #get ideas:
 print json.dumps(schema.execute('query { ideas(first: 5) { pageInfo { endCursor hasNextPage } edges { node { id } } } }', context_value=request).data, indent=2)
@@ -431,8 +489,5 @@ print json.dumps(schema.execute('query { posts(first: 5) { pageInfo { endCursor 
 
 #get thematics with questions:
 print json.dumps(schema.execute('query { thematics(identifier:"survey") { id, title, description, numPosts, numContributors, questions { title }, video {title, description, htmlCode} } }', context_value=request).data, indent=2)
-
-For mutations, see examples in tests/test_graphql.py
-In pshell, you need to db.commit() if you want a mutation to be persistent.
 
 '''
