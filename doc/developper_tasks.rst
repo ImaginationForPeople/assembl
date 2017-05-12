@@ -67,4 +67,17 @@ Raw sql connection
 .. code:: sh
 
     psql -U assembl -h localhost assembl
-    
+
+Updating supervisord.conf file
+------------------------------
+
+If you require to update, improve or otherwise add more commands for supervisor to manage, you must affect change in the template
+file instead. There are several key variables that are propagated to the `local.ini` file from the supervisord
+configuration. To affect change, make sure to do the following.
+
+.. code:: sh
+
+    # Update the configuration template file using your favourite editor
+    vi supervisord.conf.tmpl
+    assembl-ini-files local.ini
+    supervisorctl reload  # if supervisord is already running

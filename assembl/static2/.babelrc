@@ -1,4 +1,15 @@
 {
-  "plugins" : ["transform-object-rest-spread"],
-  "presets" : ["es2015", "react"]
+  "env": {
+    "production": {
+      "presets" : ["es2015", "react"],
+      "plugins": ["transform-object-rest-spread",
+                  "transform-react-constant-elements",
+                  "transform-react-inline-elements"
+      ]
+    },
+    "dev": {
+      "plugins" : ["transform-object-rest-spread"],
+      "presets" : ["es2015", "react"]
+    }
+  }
 }
