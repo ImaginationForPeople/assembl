@@ -202,6 +202,7 @@ const Translations = {
         link: 'Exporter'
       },
       step_x_total: 'Etape %{num} sur %{total}',
+      saveThemes: 'Sauvegarder'
     },
     date: {
       format: 'D MMMM YYYY',
@@ -409,6 +410,7 @@ const Translations = {
         link: 'Export'
       },
       step_x_total: 'Step %{num} on %{total}',
+      saveThemes: 'Save'
     },
     date: {
       format: 'MMMM Do, YYYY',
