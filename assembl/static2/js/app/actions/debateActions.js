@@ -33,7 +33,7 @@ export const fetchDebateData = (debateId) => {
       dispatch(resolvedFetchDebateData(debateData));
     }).catch((error) => {
       const firstError = error[0];
-      if (firstError.status === 401) {
+      if (firstError && 'status' in firstError && firstError.status === 401) {
         dispatch(unauthorizedDebateData);
       } else {
         dispatch(failedFetchDebateData(error));
