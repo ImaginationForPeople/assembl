@@ -2342,7 +2342,7 @@ graphiql@^0.8.1:
     codemirror-graphql "^0.5.9"
     marked "^0.3.5"
 
-graphql-anywhere@^3.0.0, graphql-anywhere@^3.0.1:
+graphql-anywhere@^3.0.0, graphql-anywhere@^3.0.1, graphql-anywhere@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-3.1.0.tgz#3ea0d8e8646b5cee68035016a9a7557c15c21e96"
 
@@ -2545,6 +2545,10 @@ immutability-helper@^2.2.0:
   resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.2.2.tgz#e7e9da728b3de2fad34a216f4157b326dbccc892"
   dependencies:
     invariant "^2.2.0"
+
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
 imurmurhash@^0.1.4:
   version "0.1.4"
@@ -4322,7 +4326,7 @@ qs@6.4.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
-"qs@github:ssetem/qs":
+qs@ssetem/qs:
   version "6.0.1"
   resolved "https://codeload.github.com/ssetem/qs/tar.gz/fb2b80ac750fa375e0d69643adb0840e7e04d1d3"
 
