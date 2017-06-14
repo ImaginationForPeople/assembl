@@ -11,7 +11,7 @@ var THEME = "default";
 // For css hot reload to work, don't use ExtractTextPlugin
 module.exports = {
     devServer: {
-        devtool: 'eval',
+        devtool: '#cheap-module-eval-source-map',  // http://webpack.github.io/docs/configuration.html#devtool
         inline: true,
         hot: true,
         headers: {
@@ -53,7 +53,7 @@ module.exports = {
         },
         {
             test: /\.scss$/,
-            loaders: ['style', 'css', 'sass']
+            loader: 'style!css?sourceMap=true!sass?sourceMap=true'
         },
         {
             test: /\.css$/,
