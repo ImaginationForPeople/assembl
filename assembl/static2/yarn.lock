@@ -4525,12 +4525,6 @@ react-redux@^4.4.6:
     loose-envify "^1.1.0"
     prop-types "^15.5.4"
 
-react-router-bootstrap@^0.23.1:
-  version "0.23.3"
-  resolved "https://registry.yarnpkg.com/react-router-bootstrap/-/react-router-bootstrap-0.23.3.tgz#970c35c53c04c61fb6b110d4ff651a7e8a73b2ba"
-  dependencies:
-    prop-types "^15.5.8"
-
 react-router@^3.0.0:
   version "3.0.5"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-3.0.5.tgz#c3b7873758045a8bbc9562aef4ff4bc8cce7c136"
