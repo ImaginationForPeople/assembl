@@ -97,17 +97,24 @@ def sanitize_env():
     if not env.get('host_string', None):
         env.host_string = env.hosts[0]
     #Are we on localhost
-    if set(env.hosts) - set(['localhost', '127.0.0.1']) == set():
+    is_local = set(env.hosts) - set(['localhost', '127.0.0.1']) == set()
+    if is_local:
         #WARNING:  This code will run locally, NOT on the remote server,
         # so it's only valid if we are connecting to localhost
         env.mac = system().startswith('Darwin')
     else:
         env.mac = False
     env.projectpath = env.get('projectpath', dirname(__file__))
-    env.venvpath = env.get('venvpath', join(env.projectpath, 'venv'))
+    if not env.get('venvpath', None):
+        if is_local:
+            # Trust VIRTUAL_ENV, important for Jenkins case.
+            env.venvpath = getenv('VIRTUAL_ENV', None)
+        if not env.get('venvpath', None):
+            env.venvpath = join(env.projectpath, 'venv')
     env.random_file = env.get('random_file', 'random.ini')
     env.dbdumps_dir = env.get('dbdumps_dir', join(
         env.projectpath, '%s_dumps' % env.get("projectname", 'assembl')))
+    env.ini_file = env.get('ini_file', 'local.ini')
 
 
 def load_rcfile_config():
@@ -156,18 +163,23 @@ def listdir(path):
 def create_local_ini():
     """Replace the local.ini file with one composed from the current .rc file"""
     random_ini_path = os.path.join(env.projectpath, env.random_file)
-    local_ini_path = os.path.join(env.projectpath, 'local.ini')
+    local_ini_path = os.path.join(env.projectpath, env.ini_file)
     if exists(local_ini_path):
         run('cp %s %s.%d' % (
             local_ini_path, local_ini_path, int(time())))
 
     if env.host_string == 'localhost':
         # The easy case: create a local.ini locally.
-        venvcmd("python assembl/scripts/ini_files.py compose -o local.ini " + env.rcfile)
+        venvcmd("python assembl/scripts/ini_files.py compose -o %s %s" % (
+            env.ini_file, env.rcfile))
     else:
         # Create a local.ini file on the remote server
         # without disturbing local random/local.ini files.
 
+        # OK, this is horrid because I need the local venv.
+        local_venv = env.get("local_venv", "./venv")
+        assert os.path.exists(local_venv + "/bin/python"),\
+            "No usable local venv"
         # get placeholder filenames
         with NamedTemporaryFile(delete=False) as f:
             random_file_name = f.name
@@ -180,8 +192,10 @@ def create_local_ini():
                 get(random_ini_path, random_file_name)
             rt = os.path.getmtime(random_file_name)
             # create the local.ini in a temp file
-            venvcmd("python assembl/scripts/ini_files.py compose -o %s -r %s %s" % (
-                local_file_name, random_file_name, env.rcfile))
+            with settings(host_string="localhost", venvpath=local_venv,
+                          user=getuser(), projectpath=os.getcwd()):
+                venvcmd("python assembl/scripts/ini_files.py compose -o %s -r %s %s" % (
+                    local_file_name, random_file_name, env.rcfile))
             # send the random file if changed
             if rt != os.path.getmtime(random_file_name):
                 put(random_file_name, random_ini_path)
@@ -209,7 +223,7 @@ def migrate_local_ini():
     to migrate from a hand-crafted local.ini to the new generated
     local.ini system."""
     random_ini_path = os.path.join(env.projectpath, env.random_file)
-    local_ini_path = os.path.join(env.projectpath, 'local.ini')
+    local_ini_path = os.path.join(env.projectpath, env.ini_file)
     dest_path = env.rcfile + '.' + int(time())
 
     if env.host_string == 'localhost':
@@ -250,7 +264,8 @@ def migrate_local_ini():
                 get(random_ini_path, base_random_file_name)
             get(local_ini_path, local_file_name)
             # ??? should be base_random_file_name
-            with settings(host_string="localhost", venvpath=local_venv):
+            with settings(host_string="localhost", venvpath=local_venv,
+                          user=getuser(), projectpath=os.getcwd()):
                 if not has_random:
                     templates = get_random_templates()
                     venvcmd("python assembl/scripts/ini_files.py combine -o " +
@@ -1250,7 +1265,7 @@ def check_and_create_sentry_database_user():
 @task
 def create_sentry_project():
     """Create a project for the current assembl server.
-    Mostly useful for Docker. Tested on Docker 8."""
+    Mostly useful for Docker. Tested on Sentry 8."""
     if os.path.exists(env.random_file):
         env.update(as_rc(env.random_file))
     if env.get("sentry_key", None) and env.get("sentry_secret", None):
@@ -1561,7 +1576,7 @@ def docker_compose():
 
 @task
 def reindex_elasticsearch(bg=False):
-    cmd = "assembl-reindex-all-contents local.ini"
+    cmd = "assembl-reindex-all-contents " + env.ini_file
     if bg:
         cmd += "&"
     venvcmd(cmd)
@@ -1608,7 +1623,8 @@ def docker_startup():
 def create_first_admin_user():
     email = env.get("first_admin_email", None)
     assert email, "Please set the first_admin_email in the .rc environment"
-    venvcmd("assembl-add-user -m %s -u admin -n Admin -p admin --bypass-password local.ini" % email)
+    venvcmd("assembl-add-user -m %s -u admin -n Admin -p admin --bypass-password %s" % (
+        email, env.ini_file))
 
 
 @task
@@ -1825,21 +1841,6 @@ def install_dovecot_vmm():
     sudo("apt-get -y install dovecot-core dovecot-imapd dovecot-lmtpd"
          " dovecot-pgsql vmm postfix postfix-pgsql python-egenix-mxdatetime"
          " python-crypto libsasl2-modules libsasl2-modules-db sasl2-bin")
-
-
-def get_vendor_config():
-    config = SafeConfigParser()
-    vendor_config_path = normpath(join(
-            env.projectpath, 'vendor_config.ini'))
-    fp = StringIO()
-    with settings(warn_only=True):
-        get_retval = get(vendor_config_path, fp)
-    if get_retval.failed:
-        print yellow('No vendor ini file present at %s, skipping' % vendor_config_path)
-        return config
-    fp.seek(0)  # Yes, this is mandatory
-    config.readfp(fp)
-    return config
 
 
 def update_vendor_themes(frontend_version=1):
