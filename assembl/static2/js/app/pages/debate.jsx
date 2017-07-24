@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import { Translate } from 'react-redux-i18n';
 import Loader from '../components/common/loader';
-import Themes from '../components/debate/common/themes';
+import Thematics from '../components/debate/thematics/thematics';
 import Timeline from '../components/debate/navigation/timeline';
 import Thumbnails from '../components/debate/navigation/thumbnails';
 import DebateThematicsQuery from '../graphql/DebateThematicsQuery.graphql';
@@ -61,7 +61,7 @@ class Debate extends React.Component {
                 <Timeline showNavigation={!isParentRoute} identifier={identifier} />
               </div>
             </section>
-            {isParentRoute && <Themes thematics={thematics} identifier={identifier} />}
+            {isParentRoute && <Thematics thematics={thematics} identifier={identifier} />}
             {!isParentRoute &&
               <section className="debate-section">
                 <div className={this.state.isThumbnailsHidden ? 'hiddenThumb' : 'shown'} onMouseLeave={this.hideThumbnails}>

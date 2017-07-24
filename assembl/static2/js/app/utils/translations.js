@@ -195,7 +195,10 @@ const Translations = {
         numberOfResponses: '%{count} réponses à ce post',
         numberOfResponses_0: 'Aucune réponse à ce post',
         numberOfResponses_1: '%{count} réponse à ce post',
-        startDiscussion: 'Je démarre une discussion'
+        startDiscussion: 'Je démarre une discussion',
+        accessToDiscussion: 'Accéder à la discusssion',
+        seeSubThematic: 'Voir le sous-thème',
+        seeSubThematics: 'Voir les %{nbr} sous-thèmes'
       },
       themes: 'Thèmes',
       notStarted: 'La phase %{phaseName} n\'a pas encore commencé. Merci de revenir à partir du '
@@ -448,7 +451,10 @@ const Translations = {
         numberOfResponses: '%{count} responses to this post',
         numberOfResponses_0: 'No response to this post',
         numberOfResponses_1: '%{count} response to this post',
-        startDiscussion: 'Start a new thread'
+        startDiscussion: 'Start a new thread',
+        accessToDiscussion: 'Access the thread',
+        seeSubThematic: 'See the sub-thematic',
+        seeSubThematics: 'See %{nbr} sub-thematics'
       },
       themes: 'Themes',
       notStarted: 'The %{phaseName} phase has not started. Please come back from '

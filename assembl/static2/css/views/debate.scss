@@ -131,9 +131,65 @@
 
           .stats {
             color: $white;
-            text-align: left;
-            top: 50px;
+            text-align: right;
+            top: 20px;
+            right: 60%;
           }
+
+          .description {
+            display: block;
+          }
+
+          .thread {
+            margin: 10% 0 0 0;
+          }
+
+          .sub-themes-arrow {
+            display: block;
+          }
+        }
+
+        .title {
+          height: 35%;
+          padding-top: 40%;
+          font-size: 20px;
+        }
+
+        .description {
+          margin: 20% 0 0 0;
+          display: none;
+          font-size: 11px;
+          padding-left: 12%;
+        }
+
+        .thread {
+          margin: 20% 0 0 0;
+          .link {
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: bold;
+            padding-left: 12%;
+          }
+        }
+
+        .sub-themes {
+          margin: 5% 5% 0 5%;
+          font-size: 12px;
+          font-weight: bold;
+          padding-left: 12%;
+          cursor: pointer;
+        }
+
+        .sub-themes-arrow {
+          display: none;
+          cursor: pointer;
+          margin: 5% 0;
+          padding-left: 5%;
+        }
+
+        .slash {
+          margin: 5% 0;
+          padding-left: 12%;
         }
       }
 
@@ -183,6 +239,14 @@
         overflow: hidden;
         text-align: center;
         text-overflow: ellipsis;
+      }
+
+      .rollover {
+        display: block;
+      }
+
+      .transparent {
+        color: transparent;
       }
     }
   }
@@ -364,6 +428,33 @@
       &:focus {
           box-shadow: 0 0 0 50px $input-txt-bkg-color inset;
       }
+  }
+
+  .arrows {
+    width: 48px;
+    height: 48px;
+    border-color: #000;
+    position: absolute;
+    top: 50%;
+    margin-top: -31px;
+  }
+
+  .prev {
+    border-bottom: 6px solid;
+    border-left: 6px solid;
+    transform: rotate(45deg);
+    left: 20px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .next {
+    border-bottom: 6px solid;
+    border-left: 6px solid;
+    transform: rotate(-135deg);
+    right: 20px;
+    color: white;
+    cursor: pointer;
   }
 }
 

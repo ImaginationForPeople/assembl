@@ -8,7 +8,7 @@ import { createSelector } from 'reselect';
 
 import { postsByIdSelector, localeSelector } from '../selectors';
 import { togglePostResponses } from '../actions/postsActions';
-import Header from '../components/debate/common/header';
+import Header from '../components/debate/header/header';
 import IdeaWithPosts from '../graphql/IdeaWithPosts.graphql';
 import InfiniteSeparator from '../components/common/infiniteSeparator';
 import Post, { connectPostToState, PostFolded } from '../components/debate/thread/post';
