@@ -7,9 +7,10 @@ import pkg_resources
 from pyramid.view import view_config
 from pyramid.response import Response
 from pyramid.renderers import render_to_response
-from pyramid.security import Everyone, forget
+from pyramid.security import Everyone, forget, authenticated_userid
 from pyramid.httpexceptions import (
-    HTTPNotFound, HTTPSeeOther, HTTPMovedPermanently)
+    HTTPNotFound, HTTPSeeOther, HTTPMovedPermanently, HTTPUnauthorized,
+    HTTPClientError)
 from pyramid.i18n import TranslationStringFactory
 from sqlalchemy.orm.exc import NoResultFound
 
@@ -17,7 +18,9 @@ from ...lib.utils import path_qs
 from ...lib.sqla import get_named_object
 from ...lib.frontend_urls import FrontendUrls
 from ...auth import P_READ, P_ADD_EXTRACT, P_ADMIN_DISC
-from ...auth.util import user_has_permission
+from ...auth.util import (
+    user_has_permission, effective_userid, get_roles, discussion_from_request,
+    maybe_auto_subscribe)
 from ...models import (
     Discussion,
     User,
@@ -25,6 +28,7 @@ from ...models import (
     Post,
     Idea,
     Locale,
+    NotificationSubscriptionStatus,
 )
 
 from .. import (
@@ -70,7 +74,7 @@ def get_styleguide_components():
 @view_config(route_name='home', request_method='GET', http_cache=60)
 def home_view(request):
     """The main view on a discussion"""
-    user_id = request.authenticated_userid or Everyone
+    user_id = effective_userid(request) or Everyone
     context = get_default_context(request)
     discussion = context["discussion"]
     canRead = user_has_permission(discussion.id, user_id, P_READ)
@@ -189,6 +193,11 @@ def is_login_route(route_name):
         "do_password_change")
 
 
+def is_join_route(request):
+    # TODO: Get a real shared route system for react.
+    return request.matched_route.name == 'join'
+
+
 def admin_react_view(request):
     """
     Checks that user is logged in and is admin of discussion
@@ -208,11 +217,14 @@ def react_view(request, required_permission=P_READ):
         if bare_route in ("register", "login"):
             forget(request)
     old_context = base_default_context(request)
-    user_id = request.authenticated_userid or Everyone
-    discussion = old_context["discussion"] or None
+    discussion = old_context.get("discussion", None)
+    user = old_context.get("user", None)
+    user_id = user.id if user else Everyone
+    loggedin_userid = old_context['loggedin_userid']
     get_route = old_context["get_route"]
     (theme_name, theme_relative_path) = get_theme_info(discussion, frontend_version=2)
     node_env = os.getenv('NODE_ENV', 'production')
+    first_visit_to_discussion = False
     common_context = {
         "theme_name": theme_name,
         "theme_relative_path": theme_relative_path,
@@ -229,6 +241,12 @@ def react_view(request, required_permission=P_READ):
         if not canRead and user_id == Everyone:
             # User isn't logged-in and discussion isn't public:
             # Maybe we're already in a login/register page etc.
+            if loggedin_userid:
+                # logged in, does not belong to discusion: join page
+                redirect_url = request.route_path("general_react_page",
+                                                  discussion_slug=discussion.slug,
+                                                  extra_path="join")
+                return HTTPTemporaryRedirect(redirect_url)
             if is_login_route(bare_route):
                 context = get_login_context(request)
                 context.update(common_context)
@@ -285,7 +303,7 @@ def react_view(request, required_permission=P_READ):
         if user_id != Everyone:
             user = User.get(user_id)
             if user:
-                user.is_visiting_discussion(discussion.id)
+                first_visit_to_discussion = user.is_visiting_discussion(discussion.id)
     else:
         context = get_login_context(request)
         context.update(common_context)
@@ -294,8 +312,10 @@ def react_view(request, required_permission=P_READ):
     context = dict(
         request=old_context['request'],
         discussion=discussion,
+        first_visit_to_discussion = first_visit_to_discussion,
         user=old_context['user'],
         error=old_context.get('error', None),
+        loggedin_userid=loggedin_userid,
         messages=old_context.get('messages', None),
         providers_json=old_context.get('providers_json', None),
         get_route=get_route,
@@ -374,6 +394,54 @@ def purl_post(request):
     return home_view(request)
 
 
+@view_config(route_name='join', request_method='GET', renderer='assembl:templates/join.jinja2')
+def join_discussion(request):
+    user_id = authenticated_userid(request)
+    if not user_id:
+        return HTTPSeeOther(request.route_url(
+            'contextual_react_login', **request.matchdict))
+    discussion = discussion_from_request(request)
+    if not discussion:
+        raise HTTPNotFound("No such discussion")
+    user = User.get(user_id)
+    if not user:
+        raise HTTPClientError("No such user")
+    roles = get_roles(user_id, discussion.id)
+    if roles:
+        # already joined.
+        # bare_slug will reroute to v1 or v2
+        return HTTPSeeOther(request.route_url(
+            'bare_slug', **request.matchdict))
+    # ok, show it.
+    ut = discussion.get_participant_template()[0]
+    localizer = request.localizer
+    notifications = [localizer.translate(n.get_human_readable_description())
+                     for n in ut.notification_subscriptions
+                     if n.status == NotificationSubscriptionStatus.ACTIVE]
+    data = get_default_context(request)
+    data['notifications'] = notifications
+    return data
+
+
+@view_config(route_name='join', request_method='POST')
+def do_join_discussion(request):
+    user_id = authenticated_userid(request)
+    if not user_id:
+        return HTTPUnauthorized()
+    discussion = discussion_from_request(request)
+    if not discussion:
+        raise HTTPNotFound("No such discussion")
+    user = User.get(user_id)
+    if not user:
+        raise HTTPClientError("No such user")
+    roles = get_roles(user_id, discussion.id)
+    if roles:
+        return HTTPClientError("Already joined")
+    maybe_auto_subscribe(user, discussion)
+    return HTTPSeeOther(request.route_url(
+        'bare_slug', **request.matchdict))
+
+
 def register_react_views(config, routes, view=react_view):
     """Add list of routes to the `assembl.views.discussion.views.react_view` method."""
     if not routes:
@@ -390,6 +458,7 @@ def includeme(config):
     config.add_route('new_home', '/{discussion_slug}/home')
     config.add_route('bare_slug', '/{discussion_slug}')
     config.add_route('auto_bare_slug', '/{discussion_slug}/')
+    config.add_route('join', '/{discussion_slug}/join')
     config.add_route('admin_react_page', '/{discussion_slug}/administration*extra_path')
     config.add_route('purl_posts', '/debate/{discussion_slug}/posts/*remainder')
     config.add_route('legacy_purl_posts', '/{discussion_slug}/posts/*remainder')

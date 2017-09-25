@@ -554,6 +554,22 @@ class Preferences(MutableMapping, Base, NamedClassMixin):
             "default": True
         },
 
+        # Will this discussion accept a user that logged in from another discussion, or consider that user
+        # not-logged-in until they log in on this discussion specifically?
+        {
+            "id": "shared_login",
+            "name": _("Login is shared with other discussions"),
+            "value_type": "bool",
+            # "scalar_values": {value: "label"},
+            "description": _(
+                "If you're logged into another discussion, do you need to log in again to be considered logged in here?"),
+            "allow_user_override": P_READ,
+            "modification_permission": P_ADMIN_DISC,
+            # "frontend_validator_function": func_name...?,
+            # "backend_validator_function": func_name...?,
+            "default": False
+        },
+
         # What are (ordered) identifiers of columns in multi-column views?
         {
             "id": "default_column_identifiers",

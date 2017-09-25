@@ -33,7 +33,7 @@ from sqlalchemy.orm import (
 from sqlalchemy.types import Text
 from sqlalchemy.orm.attributes import NO_VALUE
 from sqlalchemy.sql.functions import count
-from pyramid.security import Everyone, Authenticated
+from pyramid.security import Everyone, Authenticated, authenticated_userid
 from rdflib import URIRef
 from sqla_rdfbridge.mapping import PatternIriClass
 import transaction
@@ -297,9 +297,11 @@ class AgentProfile(Base):
             return self.get_status_in_discussion(discussion.id)
 
     def is_visiting_discussion(self, discussion_id):
+        """This user is visiting this discussion. Update last_visit.
+        returns whether this is the first visit"""
         from assembl.models.discussion import Discussion
         d = Discussion.get(discussion_id)
-        self.update_agent_status_last_visit(d)
+        return self.update_agent_status_last_visit(d)
 
     @classmethod
     def special_quad_patterns(cls, alias_maker, discussion_id):
@@ -712,6 +714,14 @@ class User(AgentProfile):
             return self.preferred_email
         return super(User, self).get_preferred_email()
 
+    def get_login_id(self):
+        username = self.username_p
+        if username:
+            return username
+        account = self.get_preferred_email_account()
+        if account and account.verified:
+            return account.email
+
     def merge(self, other_user):
         """Merge another user on this one, because they are the same entity.
 
@@ -852,6 +862,7 @@ class User(AgentProfile):
         agent_status.last_visit = _now
         if not agent_status.first_visit:
             agent_status.first_visit = _now
+        return agent_status.first_visit == agent_status.last_visit
 
     def update_agent_status_subscribe(self, discussion):
         # Set the AgentStatusInDiscussion
@@ -1682,7 +1693,8 @@ class LanguagePreferenceCollection(object):
             req = get_current_request()
         assert req
         if getattr(req, "lang_prefs", 0) is 0:
-            user_id = req.authenticated_userid
+            # lang. prefs remain effective even without shared login
+            user_id = authenticated_userid(req)
             if user_id and user_id != Everyone:
                 try:
                     req.lang_prefs = UserLanguagePreferenceCollection(user_id)

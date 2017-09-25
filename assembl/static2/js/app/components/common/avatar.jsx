@@ -2,8 +2,9 @@ import React from 'react';
 import { Translate } from 'react-redux-i18n';
 import { Link } from 'react-router';
 import { NavDropdown, MenuItem } from 'react-bootstrap';
+import { customBrowserHistory } from '../../index';
 import { getContextual, get } from '../../utils/routeMap';
-import { getConnectedUserName, getConnectedUserId, getDiscussionSlug } from '../../utils/globalFunctions';
+import { getConnectedUserName, getConnectedUserId, getDiscussionSlug, getLoggedInUserId } from '../../utils/globalFunctions';
 
 class ProfileIcon extends React.Component {
   constructor(props) {
@@ -24,10 +25,17 @@ class ProfileIcon extends React.Component {
       next: location
     });
   }
+  redirectToJoin() {
+    const slug = { slug: getDiscussionSlug() };
+    customBrowserHistory.push(get('join', slug));
+  }
   render() {
     const slug = { slug: getDiscussionSlug() };
     const connectedUserId = getConnectedUserId();
     const connectedUserName = getConnectedUserName();
+    const alreadyLoggedIn = !!getLoggedInUserId();
+    const loginOrJoinUrl = alreadyLoggedIn ? get('join', slug) : getContextual('login', slug);
+    const onClickRedirect = alreadyLoggedIn ? this.redirectToJoin : null;
     const dropdownUser = (
       <div className="inline">
         <span className="assembl-icon-profil grey">&nbsp;</span>
@@ -39,7 +47,7 @@ class ProfileIcon extends React.Component {
     return (
       <div className="right avatar">
         {!connectedUserId &&
-          <Link to={`${getContextual('login', slug)}?next=${this.state.next}`}>
+          <Link to={`${loginOrJoinUrl}?next=${this.state.next}`} onClick={`${onClickRedirect}`}>
             <div className="connection">
               <Translate value="navbar.connection" />
             </div>

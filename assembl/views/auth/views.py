@@ -45,7 +45,7 @@ from assembl.auth.password import (
     password_change_token, Validity, get_data_token_time)
 from assembl.auth.util import (
     discussion_from_request, roles_with_permissions, maybe_auto_subscribe,
-    get_permissions)
+    get_permissions, effective_userid, get_roles)
 from ...lib import config
 from assembl.lib.sqla_types import EmailString
 from assembl.lib.utils import normalize_email_name, get_global_base_url
@@ -261,7 +261,7 @@ def assembl_profile(request):
     localizer = request.localizer
     profile = get_profile(request)
     id_type = request.matchdict.get('type').strip()
-    logged_in = authenticated_userid(request)
+    logged_in = effective_userid(request)
     save = request.method == 'POST'
     # if some other user
     if not profile or not logged_in or logged_in != profile.id:
@@ -527,9 +527,8 @@ def assembl_login_complete_view(request):
             # logging in as a different user
             # Could I be combining account?
             forget(request)
-        else:
-            # re-logging in? Why?
-            return HTTPFound(location=next_view)
+        # Otherwise, maybe re-login on a different discussion.
+        # Fall through to maybe_autosubsribe.
     if not user.check_password(password):
         error_message = localizer.translate(_("Invalid user and password"))
         user.login_failures += 1
@@ -544,7 +543,16 @@ def assembl_login_complete_view(request):
     request.response.headerlist.extend(headers)
     discussion = discussion_from_request(request)
     if discussion:
-        maybe_auto_subscribe(user, discussion)
+        # New behaviour: join page for first visit to discussion
+        if (discussion.subscribe_to_notifications_on_signup and
+                discussion.preferences['landing_page'] and
+                not discussion.preferences['shared_login'] and
+                not get_roles(user.id, discussion.id)):
+            redirect_url = request.route_path(
+                "join", discussion_slug=discussion.slug)
+            return HTTPFound(redirect_url)
+        else:
+            maybe_auto_subscribe(user, discussion)
     return HTTPFound(location=next_view)
 
 
