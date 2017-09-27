@@ -137,5 +137,16 @@
       "url": "https://www.linkedin.com/in/citiesflife/",
       "name": "linkedin"
     }
-  ]
+  ],
+  "motionChatbot": {
+    "cssURL": "https://api.motion.ai/sdk/webchat.css",
+    "scriptURL": "https://api.motion.ai/sdk/webchat.css",
+    "args": [
+      "74376?color=00B0F0&sendBtn=SEND&inputBox=Type%20something...&module=1002983&token=ac43c34caa1712e461c4aeca022f1b09",
+      true,
+      400,
+      470,
+      "http://zupimages.net/up/17/31/075q.png"
+    ]
+  }
 }

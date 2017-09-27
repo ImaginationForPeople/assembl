@@ -2,9 +2,7 @@ import { xmlHttpRequest } from '../utils/httpRequestHandler';
 import { getSortedArrayByKey } from '../utils/globalFunctions';
 
 export const buildDebateData = (debateData, prefs, timeline) => {
-  const headerBackgroundUrl = prefs.extra_json && prefs.extra_json.headerBackgroundUrl
-    ? prefs.extra_json.headerBackgroundUrl
-    : null;
+  const headerBackgroundUrl = prefs.extra_json && prefs.extra_json.headerBackgroundUrl ? prefs.extra_json.headerBackgroundUrl : null;
   const headerLogoUrl = prefs.extra_json && prefs.extra_json.headerLogoUrl ? prefs.extra_json.headerLogoUrl : null;
   const topic = prefs.extra_json && prefs.extra_json.topic ? prefs.extra_json.topic : null;
   const introduction = prefs.extra_json && prefs.extra_json.introduction ? prefs.extra_json.introduction : null;
@@ -13,6 +11,7 @@ export const buildDebateData = (debateData, prefs, timeline) => {
   const video = prefs.extra_json && prefs.extra_json.video ? prefs.extra_json.video : null;
   const twitter = prefs.extra_json && prefs.extra_json.twitter ? prefs.extra_json.twitter : null;
   const chatbot = prefs.extra_json && prefs.extra_json.chatbot ? prefs.extra_json.chatbot : null;
+  const motionChatbot = prefs.extra_json && prefs.extra_json.motionChatbot ? prefs.extra_json.motionChatbot : null;
   const partners = prefs.extra_json && prefs.extra_json.partners ? prefs.extra_json.partners : null;
   const socialMedias = prefs.extra_json && prefs.extra_json.socialMedias ? prefs.extra_json.socialMedias : null;
   const sortedTimeline = timeline.length > 0 ? getSortedArrayByKey(timeline, 'start') : null;
@@ -32,7 +31,8 @@ export const buildDebateData = (debateData, prefs, timeline) => {
     socialMedias: socialMedias,
     twitter: twitter,
     chatbot: chatbot,
-    partners: partners
+    partners: partners,
+    motionChatbot: motionChatbot
   };
 };
 
