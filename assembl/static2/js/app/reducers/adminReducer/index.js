@@ -1,6 +1,8 @@
 import { fromJS, List, Map } from 'immutable';
 import { combineReducers } from 'redux';
 
+import resourcesCenter from './resourcesCenter';
+
 const updateInEntries = (locale, value) => {
   return (entries) => {
     const entryIndex = entries.findIndex((entry) => {
@@ -174,7 +176,9 @@ export const languagePreferences = (state = List(), action) => {
     return state;
   case 'REMOVE_LANGUAGE_PREFERENCE':
     if (hasLocale(action.locale, state)) {
-      const i = state.findIndex((a) => { return a === action.locale; });
+      const i = state.findIndex((a) => {
+        return a === action.locale;
+      });
       return state.delete(i);
     }
     return state;
@@ -192,12 +196,12 @@ export const discussionLanguagePreferencesHasChanged = (state = false, action) =
   }
 };
 
-
 export default combineReducers({
   selectedLocale: selectedLocale,
   thematicsHaveChanged: thematicsHaveChanged,
   thematicsInOrder: thematicsInOrder,
   thematicsById: thematicsById,
   discussionLanguagePreferences: languagePreferences,
-  discussionLanguagePreferencesHasChanged: discussionLanguagePreferencesHasChanged
+  discussionLanguagePreferencesHasChanged: discussionLanguagePreferencesHasChanged,
+  resourcesCenter: resourcesCenter
 });
