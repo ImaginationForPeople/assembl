@@ -16,6 +16,7 @@ import withLoadingIndicator from '../../../components/common/withLoadingIndicato
 import { DeletedPublicationStates, PublicationStates } from '../../../constants';
 import Nuggets from './nuggets';
 import hashLinkScroll from '../../../utils/hashLinkScroll';
+import { transformLinksInHtml } from '../../../utils/linkify';
 
 export const PostFolded = ({ nbPosts }) => {
   return <Translate value="debate.thread.foldedPostLink" count={nbPosts} />;
@@ -164,10 +165,10 @@ export class EmptyPost extends React.PureComponent {
       debateData,
       nuggetsManager,
       rowIndex,
-      originalLocale
+      originalLocale,
+      identifier
     } = this.props;
     // creationDate is retrieved by IdeaWithPosts query, not PostQuery
-
     const translate = contentLocale !== originalLocale;
     const { body, subject, originalBody, originalSubject } = this.getBodyAndSubject(translate);
 
@@ -256,7 +257,7 @@ export class EmptyPost extends React.PureComponent {
               </h3>
               <div
                 className={`body ${bodyMimeType === 'text/plain' ? 'pre-wrap' : ''}`}
-                dangerouslySetInnerHTML={{ __html: body }}
+                dangerouslySetInnerHTML={{ __html: transformLinksInHtml(body) }}
                 ref={this.recomputeTreeHeightOnImagesLoad}
               />
 
@@ -294,6 +295,7 @@ export class EmptyPost extends React.PureComponent {
                 routerParams={routerParams}
                 debateData={debateData}
                 postSubject={subject.replace('Re: ', '')}
+                identifier={identifier}
               />
             </Col>
           </Row>

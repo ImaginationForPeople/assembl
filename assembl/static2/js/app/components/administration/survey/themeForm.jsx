@@ -10,7 +10,7 @@ import { deleteThematicTooltip } from '../../common/tooltips';
 import { getEntryValueForLocale } from '../../../utils/i18n';
 
 export const DumbThemeCreationForm = ({
-  imgMimetype,
+  imgMimeType,
   imgUrl,
   index,
   markAsToDelete,
@@ -42,7 +42,7 @@ export const DumbThemeCreationForm = ({
       </div>
       <FormControlWithLabel label={ph} onChange={handleTitleChange} required type="text" value={title} />
       <FormGroup>
-        <FileUploader fileOrUrl={imgUrl} handleChange={handleImageChange} mimeType={imgMimetype} />
+        <FileUploader fileOrUrl={imgUrl} handleChange={handleImageChange} mimeType={imgMimeType} />
       </FormGroup>
       <div className="pointer right">
         <OverlayTrigger placement="top" overlay={deleteThematicTooltip}>
@@ -63,8 +63,8 @@ DumbThemeCreationForm.defaultProps = {
 const mapStateToProps = ({ admin: { thematicsById } }, { id, selectedLocale }) => {
   const thematic = thematicsById.get(id);
   return {
-    imgMimetype: thematic.get('imgMimetype', ''),
-    imgUrl: thematic.get('imgUrl', ''),
+    imgMimeType: thematic.getIn(['img', 'mimeType']),
+    imgUrl: thematic.getIn(['img', 'externalUrl']),
     title: getEntryValueForLocale(thematic.get('titleEntries'), selectedLocale, ''),
     toDelete: thematic.get('toDelete', false)
   };

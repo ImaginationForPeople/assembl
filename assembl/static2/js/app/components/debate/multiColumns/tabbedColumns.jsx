@@ -23,9 +23,12 @@ export default class TabbedColumns extends React.Component {
       messageColumns,
       initialRowIndex,
       noRowsRenderer,
-      idea,
+      ideaId,
+      ideaTitle,
       refetchIdea,
-      showSynthesis
+      showSynthesis,
+      identifier,
+      debateData
     } = this.props;
     const activeKey = this.state && 'activeKey' in this.state ? this.state.activeKey : messageColumns[0].messageClassifier;
     const columnsArray = orderPostsByMessageClassifier(messageColumns, posts);
@@ -36,7 +39,7 @@ export default class TabbedColumns extends React.Component {
     );
     const synthesisProps = showSynthesis && {
       classifier: activeKey,
-      synthesisTitle: getSynthesisTitle(activeKey, messageColumns[index].name, idea.title),
+      synthesisTitle: getSynthesisTitle(activeKey, messageColumns[index].name, ideaTitle),
       synthesisBody: messageColumns[index].header || I18n.t('multiColumns.synthesis.noSynthesisYet'),
       hyphenStyle: { borderTopColor: messageColumns[index].color }
     };
@@ -60,7 +63,7 @@ export default class TabbedColumns extends React.Component {
                   }}
                   disabled={isActive}
                 >
-                  {getTabTitle(classifier, messageColumn.name, idea.title)}
+                  {getTabTitle(classifier, messageColumn.name, ideaTitle)}
                 </button>
               </div>
             );
@@ -77,9 +80,11 @@ export default class TabbedColumns extends React.Component {
             data={columnsArray[activeKey]}
             initialRowIndex={initialRowIndex}
             noRowsRenderer={noRowsRenderer}
-            ideaId={idea.id}
+            ideaId={ideaId}
             refetchIdea={refetchIdea}
-            ideaTitle={idea.title}
+            ideaTitle={ideaTitle}
+            identifier={identifier}
+            debateData={debateData}
           />
         </div>
       </div>

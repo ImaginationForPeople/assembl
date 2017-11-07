@@ -42,7 +42,9 @@ export const thematicsById = (state = Map(), action) => {
   case 'CREATE_NEW_THEMATIC': {
     const emptyThematic = Map({
       toDelete: false,
-      imgUrl: null,
+      img: Map({
+        externalUrl: ''
+      }),
       isNew: true,
       questions: List(),
       titleEntries: List(),
@@ -69,7 +71,7 @@ export const thematicsById = (state = Map(), action) => {
       return titleEntries.setIn([titleEntryIndex, 'value'], action.value);
     });
   case 'UPDATE_THEMATIC_IMG_URL':
-    return state.setIn([action.id, 'imgUrl'], action.value);
+    return state.setIn([action.id, 'img', 'externalUrl'], action.value);
   case 'UPDATE_THEMATIC_TITLE': {
     return state.updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value));
   }
