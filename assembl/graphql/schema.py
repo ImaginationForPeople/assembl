@@ -2137,6 +2137,7 @@ class DeleteResource(graphene.Mutation):
         user_id = context.authenticated_userid or Everyone
 
         resource_id = args.get('resource_id')
+        resource_id = int(Node.from_global_id(resource_id)[1])
         resource = models.Resource.get(resource_id)
 
         permissions = get_permissions(user_id, discussion_id)
@@ -2168,6 +2169,7 @@ class UpdateResource(graphene.Mutation):
         user_id = context.authenticated_userid or Everyone
 
         resource_id = args.get('id')
+        resource_id = int(Node.from_global_id(resource_id)[1])
         resource = cls.get(resource_id)
 
         permissions = get_permissions(user_id, discussion_id)
