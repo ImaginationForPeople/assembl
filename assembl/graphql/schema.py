@@ -420,10 +420,7 @@ class PostAttachment(SecureObjectType, SQLAlchemyObjectType):
     document = graphene.Field(Document)
 
 
-class ResourcesCenter(SecureObjectType, SQLAlchemyObjectType):
-    class Meta:
-        model = models.Discussion
-        only_fields = ('id', )
+class ResourcesCenter(graphene.ObjectType):
 
     title = graphene.String(lang=graphene.String())
     title_entries = graphene.List(LangStringEntry)
@@ -1127,8 +1124,6 @@ class Query(graphene.ObjectType):
                                                  key=lambda entry: entry[1])]
 
     def resolve_resources_center(self, args, context, info):
-        discussion_id = context.matchdict['discussion_id']
-        discussion = models.Discussion.get(discussion_id)
         return ResourcesCenter()
 
 
