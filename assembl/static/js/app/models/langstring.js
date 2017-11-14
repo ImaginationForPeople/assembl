@@ -377,9 +377,8 @@ var LangString = Base.Model.extend({
           }
         }
       }
-    } else {
-      console.error("No langPref");
     }
+
     // give up and give first original
     for (i = 0; i < available.length; i++) {
       entry = available[i];
@@ -400,7 +399,8 @@ var LangString = Base.Model.extend({
    * @function app.models.langstrings.LangString.bestValue
    */
   bestValue: function(langPrefs) {
-    return this.best(langPrefs).get("value");
+    var bestLangString = this.best(langPrefs);
+    return bestLangString ? bestLangString.get("value") : null;
   },
   /**
    * Determines the best value, favouring interface over user prefs.
