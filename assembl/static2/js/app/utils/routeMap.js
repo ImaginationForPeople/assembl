@@ -29,6 +29,7 @@ const routes = {
   ideas: '${slug}/ideas',
   synthesis: '${slug}/synthesis',
   debate: '${slug}/debate/${phase}',
+  rootDebate: '${slug}/debate',
   community: '${slug}/community',
   terms: '${slug}/terms',
   join: '${slug}/join',
