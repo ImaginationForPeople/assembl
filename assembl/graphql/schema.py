@@ -29,6 +29,7 @@ from .post import (
 from .resource import CreateResource, DeleteResource, Resource, UpdateResource
 from .sentiment import AddSentiment, DeleteSentiment
 from .synthesis import Synthesis
+from .user import UpdateUser
 from .utils import get_root_thematic_for_phase
 
 
@@ -210,6 +211,7 @@ class Mutations(graphene.ObjectType):
     delete_resource = DeleteResource.Field()
     update_resource = UpdateResource.Field()
     update_resources_center = UpdateResourcesCenter.Field()
+    update_user = UpdateUser.Field()
 
 
 Schema = graphene.Schema(query=Query, mutation=Mutations)
