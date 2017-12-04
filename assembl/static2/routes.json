@@ -18,7 +18,7 @@
   "ctxOldLogin": "debate/${slug}/login",
   "home": "${slug}/home",
   "homeBare": "${slug}",
-  "profile": "${slug}/profil/${userId}",
+  "profile": "${slug}/profile/${userId}",
   "ideas": "${slug}/ideas",
   "syntheses": "${slug}/syntheses",
   "synthesis": "${slug}/syntheses/${synthesisId}",
