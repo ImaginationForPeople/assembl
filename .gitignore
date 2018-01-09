@@ -124,3 +124,7 @@ celerybeat-schedule
 celerybeat.pid
 doc/er_diagram.svg
 local.ini.*
+
+#dev env
+/pgdata/
+/redisdata/

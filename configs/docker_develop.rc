@@ -1,0 +1,27 @@
+_extends = develop.rc
+
+// do NOT use this config in any server open to the public! it's swiss cheese
+
+*db_host = database
+
+elasticsearch_host = elasticsearch
+elastic_search_basic_auth = elastic:changeme
+supervisor__autostart_elasticsearch_server = false
+
+supervisor__autostart_pserve = true
+supervisor__autostart_gulp = true
+supervisor__autostart_webpack = true
+supervisor__autostart_celery_notification_dispatch = true
+supervisor__autostart_celery_notify = true
+supervisor__autostart_celery_notify_beat = true
+
+redis_host = redis
+
+memcached_host = memcached
+
+webpack_bound_address = 0.0.0.0
+
+smtp_host = smtp
+mail.host = smtp
+mail.port = 5025
+mail.tls = false

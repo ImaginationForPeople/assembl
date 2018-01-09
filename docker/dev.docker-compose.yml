@@ -1,0 +1,166 @@
+version: "2"
+services:
+  supervisord:
+    build:
+      context: ..
+      dockerfile: docker/dev.Dockerfile
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisord -n'"
+    depends_on:
+      - database
+      - redis
+      - memcached
+      - elasticsearch
+    ports:
+      - "127.0.0.1:6543:6543"
+      - "127.0.0.1:8080:8080"
+  sshd:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    user: root
+    command: /bin/sh -c '/etc/init.d/ssh start && /usr/bin/ssh-keyscan localhost && while :; do sleep 1; done'
+  database:
+    image: postgres:9.5.5-alpine
+    volumes:
+      - ../pgdata:/var/lib/postgresql/data
+  elasticsearch:
+    build:
+      context: .
+      dockerfile: elasticsearch.Dockerfile
+      args:
+        version: 5.6.2
+    environment:
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+  redis:
+    image: redis:3.0-alpine
+    volumes:
+      - ../redisdata:/data
+  memcached:
+    image: memcached:1.4-alpine
+  webpack-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f dev:webpack stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  pgadmin:
+    image: chorss/docker-pgadmin4:2.0
+    ports:
+      - 127.0.0.1:5050:5050
+  smtp:
+    image: gessnerfl/fake-smtp-server:0.6.0
+    ports:
+      - 127.0.0.1:5080:5080
+  webpack-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f dev:webpack stdout'"
+    depends_on:
+      - supervisord
+    restart: always
+  pserve-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f dev:pserve stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  pserve-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f dev:pserve stdout'"
+    depends_on:
+      - supervisord
+    restart: always
+  gulp-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f dev:gulp stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  gulp-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f dev:gulp stdout'"
+    depends_on:
+      - supervisord
+    restart: always
+  changes_router-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f changes_router stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  changes_router-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f changes_router stdout'"
+    depends_on:
+      - supervisord
+    restart: always
+  celery_notification_dispatch-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f celery_notification_dispatch stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  celery_notification_dispatch-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f celery_notification_dispatch stdout'"
+    depends_on:
+      - supervisord
+    restart: always
+  celery_notify-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f celery_notify stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  celery_notify-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f celery_notify stdout'"
+    depends_on:
+      - supervisord
+    restart: always
+  celery_notify_beat-stderr:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f celery_notify_beat stderr'"
+    depends_on:
+      - supervisord
+    restart: always
+  celery_notify_beat-stdout:
+    image: devas_supervisord
+    volumes:
+      - ..:/assembl
+    command: "sh -c '. venv/bin/activate && supervisorctl tail -f celery_notify_beat stdout'"
+    depends_on:
+      - supervisord
+    restart: always

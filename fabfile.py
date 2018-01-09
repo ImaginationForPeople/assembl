@@ -597,7 +597,7 @@ def reset_semantic_mappings():
     print(cyan('Resetting semantic mappings'))
     venvcmd("echo 'import assembl.semantic ; assembl.semantic.reset_semantic_mapping()'|pshell %s" % env.ini_file)
 
-
+@task
 def app_db_install():
     """
     Install db the first time and fake migrations
@@ -1760,7 +1760,7 @@ def install_yarn():
                    "deb https://dl.yarnpkg.com/debian/ stable main", True)
             sudo('curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -')
             sudo('apt-get update')
-            sudo('apt-get install yarn')
+            sudo('apt-get install -y yarn')
     else:
         run('brew install yarn')
 

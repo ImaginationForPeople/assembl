@@ -133,7 +133,14 @@ def generate_ini_files(config, config_fname):
     webpack_port = 8080
     if config.has_option(SECTION, 'webpack_port'):
         webpack_port = config.getint(SECTION, 'webpack_port')
-    webpack_url = "http://%s:%d" % (public_hostname, webpack_port)
+        
+    webpack_host = public_hostname
+    if config.has_option(SECTION, 'webpack_bound_address'):
+        webpack_host = config.get(SECTION, 'webpack_bound_address')
+        
+    webpack_url = "http://%s:%d" % (webpack_host, webpack_port)
+    webpack_public_url = "%s:%d" % (public_hostname, webpack_port)
+
     vars = {
         'IMAP_CELERY_BROKER': imap_celery_broker,
         'NOTIF_DISPATCH_CELERY_BROKER': notif_dispatch_celery_broker,
@@ -161,6 +168,7 @@ def generate_ini_files(config, config_fname):
         'VIRTUAL_ENV': os.environ['VIRTUAL_ENV'],
         'edgesense_code_dir': edgesense_code_dir,
         'WEBPACK_URL': webpack_url,
+        'WEBPACK_PUBLIC_URL': webpack_public_url,
         'ASSEMBL_URL': url,
     }
     for var in (
