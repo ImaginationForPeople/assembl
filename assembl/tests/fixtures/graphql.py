@@ -2,17 +2,11 @@
 import pytest
 
 
-class Localizer(object):
-    def translate(self, value):
-        return value
-
-
 @pytest.fixture(scope="function")
 def graphql_request(request, test_adminuser_webrequest, discussion):
     req = test_adminuser_webrequest
     req.matchdict = {"discussion_id": discussion.id}
     req.method = 'POST'
-    req.localizer = Localizer()
     return req
 
 
