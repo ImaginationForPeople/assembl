@@ -11,7 +11,7 @@ from ..utils import PyramidWebTestRequest
 
 @pytest.fixture(scope="function")
 def participant1_user(request, test_session, discussion):
-    """A User fixture with R_PARTICIPANT role"""
+    """A User fixture with R_PARTICIPANT global role and with R_PARTICIPANT local role in discussion `discussion`"""
 
     from assembl.models import User, UserRole, Role, EmailAccount
     u = User(name=u"A. Barking Loon", type="user", password="password",
@@ -63,7 +63,7 @@ def test_app_participant1(request, participant1_user, test_app_no_perm):
 
 @pytest.fixture(scope="function")
 def participant2_user(request, test_session):
-    """A User fixture with R_PARTICIPANT role"""
+    """A User fixture with R_PARTICIPANT global role"""
 
     from assembl.models import User, UserRole, Role
     u = User(name=u"James T. Expert", type="user",
@@ -94,8 +94,7 @@ def discussion_admin_user(request, test_app, test_session, discussion):
              last_assembl_login=datetime.utcnow())
     test_session.add(u)
 
-    asid = u.create_agent_status_in_discussion(discussion)
-    asid.last_visit = datetime.utcnow()
+    u.update_agent_status_last_visit(discussion)
     role = Role.get_role(R_ADMINISTRATOR, test_session)
     test_session.add(
         LocalUserRole(user=u, discussion=discussion, role=role))

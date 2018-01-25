@@ -296,6 +296,7 @@ def get_format(request, stats_formats=default_stats_formats):
 
 def get_time_series_timing(request, force_bounds=False):
     start = request.GET.get("start", None)
+    
     end = request.GET.get("end", None)
     interval = request.GET.get("interval", None)
     try:
@@ -1661,6 +1662,16 @@ def phase1_csv_export(request):
     response.app_iter = FileIter(output)
     return response
 
+
+@view_config(context=InstanceContext, name="update_notification_subscriptions",
+             ctx_instance_class=Discussion, request_method='GET',
+             permission=P_ADMIN_DISC, renderer='json')
+def update_notification_subscriptions(request):
+    discussion = request.context._instance
+    participants = discussion.all_participants
+    for user in participants:
+        user.get_notification_subscriptions(discussion.id)
+    return {'status': 'Notification subscriptions have been updated.'}
 
 @view_config(context=InstanceContext, request_method='GET',
              ctx_instance_class=Discussion, permission=P_ADMIN_DISC,
