@@ -330,6 +330,8 @@ def get_default_context(request, **kwargs):
 
     theme_name, theme_relative_path = get_theme_info(discussion)
     node_env = os.getenv('NODE_ENV', 'production')
+
+    under_test = bool(config.get('under_test') or False)
     return dict(
         kwargs,
         request=request,
@@ -362,7 +364,8 @@ def get_default_context(request, **kwargs):
         providers=providers,
         providers_json=json.dumps(providers),
         translations=io.open(jedfilename, encoding='utf-8').read(),
-        admin_email=admin_email
+        admin_email=admin_email,
+        under_test=under_test
     )
 
 
