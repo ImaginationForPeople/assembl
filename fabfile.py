@@ -23,6 +23,7 @@ from fabric.contrib.files import (exists, is_link, append)
 from fabric.api import (
     abort, cd, env, execute, hide, prefix, settings, task as fab_task)
 from fabric.colors import yellow, cyan, red, green
+import json
 
 # import logging
 # import paramiko
@@ -37,6 +38,20 @@ from fabric.colors import yellow, cyan, red, green
 
 
 DEFAULT_SECTION = "DEFAULT"
+
+FIELD_TYPE = dict(default='A', choices=['A',
+                                        'AAAA',
+                                        'CNAME',
+                                        'DKIM',
+                                        'LOC',
+                                        'MX',
+                                        'NAPTR',
+                                        'NS',
+                                        'PTR',
+                                        'SPF',
+                                        'SRV',
+                                        'SSHFP',
+                                        'TXT'])
 
 
 def running_locally(hosts=None):
@@ -163,6 +178,198 @@ def getmtime(path):
 
 def listdir(path):
     return run("ls " + path).split()
+
+
+@task
+def get_available_ovh_services():
+    """List all available ovh services"""
+    client = create_ovh_client()
+    result = client.get('/vps')
+    print json.dumps(result, indent=4)
+
+
+@task
+def get_domain_records(domain):
+    """Obtains all records for a specific domain"""
+    records = {}
+    client = create_ovh_client()
+    # List all Ids and get info for each one
+    record_ids = client.get('/domain/zone/{domain}/record/'.format(domain=domain))
+    for record_id in record_ids:
+        info = client.get('/domain/zone/{domain}/record/{record_id}'.format(domain=domain, record_id=record_id))
+        records[info['subDomain']] = info
+    print json.dumps(records, indent=4)
+    return records
+
+
+@task
+def delete_dns_record(domain, entry_id):
+    """Deletes the dns record with the given id"""
+    client = create_ovh_client()
+    result = client.delete('/domain/zone/{domain}/record/{entry_id}'.format(domain=domain, entry_id=entry_id))
+    print json.dumps(result, indent=4)
+
+
+@task
+def delete_all_dns_records(domain):
+    """Deletes all DNS records for a given domain"""
+    client = create_ovh_client()
+    domain_record_list = get_domain_records(domain)
+    for record in domain_record_list:
+        print domain_record_list[record]["id"]
+        record_id = domain_record_list[record]["id"]
+        result = client.delete('/domain/zone/{domain}/record/{record_id}'.format(domain=domain, record_id=record_id))
+    return result
+
+
+@task
+def check_field_type_exists(field):
+    """Checks if the inputs in your dns_entries.json file are valid"""
+    return field in FIELD_TYPE['choices']
+
+
+@task
+def check_dns_entries(data):
+    """Checks if the inputs in your dns_entries.json file are valid"""
+    entries_types = []
+    for domain in data:
+        print domain
+        print data[domain]
+        for base in data[domain]:
+            print base
+            entries_types.append(base["type"])
+    for item in entries_types:
+        print item
+
+    if all(check_field_type_exists(item) for item in entries_types):
+        return True
+    else:
+        for item in entries_types:
+            if not check_field_type_exists(item):
+                print("The field type {item} is not valid".format(item=item))
+                return False
+
+
+@task
+def check_domains(data):
+    """Checks if the domains you provided in the dns_entries.json are valid"""
+    domain_list = get_domain_list()
+    if all(domain in domain_list for domain in data):
+        return True
+    else:
+        for domain in data:
+            if domain not in domain_list:
+                print("The domain {domain} is not in the domain list".format(domain=domain))
+                return False
+
+
+@task
+def get_dns_entries_from_file():
+    data = json.load(open('configs/bluenove-server-configs/dns_entries.json'))
+    print json.dumps(data, indent=4)
+    return data
+
+
+@task
+def get_domain_list():
+    client = create_ovh_client()
+    result = client.get('/domain')
+    print json.dumps(result, indent=4)
+    return result
+
+
+@task
+def create_new_dns_record():
+    data = get_dns_entries_from_file()
+    if check_dns_entries(data) and check_domains(data):
+        client = create_ovh_client()
+        for domain in data:
+            for entry in data[domain]:
+                client.post('/domain/zone/{domain}/record'.format(domain=domain), fieldType=entry["type"], target=entry["value"])
+
+
+@task
+def create_new_dns_record_cmd_line_arguments(domain_entry, field_type_entry, target_entry):
+    client = create_ovh_client()
+    if domain_entry not in get_domain_list():
+        print("The domain {domain_entry} is not a valid domain".format(domain_entry=domain_entry))
+        print "The valid domains are:"
+        for domain in get_domain_list():
+            print domain
+    elif not check_field_type_exists(field_type_entry):
+        print("The field {field_type_entry} is not a valid field type".format(field_type_entry=field_type_entry))
+        print "Valid field types are A, AAAA, CNAME, DKIM, LOC, MX, NAPTR, NS, PTR, SPF, SRV, SSHFP, TXT"
+    else:
+        print("Creating new DNS record for the domain {domain_entry} with field type {field_type_entry} with target {target_entry}".format(
+            domain_entry=domain_entry, field_type_entry=field_type_entry, target_entry=target_entry))
+        client.post('/domain/zone/{domain_entry}/record'.format(domain_entry=domain_entry), fieldType=field_type_entry, target=target_entry)
+
+
+def create_ovh_client():
+    try:
+        import ovh
+    except:
+        print "Running pip install ovh"
+        local("pip install ovh")
+    client = ovh.Client(
+        endpoint=env.ovh_hosting__endpoint,
+        application_key=env.ovh_hosting__application_key,
+        application_secret=env.ovh_hosting__application_secret,
+        consumer_key=env.ovh_hosting__consumer_key,
+    )
+    return client
+
+
+@task
+def get_ovh_vps_snapshot():
+    client = create_ovh_client()
+    result = client.get('/vps/{vps_identifier}/snapshot'.format(vps_identifier=env.ovh_hosting__vps_identifier))
+    print json.dumps(result, indent=4)
+
+
+@task
+def set_ovh_vps_snapshot():
+    import datetime
+    today_date = datetime.datetime.now().strftime('%Y_%m_%d_%H_%M_%S')
+    client = create_ovh_client()
+    result = client.put('/vps/{vps_identifier}/snapshot'.format(vps_identifier=env.ovh_hosting__vps_identifier),
+                        description='snapshot-{today_date}'.format(today_date=today_date))
+    print json.dumps(result, indent=4)
+
+
+@task
+def list_secondary_dns_names_ovh():
+    client = create_ovh_client()
+    result = client.get('/vps/{vps_identifier}/secondaryDnsDomains'.format(vps_identifier=env.ovh_hosting__vps_identifier))
+    print json.dumps(result, indent=4)
+
+
+@task
+def add_secondary_dns_names_ovh():
+    """Read list of secondary domain names to add from the file domain_name_list.rc"""
+    client = create_ovh_client()
+    with open("configs/bluenove-server-configs/domain_name_list.rc", "r") as f:
+        domains_to_add = f.readlines()
+    print(yellow("Adding the following domain names as secondary DNS domains"))
+    for domain in domains_to_add:
+        domain = domain.strip('\n')
+        print(yellow(domain))
+        result = client.post('/vps/{vps_identifier}/secondaryDnsDomains'.format(vps_identifier=env.ovh_hosting__vps_identifier), domain=domain)
+    print json.dumps(result, indent=4)
+
+
+@task
+def remove_secondary_dns_names_ovh():
+    """Read list of secondary domain names to remove from the file domain_name_list.rc"""
+    client = create_ovh_client()
+    with open("configs/bluenove-server-configs/domain_name_list.rc", "r") as f:
+        domains_to_remove = f.readlines()
+    print(yellow("Removing the following domain names as secondary DNS domains"))
+    for domain in domains_to_remove:
+        domain = domain.strip('\n')
+        print(yellow(domain))
+        result = client.delete('/vps/{vps_identifier}/secondaryDnsDomains/{domain}'.format(vps_identifier=env.ovh_hosting__vps_identifier, domain=domain))
+    print json.dumps(result, indent=4)
 
 
 @task
@@ -1136,9 +1343,9 @@ def update_python_package_builddeps():
              'libgraphviz-dev libxmlsec1-dev')
         sudo('apt-get install -y libatlas-base-dev', warn_only=True)  # ubuntu >= 17.10
         sudo('apt-get install -y libatlas-dev', warn_only=True)  # others
-        print ("We are still trying to get some requirements right for linux, "
-               "See http://www.scipy.org/scipylib/building/linux.html "
-               "for details.")
+        print("We are still trying to get some requirements right for linux, "
+              "See http://www.scipy.org/scipylib/building/linux.html "
+              "for details.")
 
 
 @task
@@ -1598,7 +1805,7 @@ def database_restore():
             env.db_database,
             env.db_user,
             remote_db_path())
-        )
+            )
 
     for process in processes:
         supervisor_process_start(process)
@@ -1873,8 +2080,10 @@ def install_elasticsearch():
             sysd=join(extract_path, 'bin/elasticsearch-systemd-pre-exec'),
             log=join(extract_path, 'bin/elasticsearch-translog'),
         ))
-        run(env.projectpath + '/var/elasticsearch/bin/elasticsearch-plugin install https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-smartcn/analysis-smartcn-{version}.zip'.format(version=ELASTICSEARCH_VERSION))
-        run(env.projectpath + '/var/elasticsearch/bin/elasticsearch-plugin install https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-kuromoji/analysis-kuromoji-{version}.zip'.format(version=ELASTICSEARCH_VERSION))
+        run(env.projectpath + '/var/elasticsearch/bin/elasticsearch-plugin install https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-smartcn/analysis-smartcn-{version}.zip'.format(
+            version=ELASTICSEARCH_VERSION))
+        run(env.projectpath + '/var/elasticsearch/bin/elasticsearch-plugin install https://artifacts.elastic.co/downloads/elasticsearch-plugins/analysis-kuromoji/analysis-kuromoji-{version}.zip'.format(
+            version=ELASTICSEARCH_VERSION))
 
         print(green("Successfully installed elasticsearch"))
 

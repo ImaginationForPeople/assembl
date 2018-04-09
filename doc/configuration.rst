@@ -99,6 +99,10 @@ saml_random.ini.tmpl
 docker_random.ini
     More random variables, specific to docker installation.
 
+snapshot.rc
+    Allows you to set the API keys to interact with the OVH API.
+    These keys can be generated on https://api.ovh.com/createToken
+    They are valid for a limited time and can be given specific rights
 
 Specific .rc File Keys
 ~~~~~~~~~~~~~~~~~~~~~~
