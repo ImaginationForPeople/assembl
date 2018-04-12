@@ -4,6 +4,7 @@ import { Map } from 'immutable';
 
 import AvailableTokens from '../../../../js/app/components/voteSession/availableTokens';
 import { tokenCategories } from './fakeData';
+import '../../../helpers/setupTranslations';
 
 describe('AvailableTokens component', () => {
   it('should match AvailableTokens snapshot (non sticky version)', () => {
@@ -45,6 +46,8 @@ describe('AvailableTokens component', () => {
     const props = {
       remainingTokensByCategory: Map({
         category1: 3,
+        category2: 6,
+        category3: 4,
         category4: 10
       }),
       sticky: false,
