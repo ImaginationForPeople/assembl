@@ -15,6 +15,7 @@ Installation and administration
    configuration
    backups
    howtoupgrade
+   preprod_update
 
 Stack and architecture
 ----------------------
