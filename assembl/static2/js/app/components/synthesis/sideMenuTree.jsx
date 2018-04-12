@@ -19,13 +19,18 @@ type SideMenuTreeProps = {
   index: number,
   slug: string,
   parents: Array<number>,
-  indexGenerator: Function
+  indexGenerator: Function,
+  ideaOnScroll?: string
 };
 
-class SideMenuTree extends React.Component<*, SideMenuTreeProps, SideMenuTreeState> {
+class SideMenuTree extends React.Component<Object, SideMenuTreeProps, SideMenuTreeState> {
   props: SideMenuTreeProps;
 
   state: SideMenuTreeState;
+
+  static defaultProps = {
+    ideaOnScroll: null
+  };
 
   static defaultProps = {
     indexGenerator: SECTION_INDEX_GENERATOR.alphanumericOr
@@ -39,7 +44,11 @@ class SideMenuTree extends React.Component<*, SideMenuTreeProps, SideMenuTreeSta
     };
   }
 
-  getLinkContainerClassNames = (id: string) => classNames('link-container', { active: location.hash === `#${id}` });
+  getLinkContainerClassNames = (id: string) => {
+    const { ideaOnScroll } = this.props;
+    const isIdeaOnScroll = ideaOnScroll === id;
+    return classNames('link-container', { active: (location.hash === `#${id}` && isIdeaOnScroll) || isIdeaOnScroll });
+  };
 
   getTitle = (title: string, level: number, url: string, id: string) => {
     const { indexGenerator, parents, index } = this.props;
@@ -58,7 +67,7 @@ class SideMenuTree extends React.Component<*, SideMenuTreeProps, SideMenuTreeSta
   };
 
   render() {
-    const { rootIdea, subIdeas, parents, index, synthesisPostId, slug } = this.props;
+    const { rootIdea, subIdeas, parents, index, synthesisPostId, slug, ideaOnScroll } = this.props;
     const { roots, descendants } = getPartialTree(subIdeas);
     const newParents = [...parents];
     newParents.push(index);
@@ -69,6 +78,7 @@ class SideMenuTree extends React.Component<*, SideMenuTreeProps, SideMenuTreeSta
       const url = get('synthesisIdea', { slug: slug, synthesisId: synthesisPostId, ideaId: id });
       return (
         <SideMenuTree
+          ideaOnScroll={ideaOnScroll}
           key={id}
           rootIdea={idea}
           index={subIndex + 1}
@@ -81,6 +91,9 @@ class SideMenuTree extends React.Component<*, SideMenuTreeProps, SideMenuTreeSta
       );
     });
     const { id, title } = rootIdea;
+    const isIdeaOnScroll = ideaOnScroll === id;
+    const isChildOnScroll = subIdeas.some(subIdea => ideaOnScroll === subIdea.id);
+    const showSubIdeasTree = (show && activeKey === id) || level > 1 || isIdeaOnScroll || isChildOnScroll;
     const rootIdeaUrl = get('synthesisIdea', { slug: slug, synthesisId: synthesisPostId, ideaId: id });
     const hasChildren = subIdeas.length > 0;
     return (
@@ -90,14 +103,17 @@ class SideMenuTree extends React.Component<*, SideMenuTreeProps, SideMenuTreeSta
           {hasChildren &&
             level === 1 && (
               <span
-                className={classNames('assembl-icon-down-open pointer', { 'active-arrow': show && activeKey === id })}
+                className={classNames('assembl-icon-down-open pointer', {
+                  'active-arrow': showSubIdeasTree,
+                  'no-pointer-events': isIdeaOnScroll || isChildOnScroll
+                })}
                 onClick={() => {
                   this.setState({ activeKey: id, show: !show });
                 }}
               />
             )}
         </div>
-        <div>{((show && activeKey === id) || level > 1) && tree}</div>
+        <div>{showSubIdeasTree && tree}</div>
       </div>
     );
   }
