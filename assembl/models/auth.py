@@ -27,6 +27,8 @@ from sqlalchemy import (
     UniqueConstraint
 )
 from pyramid.httpexceptions import HTTPBadRequest, HTTPUnauthorized
+from pyramid.security import Everyone
+from pyramid.threadlocal import get_current_request
 from sqlalchemy.orm import (
     relationship, backref, deferred)
 from sqlalchemy.orm.attributes import NO_VALUE
@@ -1638,6 +1640,11 @@ class LanguagePreferenceOrder(IntEnum):
     DeducedFromTranslation = 3
     OS_Default = 4
     Discussion = 5
+    Server = 6
+
+    @classmethod
+    def get_name_from_order(cls, order):
+        return cls._value2member_map_[order]
 
 
 LanguagePreferenceOrder.unique_prefs = (
@@ -1655,9 +1662,7 @@ class LanguagePreferenceCollection(object):
         pass
 
     @classmethod
-    def getCurrent(cls, req=None):
-        from pyramid.threadlocal import get_current_request
-        from pyramid.security import Everyone
+    def getCurrent(cls, req=None, session=None):
         # Very very hackish, but this call is costly and frequent.
         # Let's cache it in the request. Useful for view_def use.
         if req is None:
@@ -1667,13 +1672,15 @@ class LanguagePreferenceCollection(object):
             user_id = req.authenticated_userid
             if user_id and user_id != Everyone:
                 try:
-                    req.lang_prefs = UserLanguagePreferenceCollection(user_id)
+                    discussion_id = req.matchdict['discussion_id'] if (
+                        'matchdict' in req.__dict__ and req.matchdict and 'discussion_id' in req.matchdict) else None
+                    req.lang_prefs = UserLanguagePreferenceCollection(user_id, discussion_id=discussion_id, session=session)
                     return req.lang_prefs
                 except Exception:
                     capture_exception()
             # use my locale negotiator
             locale = req.locale_name
-            req.lang_prefs = LanguagePreferenceCollectionWithDefault(locale)
+            req.lang_prefs = LanguagePreferenceCollectionWithDefault(locale, session=session)
         return req.lang_prefs
 
     @abstractmethod
@@ -1688,8 +1695,8 @@ class LanguagePreferenceCollection(object):
 class LanguagePreferenceCollectionWithDefault(LanguagePreferenceCollection):
     """A LanguagePreferenceCollection with a fallback language."""
 
-    def __init__(self, locale_code):
-        self.default_locale = Locale.get_or_create(locale_code)
+    def __init__(self, locale_code, session=None):
+        self.default_locale = Locale.get_or_create(locale_code, session)
 
     def default_locale_code(self):
         return self.default_locale
@@ -1700,6 +1707,7 @@ class LanguagePreferenceCollectionWithDefault(LanguagePreferenceCollection):
                 locale=self.default_locale, locale_id=self.default_locale.id,
                 source_of_evidence=LanguagePreferenceOrder.Cookie.value)
         else:
+            db = db or User.default_db
             locale = Locale.get_or_create(locale, db)
             return UserLanguagePreference(
                 locale=locale, locale_id=locale.id,
@@ -1714,55 +1722,179 @@ class LanguagePreferenceCollectionWithDefault(LanguagePreferenceCollection):
 class UserLanguagePreferenceCollection(LanguagePreferenceCollection):
     """A LanguagePreferenceCollection that represent one user's preferences."""
 
-    def __init__(self, user_id):
-        user = User.get(user_id)
-        user_prefs = user.language_preference
-        assert user_prefs
-        user_prefs.sort(reverse=True)
-        prefs_by_locale = {
-            user_pref.locale_code: user_pref
-            for user_pref in user_prefs
-        }
-        user_prefs.reverse()
-        prefs_with_trans = [up for up in user_prefs if up.translate_to]
-        prefs_without_trans = [
-            up for up in user_prefs if not up.translate_to]
-        prefs_without_trans_by_loc = {
-            up.locale_code: up for up in prefs_without_trans}
-        # First look for translation targets
-        for (loc, pref) in prefs_by_locale.items():
-            for n, l in enumerate(Locale.decompose_locale(loc)):
-                if n == 0:
-                    continue
-                if l in prefs_by_locale:
-                    break
-                prefs_by_locale[l] = pref
-        for pref in prefs_with_trans:
-            for l in Locale.decompose_locale(pref.translate_to_code):
-                if l in prefs_without_trans_by_loc:
-                    break
-                locale = Locale.get_or_create(l)
-                new_pref = UserLanguagePreference(
-                    locale=locale, locale_id=locale.id,
-                    source_of_evidence=LanguagePreferenceOrder.DeducedFromTranslation.value,
-                    preferred_order=pref.preferred_order)
-                prefs_without_trans.append(new_pref)
-                prefs_without_trans_by_loc[l] = new_pref
-                if l not in prefs_by_locale:
-                    prefs_by_locale[l] = new_pref
+    def __init__(self, user_id, discussion_id=None, session=None):
+        self.user = User.get(user_id, session)
+        if discussion_id:
+            from assembl.models import Discussion
+            self.discussion = Discussion.get(discussion_id, session)
+        else:
+            self.discussion = None
+        self.calculate_locale_prefs(self.user.db)
+
+    def process_locale(self, locale_code, source_of_evidence, **kwargs):
+        """
+        How the locales are procssed for a user language preference. This method SHOULD
+        not be used in conjunction with post user language preference
+        """
+        session = self.user.db
+        locale_code = to_posix_string(locale_code)
+        # Updated: Now Locale is a model. Converting posix_string into its
+        # equivalent model. Creates it if it does not exist
+        locale = Locale.get_or_create(locale_code, session)
+
+        if source_of_evidence in LanguagePreferenceOrder.unique_prefs:
+            lang_pref_signatures = defaultdict(list)
+            for lp in self.user.language_preference:
+                lang_pref_signatures[lp.source_of_evidence].append(lp)
+            while len(lang_pref_signatures[source_of_evidence]) > 1:
+                # legacy multiple values
+                lp = lang_pref_signatures[source_of_evidence].pop()
+                lp.delete()
+            if len(lang_pref_signatures[source_of_evidence]) == 1:
+                pref = lang_pref_signatures[source_of_evidence][0]
+                pref.locale = locale
+                for k, v in kwargs.iteritems():
+                    setattr(pref, k, v)
+                session.flush()
+                return lang_pref_signatures[source_of_evidence][0]
+            # else creation below
+        else:
+            lang_pref_signatures = {
+                (lp.locale_id, lp.source_of_evidence)
+                for lp in self.user.language_preference
+            }
+            if (locale.id, source_of_evidence) in lang_pref_signatures:
+                prefs = filter(
+                    lambda x: x.locale_id == locale.id and x.source_of_evidence == source_of_evidence, self.user.language_preference)
+                pref = prefs[0] if prefs else None
+                if pref:
+                    # Updating the translation
+                    for k, v in kwargs.iteritems():
+                        setattr(pref, k, v)
+                    session.flush()
+                    return pref
+        lang = UserLanguagePreference(
+            user=self.user,
+            locale=locale,
+            source_of_evidence=source_of_evidence,
+            **kwargs
+        )
+        session.add(lang)
+        session.flush()
+        self.calculate_locale_prefs(session)
+        return lang
+
+    def process_post_locale(self, locale_code, post_id, **kwargs):
+        locale = Locale.get_or_create(locale_code)
+        if post_id in self.post_prefs:
+            pref = self.post_prefs[post_id]
+            pref.locale = locale
+            for k, v in kwargs.iteritems():
+                setattr(pref, k, v)
+        else:
+            pref = PostUserLanguagePreference(
+                post_id=post_id,
+                locale=locale,
+                user=self.user,
+                **kwargs
+            )
+            self.user.db.add(pref)
+            self.user.db.flush()
+        return pref
+
+    def calculate_locale_prefs(self, db):
+        # create another dictionary for posts
+        all_prefs = db.query(UserLanguagePreference).filter_by(user=self.user).all()
+        post_prefs = filter(lambda p: p.__class__ == PostUserLanguagePreference, all_prefs)
+        user_prefs = filter(lambda p: p.__class__ == UserLanguagePreference, all_prefs)
         default_pref = None
-        if prefs_with_trans:
-            prefs_with_trans.sort()
-            target_lang_code = prefs_with_trans[0].translate_to_code
-            default_pref = prefs_without_trans_by_loc.get(
-                target_lang_code, None)
+        prefs_by_locale = {}
+        if user_prefs:
+            user_prefs.sort(reverse=True)
+            prefs_by_locale = {
+                user_pref.locale_code: user_pref
+                for user_pref in user_prefs
+            }
+            user_prefs.reverse()
+            prefs_with_trans = [up for up in user_prefs if up.translate_to]
+            prefs_without_trans = [
+                up for up in user_prefs if not up.translate_to]
+            prefs_without_trans_by_loc = {
+                up.locale_code: up for up in prefs_without_trans}
+            # First look for translation targets
+            for (loc, pref) in prefs_by_locale.items():
+                for n, l in enumerate(Locale.decompose_locale(loc)):
+                    if n == 0:
+                        continue
+                    if l in prefs_by_locale:
+                        break
+                    prefs_by_locale[l] = pref
+            for pref in prefs_with_trans:
+                for l in Locale.decompose_locale(pref.translate_to_code):
+                    if l in prefs_without_trans_by_loc:
+                        break
+                    locale = Locale.get_or_create(l)
+                    new_pref = UserLanguagePreference(
+                        locale=locale, locale_id=locale.id,
+                        source_of_evidence=LanguagePreferenceOrder.DeducedFromTranslation.value,
+                        preferred_order=pref.preferred_order)
+                    prefs_without_trans.append(new_pref)
+                    prefs_without_trans_by_loc[l] = new_pref
+                    if l not in prefs_by_locale:
+                        prefs_by_locale[l] = new_pref
+            if prefs_with_trans:
+                prefs_with_trans.sort()
+                target_lang_code = prefs_with_trans[0].translate_to_code
+                default_pref = prefs_without_trans_by_loc.get(
+                    target_lang_code, None)
+            if not default_pref:
+                # using the untranslated locales, if any.
+                prefs_without_trans.sort()
+                # TODO: Or use discussion locales otherwise?
+                # As it stands, the cookie is the fallback.
+                default_pref = (
+                    prefs_without_trans[0] if prefs_without_trans else None)
+
         if not default_pref:
-            # using the untranslated locales, if any.
-            prefs_without_trans.sort()
-            # TODO: Or use discussion locales otherwise?
-            # As it stands, the cookie is the fallback.
-            default_pref = (
-                prefs_without_trans[0] if prefs_without_trans else None)
+            # Create one from the request
+            def make_preference(locale, order, source):
+                from assembl.models.langstrings import Locale
+                return UserLanguagePreference(
+                    user=self.user,
+                    locale=Locale.get_or_create(locale),
+                    source_of_evidence=source.value,
+                    preferred_order=order
+                )
+
+            request = get_current_request()
+            if not request:
+                if self.discussion:
+                    discussion_prefs = self.discussion.preferences
+                    if 'preferred_locales' in discussion_prefs and discussion_prefs['preferred_locales']:
+                        prefs_by_locale = {l: make_preference(l, 0, LanguagePreferenceOrder.Discussion)
+                                           for l in discussion_prefs['preferred_locales']}
+                        default_pref = make_preference(discussion_prefs['preferred_locales'][0], 0, LanguagePreferenceOrder.Discussion)
+                else:
+                    from assembl.models import Preferences
+                    server_prefs = Preferences.get_default_preferences(db)
+                    if 'preferred_locales' in server_prefs and server_prefs['preferred_locales']:
+                        # same as above, update the default pref with the server pref
+                        prefs_by_locale = {l: make_preference(l, 0, LanguagePreferenceOrder.Server) for l in server_prefs['preferred_locales']}
+                        default_pref = make_preference(server_prefs['preferred_locales'][0], 0, LanguagePreferenceOrder.Server)
+                    else:
+                        config_locale = config.get('pyramid.default_locale_name')
+                        prefs_by_locale = {config_locale: make_preference(config_locale, 0, LanguagePreferenceOrder.Server)}
+                        default_pref = make_preference(config_locale, 0, LanguagePreferenceOrder.Server)
+            else:
+                from assembl.lib.utils import process_locale_from_request
+                # This creates a user language preference according to request
+                pref_locale, level = process_locale_from_request(request)
+                preference = make_preference(pref_locale, 0, level)
+                db.add(preference)
+                db.flush()
+                prefs_by_locale = {pref_locale: preference}
+                default_pref = preference
+        self.post_prefs = {p.post_id: p for p in post_prefs}
         self.user_prefs = prefs_by_locale
         self.default_pref = default_pref
 
@@ -1786,9 +1918,26 @@ class UserLanguagePreferenceCollection(LanguagePreferenceCollection):
             source_of_evidence=self.default_pref.source_of_evidence,
             user=None)  # Do not give the user or this gets added to session
 
+    def has_locale(self, locale):
+        for locale in Locale.decompose_locale(locale):
+            if locale in self.user_prefs:
+                return True
+        return False
+
     def known_languages(self):
         return list({pref.translate_to_code or pref.locale_code
                      for pref in self.user_prefs.itervalues()})
+
+    def add_locale(self, locale, **kwargs):
+        post_id = kwargs.pop('post_id', None)
+        pref = None
+        if post_id:
+            pref = self.process_post_locale(locale, post_id, **kwargs)
+        else:
+            source_of_evidence = kwargs.pop('source_of_evidence', None)
+            assert source_of_evidence, "A source of evidence MUST be passed in order to create a preference"
+            pref = self.process_locale(locale, source_of_evidence, **kwargs)
+        return pref
 
 
 class UserLanguagePreference(Base):
@@ -1830,7 +1979,7 @@ class UserLanguagePreference(Base):
                         order_by=source_of_evidence))
 
     crud_permissions = CrudPermissions(
-        P_READ, P_SYSADMIN, P_SYSADMIN, P_SYSADMIN, P_READ, P_READ, P_READ)
+        P_READ, P_READ, P_READ, P_READ, P_READ, P_READ, P_READ)
 
     def is_owner(self, user_id):
         return user_id == self.user_id
@@ -1848,16 +1997,6 @@ class UserLanguagePreference(Base):
         if s:
             return s
         return id(self) - id(other)
-
-    # def set_priority_order(self, code):
-    #     # code can be ignored. This value should be updated for each user
-    #     # as each preferred language is committed
-    #     current_languages = self.db.query(UserLanguagePreference).\
-    #                         filter_by(user=self.user).\
-    #                         order_by(self.preferred_order).all()
-
-    #     if self.source_of_evidence == 0:
-    #         pass
 
     @property
     def locale_code(self):
@@ -1909,3 +2048,34 @@ class UserLanguagePreference(Base):
                 LanguagePreferenceOrder(self.source_of_evidence).name,
                 self.preferred_order or 0
             )
+
+
+class PostUserLanguagePreference(UserLanguagePreference):
+    """Does this user wants data in this language to be displayed or translated?"""
+    __tablename__ = 'post_user_language_preference'
+
+    id = Column(Integer, ForeignKey(
+        UserLanguagePreference.id, ondelete='CASCADE', onupdate='CASCADE'),
+        primary_key=True)
+
+    __mapper_args__ = {
+        'polymorphic_identity': 'post_user_language_preference'
+    }
+
+    post_id = Column(Integer, ForeignKey("content.id",
+                     ondelete='CASCADE', onupdate='CASCADE'),
+                     nullable=False, index=False)
+
+    post = relationship("Content",
+                        backref=backref('user_language_preferences'))
+
+    def unique_query(self):
+        query, _ = super(PostUserLanguagePreference, self).unique_query()
+        query = query.filter_by(post_id=self.post_id)
+        return query, True
+
+    # Query a property for fetching a user's preferences on a post
+    def __repr__(self):
+        string_rep = super(PostUserLanguagePreference, self).__repr__()
+        string_rep['post_id'] = self.post_id or -1
+        return string_rep

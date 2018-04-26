@@ -6,10 +6,13 @@ from time import sleep
 from StringIO import StringIO
 
 from pyramid.settings import asbool
+from pyramid.security import Everyone
+from pyramid.i18n import negotiate_locale_name
 from urlparse import urlparse
 from bs4 import UnicodeDammit
 
 from . import config
+from assembl.lib.locale import strip_country
 
 
 def get_eol(text):
@@ -134,3 +137,37 @@ def snake_to_camel(string):
     # We capitalize the first letter of each component except the first one
     # with the 'title' method and join them together.
     return components[0] + "".join(x.title() for x in components[1:])
+
+
+def process_locale_from_request(request):
+    from assembl.models.auth import LanguagePreferenceOrder
+    if '_LOCALE_' in request.params:
+        locale = request.params['_LOCALE_']
+        return (locale, LanguagePreferenceOrder.Parameter)
+    elif '_LOCALE_' in request.cookies:
+        locale = request.cookies['_LOCALE_']
+        return (locale, LanguagePreferenceOrder.Cookie)
+    else:
+        # uses my locale negotiator
+        locale = negotiate_locale_name(request)
+        return (locale, LanguagePreferenceOrder.OS_Default)
+
+
+def get_locale_from_request(request, session=None, user=None):
+    from assembl.models.auth import User, LanguagePreferenceCollection
+    from assembl.models.langstrings import Locale
+    if user is None:
+        user_id = request.authenticated_userid or Everyone
+        if user_id != Everyone:
+            user = User.get(user_id)
+    session = session or User.default_db
+    # This will ensure that a default language collection will be put on the request
+    language_preferences = LanguagePreferenceCollection.getCurrent(req=request, session=session)
+    if user and user != Everyone:
+        locale, level = process_locale_from_request(request)
+        language_preferences.process_locale(locale, level)
+    else:
+        locale = request.localizer.locale_name
+    target_locale = Locale.get_or_create(
+        strip_country(locale), session)
+    return target_locale
