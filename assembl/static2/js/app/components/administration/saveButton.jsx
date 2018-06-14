@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { Translate } from 'react-redux-i18n';
@@ -56,13 +57,20 @@ const mapStateToProps = state => ({
   isLargeLogo: state.debate.debateData.isLargeLogo
 });
 
-export const DumbSaveButton = ({ disabled, saveAction, specificClasses, isLargeLogo }) => {
-  const buttonClasses = specificClasses ||
-    classNames('save-button button-submit button-dark right', { 'save-button-low': isLargeLogo });
-  return (
+export const DumbSaveButton = ({ disabled, saveAction, specificClasses, isLargeLogo, saveButtonRef }) => {
+  const buttonClasses =
+    specificClasses || classNames('save-button button-submit button-dark right', { 'save-button-low': isLargeLogo });
+
+  const saveButtonElement = saveButtonRef.current;
+  if (!saveButtonElement) {
+    return null;
+  }
+
+  return ReactDOM.createPortal(
     <Button className={buttonClasses} disabled={disabled} onClick={saveAction}>
       <Translate value="administration.saveThemes" />
-    </Button>
+    </Button>,
+    saveButtonElement
   );
 };
 

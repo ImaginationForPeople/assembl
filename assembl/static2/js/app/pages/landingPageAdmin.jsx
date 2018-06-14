@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { compose, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { type Route, type Router } from 'react-router';
@@ -36,7 +36,8 @@ type Props = {
   },
   pageHasChanged: boolean,
   page: Object,
-  updateDiscussion: Function
+  updateDiscussion: Function,
+  saveButtonRef: React.Ref<'div'>
 };
 
 type State = {
@@ -127,12 +128,12 @@ class LandingPageAdmin extends React.Component<Props, State> {
   dataHaveChanged = (): boolean => this.props.landingPageModulesHasChanged || this.props.pageHasChanged;
 
   render() {
-    const { section } = this.props;
+    const { saveButtonRef, section } = this.props;
     const currentStep = parseInt(section, 10);
     const saveDisabled = !this.dataHaveChanged();
     return (
       <div className="landing-page-admin">
-        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />
+        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} saveButtonRef={saveButtonRef} />
         {section === '1' && <ManageModules {...this.props} />}
         {section === '2' && <CustomizeHeader {...this.props} />}
         {!isNaN(currentStep) && <Navbar currentStep={currentStep} totalSteps={2} phaseIdentifier="landingPage" />}

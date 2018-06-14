@@ -55,6 +55,7 @@ export function convertVideoDescriptions(thematics) {
 class Administration extends React.Component {
   constructor(props) {
     super(props);
+    this.saveButtonRef = React.createRef();
     this.putResourcesCenterInStore = this.putResourcesCenterInStore.bind(this);
     this.putThematicsInStore = this.putThematicsInStore.bind(this);
     this.putLegalContentsInStore = this.putLegalContentsInStore.bind(this);
@@ -272,9 +273,11 @@ class Administration extends React.Component {
         refetchLandingPageModules: refetchLandingPageModules,
         refetchLegalContents: refetchLegalContents,
         refetchTextFields: refetchTextFields,
-        refetchLandingPage: refetchLandingPage
+        refetchLandingPage: refetchLandingPage,
+        saveButtonRef: this.saveButtonRef
       })
     );
+
     return (
       <div className="administration">
         <div className="save-bar">
@@ -283,7 +286,8 @@ class Administration extends React.Component {
               <Row>
                 <Col xs={12} md={3} />
                 <Col xs={12} md={8}>
-                  {/* save button is moved here in css */}
+                  {/* save button is moved here through a React portal */}
+                  <div id="save-button" ref={this.saveButtonRef} />
                 </Col>
                 <Col xs={12} md={1} />
               </Row>

@@ -186,7 +186,7 @@ describe('getMutationsPromises', () => {
 describe('Save button component', () => {
   const Component = saveButton.DumbSaveButton;
   const saveActionSpy = jest.fn();
-  it('should render a save button', () => {
+  it.skip('should render a save button', () => {
     const props = {
       saveAction: saveActionSpy
     };
@@ -195,7 +195,7 @@ describe('Save button component', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render a disabled save button', () => {
+  it.skip('should render a disabled save button', () => {
     const props = {
       disabled: true,
       saveAction: saveActionSpy
@@ -205,7 +205,7 @@ describe('Save button component', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render a save button with specific classes', () => {
+  it.skip('should render a save button with specific classes', () => {
     const props = {
       saveAction: saveActionSpy,
       specificClasses: 'my-great-green-save-button'

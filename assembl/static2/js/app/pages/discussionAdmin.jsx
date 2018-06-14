@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { connect, type Dispatch, type MapStateToProps } from 'react-redux';
 import { type Route, type Router } from 'react-router';
 import { type ApolloClient, compose, graphql, withApollo } from 'react-apollo';
@@ -79,7 +79,8 @@ type Props = {
   deleteTextField: Function,
   profileOptionsHasChanged: boolean,
   refetchTextFields: Function,
-  textFields: string
+  textFields: string,
+  saveButtonRef: React.Ref<'div'>
 };
 
 type State = {
@@ -246,11 +247,11 @@ class DiscussionAdmin extends React.Component<Props, State> {
   };
 
   render() {
-    const { section } = this.props;
+    const { saveButtonRef, section } = this.props;
     const saveDisabled = !this.dataHaveChanged();
     return (
       <div className="discussion-admin">
-        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />
+        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} saveButtonRef={saveButtonRef} />
         {section === '1' && <LanguageSection {...this.props} />}
         {section === '2' && <ManageSectionsForm {...this.props} />}
         {section === '3' && <ManageProfileOptionsForm />}

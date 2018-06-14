@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { compose, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { I18n } from 'react-redux-i18n';
@@ -112,7 +112,7 @@ class SurveyAdmin extends React.Component {
   };
 
   render() {
-    const { section, thematicsHaveChanged, debateId, languages } = this.props;
+    const { saveButtonRef, section, thematicsHaveChanged, debateId, languages } = this.props;
     const { translate } = this.state;
     const exportLocale = this.state.exportLocale || (languages && languages[0].locale);
     const translation = translate && exportLocale ? `?lang=${exportLocale}` : '?'; // FIXME: using '' instead of '?' does not work
@@ -121,7 +121,7 @@ class SurveyAdmin extends React.Component {
     const saveDisabled = !thematicsHaveChanged;
     return (
       <div className="survey-admin">
-        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />
+        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} saveButtonRef={saveButtonRef} />
         {section === '1' && <ThemeSection {...this.props} />}
         {section === '2' && <QuestionSection {...this.props} />}
         {section === '3' && (

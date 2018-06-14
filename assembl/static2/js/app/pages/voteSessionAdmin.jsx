@@ -184,7 +184,8 @@ type VoteSessionAdminProps = {
   voteSessionId: string,
   debateId: string,
   route: Route,
-  router: Router
+  router: Router,
+  saveButtonRef: React.Ref<'div'>
 };
 
 type VoteSessionAdminState = {
@@ -484,13 +485,13 @@ class VoteSessionAdmin extends React.Component<VoteSessionAdminProps, VoteSessio
   dataHaveChanged = (): boolean => this.props.modulesOrProposalsHaveChanged || this.props.voteSessionPage.get('_hasChanged');
 
   render() {
-    const { editLocale, section, debateId, voteSessionId } = this.props;
+    const { editLocale, saveButtonRef, section, debateId, voteSessionId } = this.props;
     const exportLink = get('exportVoteSessionData', { debateId: debateId, voteSessionId: voteSessionId });
     const saveDisabled = !this.dataHaveChanged();
     const currentStep = parseInt(section, 10);
     return (
       <div className="token-vote-admin">
-        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />
+        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} saveButtonRef={saveButtonRef} />
         {section === '1' && <PageForm editLocale={editLocale} />}
         {section === '2' && <ModulesSection />}
         {section === '3' && <VoteProposalsSection />}
