@@ -1,5 +1,5 @@
 // @flow
-import React from 'react';
+import * as React from 'react';
 import { compose, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import { I18n } from 'react-redux-i18n';
@@ -40,7 +40,8 @@ type Props = {
   refetchResources: Function,
   refetchResourcesCenter: Function,
   route: Route,
-  router: Router
+  router: Router,
+  saveButtonRef: React.Ref<'div'>
 };
 
 type State = {
@@ -132,11 +133,11 @@ class ResourcesCenterAdmin extends React.Component<Props, State> {
   };
 
   render() {
-    const { editLocale } = this.props;
+    const { editLocale, saveButtonRef } = this.props;
     const saveDisabled = !this.dataHaveChanged();
     return (
       <div className="resources-center-admin admin-box admin-content">
-        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />
+        <SaveButton disabled={saveDisabled} saveAction={this.saveAction} saveButtonRef={saveButtonRef} />
         <SectionTitle title={I18n.t('administration.resourcesCenter.title')} annotation={I18n.t('administration.annotation')} />
         <PageForm editLocale={editLocale} />
         <ManageResourcesForm editLocale={editLocale} />
