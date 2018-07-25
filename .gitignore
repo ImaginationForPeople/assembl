@@ -134,3 +134,6 @@ local.ini.*
 
 #vcode
 .vscode
+
+#test upload
+var/test_uploads
