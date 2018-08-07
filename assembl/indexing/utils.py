@@ -1,4 +1,3 @@
-import os
 from collections import defaultdict
 
 from assembl.lib import config
@@ -6,8 +5,7 @@ from assembl.lib.locale import strip_country
 from assembl.lib.clean_input import unescape
 from elasticsearch.client import Elasticsearch
 
-from assembl.indexing.settings import get_index_settings, MAPPINGS
-from . import index_languages
+from assembl.indexing.settings import index_languages, get_index_settings, MAPPINGS
 
 
 _es = None
@@ -16,7 +14,8 @@ _es = None
 def connect():
     global _es
     if _es is None:
-        server = config.get('elasticsearch_host', 'localhost') + ':9200'
+        port = config.get('elasticsearch_port', '9200')
+        server = config.get('elasticsearch_host', 'localhost') + ':' + port
         auth = config.get('elastic_search_basic_auth', None)
         _es = Elasticsearch(server, **{'http_auth': a for a in (auth,) if a})
     return _es

@@ -87,11 +87,10 @@ class PostView extends React.PureComponent<Props, State> {
   }
 
   handleMouseUpWhileHarvesting = (): void => {
-    const { isHarvesting, contentLocale, originalLocale } = this.props;
+    const { isHarvesting } = this.props;
     const { dbId } = this.props.data.post;
     const isSelectionInBody = elementContainsSelection(document.getElementById(`message-body-local:Content/${dbId}`));
-    const translate = contentLocale !== originalLocale;
-    if (isHarvesting && !translate && isSelectionInBody) {
+    if (isHarvesting && isSelectionInBody) {
       const harvestingAnchorPosition = this.getAnchorPosition();
       this.setState({ displayHarvestingAnchor: true, harvestingAnchorPosition: harvestingAnchorPosition });
     } else {
@@ -120,7 +119,7 @@ class PostView extends React.PureComponent<Props, State> {
       dbId,
       indirectIdeaContentLinks,
       creator,
-      modificationDate,
+      modified,
       sentimentCounts,
       mySentiment,
       attachments,
@@ -185,6 +184,7 @@ class PostView extends React.PureComponent<Props, State> {
         {isHarvesting && (
           <HarvestingMenu
             postId={id}
+            lang={contentLocale}
             extracts={extracts}
             isAuthorAccountDeleted={creator.isDeleted}
             harvestingAnchorPosition={harvestingAnchorPosition}
@@ -205,7 +205,7 @@ class PostView extends React.PureComponent<Props, State> {
                   userName={creator.isDeleted ? I18n.t('deletedUser') : creator.displayName}
                   creationDate={creationDate}
                   locale={lang}
-                  modified={modificationDate !== null}
+                  modified={modified}
                 />
               )}
               <PostBody
@@ -223,6 +223,7 @@ class PostView extends React.PureComponent<Props, State> {
                 translationEnabled={debateData.translationEnabled}
                 bodyDivRef={this.recomputeTreeHeightOnImagesLoad}
                 measureTreeHeight={this.props.measureTreeHeight}
+                isHarvesting={isHarvesting}
               />
 
               <Attachments attachments={attachments} />

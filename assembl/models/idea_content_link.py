@@ -17,11 +17,13 @@ from sqlalchemy import (
     DateTime,
     ForeignKey,
     event,
+    Enum as SAEnum
 )
 
 from . import DiscussionBoundBase
 from ..lib.sqla import (CrudOperation, get_model_watcher)
 from ..lib.clean_input import sanitize_html
+from ..lib.locale import to_posix_string
 from .discussion import Discussion
 from .idea import Idea
 from .generic import Content
@@ -31,6 +33,7 @@ from ..auth import (
     CrudPermissions, P_READ, P_EDIT_IDEA,
     P_EDIT_EXTRACT, P_ADD_IDEA, P_ADD_EXTRACT,
     P_EDIT_MY_EXTRACT)
+from .langstrings import Locale
 
 
 class IdeaContentLink(DiscussionBoundBase):
@@ -289,6 +292,17 @@ class ExtractActionVocabulary(AbstractEnumVocabulary):
 # LangString.setup_ownership_load_event(ExtractActionVocabulary, ['name'])
 
 
+# Those states lists need to be kept in sync with frontend code
+# static2/js/app/constants.js
+class ExtractStates(Enum):
+
+    SUBMITTED = "SUBMITTED"  # For the Bigdatext (a machine user)
+    PUBLISHED = "PUBLISHED"  # For the human catcher
+
+
+extract_states_identifiers = [t.value for t in ExtractStates.__members__.values()]
+
+
 class Extract(IdeaContentPositiveLink):
     """
     An extracted part of a Content. A quotation to be referenced by an `Idea`.
@@ -314,6 +328,10 @@ class Extract(IdeaContentPositiveLink):
 
     important = Column('important', Boolean, server_default='0', doc=docs.ExtractInterface.important)
 
+    locale_id = Column(Integer, ForeignKey('locale.id'))
+
+    locale = relationship(Locale, foreign_keys=[locale_id])
+
     extract_nature = Column(
         'extract_nature', ExtractNatureVocabulary.pg_enum,
         ForeignKey(ExtractNatureVocabulary.id), doc=docs.ExtractInterface.extract_nature)
@@ -324,6 +342,12 @@ class Extract(IdeaContentPositiveLink):
     extract_nature_term = relationship(ExtractNatureVocabulary)
 
     extract_action_term = relationship(ExtractActionVocabulary)
+
+    extract_state = Column(
+        SAEnum(*extract_states_identifiers, name='extract_states'),
+        nullable=False,
+        default=ExtractStates.PUBLISHED.value,
+        server_default=ExtractStates.PUBLISHED.value)
 
     @property
     def extract_nature_name(self):
@@ -361,6 +385,21 @@ class Extract(IdeaContentPositiveLink):
         elif self.content.type == 'webpage':
             retval['url'] = self.content.url
         return retval
+
+    @property
+    def lang(self):
+        if self.locale_id:
+            return Locale.code_for_id(self.locale_id)
+
+        return self.locale.code
+
+    @lang.setter
+    def lang(self, code):
+        assert(code)
+        posix = to_posix_string(code)
+        locale = Locale.get_or_create(posix, self.db)
+        self.locale = locale
+        self.locale_id = locale.id
 
     def __repr__(self):
         r = super(Extract, self).__repr__()

@@ -1,39 +1,17 @@
 // @flow
 import * as React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
-import { I18n } from 'react-redux-i18n';
 
 import Search from '../search';
 import Avatar from '../common/avatar';
 import { getConnectedUserId } from '../../utils/globalFunctions';
 import { connectedUserIsExpert } from '../../utils/permissions';
-import { toggleHarvesting } from '../../actions/contextActions';
-
-type IsHarvestingButtonProps = {
-  isActive: boolean,
-  handleClick: Function
-};
-
-const IsHarvestingButton = ({ isActive, handleClick }: IsHarvestingButtonProps) => (
-  <span
-    className={`is-harvesting-button assembl-icon-expert ${isActive ? 'active' : ''}`}
-    onClick={handleClick}
-    role="button"
-    tabIndex={0}
-    title={isActive ? I18n.t('harvesting.disableHarvestingMode') : I18n.t('harvesting.enableHarvestingMode')}
-  >
-    &nbsp;
-  </span>
-);
+import HarvestingButton from './harvestingButton';
 
 type UserMenuProps = {
   location: string,
   helpUrl: string,
-  remainingWidth?: number,
-  isHarvesting: boolean,
-  themeId: ?string,
-  handleIsHarvestingButtonClick: Function
+  remainingWidth?: number
 };
 
 const shouldShowUsername = (remainingWidth, breakPoint) =>
@@ -41,10 +19,9 @@ const shouldShowUsername = (remainingWidth, breakPoint) =>
 
 const shouldShowExpertIcons = connectedUserIsExpert();
 
-const UserMenu = ({ location, helpUrl, remainingWidth, isHarvesting, handleIsHarvestingButtonClick, themeId }: UserMenuProps) => (
+const UserMenu = ({ location, helpUrl, remainingWidth }: UserMenuProps) => (
   <div className="navbar-icons">
-    {shouldShowExpertIcons &&
-      themeId && <IsHarvestingButton isActive={isHarvesting} handleClick={handleIsHarvestingButtonClick} />}
+    {shouldShowExpertIcons && <HarvestingButton />}
     <div id="search">
       <Search />
     </div>
@@ -59,17 +36,8 @@ const UserMenu = ({ location, helpUrl, remainingWidth, isHarvesting, handleIsHar
 );
 
 UserMenu.defaultProps = {
-  remainingWidth: null
+  remainingWidth: null,
+  themeId: ''
 };
 
-const mapStateToProps = state => ({
-  isHarvesting: state.context.isHarvesting
-});
-
-const mapDispatchToProps = dispatch => ({
-  handleIsHarvestingButtonClick: () => {
-    dispatch(toggleHarvesting());
-  }
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);
+export default UserMenu;

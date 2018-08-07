@@ -1,4 +1,11 @@
-import { getNumberOfDays, calculatePercentage, getBasename, hexToRgb } from '../../../js/app/utils/globalFunctions';
+import {
+  getNumberOfDays,
+  calculatePercentage,
+  getBasename,
+  hexToRgb,
+  encodeUserIdBase64,
+  isHarvestable
+} from '../../../js/app/utils/globalFunctions';
 
 describe('This test concern GlobalFunctions Class', () => {
   it('Should return the number of days between 2 dates', () => {
@@ -78,5 +85,44 @@ describe('hexToRgb function', () => {
     const expectedResult = [{ rgb: '64,164,151' }, { rgb: '164,64,114' }, { rgb: '64,81,164' }, { rgb: '253,236,0' }];
     const result = colors.map(color => ({ rgb: hexToRgb(color.hexa) }));
     expect(result).toEqual(expectedResult);
+  });
+});
+
+describe('encodeUserIdBase64 function', () => {
+  it('should return the encoded user id', () => {
+    const userId = '123';
+    const expectedResult = 'QWdlbnRQcm9maWxlOjEyMw=='; // btoa(`AgentProfile:${userId}`)
+    const result = encodeUserIdBase64(userId);
+    expect(result).toEqual(expectedResult);
+  });
+
+  it('should return a null encoded user id', () => {
+    const userId = null;
+    const expectedResult = null;
+    const result = encodeUserIdBase64(userId);
+    expect(result).toEqual(expectedResult);
+  });
+});
+
+describe('isHarvestable function', () => {
+  it('should return false if content is not harvestable', () => {
+    const params = {
+      phase: 'survey'
+    };
+    expect(isHarvestable(params)).toBeFalsy();
+  });
+
+  it('should return true if content is harvestable', () => {
+    const params = {
+      phase: 'thread'
+    };
+    expect(isHarvestable(params)).toBeTruthy();
+  });
+
+  it('should return true if content is harvestable', () => {
+    const params = {
+      phase: 'multiColumns'
+    };
+    expect(isHarvestable(params)).toBeTruthy();
   });
 });

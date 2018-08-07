@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 import logging
+import dateutil.parser
 from random import randint
 from operator import attrgetter
 
 import graphene
 from graphene.relay import Node
+from graphene_sqlalchemy import SQLAlchemyConnectionField
 from graphene_sqlalchemy.converter import (convert_column_to_string,
                                            convert_sqlalchemy_type)
 from graphene_sqlalchemy.utils import get_query
@@ -20,16 +22,17 @@ from assembl.graphql.discussion import (Discussion, UpdateDiscussion, Discussion
                                         UpdateDiscussionPreferences,
                                         UpdateResourcesCenter, VisitsAnalytics)
 from assembl.graphql.document import UploadDocument
-from assembl.graphql.idea import (CreateIdea, CreateThematic, DeleteThematic,
-                                  Idea, IdeaUnion, Thematic, UpdateThematic)
+from assembl.graphql.idea import (CreateThematic, DeleteThematic,
+                                  IdeaUnion, UpdateThematic)
 from assembl.graphql.landing_page import (LandingPageModuleType, LandingPageModule, CreateLandingPageModule,
                                           UpdateLandingPageModule)
 from assembl.graphql.langstring import resolve_langstring
 from assembl.graphql.locale import Locale
 from assembl.graphql.post import (AddPostAttachment, CreatePost, DeletePost,
                                   DeletePostAttachment, UndeletePost,
-                                  UpdatePost, AddPostExtract)
-from assembl.graphql.extract import (UpdateExtract, DeleteExtract)
+                                  UpdatePost, AddPostExtract, PostConnection,
+                                  AddPostsExtract)
+from assembl.graphql.extract import (UpdateExtract, DeleteExtract, ConfirmExtract)
 from assembl.graphql.resource import (CreateResource, DeleteResource, Resource,
                                       UpdateResource)
 from assembl.graphql.section import (CreateSection, DeleteSection, Section,
@@ -47,7 +50,10 @@ from assembl.graphql.vote_session import (
     UpdateTokenVoteSpecification, DeleteVoteSpecification,
     CreateProposal, UpdateProposal, DeleteProposal
 )
-from assembl.graphql.utils import get_fields, get_root_thematic_for_phase
+from assembl.graphql.utils import (
+    get_fields, get_root_thematic_for_phase,
+    get_posts_for_phases)
+from assembl.graphql.preferences import UpdateHarvestingTranslationPreference
 from assembl.lib.locale import strip_country
 from assembl.lib.sqla_types import EmailString
 from assembl.models.action import SentimentOfPost
@@ -55,6 +61,7 @@ from assembl.models.post import countable_publication_states
 from assembl.nlp.translation_service import DummyGoogleTranslationService
 from assembl.graphql.permissions_helpers import require_instance_permission
 from assembl.auth import CrudPermissions
+
 
 convert_sqlalchemy_type.register(EmailString)(convert_column_to_string)
 models.Base.query = models.Base.default_db.query_property()
@@ -75,9 +82,7 @@ class Query(graphene.ObjectType):
     root_idea = graphene.Field(
         IdeaUnion, identifier=graphene.String(description=docs.Default.phase_identifier), description=docs.Schema.root_idea)
     ideas = graphene.List(
-        Idea, identifier=graphene.String(required=True, description=docs.Default.phase_identifier), description=docs.Schema.ideas)
-    thematics = graphene.List(
-        Thematic, identifier=graphene.String(required=True, description=docs.Default.phase_identifier), description=docs.Schema.thematics)
+        IdeaUnion, identifier=graphene.String(required=True, description=docs.Default.phase_identifier), description=docs.Schema.ideas)
     syntheses = graphene.List(Synthesis, description=docs.Schema.syntheses)
     num_participants = graphene.Int(description=docs.Schema.num_participants)
     discussion_preferences = graphene.Field(DiscussionPreferences, description=docs.Schema.discussion_preferences)
@@ -116,13 +121,18 @@ class Query(graphene.ObjectType):
     text_fields = graphene.List(ConfigurableFieldUnion, description=docs.Schema.text_fields)
     profile_fields = graphene.List(ProfileField, description=docs.Schema.profile_fields)
     timeline = graphene.List(DiscussionPhase, description=docs.Schema.timeline)
+    posts = SQLAlchemyConnectionField(
+        PostConnection,
+        start_date=graphene.String(description=docs.SchemaPosts.start_date),
+        end_date=graphene.String(description=docs.SchemaPosts.end_date),
+        identifiers=graphene.List(graphene.String, description=docs.SchemaPosts.identifiers),
+        description=docs.SchemaPosts.__doc__)
 
     def resolve_resources(self, args, context, info):
         model = models.Resource
         query = get_query(model, context)
         discussion_id = context.matchdict['discussion_id']
-        # order by id to always return resources in the order in which they have been created
-        return query.filter(model.discussion_id == discussion_id).order_by(model.id)
+        return query.filter(model.discussion_id == discussion_id).order_by(model.order)
 
     def resolve_has_resources_center(self, args, context, info):
         model = models.Resource
@@ -164,10 +174,18 @@ class Query(graphene.ObjectType):
         return vote_session
 
     def resolve_ideas(self, args, context, info):
-        model = models.Idea
-        query = get_query(model, context)
         discussion_id = context.matchdict['discussion_id']
         discussion = models.Discussion.get(discussion_id)
+        phase_identifier = args.get('identifier')
+        if phase_identifier in ('survey', 'brightMirror'):
+            root_thematic = get_root_thematic_for_phase(discussion, phase_identifier)
+            if root_thematic is None:
+                return []
+
+            return root_thematic.get_children()
+
+        model = models.Idea
+        query = get_query(model, context)
         descendants_query = discussion.root_idea.get_descendants_query(inclusive=False)
         query = query.outerjoin(
                 models.Idea.source_links
@@ -184,22 +202,12 @@ class Query(graphene.ObjectType):
 #                joinedload(models.Idea.synthesis_title).joinedload("entries"),
                 joinedload(models.Idea.description).joinedload("entries"),
             ).order_by(models.IdeaLink.order, models.Idea.creation_date)
-        if args.get('identifier') == 'multiColumns':
+        if phase_identifier == 'multiColumns':
             # Filter out ideas that don't have columns.
             query = query.filter(
                 models.Idea.message_view_override == 'messageColumns')
 
         return query
-
-    def resolve_thematics(self, args, context, info):
-        identifier = args.get('identifier', None)
-        discussion_id = context.matchdict['discussion_id']
-        discussion = models.Discussion.get(discussion_id)
-        root_thematic = get_root_thematic_for_phase(discussion, identifier)
-        if root_thematic is None:
-            return []
-
-        return root_thematic.get_children()
 
     def resolve_syntheses(self, args, context, info):
         discussion_id = context.matchdict['discussion_id']
@@ -405,6 +413,38 @@ class Query(graphene.ObjectType):
         discussion = models.Discussion.get(discussion_id)
         return discussion.timeline_phases
 
+    def resolve_posts(self, args, context, info):
+        discussion_id = context.matchdict['discussion_id']
+        discussion = models.Discussion.get(discussion_id)
+        identifiers = args.get('identifiers', [])
+        model = models.AssemblPost
+        query = get_posts_for_phases(discussion, identifiers)
+        # If no posts in the specified identifiers, we return an empty list
+        if identifiers and query is None:
+            return []
+        elif query is None:
+            # If we have no identifier, we return all of posts
+            query = get_query(model, context)
+
+        # We filter posts by their discussion id
+        query = query.filter(
+            model.discussion_id == discussion_id,
+            model.hidden == False,  # noqa: E712
+            model.tombstone_condition()
+            )
+        # We filter posts by their modification date
+        start_date = args.get('start_date', None)
+        end_date = args.get('end_date', None)
+        if start_date:
+            start_date = dateutil.parser.parse(start_date)
+            query = query.filter(model.modification_date >= start_date)
+
+        if end_date:
+            end_date = dateutil.parser.parse(end_date)
+            query = query.filter(model.modification_date <= end_date)
+
+        return query.all()
+
 
 class Mutations(graphene.ObjectType):
 
@@ -412,7 +452,6 @@ class Mutations(graphene.ObjectType):
     create_thematic = CreateThematic.Field(description=docs.CreateThematic.__doc__)
     update_thematic = UpdateThematic.Field(description=docs.UpdateThematic.__doc__)
     delete_thematic = DeleteThematic.Field(description=docs.DeleteThematic.__doc__)
-    create_idea = CreateIdea.Field(description=docs.CreateIdea.__doc__)
     create_post = CreatePost.Field(description=docs.CreatePost.__doc__)
     update_post = UpdatePost.Field(description=docs.UpdatePost.__doc__)
     delete_post = DeletePost.Field(description=docs.DeletePost.__doc__)
@@ -449,15 +488,18 @@ class Mutations(graphene.ObjectType):
     add_token_vote = AddTokenVote.Field(description=docs.AddTokenVote.__doc__)
     add_gauge_vote = AddGaugeVote.Field(description=docs.AddGaugeVote.__doc__)
     add_post_extract = AddPostExtract.Field(description=docs.AddPostExtract.__doc__)
+    add_posts_extract = AddPostsExtract.Field(description=docs.AddPostsExtract.__doc__)
     update_extract = UpdateExtract.Field(description=docs.UpdateExtract.__doc__)
     delete_extract = DeleteExtract.Field(description=docs.DeleteExtract.__doc__)
     create_text_field = CreateTextField.Field(description=docs.CreateTextField.__doc__)
+    confirm_extract = ConfirmExtract.Field(description=docs.ConfirmExtract.__doc__)
     update_text_field = UpdateTextField.Field(description=docs.UpdateTextField.__doc__)
     delete_text_field = DeleteTextField.Field(description=docs.DeleteTextField.__doc__)
     update_profile_fields = UpdateProfileFields.Field(description=docs.UpdateProfileFields.__doc__)
     create_discussion_phase = CreateDiscussionPhase.Field(description=docs.CreateDiscussionPhase.__doc__)
     update_discussion_phase = UpdateDiscussionPhase.Field(description=docs.CreateDiscussionPhase.__doc__)
     delete_discussion_phase = DeleteDiscussionPhase.Field(description=docs.DeleteDiscussionPhase.__doc__)
+    update_harvesting_translation_preference = UpdateHarvestingTranslationPreference.Field(description=docs.UpdateHarvestingTranslationPreference.__doc__)
 
 
 Schema = graphene.Schema(query=Query, mutation=Mutations)

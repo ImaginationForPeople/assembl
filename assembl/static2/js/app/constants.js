@@ -57,9 +57,12 @@ export const PHASE_STATUS = {
 
 export const PHASES = {
   survey: 'survey',
+  thread: 'thread',
   multiColumns: 'multiColumns',
   voteSession: 'voteSession'
 };
+
+export const HARVESTABLE_PHASES = [PHASES.thread, PHASES.multiColumns];
 
 // Those states lists need to be kept in sync with models/post.py
 export const PublicationStates = {
@@ -70,6 +73,12 @@ export const PublicationStates = {
   MODERATED_TEXT_NEVER_AVAILABLE: 'MODERATED_TEXT_NEVER_AVAILABLE',
   DELETED_BY_USER: 'DELETED_BY_USER',
   DELETED_BY_ADMIN: 'DELETED_BY_ADMIN'
+};
+
+// Those states lists need to be kept in sync with models/idea_content_link.py
+export const ExtractStates = {
+  SUBMITTED: 'SUBMITTED',
+  PUBLISHED: 'PUBLISHED'
 };
 
 export const pickerColors = [

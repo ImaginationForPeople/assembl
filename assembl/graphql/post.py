@@ -29,7 +29,7 @@ from .types import SecureObjectType, SQLAlchemyInterface
 from .user import AgentProfile
 from .utils import DateTime, abort_transaction_on_exception
 from .synthesis import Synthesis
-from .extract import Extract
+from .extract import Extract, ExtractStates, ExtractNatures
 
 
 _ = TranslationStringFactory('assembl')
@@ -103,6 +103,9 @@ class PostInterface(SQLAlchemyInterface):
     attachments = graphene.List(PostAttachment, description=docs.PostInterface.attachments)
     original_locale = graphene.String(description=docs.PostInterface.original_locale)
     publishes_synthesis = graphene.Field(lambda: Synthesis, description=docs.PostInterface.publishes_synthesis)
+    type = graphene.String(description=docs.PostInterface.type)
+    discussion_id = graphene.String(description=docs.PostInterface.discussion_id)
+    modified = graphene.Boolean(description=docs.PostInterface.modified)
 
     def resolve_db_id(self, args, context, info):
         return self.id
@@ -222,6 +225,12 @@ class PostInterface(SQLAlchemyInterface):
 
         return u''
 
+    def resolve_type(self, args, context, info):
+        return self.__class__.__name__
+
+    def resolve_modified(self, args, context, info):
+        return self.get_modification_date() > self.creation_date
+
 
 class Post(SecureObjectType, SQLAlchemyObjectType):
     __doc__ = docs.Post.__doc__
@@ -238,6 +247,24 @@ class PostConnection(graphene.Connection):
 
     class Meta:
         node = Post
+
+
+class PostExtractEntryFields(graphene.AbstractType):
+    post_id = graphene.String(required=True, description=docs.PostExtract.post_id)
+    offset_start = graphene.Int(required=True, description=docs.PostExtract.offset_start)
+    offset_end = graphene.Int(required=True, description=docs.PostExtract.offset_end)
+    xpath_start = graphene.String(required=True, description=docs.PostExtract.xpath_start)
+    xpath_end = graphene.String(required=True, description=docs.PostExtract.xpath_end)
+    body = graphene.String(required=True, description=docs.PostExtract.body)
+    lang = graphene.String(required=True, description=docs.PostExtract.lang)
+
+
+class PostExtractEntry(graphene.ObjectType, PostExtractEntryFields):
+    pass
+
+
+class PostExtractEntryInput(graphene.InputObjectType, PostExtractEntryFields):
+    pass
 
 
 class CreatePost(graphene.Mutation):
@@ -348,7 +375,8 @@ class CreatePost(graphene.Mutation):
                 body=body_langstring,
                 creator_id=user_id,
                 body_mime_type=u'text/html',
-                message_classifier=classifier
+                message_classifier=classifier,
+                creation_date=datetime.utcnow()
             )
             new_post.guess_languages()
             db = new_post.db
@@ -653,6 +681,7 @@ class AddPostExtract(graphene.Mutation):
         post_id = graphene.ID(required=True, description=docs.AddPostExtract.post_id)
         body = graphene.String(required=True, description=docs.AddPostExtract.body)
         important = graphene.Boolean(description=docs.AddPostExtract.important)
+        lang = graphene.String(required=True, description=docs.AddPostExtract.lang)
         xpath_start = graphene.String(required=True, description=docs.AddPostExtract.xpath_start)
         xpath_end = graphene.String(required=True, description=docs.AddPostExtract.xpath_end)
         offset_start = graphene.Int(required=True, description=docs.AddPostExtract.offset_start)
@@ -679,6 +708,7 @@ class AddPostExtract(graphene.Mutation):
             important=args.get('important', False),
             content=post
         )
+        new_extract.lang = args.get('lang')
         post.db.add(new_extract)
         range = models.TextFragmentIdentifier(
             extract=new_extract,
@@ -690,3 +720,58 @@ class AddPostExtract(graphene.Mutation):
         post.db.flush()
 
         return AddPostExtract(post=post)
+
+
+# Used by the Bigdatext app
+class AddPostsExtract(graphene.Mutation):
+    class Input:
+        extracts = graphene.List(
+            PostExtractEntryInput, required=True, description=docs.AddPostsExtract.extracts)
+        extract_nature = ExtractNatures(description=docs.AddPostsExtract.extract_nature)
+        extract_state = ExtractStates(description=docs.AddPostsExtract.extract_state)
+
+    status = graphene.Boolean(description=docs.AddPostsExtract.status)
+
+    @staticmethod
+    @abort_transaction_on_exception
+    def mutate(root, args, context, info):
+        status = False
+        require_cls_permission(CrudPermissions.CREATE, models.Extract, context)
+        discussion_id = context.matchdict['discussion_id']
+        # Retrieve the user id
+        user_id = context.authenticated_userid or Everyone
+        extracts = args.get('extracts')
+        status = True
+        extract_nature = args.get('extract_nature', None)
+        extract_nature = models.ExtractNatureVocabulary.Enum(extract_nature) if extract_nature else None
+        extract_state = args.get('extract_state', None)
+        # Add all of extracts
+        for extract in extracts:
+            post_id = extract.get('post_id')
+            post_id = int(Node.from_global_id(post_id)[1])
+            post = models.Post.get(post_id) if post_id else None
+            if not post:
+                continue
+
+            new_extract = models.Extract(
+                creator_id=user_id,
+                owner_id=user_id,
+                discussion_id=discussion_id,
+                body=extract.get('body'),
+                important=extract.get('important', False),
+                content=post,
+                extract_nature=extract_nature,
+                extract_state=extract_state
+            )
+            new_extract.lang = extract.get('lang')
+            post.db.add(new_extract)
+            range = models.TextFragmentIdentifier(
+                extract=new_extract,
+                xpath_start=extract.get('xpath_start'),
+                offset_start=extract.get('offset_start'),
+                xpath_end=extract.get('xpath_end'),
+                offset_end=extract.get('offset_end'))
+            post.db.add(range)
+            post.db.flush()
+
+        return AddPostsExtract(status=status)

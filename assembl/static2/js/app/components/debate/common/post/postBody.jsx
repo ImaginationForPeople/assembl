@@ -1,15 +1,20 @@
 // @flow
 import * as React from 'react';
+import { graphql } from 'react-apollo';
 import activeHtml from 'react-active-html';
 import classNames from 'classnames';
 import jQuery from 'jquery';
 import ARange from 'annotator_range'; // eslint-disable-line
+import { withRouter } from 'react-router';
 
-import PostTranslate from '../../common/translations/postTranslate';
+import { getConnectedUserId, isHarvestable } from '../../../../utils/globalFunctions';
+import { isSpecialURL } from '../../../../utils/urlPreview';
+import { ExtractStates } from '../../../../constants';
 import { transformLinksInHtml /* getUrls */ } from '../../../../utils/linkify';
+import UpdateHarvestingTranslationPreference from '../../../../graphql/mutations/updateHarvestingTranslationPreference.graphql';
+import PostTranslate from '../../common/translations/postTranslate';
 import Embed from '../../../common/urlPreview/embed';
 import URLMetadataLoader from '../../../common/urlPreview/urlMetadataLoader';
-import { isSpecialURL } from '../../../../utils/urlPreview';
 
 type Props = {
   body: ?string,
@@ -24,20 +29,32 @@ type Props = {
   originalLocale: string,
   translate: boolean,
   translationEnabled: boolean,
+  isHarvesting: boolean,
+  params: RouterParams,
   handleMouseUpWhileHarvesting?: Function, // eslint-disable-line react/require-default-props
-  measureTreeHeight?: Function // eslint-disable-line react/require-default-props
+  measureTreeHeight?: Function, // eslint-disable-line react/require-default-props
+  updateHarvestingTranslation: Function
 };
 
 type ExtractInPostProps = {
   id: string,
+  state: string,
   children: React.Node
 };
 
-const ExtractInPost = ({ id, children }: ExtractInPostProps) => (
-  <span className="extract-in-message" id={id}>
-    {children}
-  </span>
-);
+const ExtractInPost = ({ id, state, children }: ExtractInPostProps) => {
+  const isSubmitted = state === ExtractStates.SUBMITTED;
+  return (
+    <span
+      className={classNames('extract-in-message', {
+        submitted: isSubmitted
+      })}
+      id={id}
+    >
+      {children}
+    </span>
+  );
+};
 
 const postBodyReplacementComponents = afterLoad => ({
   iframe: attributes => (
@@ -54,11 +71,15 @@ const postBodyReplacementComponents = afterLoad => ({
     if (embeddedUrl) return origin;
     return [origin, <URLMetadataLoader key={`url-preview-${attributes.href}`} url={attributes.href} afterLoad={afterLoad} />];
   },
-  annotation: attributes => <ExtractInPost id={attributes.id}>{attributes.children}</ExtractInPost>
+  annotation: attributes => (
+    <ExtractInPost id={attributes.id} state={attributes['data-state']}>
+      {attributes.children}
+    </ExtractInPost>
+  )
 });
 
 const Html = (props) => {
-  const { extracts, rawHtml, divRef, dbId, replacementComponents } = props;
+  const { extracts, rawHtml, divRef, dbId, replacementComponents, contentLocale } = props;
   /*
    * The activeHtml() function will parse the raw html,
    * replace specified tags with provided components
@@ -76,12 +97,12 @@ const Html = (props) => {
       html = html.body;
     }
     extracts.forEach((extract) => {
-      if (extract) {
+      if (extract && extract.lang === contentLocale) {
         const tfis = extract.textFragmentIdentifiers;
-        const wrapper = jQuery(`<annotation id="${extract.id}"></annotation>`);
+        const wrapper = jQuery(`<annotation id="${extract.id}" data-state="${extract.extractState || ''}"></annotation>`);
         if (tfis) {
           tfis.forEach((tfi) => {
-            if (tfi && tfi.xpathStart && tfi.offsetStart && tfi.xpathEnd && tfi.offsetEnd) {
+            if (tfi && tfi.xpathStart && tfi.offsetStart !== null && tfi.xpathEnd && tfi.offsetEnd !== null) {
               const range = new ARange.SerializedRange({
                 start: tfi.xpathStart,
                 startOffset: tfi.offsetStart,
@@ -117,7 +138,7 @@ const Html = (props) => {
   );
 };
 
-const PostBody = ({
+export const DumbPostBody = ({
   body,
   extracts,
   bodyDivRef,
@@ -131,9 +152,12 @@ const PostBody = ({
   translate,
   translationEnabled,
   handleMouseUpWhileHarvesting,
-  measureTreeHeight
+  measureTreeHeight,
+  updateHarvestingTranslation,
+  isHarvesting,
+  params
 }: Props) => {
-  const divClassNames = classNames('post-body', { 'post-body--is-harvestable': !translate });
+  const divClassNames = 'post-body post-body--is-harvestable';
   const htmlClassNames = classNames('post-body-content', 'body', {
     'pre-wrap': bodyMimeType === 'text/plain'
   });
@@ -153,6 +177,20 @@ const PostBody = ({
           originalLocale={originalLocale}
           translate={translate}
           afterLoad={afterLoad}
+          onTranslate={(from, into) => {
+            const connectedUserIdBase64 = getConnectedUserId(true);
+            if (connectedUserIdBase64 && isHarvesting && isHarvestable(params)) {
+              updateHarvestingTranslation({
+                variables: {
+                  id: connectedUserIdBase64,
+                  translation: {
+                    localeFrom: from,
+                    localeInto: into
+                  }
+                }
+              });
+            }
+          }}
         />
       ) : null}
       {subject && <h3 className="post-body-title dark-title-3">{subject}</h3>}
@@ -165,6 +203,7 @@ const PostBody = ({
             extracts={extracts}
             dbId={dbId}
             replacementComponents={postBodyReplacementComponents(afterLoad)}
+            contentLocale={contentLocale}
           />
           {/* {urls && (
             <div className="urls-container">
@@ -177,4 +216,8 @@ const PostBody = ({
   );
 };
 
-export default PostBody;
+export default withRouter(
+  graphql(UpdateHarvestingTranslationPreference, {
+    name: 'updateHarvestingTranslation'
+  })(DumbPostBody)
+);

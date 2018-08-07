@@ -1,10 +1,11 @@
 // @noflow
 import * as React from 'react';
 import { Translate } from 'react-redux-i18n';
-import { Button, OverlayTrigger } from 'react-bootstrap';
-import { deleteThematicImageTooltip, fileNameTooltip } from '../common/tooltips';
+import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { deleteFileTooltip, fileNameTooltip } from '../common/tooltips';
 
 type FileUploaderProps = {
+  deleteFileTooltip: React.Element<Tooltip>,
   filename: string,
   fileOrUrl: File | string,
   mimeType: string,
@@ -33,6 +34,7 @@ class FileUploader extends React.Component<FileUploaderProps, FileUploaderState>
   preview: ?HTMLImageElement;
 
   static defaultProps = {
+    deleteFileTooltip: deleteFileTooltip,
     filename: '',
     mimeType: '',
     name: 'file-uploader',
@@ -106,7 +108,7 @@ class FileUploader extends React.Component<FileUploaderProps, FileUploaderState>
           {title}
         </div>
       </OverlayTrigger>
-      <OverlayTrigger placement="top" overlay={deleteThematicImageTooltip}>
+      <OverlayTrigger placement="top" overlay={this.props.deleteFileTooltip}>
         <Button onClick={this.props.onDeleteClick} className="admin-icons">
           <span className="assembl-icon-delete grey" />
         </Button>
@@ -121,7 +123,7 @@ class FileUploader extends React.Component<FileUploaderProps, FileUploaderState>
     const mimeTypeIsImage = mimeType.startsWith('image/');
     const isToDelete = fileSrc === 'TO_DELETE';
     const isImage = fileIsImage || (mimeTypeIsImage && !isToDelete);
-    const title = isImage && imgTitle ? imgTitle : fileName;
+    const title = imgTitle || fileName;
     if (isAdminUploader) {
       return (
         <div>

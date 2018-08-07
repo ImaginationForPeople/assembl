@@ -148,6 +148,7 @@
     font-size: 11px;
     color: $grey3;
     margin-left: -5px;
+    display: flex;
 
     img {
       border-radius: 50%;
@@ -191,7 +192,8 @@
       padding: 0 0 0 2px;
       background: none;
 
-      &:hover, &:focus {
+      &:hover,
+      &:focus {
         background: none !important;
       }
 
@@ -401,6 +403,8 @@
     text-align: center;
     padding: 20px 0;
     background-color: $grey1;
+    display: flex;
+    justify-content: space-around;
 
     .btn-default {
       margin: 0 22px;
@@ -423,5 +427,41 @@
 .harvesting-mode-on {
   .extract-in-message {
     background-color: $harvesting-green-light;
+
+    &.submitted {
+      background-color: $harvesting-blue-light;
+    }
+  }
+}
+
+.submitted-harvesting {
+  .harvesting-submitted-message {
+    color: $harvesting-blue;
+    padding-top: 10px;
+    font-size: 12px;
+    padding-left: 8px;
+    margin-bottom: -10px;
+  }
+
+  .validated-harvesting {
+    color: $harvesting-blue !important;
+  }
+
+  .box-icon {
+    border: 3px solid $harvesting-blue;
+  }
+
+  .active-box {
+    border-left-color: $harvesting-blue;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .is-harvesting-button {
+    display: none;
+  }
+
+  .harvesting-container {
+    display: none;
   }
 }
