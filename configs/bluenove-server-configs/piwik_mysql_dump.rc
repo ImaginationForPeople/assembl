@@ -1,0 +1,10 @@
+_extends = ../base_env.rc 
+public_hostname = stats.bluenove.com
+_projectpath = /home/assembl_user/assembl
+assembl_user=mozayed
+borg_repository=
+remote_server_backup_location=
+assembl_path=
+mysql_password=
+mysql_user=root
+remote_dump_location=/mozayed

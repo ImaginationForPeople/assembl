@@ -1,0 +1,19 @@
+#!/bin/bash
+#Date of today 
+DATE=`date +%y_%m_%d`
+
+#liste des dossier
+LISTEBDD=$( echo 'show databases' | mysql --user={{mysql_user}} --password={{mysql_password}} )
+
+#looping on each Folder
+for SQL in $LISTEBDD
+do
+ 
+if [ $SQL == "piwik" ]; then
+ 
+
+mysqldump --user={{mysql_user}} --password={{mysql_password}} $SQL | gzip > /home{{remote_dump_location}}/$SQL"_mysql20"$DATE.sql.gz
+ 
+fi
+ 
+done
