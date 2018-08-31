@@ -363,7 +363,8 @@ const Translations = {
       brightMirror: {
         startFictionLabel: "Je partage ma fiction",
         fillBodyLabel: "Ecrivez votre fiction",
-        postSuccessMsg: "Merci pour votre participation. Votre fiction a bien été enregistrée !"
+        postSuccessMsg: "Merci pour votre participation. Votre fiction a bien été enregistrée !",
+        allFictions: "Fictions déjà parues"
       },
       themes: "Thèmes",
       notStarted: "La phase %{phaseName} n'a pas encore commencé. Merci de revenir à partir du ",
@@ -1169,7 +1170,8 @@ const Translations = {
       brightMirror: {
         startFictionLabel: "Share a fiction",
         fillBodyLabel: "Write your fiction",
-        postSuccessMsg: "Thanks for your participation. Your fiction has been saved!"
+        postSuccessMsg: "Thanks for your participation. Your fiction has been saved!",
+        allFictions: "Published fictions"
       },
       themes: "Themes",
       notStarted: "The %{phaseName} phase has not started. Please come back from ",
@@ -1600,7 +1602,8 @@ const Translations = {
     },
     date: {
       format: "MMMM Do, YYYY",
-      format2: "YYYY-MM-DD"
+      format2: "YYYY-MM-DD",
+      format3: "MM/DD/YYYY"
     },
     duration: {
       format: "h [h]"

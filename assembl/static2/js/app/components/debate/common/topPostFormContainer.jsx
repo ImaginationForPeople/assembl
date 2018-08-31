@@ -8,8 +8,8 @@ import { hexToRgb } from '../../../utils/globalFunctions';
 import { MIN_WIDTH_COLUMN, SMALL_SCREEN_HEIGHT } from '../../../constants';
 
 type TopPostFormContainerProps = {
-  messageColumns: Object,
-  isColumnViewInline: boolean,
+  messageColumns?: Object,
+  isColumnViewInline?: boolean,
   ideaId: string,
   refetchIdea: Function,
   topPostsCount: number,
@@ -87,8 +87,17 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
   }
 
   render() {
-    const { ideaId, refetchIdea, messageColumns = [], isColumnViewInline, topPostsCount,
-      instructionLabel, fillBodyLabel, bodyPlaceholder, postSuccessMsg } = this.props;
+    const {
+      ideaId,
+      refetchIdea,
+      messageColumns = [],
+      isColumnViewInline,
+      topPostsCount,
+      instructionLabel,
+      fillBodyLabel,
+      bodyPlaceholder,
+      postSuccessMsg
+    } = this.props;
     const columnsInfos = this.getColumnsInfos();
     const { sticky } = this.state;
     const containerClassNames = sticky && messageColumns.length <= 1 && topPostsCount >= 1 ? 'top-post-sticky' : '';

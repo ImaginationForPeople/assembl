@@ -1,6 +1,7 @@
 #import "./fragments/IdeaMessageColumn.graphql"
+#import "./fragments/AgentProfileInfo.graphql"
 
-query IdeaWithPosts($id: ID!, $lang: String) {
+query IdeaWithPosts($id: ID!, $lang: String, $additionalFields: Boolean!) {
   idea: node(id: $id) {
     ... on Idea {
       id
@@ -15,6 +16,7 @@ query IdeaWithPosts($id: ID!, $lang: String) {
           node {
             ... on Post {
               id
+              subject(lang: $lang) @include(if: $additionalFields)
               parentId
               creationDate
               publicationState
@@ -25,6 +27,9 @@ query IdeaWithPosts($id: ID!, $lang: String) {
                 disagree
                 dontUnderstand
                 moreInfo
+              }
+              creator @include(if: $additionalFields) {
+                ...AgentProfileInfo
               }
             }
           }

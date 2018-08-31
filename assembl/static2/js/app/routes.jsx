@@ -44,7 +44,7 @@ import { routeForRouter } from './utils/routeMap';
 import IntMainPage from './integration/index';
 import Int101Page from './integration/101/index';
 import Int101FormBuilderPage from './integration/101/containers/formBuilder101/formBuilder101';
-import IntBrightMirrorIndex from './integration/brightMirror/index';
+import IntBrightMirrorIndex from './integration/brightMirror';
 import IntBrightMirrorShow from './integration/brightMirror/show';
 
 const DebateHome = (props) => {
@@ -69,13 +69,15 @@ const DebateChild = (props) => {
   case 'survey':
     return <Survey id={props.id} identifier={props.identifier} />;
   case 'thread':
-    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} />;
+    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} additionalFields={false} />;
   case 'multiColumns':
-    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} />;
+    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} additionalFields={false} />;
   case 'voteSession':
     return <NotFound />;
+  case 'brightMirror':
+    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} additionalFields />;
   default:
-    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} />;
+    return <Idea id={props.id} identifier={props.identifier} routerParams={props.params} additionalFields={false} />;
   }
 };
 

@@ -1,0 +1,31 @@
+.instructions-text {
+  .announcement {
+    margin: 0;
+  }
+
+  .announcement-title {
+    margin-bottom: 33px;
+  }
+
+  .announcement-media {
+    font-family: $font-family4;
+    letter-spacing: 1px;
+    line-height: 36px;
+    margin: 0 17px 33px 17px;
+    font-size: $font-size-sm;
+    width: auto;
+    text-align: left;
+  }
+
+  @media (min-width: $screen-sm-min) {
+    .announcement-title {
+      margin-bottom: 40px;
+    }
+  }
+
+  @media (min-width: $screen-md-min) {
+    .announcement-title {
+      margin-bottom: 47px;
+    }
+  }
+}

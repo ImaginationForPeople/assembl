@@ -13,6 +13,10 @@ export const APP_CONTAINER_PADDING = 15;
 export const MIN_WIDTH_COLUMN = 400;
 export const COLUMN_OPACITY_GAIN = 0.5;
 
+// Bright mirror previews
+export const FICTION_PREVIEW_TITLE_MAX_CHAR = 60;
+export const FICTION_PREVIEW_NAME_MAX_CHAR = 20;
+
 // Minimum length for survey answers
 export const MINIMUM_BODY_LENGTH = 10;
 
@@ -95,6 +99,26 @@ export const pickerColors = [
   '#1652C1',
   '#EB144C',
   '#000000'
+];
+
+export const fictionBackgroundColors = [
+  '#ffcdd2',
+  '#e1bee7',
+  '#d1c4e9',
+  '#c5cae9',
+  '#bbdefb',
+  '#b3e5fc',
+  '#b2ebf2',
+  '#b2dfdb',
+  '#c8e6c9',
+  '#dcedc8',
+  '#f0f4c3',
+  '#fff9c4',
+  '#ffecb3',
+  '#ffe0b2',
+  '#ffccbc',
+  '#d7ccc8',
+  '#cfd8dc'
 ];
 
 export const modulesTranslationKeys = ['survey', 'thread', 'multiColumns', 'voteSession', 'brightMirror'];
