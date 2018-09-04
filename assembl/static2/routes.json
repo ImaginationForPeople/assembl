@@ -30,6 +30,7 @@
   "community": "${slug}/community",
   "terms": "${slug}/terms",
   "theme": "theme/${themeId}",
+  "brightMirrorFiction": "theme/${themeId}/fictions/${postId}",
   "question": "question/${questionId}/${questionIndex}",
   "questionPost": "${slug}/debate/${phase}/question/${questionId}/${questionIndex}/#${element}",
   "administration": "${slug}/administration",
@@ -55,5 +56,5 @@
   "integration101Page": "integration/101/index",
   "integration101FormBuilderPage": "integration/101/form-builder",
   "integrationBrightMirrorIndex": "integration/bright-mirror/index",
-  "integrationBrightMirrorShow": "integration/bright-mirror/show"
+  "integrationBrightMirrorFiction": "integration/bright-mirror/bright-mirror-fiction"
 }

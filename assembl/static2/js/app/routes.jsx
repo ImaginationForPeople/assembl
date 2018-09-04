@@ -37,6 +37,7 @@ import ResourcesCenter from './pages/resourcesCenter';
 import LandingPageAdmin from './pages/landingPageAdmin';
 import ExportTaxonomies from './pages/exportTaxonomies';
 import BrightMirror from './pages/brightMirror';
+import BrightMirrorFiction from './pages/brightMirrorFiction';
 import BrightMirrorAdmin from './pages/brightMirrorAdmin';
 import { routeForRouter } from './utils/routeMap';
 
@@ -44,8 +45,7 @@ import { routeForRouter } from './utils/routeMap';
 import IntMainPage from './integration/index';
 import Int101Page from './integration/101/index';
 import Int101FormBuilderPage from './integration/101/containers/formBuilder101/formBuilder101';
-import IntBrightMirrorIndex from './integration/brightMirror/index';
-import IntBrightMirrorShow from './integration/brightMirror/show';
+import IntBrightMirrorFiction from './integration/brightMirror/pages/brightMirrorFiction';
 
 const DebateHome = (props) => {
   switch (props.params.phase) {
@@ -104,14 +104,19 @@ const AdminChild = (props) => {
   }
 };
 
+// TODO: fix temp patch below
+const AZERTY = () => <BrightMirrorFiction id="UG9zdDozNzEw" contentLocale="fr" />;
+
 export default [
   <Route path="/" component={Root}>
     {/* 'integration' route is only used for HTML/CSS integration purpose */}
     <Route path={routeForRouter('integrationPage', false, { preSlash: true })} component={IntMainPage} />
     <Route path={routeForRouter('integration101Page', false, { preSlash: true })} component={Int101Page} />
     <Route path={routeForRouter('integration101FormBuilderPage', false, { preSlash: true })} component={Int101FormBuilderPage} />
-    <Route path={routeForRouter('integrationBrightMirrorIndex', false, { preSlash: true })} component={IntBrightMirrorIndex} />
-    <Route path={routeForRouter('integrationBrightMirrorShow', false, { preSlash: true })} component={IntBrightMirrorShow} />
+    <Route
+      path={routeForRouter('integrationBrightMirrorFiction', false, { preSlash: true })}
+      component={IntBrightMirrorFiction}
+    />
     {/* once the integration workflow is mature, Styleguide component will be replaced by Storybook and thus can be removed */}
     <Route path={routeForRouter('styleguide', false, { preSlash: true })} component={Styleguide} />
     {/* Those login routes should be kept in synchrony with assembl.views.auth.__init__.py */}
@@ -124,6 +129,7 @@ export default [
     <Route path={routeForRouter('signup', true)} component={Signup} />
     <Route path={routeForRouter('changePassword', true)} component={ChangePassword} />
     <Route path={routeForRouter('requestPasswordChange', true)} component={RequestPasswordChange} />
+    {/* TODO: eventually refactor Main into App */}
     <Route component={App}>
       <Route component={Main}>
         <Redirect from={routeForRouter('homeBare')} to={routeForRouter('home')} />
@@ -142,6 +148,10 @@ export default [
         <Route path={routeForRouter('rootDebate')} />
         <Route path={routeForRouter('debate', false, { phase: ':phase' })} component={DebateHome}>
           <Route path={routeForRouter('theme', false, { themeId: ':themeId' })} component={DebateChild} />
+          <Route
+            path={routeForRouter('brightMirrorFiction', false, { themeId: ':themeId', postId: ':postId' })}
+            component={AZERTY}
+          />
           <Route
             path={routeForRouter('question', false, { questionId: ':questionId', questionIndex: ':questionIndex' })}
             component={Question}

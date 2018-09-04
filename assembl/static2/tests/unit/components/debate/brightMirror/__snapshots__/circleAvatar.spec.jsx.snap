@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Button101 danger 1`] = `
+exports[`Storyshots CircleAvatar default 1`] = `
 <div>
   <div
     style={
@@ -10,14 +10,11 @@ exports[`Storyshots Button101 danger 1`] = `
       }
     }
   >
-    <button
-      className="integration button btn btn-lg btn-danger"
-      disabled={false}
-      onClick={[Function]}
-      type="button"
-    >
-      Custom label
-    </button>
+    <img
+      alt="taryn-treutel-avatar"
+      className="circle-avatar"
+      src="https://loremflickr.com/300/300"
+    />
   </div>
   <button
     onClick={[Function]}
@@ -119,368 +116,7 @@ exports[`Storyshots Button101 danger 1`] = `
               }
             }
           >
-            Button101
-          </h1>
-          <h2
-            style={
-              Object {
-                "fontSize": "22px",
-                "fontWeight": 400,
-                "margin": "0 0 10px 0",
-                "padding": 0,
-              }
-            }
-          >
-            danger
-          </h2>
-        </div>
-        
-        <div>
-          <h1
-            style={
-              Object {
-                "borderBottom": "1px solid #EEE",
-                "fontSize": "25px",
-                "margin": "20px 0 0 0",
-                "padding": "0 0 5px 0",
-              }
-            }
-          >
-            Story Source
-          </h1>
-          <pre
-            className="css-4akams"
-          >
-            <div>
-              <div
-                style={
-                  Object {
-                    "paddingLeft": 18,
-                    "paddingRight": 3,
-                  }
-                }
-              >
-                <span
-                  style={
-                    Object {
-                      "color": "#777",
-                    }
-                  }
-                >
-                  &lt;
-                  button101
-                </span>
-                <span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      isDisabled
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#a11",
-                            }
-                          }
-                        >
-                          false
-                        </span>
-                        }
-                      </span>
-                    </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      type
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        "
-                        <span
-                          style={
-                            Object {
-                              "color": "#22a",
-                              "wordBreak": "break-word",
-                            }
-                          }
-                        >
-                          danger
-                        </span>
-                        "
-                      </span>
-                    </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      label
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        "
-                        <span
-                          style={
-                            Object {
-                              "color": "#22a",
-                              "wordBreak": "break-word",
-                            }
-                          }
-                        >
-                          Custom label
-                        </span>
-                        "
-                      </span>
-                    </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      onClickHandler
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#170",
-                            }
-                          }
-                        >
-                          onClickHandler
-                        </span>
-                        }
-                      </span>
-                    </span>
-                    <br />
-                  </span>
-                </span>
-                <span
-                  style={
-                    Object {
-                      "color": "#777",
-                    }
-                  }
-                >
-                  /&gt;
-                </span>
-              </div>
-            </div>
-            <button
-              className="css-py33tc"
-              onClick={[Function]}
-            >
-              <div
-                className="css-kv47nt"
-              >
-                <div
-                  style={
-                    Object {
-                      "marginBottom": 6,
-                    }
-                  }
-                >
-                  Copied!
-                </div>
-                <div>
-                  Copy
-                </div>
-              </div>
-            </button>
-          </pre>
-        </div>
-        <div>
-          <h1
-            style={
-              Object {
-                "borderBottom": "1px solid #EEE",
-                "fontSize": "25px",
-                "margin": "20px 0 0 0",
-                "padding": "0 0 5px 0",
-              }
-            }
-          >
-            Prop Types
-          </h1>
-          <div>
-            <h2
-              style={
-                Object {
-                  "margin": "20px 0 0 0",
-                }
-              }
-            >
-              "
-              button101
-              " Component
-            </h2>
-            <small>
-              No propTypes defined!
-            </small>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`Storyshots Button101 default 1`] = `
-<div>
-  <div
-    style={
-      Object {
-        "position": "relative",
-        "zIndex": 0,
-      }
-    }
-  >
-    <button
-      className="integration button btn btn-lg btn-info"
-      disabled={false}
-      onClick={[Function]}
-      type="button"
-    >
-      Custom label
-    </button>
-  </div>
-  <button
-    onClick={[Function]}
-    style={
-      Object {
-        "background": "#28c",
-        "border": "none",
-        "borderRadius": "0 0 0 5px",
-        "color": "#fff",
-        "cursor": "pointer",
-        "display": "block",
-        "fontFamily": "sans-serif",
-        "fontSize": "12px",
-        "padding": "5px 15px",
-        "position": "fixed",
-        "right": 0,
-        "top": 0,
-      }
-    }
-    type="button"
-  >
-    Show Info
-  </button>
-  <div
-    style={
-      Object {
-        "background": "white",
-        "bottom": 0,
-        "display": "none",
-        "left": 0,
-        "overflow": "auto",
-        "padding": "0 40px",
-        "position": "fixed",
-        "right": 0,
-        "top": 0,
-        "zIndex": 99999,
-      }
-    }
-  >
-    <button
-      onClick={[Function]}
-      style={
-        Object {
-          "background": "#28c",
-          "border": "none",
-          "borderRadius": "0 0 0 5px",
-          "color": "#fff",
-          "cursor": "pointer",
-          "display": "block",
-          "fontFamily": "sans-serif",
-          "fontSize": "12px",
-          "padding": "5px 15px",
-          "position": "fixed",
-          "right": 0,
-          "top": 0,
-        }
-      }
-      type="button"
-    >
-      ×
-    </button>
-    <div
-      style={undefined}
-    >
-      <div
-        style={
-          Object {
-            "WebkitFontSmoothing": "antialiased",
-            "backgroundColor": "#fff",
-            "border": "1px solid #eee",
-            "borderRadius": "2px",
-            "boxShadow": "0px 2px 3px rgba(0, 0, 0, 0.05)",
-            "color": "#444",
-            "fontFamily": "-apple-system, \\".SFNSText-Regular\\", \\"San Francisco\\", BlinkMacSystemFont, \\"Segoe UI\\", \\"Roboto\\", \\"Oxygen\\", \\"Ubuntu\\", \\"Cantarell\\", \\"Fira Sans\\", \\"Droid Sans\\", \\"Helvetica Neue\\", \\"Lucida Grande\\", \\"Arial\\", sans-serif",
-            "fontSize": "15px",
-            "fontWeight": 300,
-            "lineHeight": 1.45,
-            "marginBottom": "20px",
-            "marginTop": "20px",
-            "padding": "20px 40px 40px",
-          }
-        }
-      >
-        <div
-          style={
-            Object {
-              "borderBottom": "1px solid #eee",
-              "marginBottom": 10,
-              "paddingTop": 10,
-            }
-          }
-        >
-          <h1
-            style={
-              Object {
-                "fontSize": "35px",
-                "margin": 0,
-                "padding": 0,
-              }
-            }
-          >
-            Button101
+            CircleAvatar
           </h1>
           <h2
             style={
@@ -529,47 +165,15 @@ exports[`Storyshots Button101 default 1`] = `
                   }
                 >
                   &lt;
-                  button101
+                  circleAvatar
                 </span>
                 <span>
                   <span>
-                    <span>
-                      <br />
-                        
-                    </span>
+                     
                     <span
                       style={Object {}}
                     >
-                      isDisabled
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#a11",
-                            }
-                          }
-                        >
-                          false
-                        </span>
-                        }
-                      </span>
-                    </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      type
+                      username
                     </span>
                     <span>
                       =
@@ -585,21 +189,18 @@ exports[`Storyshots Button101 default 1`] = `
                             }
                           }
                         >
-                          info
+                          taryn-treutel
                         </span>
                         "
                       </span>
                     </span>
                   </span>
                   <span>
-                    <span>
-                      <br />
-                        
-                    </span>
+                     
                     <span
                       style={Object {}}
                     >
-                      label
+                      src
                     </span>
                     <span>
                       =
@@ -615,41 +216,12 @@ exports[`Storyshots Button101 default 1`] = `
                             }
                           }
                         >
-                          Custom label
+                          https://loremflickr.com/300/300
                         </span>
                         "
                       </span>
                     </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      onClickHandler
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#170",
-                            }
-                          }
-                        >
-                          onClickHandler
-                        </span>
-                        }
-                      </span>
-                    </span>
-                    <br />
+                     
                   </span>
                 </span>
                 <span
@@ -708,7 +280,7 @@ exports[`Storyshots Button101 default 1`] = `
               }
             >
               "
-              button101
+              circleAvatar
               " Component
             </h2>
             <small>
@@ -722,7 +294,7 @@ exports[`Storyshots Button101 default 1`] = `
 </div>
 `;
 
-exports[`Storyshots Button101 disabled 1`] = `
+exports[`Storyshots CircleAvatar no username 1`] = `
 <div>
   <div
     style={
@@ -732,14 +304,11 @@ exports[`Storyshots Button101 disabled 1`] = `
       }
     }
   >
-    <button
-      className="integration button btn btn-lg btn-info"
-      disabled={true}
-      onClick={[Function]}
-      type="button"
-    >
-      Custom label
-    </button>
+    <img
+      alt="no-username-avatar"
+      className="circle-avatar"
+      src="/static2/img/icons/avatar.png"
+    />
   </div>
   <button
     onClick={[Function]}
@@ -841,7 +410,7 @@ exports[`Storyshots Button101 disabled 1`] = `
               }
             }
           >
-            Button101
+            CircleAvatar
           </h1>
           <h2
             style={
@@ -853,7 +422,7 @@ exports[`Storyshots Button101 disabled 1`] = `
               }
             }
           >
-            disabled
+            no username
           </h2>
         </div>
         
@@ -890,29 +459,15 @@ exports[`Storyshots Button101 disabled 1`] = `
                   }
                 >
                   &lt;
-                  button101
+                  circleAvatar
                 </span>
                 <span>
                   <span>
-                    <span>
-                      <br />
-                        
-                    </span>
+                     
                     <span
                       style={Object {}}
                     >
-                      isDisabled
-                    </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      type
+                      username
                     </span>
                     <span>
                       =
@@ -928,21 +483,18 @@ exports[`Storyshots Button101 disabled 1`] = `
                             }
                           }
                         >
-                          info
+                          
                         </span>
                         "
                       </span>
                     </span>
                   </span>
                   <span>
-                    <span>
-                      <br />
-                        
-                    </span>
+                     
                     <span
                       style={Object {}}
                     >
-                      label
+                      src
                     </span>
                     <span>
                       =
@@ -958,41 +510,12 @@ exports[`Storyshots Button101 disabled 1`] = `
                             }
                           }
                         >
-                          Custom label
+                          
                         </span>
                         "
                       </span>
                     </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      onClickHandler
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#170",
-                            }
-                          }
-                        >
-                          onClickHandler
-                        </span>
-                        }
-                      </span>
-                    </span>
-                    <br />
+                     
                   </span>
                 </span>
                 <span
@@ -1051,7 +574,7 @@ exports[`Storyshots Button101 disabled 1`] = `
               }
             >
               "
-              button101
+              circleAvatar
               " Component
             </h2>
             <small>
@@ -1065,7 +588,7 @@ exports[`Storyshots Button101 disabled 1`] = `
 </div>
 `;
 
-exports[`Storyshots Button101 playground 1`] = `
+exports[`Storyshots CircleAvatar playground 1`] = `
 <div>
   <div
     style={
@@ -1075,14 +598,11 @@ exports[`Storyshots Button101 playground 1`] = `
       }
     }
   >
-    <button
-      className="integration button btn btn-lg btn-info"
-      disabled={false}
-      onClick={[Function]}
-      type="button"
-    >
-      Playground label
-    </button>
+    <img
+      alt="taryn-treutel-avatar"
+      className="circle-avatar"
+      src="https://loremflickr.com/300/300"
+    />
   </div>
   <button
     onClick={[Function]}
@@ -1184,7 +704,7 @@ exports[`Storyshots Button101 playground 1`] = `
               }
             }
           >
-            Button101
+            CircleAvatar
           </h1>
           <h2
             style={
@@ -1233,18 +753,15 @@ exports[`Storyshots Button101 playground 1`] = `
                   }
                 >
                   &lt;
-                  button101
+                  circleAvatar
                 </span>
                 <span>
                   <span>
-                    <span>
-                      <br />
-                        
-                    </span>
+                     
                     <span
                       style={Object {}}
                     >
-                      label
+                      username
                     </span>
                     <span>
                       =
@@ -1260,21 +777,18 @@ exports[`Storyshots Button101 playground 1`] = `
                             }
                           }
                         >
-                          Playground label
+                          taryn-treutel
                         </span>
                         "
                       </span>
                     </span>
                   </span>
                   <span>
-                    <span>
-                      <br />
-                        
-                    </span>
+                     
                     <span
                       style={Object {}}
                     >
-                      type
+                      src
                     </span>
                     <span>
                       =
@@ -1290,70 +804,12 @@ exports[`Storyshots Button101 playground 1`] = `
                             }
                           }
                         >
-                          info
+                          https://loremflickr.com/300/300
                         </span>
                         "
                       </span>
                     </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      isDisabled
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#a11",
-                            }
-                          }
-                        >
-                          false
-                        </span>
-                        }
-                      </span>
-                    </span>
-                  </span>
-                  <span>
-                    <span>
-                      <br />
-                        
-                    </span>
-                    <span
-                      style={Object {}}
-                    >
-                      onClickHandler
-                    </span>
-                    <span>
-                      =
-                      <span
-                        style={Object {}}
-                      >
-                        {
-                        <span
-                          style={
-                            Object {
-                              "color": "#170",
-                            }
-                          }
-                        >
-                          onClickHandler
-                        </span>
-                        }
-                      </span>
-                    </span>
-                    <br />
+                     
                   </span>
                 </span>
                 <span
@@ -1412,7 +868,7 @@ exports[`Storyshots Button101 playground 1`] = `
               }
             >
               "
-              button101
+              circleAvatar
               " Component
             </h2>
             <small>
