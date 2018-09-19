@@ -46,9 +46,8 @@ def running_locally(hosts=None):
 
 
 def sudo(*args, **kwargs):
-    sudoer = env.get("sudo_user", None) or env.get("user")
-    with settings(user=sudoer,
-                  sudo_prefix='sudo -i -S -p \'{}\''.format(env.sudo_prompt)):
+    sudoer = env.get("sudoer", None) or env.get("user")
+    with settings(user=sudoer, sudo_prefix='sudo -i -S -p \'{}\''.format(env.sudo_prompt)):
         if sudoer == "root":
             run(*args, **kwargs)
         else:
@@ -1091,6 +1090,21 @@ def app_compile_nodbupdate():
     execute(compile_stylesheets)
     execute(compile_messages)
     execute(compile_javascript)
+
+
+@task
+def setup_nginx_file():
+    """Creates nginx config file from template."""
+    sudo("cp %s/doc/sample_nginx_config/assembl.yourdomain.com /etc/nginx/sites-available/assembl.%s" % (env._projectpath, env.public_hostname))
+    sudo("ln -s /etc/nginx/sites-available/assembl.%s /etc/nginx/sites-enabled/" % env.public_hostname)
+    sudo("/etc/init.d/nginx restart")
+
+
+@task
+def setup_assembl_service():
+    sudo("cp %s/doc/sample_systemd_script/assembl.service /etc/systemd/system/assembl.service" % env.public_hostname)
+    sudo("systemctl enable assembl")
+    sudo("systemctl assembl restart")
 
 
 @task
