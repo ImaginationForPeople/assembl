@@ -7,7 +7,6 @@ import ProfileLine from '../../../common/profileLine';
 import PostActions from '../../common/postActions';
 import AnswerForm from '../../thread/answerForm';
 import Nuggets from '../../thread/nuggets';
-import RelatedIdeas from './relatedIdeas';
 import PostBody from './postBody';
 import HarvestingMenu from '../../../harvesting/harvestingMenu';
 import type { Props as PostProps } from './index';
@@ -229,10 +228,22 @@ class PostView extends React.PureComponent<Props, State> {
 
               <Attachments attachments={attachments} />
 
+              {canReply && (
+                <div className={this.state.showAnswerForm ? 'answer-form' : 'collapsed-answer-form'}>
+                  <AnswerForm
+                    parentId={id}
+                    ideaId={ideaId}
+                    refetchIdea={refetchIdea}
+                    textareaRef={answerTextareaRef}
+                    hideAnswerForm={this.hideAnswerForm}
+                    handleAnswerClick={this.handleAnswerClick}
+                    phaseId={phaseId}
+                  />
+                </div>
+              )}
+
               {!multiColumns && (
                 <div>
-                  <RelatedIdeas indirectIdeaContentLinks={indirectIdeaContentLinks} />
-
                   <div className="answers annotation">
                     <Translate value="debate.thread.numberOfResponses" count={numChildren} />
                   </div>
@@ -256,19 +267,6 @@ class PostView extends React.PureComponent<Props, State> {
             </div>
           </div>
         </div>
-        {canReply && (
-          <div className={this.state.showAnswerForm ? 'answer-form' : 'collapsed-answer-form'}>
-            <AnswerForm
-              parentId={id}
-              ideaId={ideaId}
-              refetchIdea={refetchIdea}
-              textareaRef={answerTextareaRef}
-              hideAnswerForm={this.hideAnswerForm}
-              handleAnswerClick={this.handleAnswerClick}
-              phaseId={phaseId}
-            />
-          </div>
-        )}
       </div>
     );
   }

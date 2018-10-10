@@ -2,16 +2,17 @@
   position: relative;
 
   .subject-prefix {
+    display: none;
     color: $first-color-opacity-70;
     font-family: 'LatoLight';
   }
 
   .level {
-    width: 600px;
+    width: 700px;
     margin: 0 auto;
 
     .box {
-      border-left: 4px solid $first-color;
+      border-left: 2px solid $first-color;
     }
   }
 
@@ -35,7 +36,7 @@
     margin-bottom: -6px;
     position: relative;
     height: $post-space;
-    border-left: 1px solid $grey1;
+    border-left: 1px solid $first-color;
     width: $tree-indentation;
 
     span {
@@ -83,7 +84,7 @@
   }
 
   .infinite-separator {
-    margin: $margin-section auto;
+    margin: $margin-section auto 130px auto;
     width: 200px;
     border-bottom: 1px solid $first-color;
     position: relative;
@@ -102,7 +103,24 @@
   .level-1, .level-2, .level-3, .level-4 {
     padding-bottom: $post-space;
     padding-left: $tree-indentation*2;
-    border-top: 1px solid $grey1;
+    border-top: 1px solid $first-color;
+    border-left: 1px solid $first-color;
+
+    .level-2 {
+      max-width: 670px;
+    }
+
+    .level-3 {
+      max-width: 640px;
+    }
+
+    .level-4 {
+      max-width: 610px;
+    }
+
+    .level-5 {
+      max-width: 580px;
+    }
 
     .box {
       border-top: none;
@@ -140,14 +158,13 @@
     }
 
     .level {
-      border-top: 1px solid $grey1;
+      border-top: 1px solid $first-color;
       margin-top: 20px;
     }
 
     .level-1 {
       margin-left: 20px;
       padding-left: 0;
-      padding-right: 20px;
     }
 
     .level-2, .level-3, .level-4 {

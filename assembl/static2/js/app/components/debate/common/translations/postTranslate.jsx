@@ -6,7 +6,6 @@ import { Translate, I18n } from 'react-redux-i18n';
 
 import { updateContentLocaleById, updateContentLocaleByOriginalLocale } from '../../../../actions/contentLocaleActions';
 import LocalesQuery from '../../../../graphql/LocalesQuery.graphql';
-import SwitchButton from '../../../common/switchButton';
 import manageErrorAndLoading from '../../../common/manageErrorAndLoading';
 import { getConnectedUserId } from '../../../../utils/globalFunctions';
 import { displayCustomModal } from '../../../../utils/utilityManager';
@@ -131,13 +130,16 @@ class PostTranslate extends React.Component<PostTranslateProps, PostTranslateSta
             />
           </p>
         ) : null}
-        <SwitchButton
+        <span
+          className="translate-button"
           ref={this.props.afterLoad}
           name={`switch-${id}`}
-          onChange={this.handleSubmit}
+          onClick={this.handleSubmit}
           checked={translate}
           labelRight={I18n.t('debate.thread.translate')}
-        />
+        >
+          <Translate value="debate.thread.translate" />
+        </span>
       </div>
     );
   }

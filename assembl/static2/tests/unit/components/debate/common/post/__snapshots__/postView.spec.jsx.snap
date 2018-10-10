@@ -161,10 +161,20 @@ exports[`PostView component should render a post in view mode 1`] = `
         <Attachments
           attachments={Array []}
         />
-        <div>
-          <RelatedIdeas
-            indirectIdeaContentLinks={undefined}
+        <div
+          className="collapsed-answer-form"
+        >
+          <Connect(Apollo(Apollo(AnswerForm)))
+            handleAnswerClick={[Function]}
+            hideAnswerForm={[Function]}
+            ideaId="ABC123"
+            parentId="XYZ333"
+            phaseId="DEF345"
+            refetchIdea={[Function]}
+            textareaRef={[Function]}
           />
+        </div>
+        <div>
           <div
             className="answers annotation"
           >
@@ -203,19 +213,6 @@ exports[`PostView component should render a post in view mode 1`] = `
         />
       </div>
     </div>
-  </div>
-  <div
-    className="collapsed-answer-form"
-  >
-    <Connect(Apollo(Apollo(AnswerForm)))
-      handleAnswerClick={[Function]}
-      hideAnswerForm={[Function]}
-      ideaId="ABC123"
-      parentId="XYZ333"
-      phaseId="DEF345"
-      refetchIdea={[Function]}
-      textareaRef={[Function]}
-    />
   </div>
 </div>
 `;

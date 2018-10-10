@@ -1,11 +1,19 @@
 .profileLine {
+  display: flex;
+
   img {
     border-radius: 50%;
     margin-right: 5px;
   }
 
   .user {
-    vertical-align: bottom;
+    vertical-align: middle;
+    display: flex;
+    padding: 0 0 20px 0;
+  }
+
+  .date {
+    vertical-align: middle;
     display: inline-block;
   }
 }
