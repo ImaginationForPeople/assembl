@@ -2627,6 +2627,14 @@ def generate_graphql_documentation():
 
 
 @task
+def install_and_start_devpi_server():
+    print(green("Installing devpi server and client"))
+    venvcmd("pip install -U devpi-web devpi-client")
+    print(green("Starting devpi server"))
+    venvcmd("devpi-server --start --init")
+
+
+@task
 def install_docker():
     if env.mac:
         print(green("Docker can be installed from https://store.docker.com/editions/community/docker-ce-desktop-mac"))
