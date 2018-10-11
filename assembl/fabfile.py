@@ -2635,6 +2635,55 @@ def install_and_start_devpi_server():
 
 
 @task
+def point_devpi_client_to_devpi_server():
+    print(green("Connecting the client to dev pi server on %s" % (env.devpi_server)))
+    local('devpi use %s' % (env.devpi_server))
+
+
+@task
+def create_devpi_user():
+    print(green("Creating devpi user"))
+    venvcmd("devpi user -c %s password=%s" % (env.devpi_user, env.devpi_password))
+
+
+@task
+def login_devpi_user():
+    print(green("Logging in as devpi user: %s" % (env.devpi_user)))
+    venvcmd("devpi login %s --password=%s" % (env.devpi_user, env.devpi_password))
+
+
+@task
+def define_devpi_index():
+    print(green("Defining devpi index"))
+    venvcmd("devpi index -c dev bases=root/pypi")
+
+
+@task
+def define_devpi_index_to_use():
+    print(green("Defining devpi index to use"))
+    venvcmd("devpi use %s/dev" % (env.devpi_user))
+
+
+@task
+def devpi_upload_package():
+    """Warning: this command has to be executed in the folder where your setup.py"""
+    print(green("Uploading package to server"))
+    venvcmd("devpi upload")
+
+
+@task
+def devpi_install_assembl():
+    print(green("Installing assembl"))
+    venvcmd("devpi install assembl")
+
+
+@task
+def generate_devpi_conf_for_nginx_and_supervisor():
+    print(green("Generating devpi configuration for nginx and supervisor"))
+    venvcmd("devpi-server --gen-config")
+
+
+@task
 def install_docker():
     if env.mac:
         print(green("Docker can be installed from https://store.docker.com/editions/community/docker-ce-desktop-mac"))
