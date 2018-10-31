@@ -265,6 +265,7 @@ export class BrightMirrorFiction extends Component<LocalBrightMirrorFictionProps
 
     const fictionBodyProps: FictionBodyProps = {
       id: fictionId,
+      ideaId: themeId,
       title: title,
       content: content,
       contentLocale: contentLocale,
