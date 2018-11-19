@@ -44,6 +44,7 @@ class AgentProfile(SecureObjectType, SQLAlchemyObjectType):
     image = graphene.Field(Document, description=docs.AgentProfile.image)
     creation_date = DateTime(description=docs.AgentProfile.creation_date)  # creation_date only exists on User, not AgentProfile
     has_password = graphene.Boolean(description=docs.AgentProfile.has_password)
+    is_social_account = graphene.Boolean(description=docs.AgentProfile.is_social_account)
     is_deleted = graphene.Boolean(description=docs.AgentProfile.is_deleted)
     is_machine = graphene.Boolean(description=docs.AgentProfile.is_machine)
     preferences = graphene.Field(Preferences, description=docs.AgentProfile.preferences)
@@ -87,6 +88,13 @@ class AgentProfile(SecureObjectType, SQLAlchemyObjectType):
 
     def resolve_has_password(self, args, context, info):
         return self.password is not None
+
+    def resolve_is_social_account(self, args, context, info):
+        from assembl.models.social_auth import SocialAuthAccount
+        for a in self.accounts:
+            if issubclass(type(a), SocialAuthAccount):
+                return True
+        return False
 
     def resolve_is_machine(self, args, context, info):
         return getattr(self, 'is_machine', False)
@@ -165,8 +173,9 @@ class UpdateUser(graphene.Mutation):
             new_password = args.get('new_password')
             new_password2 = args.get('new_password2')
             # only modify the password if it was given in parameter
-            if old_password is not None and new_password is not None and new_password2 is not None:
-                if not user.check_password(old_password):
+            if (old_password is not None or user.password is None) and None not in (new_password, new_password2):
+                # If the User is a social user, they won't initially have a password (so it can be none)
+                if user.password and not user.check_password(old_password):
                     raise Exception(u"002: The entered password doesn't match your current password.")
 
                 if new_password != new_password2:

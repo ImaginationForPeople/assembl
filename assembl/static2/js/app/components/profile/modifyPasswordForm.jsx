@@ -33,19 +33,23 @@ class ModifyPasswordForm extends React.Component<Props, State> {
 
   handleOldPasswordChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const disabled = isEmpty(value) || isEmpty(this.state.newPassword) || isEmpty(this.state.newPassword2);
+    const { isSocialAccount } = this.props;
+    const { newPassword, newPassword2 } = this.state;
+    const disabled = isEmpty(value) || isEmpty(newPassword) || isEmpty(newPassword2) || !isSocialAccount;
     this.setState({ oldPassword: value, disabled: disabled });
   };
 
   handleNewPasswordChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const disabled = isEmpty(this.state.oldPassword) || isEmpty(value) || isEmpty(this.state.newPassword2);
+    const { newPassword2 } = this.state;
+    const disabled = isEmpty(value) || isEmpty(newPassword2);
     this.setState({ newPassword: value, disabled: disabled });
   };
 
   handleNewPassword2Change = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const disabled = isEmpty(this.state.oldPassword) || isEmpty(this.state.newPassword) || isEmpty(value);
+    const { newPassword } = this.state;
+    const disabled = isEmpty(newPassword) || isEmpty(value);
     this.setState({ newPassword2: value, disabled: disabled });
   };
 
@@ -76,7 +80,8 @@ class ModifyPasswordForm extends React.Component<Props, State> {
   };
 
   render() {
-    const oldPasswordLabel = I18n.t('profile.oldPassword');
+    const { isSocialAccount } = this.props;
+    const oldPasswordLabel = isSocialAccount ? I18n.t('profile.oldPasswordSocial') : I18n.t('profile.oldPassword');
     const newPasswordLabel = I18n.t('profile.newPassword');
     const newPassword2Label = I18n.t('profile.newPassword2');
     const { oldPassword, newPassword, newPassword2 } = this.state;
@@ -86,7 +91,7 @@ class ModifyPasswordForm extends React.Component<Props, State> {
           label={oldPasswordLabel}
           onChange={this.handleOldPasswordChange}
           type="password"
-          required
+          required={!isSocialAccount}
           value={oldPassword}
         />
         <FormControlWithLabel
