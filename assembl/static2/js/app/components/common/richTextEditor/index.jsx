@@ -20,7 +20,7 @@ import { addProtocol } from '../../../utils/linkify';
 type DraftPlugin = any;
 
 type Props = {
-  editorState: EditorState,
+  initialEditorState: EditorState,
   handleInputFocus?: Function,
   maxLength: number,
   onChange: Function,
@@ -31,7 +31,8 @@ type Props = {
 };
 
 type State = {
-  editorHasFocus: boolean
+  editorHasFocus: boolean,
+  editorState: EditorState
 };
 
 export default class RichTextEditor extends React.Component<Props, State> {
@@ -50,6 +51,7 @@ export default class RichTextEditor extends React.Component<Props, State> {
 
   constructor(props: Props): void {
     super(props);
+    const { withAttachmentButton, initialEditorState, toolbarPosition } = props;
     this.editor = React.createRef();
     const modalPlugin = createModalPlugin();
     const { closeModal, setModalContent, Modal } = modalPlugin;
@@ -67,7 +69,7 @@ export default class RichTextEditor extends React.Component<Props, State> {
     const components = {};
     const toolbarStructure = [BoldButton, ItalicButton, UnorderedListButton, LinkButton];
     const plugins = [counterPlugin, linkPlugin];
-    if (props.withAttachmentButton) {
+    if (withAttachmentButton) {
       const attachmentPlugin = createAttachmentPlugin({
         ...modalConfig
       });
@@ -87,7 +89,7 @@ export default class RichTextEditor extends React.Component<Props, State> {
           buttonWrapper: 'btn-group'
         },
         toolbarStyles: {
-          toolbar: classNames('editor-toolbar', props.toolbarPosition)
+          toolbar: classNames('editor-toolbar', toolbarPosition)
         }
       }
     });
@@ -104,18 +106,20 @@ export default class RichTextEditor extends React.Component<Props, State> {
     };
 
     this.state = {
-      editorHasFocus: false
+      editorHasFocus: false,
+      editorState: initialEditorState
     };
+  }
+
+  shouldComponentUpdate(nextProps: Props) {
+    const { initialEditorState } = this.props;
+    // Update the Editor only if the update is external
+    return initialEditorState !== nextProps.initialEditorState;
   }
 
   handleEditorFocus = (): void => {
     const { handleInputFocus } = this.props;
-    this.setState(
-      {
-        editorHasFocus: true
-      },
-      handleInputFocus
-    );
+    this.setState({ editorHasFocus: true }, handleInputFocus);
   };
 
   countRemainingChars = (plainText: string): string => {
@@ -126,8 +130,9 @@ export default class RichTextEditor extends React.Component<Props, State> {
   };
 
   shouldHidePlaceholder(): boolean {
+    const { editorState } = this.state;
     // don't display placeholder if user changes the block type (to bullet list) before to type anything
-    const contentState = this.props.editorState.getCurrentContent();
+    const contentState = editorState.getCurrentContent();
     if (!contentState.hasText()) {
       if (
         contentState
@@ -155,16 +160,22 @@ export default class RichTextEditor extends React.Component<Props, State> {
     // Pressing shift-enter keys creates a new line (<br/>) instead of an new paragraph (<p>)
     // See https://github.com/HubSpot/draft-convert/issues/83
     // For example, this enables to create line returns inside a list item.
-    const { editorState, onChange } = this.props;
+    const { editorState } = this.state;
     if (e.shiftKey) {
-      onChange(RichUtils.insertSoftNewline(editorState));
+      this.onChange(RichUtils.insertSoftNewline(editorState));
       return 'handled';
     }
     return 'not-handled';
   };
 
+  onChange = (newEditorState: EditorState) => {
+    const { onChange } = this.props;
+    this.setState({ editorState: newEditorState }, () => onChange(newEditorState));
+  };
+
   render() {
-    const { editorState, maxLength, onChange, placeholder, textareaRef } = this.props;
+    const { maxLength, placeholder, textareaRef } = this.props;
+    const { editorState } = this.state;
     const divClassName = classNames('rich-text-editor', { hidePlaceholder: this.shouldHidePlaceholder() });
     const { Attachments, CustomCounter, Modal, Toolbar } = this.components;
     return (
@@ -181,7 +192,7 @@ export default class RichTextEditor extends React.Component<Props, State> {
         <div onClick={this.focusEditor}>
           <Editor
             editorState={editorState}
-            onChange={onChange}
+            onChange={this.onChange}
             onFocus={this.handleEditorFocus}
             placeholder={placeholder}
             plugins={this.plugins}

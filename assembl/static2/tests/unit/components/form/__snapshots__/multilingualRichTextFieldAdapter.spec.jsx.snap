@@ -8,7 +8,7 @@ exports[`MultilingualRichTextFieldAdapter component should render a required ric
     className="form-group"
   >
     <AssemblEditor
-      editorState={
+      initialEditorState={
         EditorState {
           "_immutable": Immutable.Record {
             "allowUndo": true,
@@ -145,7 +145,7 @@ exports[`MultilingualRichTextFieldAdapter component should render a rich text fi
     className="form-group"
   >
     <AssemblEditor
-      editorState={
+      initialEditorState={
         EditorState {
           "_immutable": Immutable.Record {
             "allowUndo": true,
@@ -281,7 +281,7 @@ exports[`MultilingualRichTextFieldAdapter component should render a rich text fi
     className="form-group has-error"
   >
     <AssemblEditor
-      editorState={
+      initialEditorState={
         EditorState {
           "_immutable": Immutable.Record {
             "allowUndo": true,
@@ -388,7 +388,7 @@ exports[`MultilingualRichTextFieldAdapter component should render a rich text fi
     className="form-group"
   >
     <AssemblEditor
-      editorState={
+      initialEditorState={
         EditorState {
           "_immutable": Immutable.Record {
             "allowUndo": true,
@@ -495,7 +495,7 @@ exports[`MultilingualRichTextFieldAdapter component should render a rich text fi
     className="form-group"
   >
     <AssemblEditor
-      editorState={
+      initialEditorState={
         EditorState {
           "_immutable": Immutable.Record {
             "allowUndo": true,
@@ -631,7 +631,7 @@ exports[`MultilingualRichTextFieldAdapter component should render a rich text fi
     className="form-group"
   >
     <AssemblEditor
-      editorState={
+      initialEditorState={
         EditorState {
           "_immutable": Immutable.Record {
             "allowUndo": true,

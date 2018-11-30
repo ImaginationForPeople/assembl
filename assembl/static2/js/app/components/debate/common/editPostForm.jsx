@@ -171,7 +171,7 @@ class EditPostForm extends React.PureComponent<EditPostFormProps, EditPostFormSt
             )}
             <FormGroup>
               <RichTextEditor
-                editorState={body}
+                initialEditorState={body}
                 placeholder={I18n.t(bodyDescriptionMsgId)}
                 onChange={this.updateBody}
                 maxLength={bodyMaxLength}

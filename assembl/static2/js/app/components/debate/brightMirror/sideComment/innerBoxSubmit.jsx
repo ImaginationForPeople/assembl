@@ -33,7 +33,7 @@ const InnerBoxSubmit = ({ userId, userName, body, updateBody, submit, cancelSubm
     <div className="harvesting-box-body">
       <div className="submit-comment">
         <RichTextEditor
-          editorState={body}
+          initialEditorState={body}
           maxLength={FICTION_COMMENT_MAX_LENGTH}
           onChange={updateBody}
           placeholder={I18n.t('debate.brightMirror.sideComment.commentLabel')}

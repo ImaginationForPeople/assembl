@@ -14,7 +14,7 @@ describe('RichTextEditor component', () => {
     const editorState = EditorState.createWithContent(contentState);
     const onChangeSpy = jest.fn();
     const props = {
-      editorState: editorState,
+      initialEditorState: editorState,
       maxLength: 2000,
       onChange: onChangeSpy,
       placeholder: 'Write here'
@@ -31,7 +31,7 @@ describe('RichTextEditor component', () => {
       const onChangeSpy = jest.fn();
       let editorState = EditorState.createWithContent(ContentState.createFromText(''));
       editorState = RichUtils.toggleBlockType(editorState, 'unordered-list-item');
-      const wrapper = mount(<RichTextEditor editorState={editorState} onChange={onChangeSpy} />);
+      const wrapper = mount(<RichTextEditor initialEditorState={editorState} onChange={onChangeSpy} />);
       const actual = wrapper.instance().shouldHidePlaceholder();
       expect(actual).toBeTruthy();
     });
@@ -39,7 +39,7 @@ describe('RichTextEditor component', () => {
     it('should return false if the content is not empty', () => {
       const onChangeSpy = jest.fn();
       const editorState = EditorState.createWithContent(ContentState.createFromText('Hello world'));
-      const wrapper = mount(<RichTextEditor editorState={editorState} onChange={onChangeSpy} />);
+      const wrapper = mount(<RichTextEditor initialEditorState={editorState} onChange={onChangeSpy} />);
       const actual = wrapper.instance().shouldHidePlaceholder();
       expect(actual).toBeFalsy();
     });
@@ -47,7 +47,7 @@ describe('RichTextEditor component', () => {
     it('should return false if the block type is unstyled', () => {
       const onChangeSpy = jest.fn();
       const editorState = EditorState.createWithContent(ContentState.createFromText(''));
-      const wrapper = mount(<RichTextEditor editorState={editorState} onChange={onChangeSpy} />);
+      const wrapper = mount(<RichTextEditor initialEditorState={editorState} onChange={onChangeSpy} />);
       const actual = wrapper.instance().shouldHidePlaceholder();
       expect(actual).toBeFalsy();
     });

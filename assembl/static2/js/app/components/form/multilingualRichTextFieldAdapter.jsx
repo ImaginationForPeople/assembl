@@ -37,7 +37,7 @@ const RichTextFieldAdapter = ({
       <RichTextEditor
         {...otherListeners}
         {...rest}
-        editorState={valueInLocale}
+        initialEditorState={valueInLocale}
         placeholder={label}
         toolbarPosition="bottom"
         onChange={es => onChange({ ...value, [editLocale]: es })}

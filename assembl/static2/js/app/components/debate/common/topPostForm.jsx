@@ -211,7 +211,7 @@ export class DumbTopPostForm extends React.Component<Props, State> {
           {isActive || ideaOnColumn ? (
             <div className="margin-m">
               <RichTextEditor
-                editorState={body}
+                initialEditorState={body}
                 handleInputFocus={this.handleInputFocus}
                 maxLength={bodyMaxLength}
                 onChange={this.updateBody}

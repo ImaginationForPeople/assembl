@@ -137,7 +137,7 @@ export class DumbAnswerForm extends React.PureComponent<Props, State> {
             <div className="answer-form-inner">
               <FormGroup>
                 <RichTextEditor
-                  editorState={this.state.body}
+                  initialEditorState={this.state.body}
                   handleInputFocus={this.handleInputFocus}
                   maxLength={BODY_MAX_LENGTH}
                   placeholder={I18n.t('debate.toAnswer')}
