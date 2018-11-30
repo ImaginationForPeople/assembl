@@ -118,7 +118,7 @@ exports[`AnswerForm component should render a answer form 1`] = `
                       <div
                         class="editor-label form-label"
                       >
-                         
+                        Answer
                       </div>
                       <div
                         class="clear"
@@ -128,17 +128,6 @@ exports[`AnswerForm component should render a answer form 1`] = `
                       <div
                         class="DraftEditor-root"
                       >
-                        <div
-                          class="public-DraftEditorPlaceholder-root"
-                        >
-                          <div
-                            class="public-DraftEditorPlaceholder-inner"
-                            id="placeholder-EditorStateKey"
-                            style="white-space: pre-wrap;"
-                          >
-                            Answer
-                          </div>
-                        </div>
                         <div
                           class="DraftEditor-editorContainer"
                         >
@@ -166,9 +155,11 @@ exports[`AnswerForm component should render a answer form 1`] = `
                                   <span
                                     data-offset-key="EditorStateKey-0-0"
                                   >
-                                    <br
+                                    <span
                                       data-text="true"
-                                    />
+                                    >
+                                      Hello
+                                    </span>
                                   </span>
                                 </div>
                               </div>
@@ -183,7 +174,7 @@ exports[`AnswerForm component should render a answer form 1`] = `
                       <span
                         class="draftJsUndoPlugin__counter__2wZYK"
                       >
-                        You have 3000 characters left
+                        You have 2995 characters left
                       </span>
                     </div>
                     <div

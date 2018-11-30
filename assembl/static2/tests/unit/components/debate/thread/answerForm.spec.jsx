@@ -5,6 +5,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { EditorState, ContentState } from 'draft-js';
 
 import { DumbAnswerForm } from '../../../../../js/app/components/debate/thread/answerForm';
+import RichTextEditor from '../../../../../js/app/components/common/richTextEditor';
 import { displayAlert } from '../../../../../js/app/utils/utilityManager';
 
 configure({ adapter: new Adapter() });
@@ -44,7 +45,10 @@ describe('AnswerForm component', () => {
 
   it('should submit an answer', async () => {
     const body = EditorState.createWithContent(ContentState.createFromText('Hello'));
-    wrapper.instance().updateBody(body);
+    wrapper
+      .find(RichTextEditor)
+      .instance()
+      .onChange(body);
     wrapper
       .find('.button-submit')
       .first()
