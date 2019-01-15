@@ -326,7 +326,11 @@ const Translations = {
           }
         }
       },
+      icons: {
+        error: "Icone d'erreur"
+      },
       loader: {
+        error: "Il y a une erreur de chargement de l’analyse",
         loading: "Chargement en cours..."
       },
       uploadButton: "Choisissez un fichier",
@@ -1297,7 +1301,11 @@ const Translations = {
           }
         }
       },
+      icons: {
+        error: "Error icon"
+      },
       loader: {
+        error: "TO BE DEFINED",
         loading: "Loading..."
       },
       uploadButton: "Choose a file to upload",
