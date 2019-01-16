@@ -435,7 +435,7 @@ const Translations = {
         seeSubIdeas_1: "Voir le sous-thème",
         announcement: "Consigne",
         guidelines: "Consigne",
-        summary: "A retenir",
+        summary: "À retenir",
         semanticAnalysis: {
           long: "Sémantique",
           short: "Analyse"
