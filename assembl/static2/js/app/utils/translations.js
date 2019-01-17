@@ -327,7 +327,8 @@ const Translations = {
         }
       },
       icons: {
-        error: "Icone d'erreur"
+        error: "Icone d'erreur",
+        tooltip: "Icone du tooltip"
       },
       loader: {
         error: "Il y a une erreur de chargement de l’analyse",
@@ -1302,7 +1303,8 @@ const Translations = {
         }
       },
       icons: {
-        error: "Error icon"
+        error: "Error icon",
+        tooltip: "Tooltip icon"
       },
       loader: {
         error: "TO BE DEFINED",
