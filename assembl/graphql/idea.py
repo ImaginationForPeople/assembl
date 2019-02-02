@@ -185,6 +185,7 @@ class IdeaAnnouncementInput(graphene.InputObjectType):
     body_attachments = graphene.List(graphene.String, description=docs.IdeaAnnouncement.body_attachments)
     body_entries = graphene.List(LangStringEntryInput, required=True, description=docs.IdeaAnnouncement.body_entries)
     quote_entries = graphene.List(LangStringEntryInput, required=False, description=docs.IdeaAnnouncement.quote_entries)
+    summary_entries = graphene.List(LangStringEntryInput, description=docs.IdeaAnnouncement.summary_entries)
 
 
 class IdeaAnnouncement(SecureObjectType, SQLAlchemyObjectType):
@@ -202,6 +203,8 @@ class IdeaAnnouncement(SecureObjectType, SQLAlchemyObjectType):
     body_entries = graphene.List(LangStringEntry, required=True, description=docs.IdeaAnnouncement.body_entries)
     quote = graphene.String(lang=graphene.String(), description=docs.IdeaAnnouncement.quote)
     quote_entries = graphene.List(LangStringEntry, required=False, description=docs.IdeaAnnouncement.quote_entries)
+    summary = graphene.String(lang=graphene.String(), description=docs.IdeaAnnouncement.summary)
+    summary_entries = graphene.List(LangStringEntry, required=False, description=docs.IdeaAnnouncement.summary_entries)
 
     def resolve_title(self, args, context, info):
         return resolve_langstring(self.title, args.get('lang'))
@@ -223,6 +226,12 @@ class IdeaAnnouncement(SecureObjectType, SQLAlchemyObjectType):
 
     def resolve_quote_entries(self, args, context, info):
         return resolve_langstring_entries(self, 'quote')
+
+    def resolve_summary(self, args, context, info):
+        return resolve_langstring(self.summary, args.get('lang'))
+
+    def resolve_summary_entries(self, args, context, info):
+        return resolve_langstring_entries(self, 'summary')
 
 
 class IdeaMessageColumn(SecureObjectType, SQLAlchemyObjectType):
@@ -705,7 +714,8 @@ def create_idea(parent_idea, phase, args, context):
             announcement_title_langstring = langstring_from_input_entries(announcement_title_entries)
             announcement_body_langstring = langstring_from_input_entries(announcement.get('body_entries', None))
             announcement_quote_langstring = langstring_from_input_entries(announcement.get('quote_entries', None))
-            saobj2 = create_idea_announcement(user_id, discussion, saobj, announcement_title_langstring, announcement_body_langstring, announcement_quote_langstring)
+            announcement_summary_langstring = langstring_from_input_entries(announcement.get('summary_entries', None))
+            saobj2 = create_idea_announcement(user_id, discussion, saobj, announcement_title_langstring, announcement_body_langstring, announcement_quote_langstring, announcement_summary_langstring)
             db.add(saobj2)
             update_announcement_body_attachments(
                 context,
@@ -850,7 +860,8 @@ def update_idea(args, phase, context):
                 announcement_title_langstring = langstring_from_input_entries(announcement_title_entries)
                 announcement_body_langstring = langstring_from_input_entries(announcement.get('body_entries', None))
                 announcement_quote_langstring = langstring_from_input_entries(announcement.get('quote_entries', None))
-                saobj2 = create_idea_announcement(user_id, discussion, thematic, announcement_title_langstring, announcement_body_langstring, announcement_quote_langstring)
+                announcement_summary_langstring = langstring_from_input_entries(announcement.get('summary_entries', None))
+                saobj2 = create_idea_announcement(user_id, discussion, thematic, announcement_title_langstring, announcement_body_langstring, announcement_quote_langstring, announcement_summary_langstring)
                 db.add(saobj2)
             else:
                 update_langstring_from_input_entries(
@@ -859,6 +870,8 @@ def update_idea(args, phase, context):
                     thematic.announcement, 'body', announcement.get('body_entries', None))
                 update_langstring_from_input_entries(
                     thematic.announcement, 'quote', announcement.get('quote_entries', None))
+                update_langstring_from_input_entries(
+                    thematic.announcement, 'summary', announcement.get('summary_entries', None))
                 thematic.announcement.last_updated_by_id = user_id
 
             update_announcement_body_attachments(
