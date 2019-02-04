@@ -44,7 +44,7 @@ type EditPostFormProps = {
   draftable?: boolean,
   draftSuccessMsgId?: string,
   isDebateModerated: boolean,
-  multiColumns: boolean
+  multiColumns?: boolean
 };
 
 type EditPostFormState = {
@@ -231,6 +231,10 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
     );
   }
 }
+
+DumbEditPostForm.defaultProps = {
+  multiColumns: false
+};
 
 const EditPostFormWithContext = props => (
   <DebateContext.Consumer>
