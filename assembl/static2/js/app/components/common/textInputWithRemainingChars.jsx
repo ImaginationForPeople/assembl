@@ -11,7 +11,6 @@ type Props = {
   handleTxtChange: (SyntheticInputEvent<HTMLInputElement>) => void,
   handleInputFocus?: ?(SyntheticInputEvent<HTMLInputElement>) => void,
   isActive?: boolean,
-  multiColumns?: boolean,
   name: string
 };
 
@@ -23,24 +22,21 @@ export const TextInputWithRemainingChars = ({
   handleTxtChange,
   handleInputFocus,
   isActive,
-  multiColumns,
   name
 }: Props) => {
   const remainingChars = maxLength - value.length;
   return (
     <div>
-      {(alwaysDisplayLabel || value) && !multiColumns ? <div className="form-label input-title-label">{label}</div> : null}
-      {!multiColumns ? (
-        <FormControl
-          type="text"
-          placeholder={label}
-          maxLength={maxLength}
-          value={value}
-          onFocus={handleInputFocus || null}
-          onChange={handleTxtChange}
-          name={name}
-        />
-      ) : null}
+      {alwaysDisplayLabel || value ? <div className="form-label input-title-label">{label}</div> : null}
+      <FormControl
+        type="text"
+        placeholder={label}
+        maxLength={maxLength}
+        value={value}
+        onFocus={handleInputFocus || null}
+        onChange={handleTxtChange}
+        name={name}
+      />
       <div className="annotation margin-xs">
         {isActive ? (
           <Translate value="debate.remaining_x_characters" nbCharacters={remainingChars < 10000 ? remainingChars : maxLength} />
@@ -55,6 +51,5 @@ export const TextInputWithRemainingChars = ({
 TextInputWithRemainingChars.defaultProps = {
   alwaysDisplayLabel: false,
   isActive: false,
-  handleInputFocus: null,
-  multiColumns: false
+  handleInputFocus: null
 };

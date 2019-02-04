@@ -163,11 +163,22 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
       bodyDescriptionMsgId,
       bodyMaxLength,
       draftable,
-      isDebateModerated
+      isDebateModerated,
+      multiColumns
     } = this.props;
     const userIsModerator = connectedUserIsModerator();
     const publicationState =
       !userIsModerator && isDebateModerated ? PublicationStates.SUBMITTED_AWAITING_MODERATION : PublicationStates.PUBLISHED;
+    const titleInputForThreadPost = !multiColumns ? (
+      <TextInputWithRemainingChars
+        alwaysDisplayLabel
+        label={I18n.t('debate.edit.subject')}
+        value={subject}
+        handleTxtChange={this.updateSubject}
+        maxLength={TEXT_INPUT_MAX_LENGTH}
+        name="top-post-title"
+      />
+    ) : null;
     return (
       <Row>
         <Col xs={12} md={12}>
@@ -183,15 +194,7 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
                 <div className="margin-m" />
               </div>
             ) : (
-              <TextInputWithRemainingChars
-                multiColumns={this.props.multiColumns}
-                alwaysDisplayLabel
-                label={I18n.t('debate.edit.subject')}
-                value={subject}
-                handleTxtChange={this.updateSubject}
-                maxLength={TEXT_INPUT_MAX_LENGTH}
-                name="top-post-title"
-              />
+              titleInputForThreadPost
             )}
             <FormGroup>
               <RichTextEditor
