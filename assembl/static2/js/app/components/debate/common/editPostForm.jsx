@@ -43,7 +43,8 @@ type EditPostFormProps = {
   bodyMaxLength?: number,
   draftable?: boolean,
   draftSuccessMsgId?: string,
-  isDebateModerated: boolean
+  isDebateModerated: boolean,
+  multiColumns: boolean
 };
 
 type EditPostFormState = {
@@ -156,7 +157,14 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
 
   render() {
     const { subject, body } = this.state;
-    const { editTitleLabelMsgId, modifiedOriginalSubject, bodyDescriptionMsgId, bodyMaxLength, draftable, isDebateModerated } = this.props;
+    const {
+      editTitleLabelMsgId,
+      modifiedOriginalSubject,
+      bodyDescriptionMsgId,
+      bodyMaxLength,
+      draftable,
+      isDebateModerated
+    } = this.props;
     const userIsModerator = connectedUserIsModerator();
     const publicationState =
       !userIsModerator && isDebateModerated ? PublicationStates.SUBMITTED_AWAITING_MODERATION : PublicationStates.PUBLISHED;
@@ -176,6 +184,7 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
               </div>
             ) : (
               <TextInputWithRemainingChars
+                multiColumns={this.props.multiColumns}
                 alwaysDisplayLabel
                 label={I18n.t('debate.edit.subject')}
                 value={subject}
