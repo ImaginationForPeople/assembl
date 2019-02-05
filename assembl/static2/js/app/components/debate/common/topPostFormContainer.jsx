@@ -22,8 +22,7 @@ type TopPostFormContainerProps = {
   bodyMaxLength?: number,
   draftable: boolean,
   draftSuccessMsgId?: ?string,
-  fullscreen: boolean,
-  isBrightMirror?: boolean
+  fullscreen: boolean
 };
 
 type TopPostFormContainerState = {
@@ -41,8 +40,7 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
     messageColumns: [],
     draftable: false,
     draftSuccessMsgId: null,
-    fullscreen: false,
-    isBrightMirror: false
+    fullscreen: false
   };
 
   constructor(props: TopPostFormContainerProps) {
@@ -109,8 +107,7 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
       draftSuccessMsgId,
       bodyMaxLength,
       draftable,
-      fullscreen,
-      isBrightMirror
+      fullscreen
     } = this.props;
     const columnsInfos = this.getColumnsInfos();
     const { sticky } = this.state;
@@ -179,7 +176,6 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
                             bodyMaxLength={bodyMaxLength}
                             draftable={draftable}
                             draftSuccessMsgId={draftSuccessMsgId}
-                            isBrightMirror={isBrightMirror}
                           />
                         </Col>
                       </Row>

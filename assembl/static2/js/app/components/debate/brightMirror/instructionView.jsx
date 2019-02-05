@@ -58,7 +58,6 @@ const InstructionView = ({
       draftable
       draftSuccessMsgId="debate.brightMirror.draftSuccessMsg"
       fullscreen
-      isBrightMirror
     />
   ) : null;
 

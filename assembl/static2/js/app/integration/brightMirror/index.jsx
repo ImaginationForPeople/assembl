@@ -37,7 +37,6 @@ class Index extends Component {
             fillBodyLabelMsgId="debate.brightMirror.fillBodyLabel"
             bodyPlaceholderMsgId="debate.brightMirror.fillBodyLabel"
             postSuccessMsgId="debate.brightMirror.postSuccessMsg"
-            isBrightMirror
           />
           <FictionsList {...customFictionsList} />
         </div>

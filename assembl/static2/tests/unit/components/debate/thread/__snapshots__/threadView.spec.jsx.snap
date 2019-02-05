@@ -43,7 +43,6 @@ exports[`ThreadView component should render a TopPostForm 1`] = `
     draftable={false}
     fullscreen={false}
     instructionLabelMsgId="debate.thread.startDiscussion"
-    isBrightMirror={false}
     isColumnViewInline={false}
     messageColumns={Array []}
     refetchIdea={[MockFunction]}
