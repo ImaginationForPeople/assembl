@@ -26,7 +26,8 @@ const topPostFormProps: Props = {
   draftable: false,
   ideaOnColumn: false,
   isDebateModerated: false,
-  messageViewOverride: MESSAGE_VIEW.thread
+  messageViewOverride: MESSAGE_VIEW.thread,
+  isBrightMirror: false
 };
 
 describe('<TopPostForm /> - with shallow', () => {

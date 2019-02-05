@@ -62,6 +62,7 @@ exports[`Bright Mirror page should match BrightMirror instruction snapshot 1`] =
       fullscreen={true}
       ideaId={0}
       instructionLabelMsgId="debate.brightMirror.startFictionLabel"
+      isBrightMirror={true}
       isColumnViewInline={false}
       messageColumns={Array []}
       postSuccessMsgId="debate.brightMirror.postSuccessMsg"
