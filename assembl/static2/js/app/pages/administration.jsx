@@ -393,7 +393,7 @@ export default compose(
         textFields: data.textFields
       };
     },
-    skip: props => isNotInDiscussionAdmin(props) || props.router.getCurrentLocation().search !== '?section=3'
+    skip: props => isNotInDiscussionAdmin(props) || props.router.getCurrentLocation().search !== '?section=4'
   }),
   mergeLoadingAndError([
     'voteSessionMetadata',
