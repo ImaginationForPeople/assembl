@@ -102,7 +102,6 @@ exports[`AnswerForm component should render a answer form 1`] = `
             }
           }
           handleInputFocus={[Function]}
-          maxLength={0}
           onChange={[Function]}
           placeholder="Answer"
           textareaRef={
