@@ -315,15 +315,8 @@ $deleted-post-border: 1px solid $light-grey !default;
     }
 
     .assembl-icon-check-box-declined {
-      font-size: 20px;
+      font-size: 18px;
       padding-left: 2px;
-    }
-
-    @-moz-document url-prefix() {
-      /* adapt padding to be align on firefox */
-      .assembl-icon-check-box-declined {
-        padding-left: 1px;
-      }
     }
   }
 
