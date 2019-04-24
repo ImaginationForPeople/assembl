@@ -694,7 +694,7 @@ const Translations = {
         exportDebateData: "Exporter les données"
       },
       discussionPreferences: {
-        debateLogoLabel: "Logo du débat"
+        debateLogoLabel: "Logo de la discussion"
       },
       timelineAdmin: {
         phase: "Phase %{count}",
@@ -1737,7 +1737,7 @@ const Translations = {
         exportDebateData: "Export the data"
       },
       discussionPreferences: {
-        debateLogoLabel: "Debate logo"
+        debateLogoLabel: "Discussion logo"
       },
       timelineAdmin: {
         phase: "Phase %{count}",
