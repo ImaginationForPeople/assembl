@@ -613,8 +613,9 @@ def get_landing_page_image():
     from ..auth.util import get_current_discussion
     discussion = get_current_discussion()
     if discussion:
-        dict = discussion.preferences['extra_json']
-        return dict.get("headerBackgroundUrl", "no image available")
+        for attachment in discussion.attachments:
+            if attachment.attachmentPurpose == LANDING_PAGE_HEADER_IMAGE:
+                return attachment.document
 
 
 def process_locale(
