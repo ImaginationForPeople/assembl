@@ -41,7 +41,7 @@ def abort_transaction_on_exception(fn):
             import transaction
             transaction.abort()
             capture_exception()
-            raise
+            raise Exception('An error has occured, please contact administrator')
 
     return decorator
 
