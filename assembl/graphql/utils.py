@@ -9,6 +9,12 @@ from graphql.utils.ast_to_dict import ast_to_dict
 from .langstring import langstring_from_input_entries
 from assembl import models
 from assembl.lib.sentry import capture_exception
+from sqlalchemy.exc import DataError
+from pyramid.threadlocal import get_current_request
+from pyramid.i18n import TranslationStringFactory
+
+
+_ = TranslationStringFactory('assembl')
 
 
 class DateTime(Scalar):
@@ -37,11 +43,17 @@ def abort_transaction_on_exception(fn):
     def decorator(*args, **kwargs):
         try:
             return fn(*args, **kwargs)
-        except Exception:
+        except Exception as e:
             import transaction
             transaction.abort()
             capture_exception()
-            raise Exception('An error has occured, please contact administrator')
+            request = get_current_request()
+            localizer = request.localizer
+            error = localizer.translate(_("An error has occured. Please contact the administrator."))
+            if isinstance(e, DataError):
+                raise Exception(error)
+            else:
+                raise
 
     return decorator
 
