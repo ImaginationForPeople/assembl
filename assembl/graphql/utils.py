@@ -53,7 +53,7 @@ def abort_transaction_on_exception(fn):
             if isinstance(e, DataError):
                 raise Exception(error)
             else:
-                raise
+                raise e
 
     return decorator
 
