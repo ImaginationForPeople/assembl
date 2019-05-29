@@ -1066,7 +1066,7 @@ class TestTaxonomyExport(AbstractExport):
         assert header[self.TAG1] == "Tag1"
         assert header[self.TAG2] == "Tag2"
 
-        first_row = result[1]
+        first_row = result[-1]
         # Depending on tests execution order, the thematic can change
         # because reply_post_1 appears in 3 different ideas and the csv export take the first idea.
         # assert first_row[self.THEMATIC] == "Lower taxes"
@@ -1084,10 +1084,10 @@ class TestTaxonomyExport(AbstractExport):
         assert first_row[self.HARVESTER_USERNAME] == ""
         assert first_row[self.NUGGET] == "No"
         assert first_row[self.STATE] == "PUBLISHED"
-        assert first_row[self.TAG1] == "foo"
-        assert first_row[self.TAG2] == "bar"
+        assert first_row[self.TAG1] == "bar"
+        assert first_row[self.TAG2] == "foo"
 
-        last_row = result[-1]
+        last_row = result[1]
         # Depending on tests execution order, the thematic can change
         # because reply_post_1 appears in 3 different ideas and the csv export take the first idea.
         # assert last_row[self.THEMATIC] == "Lower taxes"
