@@ -1,31 +1,43 @@
 // @flow
 import * as React from 'react';
 import { List, Map } from 'immutable';
-import { I18n } from 'react-redux-i18n';
 import ModuleBlock from './moduleBlock';
 
 type Props = {
+  editModule: ((module: LandingPageModule) => any) | void,
+  isOrdering: boolean,
   modules: List<Map>,
   moveModuleDown: Function,
-  moveModuleUp: Function
+  moveModuleUp: Function,
+  removeModule: ((module: LandingPageModule) => any) | void,
+  updateModuleEnabled: ((module: LandingPageModule) => any) | void
 };
 
-const ModulesPreview = ({ modules, moveModuleDown, moveModuleUp }: Props) => {
+const ModulesPreview = ({
+  editModule,
+  isOrdering,
+  modules,
+  moveModuleDown,
+  moveModuleUp,
+  removeModule,
+  updateModuleEnabled
+}: Props) => {
   if (modules.size <= 0) {
     return null;
   }
-
   const renderModuleBlock = (module) => {
     const id = module.get('id');
-    const moduleTitle = module.getIn(['moduleType', 'title']);
+    // FIXME: timeline will be orderable
     return (
       <ModuleBlock
         key={id}
+        module={module}
+        updateEnabled={updateModuleEnabled ? updateModuleEnabled(module) : undefined}
         moveDown={() => moveModuleDown(id)}
         moveUp={() => moveModuleUp(id)}
-        required={module.getIn(['moduleType', 'required'])}
-        title={moduleTitle || I18n.t('administration.landingPage.manageModules.textAndMultimedia')}
-        withArrows={module.getIn(['moduleType', 'editableOrder'])}
+        edit={editModule ? editModule(module) : undefined}
+        remove={removeModule ? removeModule(module) : undefined}
+        isOrdering={isOrdering}
       />
     );
   };

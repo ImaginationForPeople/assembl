@@ -687,10 +687,12 @@ const Translations = {
         "Il y a eu une erreur lors de la sauvegarde, veuillez vérifier que vous avez bien renseigné tous les champs requis.",
       deleteThematic: "Supprimer la thématique",
       deleteSubThematicDisabled: "Vous ne pouvez pas supprimer une thématique ayant des sous-thématiques.",
+      discussionSlug: "Slug de la discussion",
       confirmDeleteThematicTitle: "Confirmer la suppression",
       confirmDeleteThematic: "Êtes-vous sûr de vouloir supprimer cette thématique ?",
       confirmUnsavedChanges: "Vous avez des changements non sauvegardés. Êtes-vous sûr de vouloir quitter cette page ?",
       deleteQuestion: "Supprimer la question",
+      down: "Descendre",
       changeLanguage: "Renseigner une autre langue",
       question_label: "Question",
       announcementModule: "Option module consigne",
@@ -698,13 +700,17 @@ const Translations = {
       deleteAssociatedFile: "Supprimer le fichier associé",
       deleteThematicImage: "Supprimer l'image associée à cette thématique",
       edition: "Éditer la discussion",
-      landingpage: "Page d'accueil",
+      landingpage: "Modules de la page d'accueil",
+      textMultimediaSection: "Texte et multimédia",
+      textMultimediaTitle: "Titre du module texte et multimédia",
+      textMultimediaLayout: "Agencement texte-image-media",
+      textMultimediaBody: "Contenu du module texte et multimédia",
       up: "Remonter",
-      down: "Descendre",
       nextStep: "Étape suivante",
       previousStep: "Étape précédente",
       informationOfTheDebate: "Informations de la discussion",
-      discussionSlug: "Slug de la discussion",
+      save: "Sauvegarder",
+      saveOrder: "Sauvegarder l'ordre",
       slugWarning:
         "Cette modification entraine un changement de l'adresse de la consultation. Intégrez ce changement dans vos prochaines communications. Pour assurer la continuité du service, la précédente adresse sera toujours opérationnelle.",
       invalidSlug: "Les caractères spéciaux ne sont pas autorisés",
@@ -741,12 +747,16 @@ const Translations = {
         warningLabel: "La période de cette phase chevauche la période de la phase précédente ou de la phase suivante."
       },
       modules: {
+        brightMirror: "Module Bright Mirror",
+        disable: "Désactiver le module",
+        edit: "Configurer le module",
+        enable: "Activer le module",
         noModule: "Aucun module",
+        messageColumns: "Module Multi-colonnes",
+        remove: "Retier le module",
         survey: "Module Questions",
         thread: "Module Threads",
-        messageColumns: "Module Multi-colonnes",
-        voteSession: "Module de vote",
-        brightMirror: "Module Bright Mirror"
+        voteSession: "Module de vote"
       },
       noTimeline: "Aucune timeline n'a été configurée pour ce débat.",
       survey: {
@@ -988,7 +998,8 @@ const Translations = {
           helper: "Choisissez les modules que vous souhaitez voir apparaître dans la page d'accueil et leurs emplacements.",
           textAndMultimedia: "Texte & Multi-média",
           textAndMultimediaBtn: "Ajouter un module Texte & Multi-média",
-          confirmationModal: "Voulez-vous ajouter un module Texte & Multi-média supplémentaire à la page d'accueil ?"
+          confirmationModal: "Voulez-vous ajouter un module Texte & Multi-média supplémentaire à la page d'accueil ?",
+          successSave: "La section texte & multi-média a été mis à jour avec succès !"
         },
         header: {
           successSave: "Le contenu du header a été mis à jour avec succès !",
@@ -1018,6 +1029,9 @@ const Translations = {
           image: "Choisir l'image pour cette phase",
           imageDescription: "L'image doit avoir une hauteur de 500px et une largeur de 400px.",
           sectionTitle: "Configurer le titre et sous-titre de la section"
+        },
+        textMultimedia: {
+          title: "Texte & multi-média"
         },
         successSave: "Les modules ont été enregistrés avec succès !",
         headerSuccessSave: "Le bandeau de la page d'accueil a été sauvegardé avec succès !"
@@ -1775,7 +1789,13 @@ const Translations = {
       deleteAssociatedFile: "Delete the associated file",
       deleteThematicImage: "Delete the image associated to this thematic",
       edition: "Edit the discussion",
-      landingpage: "Landing page",
+      landingpage: "Landing page modules",
+      save: "Save",
+      saveOrder: "Save order",
+      textMultimediaSection: "Text and multimedia",
+      textMultimediaTitle: "Text and multimedia module title",
+      textMultimediaLayout: "Texte-image-media layout",
+      textMultimediaBody: "Text and multimedia module content",
       up: "Up",
       down: "Down",
       nextStep: "Next step",
@@ -1818,12 +1838,14 @@ const Translations = {
         warningLabel: "The dates you have set for this phase are overlapping the previous phase or the next phase"
       },
       modules: {
+        brightMirror: "Bright Mirror module",
+        edit: "Configure the module",
+        messageColumns: "Multi-columns module",
         noModule: "No module",
+        remove: "Remove the module",
         survey: "Survey module",
         thread: "Thread module",
-        messageColumns: "Multi-columns module",
-        voteSession: "Vote module",
-        brightMirror: "Bright Mirror module"
+        voteSession: "Vote module"
       },
       noTimeline: "No timeline has been configured yet",
       survey: {
@@ -2058,7 +2080,8 @@ const Translations = {
           helper: "Choose the modules you want to see in the landing page and their position.",
           textAndMultimedia: "Text & Multimedia",
           textAndMultimediaBtn: "Add a Text & Multimedia module",
-          confirmationModal: "Are you sure you want to add a Text & Multimedia module to the landing page?"
+          confirmationModal: "Are you sure you want to add a Text & Multimedia module to the landing page?",
+          successSave: "The text & multimedia section has been successfuly saved"
         },
         header: {
           successSave: "The header has been updated successfully!",
@@ -2087,6 +2110,9 @@ const Translations = {
           image: "Choose the image for this phase",
           sectionTitle: "Configure the title and the subtitle of the section",
           imageDescription: "The image must have a height of 500px and a width of 400px."
+        },
+        textMultimedia: {
+          title: "Text & multi-media"
         },
         successSave: "The modules have been saved with success!",
         headerSuccessSave: "The home page header have been saved with success!"

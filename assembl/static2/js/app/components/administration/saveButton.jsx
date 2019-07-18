@@ -10,7 +10,8 @@ import { type MutationsPromises } from '../form/types.flow';
 type Props = {
   disabled?: boolean,
   saveAction: () => void,
-  specificClasses?: ?string
+  specificClasses?: ?string,
+  title?: string
 };
 
 type Item = {
@@ -53,6 +54,7 @@ export const runSerial = (tasks: MutationsPromises) => {
 };
 
 /* Utility that creates create/delete/update mutations for a list of items */
+/* NEVER USE THOSE MUTATIONS FOR BATCH ACTIONS, this would send one action for each item !! */
 export const getMutationsPromises = (params: Params) => {
   const {
     items,
@@ -103,34 +105,42 @@ export const getMutationsPromises = (params: Params) => {
   return promises;
 };
 
-export const DumbSaveButton = ({ disabled, saveAction, specificClasses }: Props) => {
+export const DumbSaveButton = ({ disabled, saveAction, specificClasses, title }: Props) => {
   const isHoverClass = !disabled ? 'button-dark' : '';
   const buttonClasses = specificClasses || classNames('save-button button-submit right', isHoverClass);
 
   return (
     <Button className={buttonClasses} disabled={disabled} onClick={saveAction}>
-      <Translate value="administration.saveThemes" />
+      <Translate value={title} />
     </Button>
   );
 };
 
 DumbSaveButton.defaultProps = {
+  btnId: 'save-button',
+  disabled: false,
   specificClasses: null,
-  disabled: false
+  title: 'administration.save'
 };
 
-class SaveButtonInPortal extends React.PureComponent<Props> {
+type SaveButtonInPortalProps = {
+  btnId?: string
+} & Props;
+
+class SaveButtonInPortal extends React.PureComponent<SaveButtonInPortalProps> {
   static defaultProps = {
     specificClasses: null
   };
 
   componentDidMount() {
-    const saveButton = document.getElementById('save-button');
+    const { btnId } = this.props;
+    const saveButton = document.getElementById(btnId || DumbSaveButton.defaultProps.btnId);
     if (saveButton) saveButton.appendChild(this.el);
   }
 
   componentWillUnmount() {
-    const saveButton = document.getElementById('save-button');
+    const { btnId } = this.props;
+    const saveButton = document.getElementById(btnId || DumbSaveButton.defaultProps.btnId);
     if (saveButton) saveButton.removeChild(this.el);
   }
 

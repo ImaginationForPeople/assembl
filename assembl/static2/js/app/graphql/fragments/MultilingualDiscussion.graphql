@@ -1,0 +1,32 @@
+#import "./LangString.graphql"
+# Synthesis query for administration form
+
+fragment MultilingualDiscussion on Discussion {
+  id
+  buttonLabelEntries {
+    ...langStringEntry
+  }
+  endDate
+  headerImage {
+    mimeType
+    title
+    externalUrl
+  }
+  homepageUrl
+  loginData(nextView: $nextView) {
+    local
+    url
+  }
+  logoImage {
+    mimeType
+    externalUrl
+    title
+  }
+  startDate
+  subtitleEntries {
+    ...langStringEntry
+  }
+  titleEntries {
+    ...langStringEntry
+  }
+}

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ManageModules component should render a form to manage the landing page modules 1`] = `
+exports[`ManageModules component should render a preview to manage the landing page modules 1`] = `
 <div
   className="admin-box"
 >
@@ -23,153 +23,90 @@ exports[`ManageModules component should render a form to manage the landing page
         value="administration.landingPage.manageModules.helper"
       />
     </p>
-    <div
-      className="two-columns-admin"
-    >
-      <div
-        className="column-left"
-      >
-        <DumbSelectModulesForm
-          lang="fr"
-          moduleTypes={
-            Array [
-              Object {
-                "identifier": "HEADER",
+    <div>
+      <ModulesPreview
+        editModule={[Function]}
+        modules={
+          Immutable.List [
+            Immutable.Map {
+              "enabled": true,
+              "id": "abc123",
+              "moduleType": Immutable.Map {
                 "moduleId": "abc123",
+                "editableOrder": false,
+                "identifier": "HEADER",
                 "required": true,
                 "title": "Header",
               },
-              Object {
-                "identifier": "INTRODUCTION",
+              "order": 1,
+            },
+            Immutable.Map {
+              "enabled": false,
+              "id": "def456",
+              "moduleType": Immutable.Map {
                 "moduleId": "def456",
-                "required": false,
+                "editableOrder": true,
+                "identifier": "INTRODUCTION",
                 "title": "Introduction",
               },
-              Object {
-                "identifier": "VIDEO",
+              "order": 2,
+            },
+            Immutable.Map {
+              "enabled": true,
+              "id": "ghi789",
+              "moduleType": Immutable.Map {
                 "moduleId": "ghi789",
-                "required": false,
+                "editableOrder": true,
+                "identifier": "VIDEO",
                 "title": "Video",
               },
-              Object {
-                "identifier": "FOOTER",
+              "order": 5,
+            },
+            Immutable.Map {
+              "enabled": true,
+              "id": "jkl865",
+              "moduleType": Immutable.Map {
                 "moduleId": "jkl865",
+                "editableOrder": false,
+                "identifier": "FOOTER",
                 "required": true,
                 "title": "Footer",
               },
-            ]
-          }
-          modulesById={
-            Immutable.Map {
-              "abc123": Immutable.Map {
-                "enabled": true,
-                "id": "abc123",
-                "moduleType": Immutable.Map {
-                  "moduleId": "abc123",
-                  "editableOrder": false,
-                  "identifier": "HEADER",
-                  "required": true,
-                  "title": "Header",
-                },
-                "order": 1,
-              },
-              "def456": Immutable.Map {
-                "enabled": false,
-                "id": "def456",
-                "moduleType": Immutable.Map {
-                  "moduleId": "def456",
-                  "editableOrder": true,
-                  "identifier": "INTRODUCTION",
-                  "title": "Introduction",
-                },
-                "order": 2,
-              },
-              "ghi789": Immutable.Map {
-                "enabled": true,
-                "id": "ghi789",
-                "moduleType": Immutable.Map {
-                  "moduleId": "ghi789",
-                  "editableOrder": true,
-                  "identifier": "VIDEO",
-                  "title": "Video",
-                },
-                "order": 5,
-              },
-              "jkl865": Immutable.Map {
-                "enabled": true,
-                "id": "jkl865",
-                "moduleType": Immutable.Map {
-                  "moduleId": "jkl865",
-                  "editableOrder": false,
-                  "identifier": "FOOTER",
-                  "required": true,
-                  "title": "Footer",
-                },
-                "order": 99,
-              },
-            }
-          }
-          toggleModule={[MockFunction]}
-        />
-        <div
-          className="margin-xl"
-        >
-          <AddModuleButton
-            allDuplicatesAreChecked={false}
-            buttonTitleTranslationKey="textAndMultimediaBtn"
-            createModule={[MockFunction]}
-            numberOfDuplicatesModules={1}
-            numberOfEnabledModules={3}
-          />
-        </div>
-      </div>
+              "order": 99,
+            },
+          ]
+        }
+        moveModuleDown={[MockFunction]}
+        moveModuleUp={[MockFunction]}
+        removeModule={[Function]}
+        updateModuleEnabled={[Function]}
+      />
+    </div>
+    <div>
+      <SaveButtonInPortal
+        btnId="reset-order-button"
+        disabled={true}
+        specificClasses="btn-danger"
+        title="cancel"
+      />
+      <SaveButtonInPortal
+        btnId="save-order-button"
+        disabled={true}
+        specificClasses={null}
+        title="administration.saveOrder"
+      />
       <div
-        className="column-right"
-      >
-        <ModulesPreview
-          modules={
-            Immutable.List [
-              Immutable.Map {
-                "enabled": true,
-                "id": "abc123",
-                "moduleType": Immutable.Map {
-                  "moduleId": "abc123",
-                  "editableOrder": false,
-                  "identifier": "HEADER",
-                  "required": true,
-                  "title": "Header",
-                },
-                "order": 1,
-              },
-              Immutable.Map {
-                "enabled": true,
-                "id": "ghi789",
-                "moduleType": Immutable.Map {
-                  "moduleId": "ghi789",
-                  "editableOrder": true,
-                  "identifier": "VIDEO",
-                  "title": "Video",
-                },
-                "order": 5,
-              },
-              Immutable.Map {
-                "enabled": true,
-                "id": "jkl865",
-                "moduleType": Immutable.Map {
-                  "moduleId": "jkl865",
-                  "editableOrder": false,
-                  "identifier": "FOOTER",
-                  "required": true,
-                  "title": "Footer",
-                },
-                "order": 99,
-              },
-            ]
-          }
-          moveModuleDown={[MockFunction]}
-          moveModuleUp={[MockFunction]}
-        />
-      </div>
+        id="save-order-button"
+      />
+      <div
+        id="reset-order-button"
+      />
+      <hr />
+      <AddModuleButton
+        buttonTitleTranslationKey="textAndMultimediaBtn"
+        createModule={[Function]}
+        disabled={false}
+      />
     </div>
   </div>
 </div>

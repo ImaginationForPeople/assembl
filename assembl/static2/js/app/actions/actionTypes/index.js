@@ -42,7 +42,7 @@ export const UPDATE_GAUGE_MAXIMUM: 'UPDATE_GAUGE_MAXIMUM' = 'UPDATE_GAUGE_MAXIMU
 export const UPDATE_GAUGE_UNIT: 'UPDATE_GAUGE_UNIT' = 'UPDATE_GAUGE_UNIT';
 export const CREATE_LANDING_PAGE_MODULE: 'CREATE_LANDING_PAGE_MODULE' = 'CREATE_LANDING_PAGE_MODULE';
 export const UPDATE_LANDING_PAGE_MODULES: 'UPDATE_LANDING_PAGE_MODULES' = 'UPDATE_LANDING_PAGE_MODULES';
-export const TOGGLE_LANDING_PAGE_MODULE: 'TOGGLE_LANDING_PAGE_MODULE' = 'TOGGLE_LANDING_PAGE_MODULE';
+export const RESET_LANDING_PAGE_MODULES: 'RESET_LANDING_PAGE_MODULES' = 'RESET_LANDING_PAGE_MODULES';
 export const MOVE_LANDING_PAGE_MODULE_UP: 'MOVE_LANDING_PAGE_MODULE_UP' = 'MOVE_LANDING_PAGE_MODULE_UP';
 export const MOVE_LANDING_PAGE_MODULE_DOWN: 'MOVE_LANDING_PAGE_MODULE_DOWN' = 'MOVE_LANDING_PAGE_MODULE_DOWN';
 export const UPDATE_VOTE_PROPOSALS: 'UPDATE_VOTE_PROPOSALS' = 'UPDATE_VOTE_PROPOSALS';
@@ -272,11 +272,6 @@ export type MoveProposalDown = {
   type: typeof MOVE_PROPOSAL_DOWN
 };
 
-export type toggleLandingPageModule = {
-  id: string,
-  type: typeof TOGGLE_LANDING_PAGE_MODULE
-};
-
 type LandingPageModuleInfo = {
   id: string
 };
@@ -285,14 +280,9 @@ export type UpdateLandingPageModules = {
   modules: LandingPageModules,
   type: typeof UPDATE_LANDING_PAGE_MODULES
 };
-
-export type createLandingPageModule = {
-  id: string,
-  identifier: string,
-  order: number,
-  numberOfDuplicatesModules: number,
-  title: string,
-  type: typeof CREATE_LANDING_PAGE_MODULE
+export type ResetLandingPageModules = {
+  modules: LandingPageModules,
+  type: typeof RESET_LANDING_PAGE_MODULES
 };
 
 export type MoveLandingPageModuleUp = {

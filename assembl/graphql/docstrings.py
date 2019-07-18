@@ -51,6 +51,7 @@ class Schema:
     discussion = """The discussion object metadata."""
     landing_page_module_types = """The metadata object for LandingPageModule object."""
     landing_page_modules = """A list of LandingPageModules."""
+    landing_page_module = """A LandingPageModule."""
     text_fields = """A list of ConfigurableField union, where each text field represents a field on a bound entity."""
     profile_fields = """A list of ConfigurableField union, where each text field represents a field on a profile only."""
     timeline = """A list of DiscussionPhase objects, descriping the timeline objects on the debate."""
@@ -169,6 +170,19 @@ class UpdateDiscussionPreferences:
     with_translation = DiscussionPreferences.with_translation
     with_semantic_analysis = DiscussionPreferences.with_semantic_analysis
     slug = DiscussionPreferences.slug
+
+
+class DiscussionTextMultimedia:
+    __doc__ = """A discussion can have many preferences. This metadata object describes these preferences."""
+    languages = """A list of LocalePreference metadata objects on the discussion which describe the languages supported by the debate."""
+    tab_title = """The title in the tab."""
+    favicon = Default.document % ("""The site favicon.""",)
+    logo = Default.document % ("""The site logo.""",)
+    with_moderation = """A Boolean flag indicating whether the moderation is activated or not."""
+    with_translation = """A Boolean flag indicating wheter the users have the possibility to translate the messages or not."""
+    with_semantic_analysis = "A Boolean flag indicating wheter the semantic analysis is activated or not."
+    slug = Discussion.slug
+    old_slugs = """List of previous used slugs for this discussion"""
 
 
 class UpdateLegalContents:
@@ -550,6 +564,10 @@ class UpdateLandingPageModule:
     order = LandingPageModule.order
     configuration = LandingPageModule.configuration
     landing_page_module = CreateLandingPageModule.landing_page_module
+
+
+class DeleteLandingPageModule:
+    __doc__ = """A mutation that deletes an existing LandingPageModule."""
 
 
 class Attachment:

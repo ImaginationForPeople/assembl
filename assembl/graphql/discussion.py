@@ -1,19 +1,22 @@
 import os.path
+from urlparse import urljoin
+
 import graphene
 from graphene.relay import Node
 from graphene_sqlalchemy import SQLAlchemyObjectType
-from urlparse import urljoin
-
-from assembl import models
-from assembl.auth import CrudPermissions
+from pyramid.i18n import TranslationStringFactory
 
 import assembl.graphql.docstrings as docs
+from assembl import models
+from assembl.auth import CrudPermissions
 from .attachment import Attachment
 from .document import Document
-from .types import SecureObjectType
+from .idea import TagResult, SentimentAnalysisResult
 from .langstring import (
     LangStringEntry, LangStringEntryInput, resolve_langstring,
     resolve_langstring_entries, update_langstring_from_input_entries)
+from .permissions_helpers import require_cls_permission, require_instance_permission
+from .types import SecureObjectType
 from .utils import (
     abort_transaction_on_exception,
     create_attachment,
@@ -21,9 +24,6 @@ from .utils import (
     get_attachments_with_purpose,
     get_attachment_with_purpose,
     DateTime)
-from .idea import TagResult, SentimentAnalysisResult
-from .permissions_helpers import require_cls_permission, require_instance_permission
-from pyramid.i18n import TranslationStringFactory
 
 _ = TranslationStringFactory('assembl')
 
@@ -870,3 +870,19 @@ class VisitsAnalytics(graphene.ObjectType):
 
     def resolve_nb_uniq_pageviews(self, args, context, info):
         return self.generic_resolver(args, context, info, "nb_uniq_pageviews")
+
+
+def _resolve_langstring_field(args, context, name):
+    discussion_id = context.matchdict['discussion_id']
+    discussion = models.Discussion.get(discussion_id)
+    return resolve_langstring(getattr(discussion, name), args.get('lang'))
+
+
+def _resolve_langstring_entries_field(context, name):
+    discussion_id = context.matchdict['discussion_id']
+    discussion = models.Discussion.get(discussion_id)
+    value = getattr(discussion, name)
+    if value:
+        return resolve_langstring_entries(discussion, name)
+
+    return []

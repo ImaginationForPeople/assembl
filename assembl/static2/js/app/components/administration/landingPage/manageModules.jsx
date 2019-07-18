@@ -3,65 +3,71 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { I18n, Translate } from 'react-redux-i18n';
 import type { List, Map } from 'immutable';
+import { Button } from 'react-bootstrap';
+import type { ApolloClient } from 'react-apollo';
+import { compose, withApollo } from 'react-apollo';
+
 import ModulesPreview from './modulesPreview';
 import SectionTitle from '../../administration/sectionTitle';
-import SelectModulesForm from './selectModulesForm';
-import {
-  toggleLandingPageModule,
-  moveLandingPageModuleDown,
-  moveLandingPageModuleUp,
-  createLandingPageModule
-} from '../../../actions/adminActions/landingPage';
-import { createRandomId } from '../../../utils/globalFunctions';
+import { moveLandingPageModuleDown, moveLandingPageModuleUp } from '../../../actions/adminActions/landingPage';
+import { browserHistory } from '../../../router';
+import LandingPageModulesQuery from '../../../graphql/LandingPageModulesQuery.graphql';
+import updateLandingPageModule from '../../../graphql/mutations/updateLandingPageModule.graphql';
+import deleteLandingPageModule from '../../../graphql/mutations/deleteLandingPageModule.graphql';
+import createLandingPageModule from '../../../graphql/mutations/createLandingPageModule.graphql';
+import { getDiscussionSlug } from '../../../utils/globalFunctions';
 import AddModuleButton from './addModuleButton';
-
-export type LandingPageModuleType = {
-  defaultOrder: number,
-  editableOrder: boolean,
-  id: string,
-  identifier: string,
-  moduleId: string,
-  required: boolean,
-  title: string
-};
-
-export type LandingPageModule = {
-  configuration: Object,
-  enabled: boolean,
-  existsInDatabase: true,
-  id: string,
-  moduleType: LandingPageModule,
-  order: number,
-  subtitle: ?string,
-  subtitleEntries: Array<LangstringEntries>,
-  title: ?string,
-  titleEntries: Array<LangstringEntries>
-};
+import { get } from '../../../utils/routeMap';
+import { closeModal, displayModal } from '../../../utils/utilityManager';
+import SaveButton from '../saveButton';
 
 type Props = {
-  enabledModules: List<Map>,
-  moduleTypes: Array<LandingPageModuleType>,
-  locale: string,
-  modulesById: Map<string, Map>,
+  client: ApolloClient,
+  isOrdering: boolean,
+  lang: string,
+  modules: List<Map>,
   moveModuleDown: Function,
   moveModuleUp: Function,
-  toggleModule: Function,
-  createModule: Function
+  saveOrder: () => void,
+  resetOrder: () => void
 };
 
-const MODULES_IDENTIFIERS = {
-  header: 'HEADER',
-  timeline: 'TIMELINE',
-  chatbot: 'CHATBOT',
-  topThematics: 'TOP_THEMATICS',
-  tweets: 'TWEETS',
-  contact: 'CONTACT',
-  data: 'DATA',
-  news: 'NEWS',
-  partners: 'PARTNERS',
-  introduction: 'INTRODUCTION',
-  footer: 'FOOTER'
+type ModuleInfo = {
+  identifier: string,
+  implemented: boolean, // if false, this type of module has not been implemented yet
+  editSection?: string
 };
+
+export const MODULE_TYPES: Map<string, ModuleInfo> = {
+  header: { editSection: 'editHeader', identifier: 'HEADER', implemented: true },
+  timeline: { identifier: 'TIMELINE', implemented: true },
+  chatbot: { identifier: 'CHATBOT' },
+  topThematics: { identifier: 'TOP_THEMATICS', implemented: false },
+  tweets: { identifier: 'TWEETS', implemented: false },
+  contact: { identifier: 'CONTACT', implemented: false },
+  data: { identifier: 'DATA', implemented: false },
+  news: { identifier: 'NEWS', implemented: false },
+  partners: { haveOrder: true, identifier: 'PARTNERS', implemented: false },
+  textAndMultimedia: {
+    editSection: 'editTextAndMultimedia',
+    identifier: 'INTRODUCTION',
+    implemented: true
+  },
+  footer: { identifier: 'FOOTER', implemented: true }
+};
+
+export function getModuleTypeInfo(identifier: string): ModuleInfo | null {
+  // can't type moduleInfos as Array<ModuleInfo> cf https://github.com/facebook/flow/issues/2221
+  const moduleInfos: Array<any> = Object.values(MODULE_TYPES);
+  const moduleInfo: any | null = moduleInfos.find((m: any) => (!!m && m.identifier === identifier) || null);
+  return moduleInfo;
+}
+
+function getEditSection(module: Map): string | null {
+  const moduleType = module.getIn(['moduleType', 'identifier']);
+  const moduleInfo = getModuleTypeInfo(moduleType);
+  return !!moduleInfo && !!moduleInfo.editSection ? moduleInfo.editSection : null;
+}
 
 export const sortByTitle = (modules: Array<LandingPageModuleType>): Array<LandingPageModuleType> => {
   const sortedModules = [...modules];
@@ -88,67 +94,141 @@ export const sortByTitle = (modules: Array<LandingPageModuleType>): Array<Landin
   return sortedModules;
 };
 
-export const DumbManageModules = ({
-  enabledModules,
-  moduleTypes,
-  locale,
-  modulesById,
-  moveModuleDown,
-  moveModuleUp,
-  toggleModule,
-  createModule
-}: Props) => {
-  const numberOfTextAndMultimediaModules = moduleTypes.filter(
-    moduleType => moduleType.identifier === MODULES_IDENTIFIERS.introduction
-  ).length;
+const navigateToModuleEdit = (module: Map): void => {
+  const editSection = getEditSection(module);
+  const moduleId = module.get('id');
+  const query = { section: editSection, landingPageModuleId: moduleId };
+  const url = get('administration', { slug: getDiscussionSlug() || '', id: 'landingPage' }, query);
+  browserHistory.push(url);
+};
 
-  const numberOfEnabledTextAndMultimediaModules = enabledModules.filter(
-    module => module.getIn(['moduleType', 'identifier']) === MODULES_IDENTIFIERS.introduction
-  ).size;
-  const allTextAndMultimediaAreChecked = numberOfEnabledTextAndMultimediaModules === numberOfTextAndMultimediaModules;
+export class DumbManageModules extends React.Component<Props> {
+  render() {
+    const { client, isOrdering, lang, modules, moveModuleDown, moveModuleUp, resetOrder, saveOrder } = this.props;
 
-  const updatedModuleTypes = sortByTitle(moduleTypes);
+    const editModule = (module: Map): (() => void) | void => {
+      if (getEditSection(module)) {
+        return () => navigateToModuleEdit(module);
+      }
+      return undefined;
+    };
 
-  return (
-    <div className="admin-box">
-      <SectionTitle
-        title={I18n.t('administration.landingPage.manageModules.title')}
-        annotation={I18n.t('administration.annotation')}
-      />
-      <div className="admin-content form-container" style={{ maxWidth: '700px' }}>
-        <p className="admin-paragraph">
-          <Translate value="administration.landingPage.manageModules.helper" />
-        </p>
-        <div className="two-columns-admin">
-          <div className="column-left">
-            <SelectModulesForm
-              lang={locale}
-              moduleTypes={updatedModuleTypes}
-              modulesById={modulesById}
-              toggleModule={toggleModule}
+    const refetchQueries = [
+      {
+        query: LandingPageModulesQuery,
+        variables: {
+          lang: lang
+        }
+      }
+    ];
+
+    const updateModuleEnabled = (module: Map): ((enabled: boolean) => void) | void => {
+      if (!module.getIn(['moduleType', 'required'])) {
+        return (enabled: boolean) => {
+          client.mutate({
+            mutation: updateLandingPageModule,
+            variables: { id: module.get('id'), enabled: enabled },
+            refetchQueries: refetchQueries
+          });
+        };
+      }
+      return undefined;
+    };
+
+    const removeModule = (module: Map): (() => void) | void => {
+      if (module.getIn(['moduleType', 'identifier']) === MODULE_TYPES.textAndMultimedia.identifier) {
+        return () => {
+          const title = <Translate value="debate.confirmDeletionTitle" />;
+          const body = <Translate value="debate.synthesis.confirmDeletionBody" />;
+          const onClick = () => {
+            client.mutate({
+              mutation: deleteLandingPageModule,
+              variables: { id: module.get('id') },
+              refetchQueries: refetchQueries
+            });
+            closeModal();
+          };
+          const footer = [
+            <Button key="cancel" onClick={closeModal} className="button-cancel button-dark">
+              <Translate value="debate.confirmDeletionButtonCancel" />
+            </Button>,
+            <Button key="delete" onClick={onClick} className="button-submit button-dark">
+              <Translate value="debate.confirmDeletionButtonDelete" />
+            </Button>
+          ];
+          const includeFooter = true;
+          displayModal(title, body, includeFooter, footer);
+        };
+      }
+      return undefined;
+    };
+
+    const createTextAndMultimediaModule = (): Promise<any> => {
+      const nextOrder = Math.max(...modules.map(module => module.get('order'))) + 1;
+      return client.mutate({
+        mutation: createLandingPageModule,
+        variables: { typeIdentifier: MODULE_TYPES.textAndMultimedia.identifier, order: nextOrder, enabled: true },
+        refetchQueries: refetchQueries
+      });
+    };
+
+    return (
+      <div className="admin-box">
+        <SectionTitle
+          title={I18n.t('administration.landingPage.manageModules.title')}
+          annotation={I18n.t('administration.annotation')}
+        />
+        <div className="admin-content form-container" style={{ maxWidth: '700px' }}>
+          <p className="admin-paragraph">
+            <Translate value="administration.landingPage.manageModules.helper" />
+          </p>
+          <div>
+            <ModulesPreview
+              modules={modules}
+              moveModuleDown={moveModuleDown}
+              moveModuleUp={moveModuleUp}
+              editModule={editModule}
+              updateModuleEnabled={updateModuleEnabled}
+              removeModule={removeModule}
+              isOrdering={isOrdering}
             />
-            <div className="margin-xl">
-              <AddModuleButton
-                numberOfDuplicatesModules={numberOfTextAndMultimediaModules}
-                numberOfEnabledModules={enabledModules.size}
-                createModule={createModule}
-                allDuplicatesAreChecked={allTextAndMultimediaAreChecked}
-                buttonTitleTranslationKey="textAndMultimediaBtn"
-              />
-            </div>
+            {/* <Layouts /> */}
           </div>
-          <div className="column-right">
-            <ModulesPreview modules={enabledModules} moveModuleDown={moveModuleDown} moveModuleUp={moveModuleUp} />
+          <div>
+            <SaveButton
+              btnId="reset-order-button"
+              specificClasses="btn-danger"
+              disabled={!isOrdering}
+              saveAction={resetOrder}
+              title="cancel"
+            />
+            <SaveButton
+              btnId="save-order-button"
+              disabled={!isOrdering}
+              saveAction={saveOrder}
+              title="administration.saveOrder"
+            />
+            <div id="save-order-button" />
+            <div id="reset-order-button" />
+            <hr />
+            <AddModuleButton
+              disabled={isOrdering}
+              createModule={createTextAndMultimediaModule}
+              buttonTitleTranslationKey="textAndMultimediaBtn"
+            />
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+}
+
 const mapStateToProps = (state) => {
-  const { enabledModulesInOrder, modulesById, modulesInOrder } = state.admin.landingPage;
+  const { i18n: { locale }, admin: { landingPage: { isOrderingModules, modulesInOrder, modulesById } } } = state;
   return {
-    enabledModules: enabledModulesInOrder.map(id => modulesById.get(id)),
+    isOrdering: isOrderingModules,
+    lang: locale,
+    modules: modulesInOrder.map(id => modulesById.get(id)),
     modulesById: modulesById,
     moduleTypes: modulesInOrder
       .map((id) => {
@@ -159,21 +239,10 @@ const mapStateToProps = (state) => {
       .toJS()
   };
 };
+
 const mapDispatchToProps = dispatch => ({
   moveModuleDown: id => dispatch(moveLandingPageModuleDown(id)),
-  moveModuleUp: id => dispatch(moveLandingPageModuleUp(id)),
-  toggleModule: id => dispatch(toggleLandingPageModule(id)),
-  createModule: (nextOrder, numberOfDuplicatesModules, identifier = MODULES_IDENTIFIERS.introduction) => {
-    const newId = createRandomId();
-    return dispatch(
-      createLandingPageModule(
-        newId,
-        identifier,
-        numberOfDuplicatesModules,
-        I18n.t('administration.landingPage.manageModules.textAndMultimedia'),
-        nextOrder
-      )
-    );
-  }
+  moveModuleUp: id => dispatch(moveLandingPageModuleUp(id))
 });
-export default connect(mapStateToProps, mapDispatchToProps)(DumbManageModules);
+
+export default compose(connect(mapStateToProps, mapDispatchToProps), withApollo)(DumbManageModules);

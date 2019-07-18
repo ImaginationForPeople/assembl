@@ -1,25 +1,26 @@
 // @flow
 import { fromJS, List, Map } from 'immutable';
-import { combineReducers } from 'redux';
 import type ReduxAction from 'redux';
+import { combineReducers } from 'redux';
 import {
   type Action,
   CREATE_LANDING_PAGE_MODULE,
   MOVE_LANDING_PAGE_MODULE_DOWN,
   MOVE_LANDING_PAGE_MODULE_UP,
-  TOGGLE_LANDING_PAGE_MODULE,
-  UPDATE_LANDING_PAGE_MODULES
+  UPDATE_LANDING_PAGE_MODULES,
+  RESET_LANDING_PAGE_MODULES
 } from '../../actions/actionTypes';
+import { getModuleTypeInfo } from '../../components/administration/landingPage/manageModules';
 
-type ModulesHasChangedReducer = (boolean, ReduxAction<Action>) => boolean;
-export const modulesHasChanged: ModulesHasChangedReducer = (state = false, action) => {
+type IsOrderingModulesReducer = (boolean, ReduxAction<Action>) => boolean;
+export const isOrderingModules: IsOrderingModulesReducer = (state = false, action) => {
   switch (action.type) {
-  case CREATE_LANDING_PAGE_MODULE:
   case MOVE_LANDING_PAGE_MODULE_UP:
   case MOVE_LANDING_PAGE_MODULE_DOWN:
-  case TOGGLE_LANDING_PAGE_MODULE:
     return true;
+  case RESET_LANDING_PAGE_MODULES:
   case UPDATE_LANDING_PAGE_MODULES:
+  case CREATE_LANDING_PAGE_MODULE:
     return false;
   default:
     return state;
@@ -31,19 +32,15 @@ type ModulesInOrderReducer = (ModulesInOrderState, ReduxAction<Action>) => Modul
 export const modulesInOrder: ModulesInOrderReducer = (state = List(), action) => {
   switch (action.type) {
   case UPDATE_LANDING_PAGE_MODULES:
-    return List(action.modules.map(module => module.id));
-  case CREATE_LANDING_PAGE_MODULE:
-    // insert at the end (just before FOOTER module)
-    return state.insert(state.size - 1, action.id);
-  default:
-    return state;
-  }
-};
-
-type EnabledModulesInOrderState = List<string>;
-type EnabledModulesInOrderReducer = (EnabledModulesInOrderState, ReduxAction<Action>) => EnabledModulesInOrderState;
-export const enabledModulesInOrder: EnabledModulesInOrderReducer = (state = List(), action) => {
-  switch (action.type) {
+  case RESET_LANDING_PAGE_MODULES:
+    return List(
+      action.modules
+        .filter((module) => {
+          const moduleInfo = getModuleTypeInfo(module.moduleType.identifier);
+          return moduleInfo && moduleInfo.implemented;
+        })
+        .map(module => module.id)
+    );
   case CREATE_LANDING_PAGE_MODULE:
     // insert at the end (just before FOOTER module)
     return state.insert(state.size - 1, action.id);
@@ -62,18 +59,6 @@ export const enabledModulesInOrder: EnabledModulesInOrderReducer = (state = List
 
     return state.delete(idx).insert(idx + 1, action.id);
   }
-  case TOGGLE_LANDING_PAGE_MODULE: {
-    const id = action.id;
-    const idx = state.indexOf(id);
-    if (idx !== -1) {
-      return state.delete(idx);
-    }
-
-    // insert at the end (just before FOOTER module)
-    return state.insert(state.size - 1, id);
-  }
-  case UPDATE_LANDING_PAGE_MODULES:
-    return List(action.modules.filter(module => module.enabled).map(module => module.id));
   default:
     return state;
   }
@@ -105,10 +90,6 @@ export const modulesById: ModulesByIdReducer = (state = initialState, action) =>
         .set('order', action.order)
         .set('id', action.id)
     );
-  case TOGGLE_LANDING_PAGE_MODULE: {
-    const moduleType = action.id;
-    return state.updateIn([moduleType, 'enabled'], v => !v).setIn([moduleType, '_hasChanged'], true);
-  }
   case MOVE_LANDING_PAGE_MODULE_UP: {
     let newState = Map();
     state.forEach((module) => {
@@ -132,21 +113,15 @@ export const modulesById: ModulesByIdReducer = (state = initialState, action) =>
     });
     return newState;
   }
+  case RESET_LANDING_PAGE_MODULES:
   default:
     return state;
   }
 };
 
-export type LandingPageState = {
-  enabledModulesInOrder: EnabledModulesInOrderState,
-  modulesById: Map<string>,
-  modulesHasChanged: boolean
-};
-
 const reducers = {
+  isOrderingModules: isOrderingModules,
   modulesInOrder: modulesInOrder,
-  enabledModulesInOrder: enabledModulesInOrder,
-  modulesHasChanged: modulesHasChanged,
   modulesById: modulesById
 };
 

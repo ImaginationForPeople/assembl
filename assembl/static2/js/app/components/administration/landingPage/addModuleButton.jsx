@@ -2,23 +2,15 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
 import { Translate } from 'react-redux-i18n';
-import { displayModal, closeModal } from '../../../utils/utilityManager';
+import { closeModal, displayModal } from '../../../utils/utilityManager';
 
 type Props = {
+  buttonTitleTranslationKey: string,
   createModule: Function,
-  numberOfDuplicatesModules: number,
-  numberOfEnabledModules: number,
-  allDuplicatesAreChecked: boolean,
-  buttonTitleTranslationKey: string
+  disabled?: boolean
 };
 
-const AddModuleButton = ({
-  createModule,
-  numberOfDuplicatesModules,
-  numberOfEnabledModules,
-  allDuplicatesAreChecked,
-  buttonTitleTranslationKey
-}: Props) => {
+const AddModuleButton = ({ buttonTitleTranslationKey, createModule, disabled }: Props) => {
   const displayConfirmationModal = () => {
     const body = <Translate value="administration.landingPage.manageModules.confirmationModal" />;
     const footer = [
@@ -29,7 +21,7 @@ const AddModuleButton = ({
         key="add"
         id="confirm-add-tm-button"
         onClick={() => {
-          createModule(numberOfEnabledModules - 2, numberOfDuplicatesModules + 1);
+          createModule();
           closeModal();
         }}
         className="button-submit button-dark"
@@ -41,10 +33,14 @@ const AddModuleButton = ({
     return displayModal(null, body, includeFooter, footer);
   };
   return (
-    <Button className="button-submit button-dark" onClick={displayConfirmationModal} disabled={!allDuplicatesAreChecked}>
+    <Button className="button-submit button-dark" onClick={disabled ? () => false : displayConfirmationModal} disabled={disabled}>
       <Translate value={`administration.landingPage.manageModules.${buttonTitleTranslationKey}`} />
     </Button>
   );
+};
+
+AddModuleButton.defaultProps = {
+  disabled: false
 };
 
 export default AddModuleButton;

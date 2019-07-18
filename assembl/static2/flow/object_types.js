@@ -89,6 +89,7 @@ type RichTextLangstringEntry = {
   localeCode: string,
   value: EditorState
 };
+
 type RichTextLangstringEntries = Array<RichTextLangstringEntry>;
 
 type TitleEntries = {
@@ -158,6 +159,65 @@ type DebateData = Object & {
   video: DebateVideo,
   customHtmlCodeLandingPage: ?string,
   customHtmlCodeRegistrationPage: ?string
+};
+
+type Discussion = {
+  id: string,
+  // The file representing the logo of the debate. A file metadata object, described by the Document object.
+  logoImage: ?{|
+    // The MIME-Type of the file uploaded.
+    mimeType: ?string,
+    // A url to an image or a document to be attached.
+    externalUrl: ?string,
+    // The filename title.
+    title: ?string
+  |},
+  // The file representing the header of the landing page. A file metadata object, described by the Document object.
+  headerImage: ?{|
+    // The MIME-Type of the file uploaded.
+    mimeType: ?string,
+    // The filename title.
+    title: ?string,
+    // A url to an image or a document to be attached.
+    externalUrl: ?string
+  |},
+  // The title of the discussion, in the language specified by the input
+  title: ?string,
+  // A list of possible languages of the entity as LangStringEntry objects. %s
+  titleEntries: ?Array<?{|
+    // The ISO 639-1 locale code of the language the content represents.
+    localeCode: string,
+    // The unicode encoded string representation of the content.
+    value: ?string
+  |}>,
+  // The subtitle of the discussion, in the language specified by the input
+  subtitle: ?string,
+  // A list of possible languages of the entity as LangStringEntry objects. %s
+  subtitleEntries: ?Array<?{|
+    // The ISO 639-1 locale code of the language the content represents.
+    localeCode: string,
+    // The unicode encoded string representation of the content.
+    value: ?string
+  |}>,
+  // The value inside of the participation button in the landing page.
+  buttonLabel: ?string,
+  // A list of possible languages of the entity as LangStringEntry objects. %s
+  buttonLabelEntries: ?Array<?{|
+    // The ISO 639-1 locale code of the language the content represents.
+    localeCode: string,
+    // The unicode encoded string representation of the content.
+    value: ?string
+  |}>,
+  // A URL for the homepage (optional). Often placed on the logo.
+  homepageUrl: ?string,
+  loginData: ?{|
+    local: ?boolean,
+    url: string
+  |},
+  // The start date of a discussion. A datetime that is either set in mutation, or calculated from the start of the first phase.
+  startDate: ?any,
+  // The end date of a discussion. A datetime that is either set in a mutation, or calculated from the end of last phase.
+  endDate: ?any
 };
 
 type ErrorDef = {
@@ -237,4 +297,41 @@ type Language = {
   locale: string,
   name: string,
   nativeName: string
+};
+
+type LandingPageModuleType = {
+  defaultOrder: number,
+  editableOrder: boolean,
+  id: string,
+  identifier: string,
+  moduleId: string,
+  required: boolean,
+  title: string
+};
+
+type LandingPageModule = {
+  body: ?string,
+  configuration: Object,
+  enabled: boolean,
+  existsInDatabase: true,
+  id: string,
+  moduleType: LandingPageModuleType,
+  order: number,
+  subtitle: ?string,
+  title: ?string
+};
+
+type MultilingualLandingPageModule = {
+  body: ?string,
+  bodyEntries?: RichTextLangstringEntries,
+  configuration: Object,
+  enabled: boolean,
+  existsInDatabase: true,
+  id: string,
+  moduleType: LandingPageModuleType,
+  order: number,
+  subtitle: ?string,
+  subtitleEntries: LangstringEntries,
+  title: ?string,
+  titleEntries: LangstringEntries
 };
