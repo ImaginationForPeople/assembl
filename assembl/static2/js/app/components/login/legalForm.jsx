@@ -68,19 +68,18 @@ class LegalForm extends React.Component<Props, State> {
             }}
             dangerouslySetInnerHTML={{ __html: text }}
           />
-          {isScrolled &&
-            !checked && (
-              <Button
-                type="submit"
-                name="acceptTerms"
-                className="button-submit button-dark terms-submit right"
-                onClick={() => {
-                  this.handleSubmit(legalContentsType);
-                }}
-              >
-                <Translate value="termsAndConditions.accept" />
-              </Button>
-            )}
+          {isScrolled && !checked && (
+            <Button
+              type="submit"
+              name="acceptTerms"
+              className="button-submit button-dark terms-submit right"
+              onClick={() => {
+                this.handleSubmit(legalContentsType);
+              }}
+            >
+              <Translate value="termsAndConditions.accept" />
+            </Button>
+          )}
         </Modal.Body>
       </div>
     );

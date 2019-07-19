@@ -95,7 +95,9 @@ class Tag extends React.Component<Props, State> {
 
   updateTag = (values: TagData) => {
     const { updateTag, tag, contextId, onUpdate } = this.props;
-    const { tag: { label } } = values;
+    const {
+      tag: { label }
+    } = values;
     this.setState({ submitting: true }, () => {
       updateTag({ id: tag.value, value: label, taggableId: contextId })
         .then(({ data }) => {

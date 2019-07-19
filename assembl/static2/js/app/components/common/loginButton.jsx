@@ -20,7 +20,14 @@ type ButtonProps = {
   label: React.Node | string
 };
 
-const DumbButton = ({ data: { discussion: { loginData: { url, local } } }, label }: ButtonProps): React.Node => {
+const DumbButton = ({
+  data: {
+    discussion: {
+      loginData: { url, local }
+    }
+  },
+  label
+}: ButtonProps): React.Node => {
   const slug = getDiscussionSlug();
   const next = getCurrentView();
   let link = `${getContextual('login', { slug: slug })}?next=${next}`;
@@ -45,4 +52,7 @@ const DumbButton = ({ data: { discussion: { loginData: { url, local } } }, label
   );
 };
 
-export default compose(graphql(DiscussionQuery), manageErrorAndLoading({ displayLoader: false }))(DumbButton);
+export default compose(
+  graphql(DiscussionQuery),
+  manageErrorAndLoading({ displayLoader: false })
+)(DumbButton);

@@ -74,7 +74,9 @@ class DiscussionPreferencesForm extends React.Component<Props, State> {
                   subscription={{ values: true }}
                   // $FlowFixMe ignore undefined state
                   onChange={(state: FormState) => {
-                    const { values: { withSemanticAnalysis, withTranslation } } = state;
+                    const {
+                      values: { withSemanticAnalysis, withTranslation }
+                    } = state;
                     this.setState({ translationServiceMissing: withSemanticAnalysis && !withTranslation });
                   }}
                 />
@@ -158,4 +160,7 @@ const mapStateToProps = state => ({
 
 export { DiscussionPreferencesForm };
 
-export default compose(connect(mapStateToProps), withApollo)(DiscussionPreferencesForm);
+export default compose(
+  connect(mapStateToProps),
+  withApollo
+)(DiscussionPreferencesForm);

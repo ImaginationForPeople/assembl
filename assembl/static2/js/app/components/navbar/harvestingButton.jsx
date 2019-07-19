@@ -70,7 +70,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   graphql(PreferencesQuery, {
     options: () => ({ notifyOnNetworkStatusChange: true, fetchPolicy: 'network-only' })
   }),

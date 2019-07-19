@@ -125,7 +125,13 @@ export class AssemblNavbar extends React.PureComponent<AssemblNavbarProps, Assem
   };
 
   renderUserMenu = (remainingWidth: number) => {
-    const { debate: { debateData: { helpUrl } }, location, discussionData } = this.props;
+    const {
+      debate: {
+        debateData: { helpUrl }
+      },
+      location,
+      discussionData
+    } = this.props;
     const { loginData } = discussionData;
     return <UserMenu helpUrl={helpUrl} location={location} remainingWidth={remainingWidth} loginData={loginData} />;
   };
@@ -160,12 +166,11 @@ export class AssemblNavbar extends React.PureComponent<AssemblNavbarProps, Assem
     return (
       <div className="background-light">
         <Navbar fixedTop fluid className="no-padding">
-          {isLargeLogo &&
-            !screenTooSmall && (
-              <div className="large-logo max-container">
-                <Logo slug={slug} src={commonProps.logoSrc} url={commonProps.logoLink} />
-              </div>
-            )}
+          {isLargeLogo && !screenTooSmall && (
+            <div className="large-logo max-container">
+              <Logo slug={slug} src={commonProps.logoSrc} url={commonProps.logoLink} />
+            </div>
+          )}
           <div className="nav-bar max-container" id="navbar">
             {screenTooSmall ? (
               <MobileNavbar {...commonProps} />

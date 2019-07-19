@@ -408,12 +408,14 @@ class Post extends React.Component<Props> {
             <div className="stat-sentiment">
               <div>
                 <div className="min-sentiment">
-                  <Like size={15} />&nbsp;<span className="txt">{currentCounts.like}</span>
+                  <Like size={15} />
+                  &nbsp;<span className="txt">{currentCounts.like}</span>
                 </div>
               </div>
               <div>
                 <div className="min-sentiment">
-                  <Disagree size={15} />&nbsp;<span className="txt">{currentCounts.disagree}</span>
+                  <Disagree size={15} />
+                  &nbsp;<span className="txt">{currentCounts.disagree}</span>
                 </div>
               </div>
             </div>

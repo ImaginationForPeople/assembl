@@ -85,7 +85,7 @@ export class DumbSynthesis extends React.Component<SynthesisProps, SynthesisStat
       const firstIdeaTopOffset = introNodeTop + introNodeHeight;
       const scroll = window.pageYOffset;
       const { innerHeight, innerWidth } = window;
-      const sideMenuTopOffset = innerHeight * sideMenuTopPercentage / 100;
+      const sideMenuTopOffset = (innerHeight * sideMenuTopPercentage) / 100;
       // this value is the gap between the top of sideMenu and the top of the window set by the css 'top' property
       if (sideMenuHeight && sideMenuHeight + sideMenuTopOffset > innerHeight) {
         this.setState({ sideMenuOverflow: 'scroll', setSideMenuHeight: '80%' });

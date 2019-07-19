@@ -260,4 +260,8 @@ const withData: OperationComponent<Response> = graphql(PostQuery);
 
 // Absolutely don't use redux connect here to avoid performance issue.
 // Please pass the needed props from Tree component.
-export default compose(withData, withErrorBoundary, manageErrorAndLoading({ displayLoader: true }))(PostWithContext);
+export default compose(
+  withData,
+  withErrorBoundary,
+  manageErrorAndLoading({ displayLoader: true })
+)(PostWithContext);

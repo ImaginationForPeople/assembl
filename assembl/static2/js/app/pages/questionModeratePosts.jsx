@@ -8,7 +8,9 @@ import { get, goTo } from '../utils/routeMap';
 class QuestionModeratePosts extends React.Component<Props> {
   componentDidMount() {
     if (!connectedUserIsModerator()) {
-      const { params: { slug } } = this.props;
+      const {
+        params: { slug }
+      } = this.props;
       goTo(
         get('unauthorizedAdministration', {
           slug: slug

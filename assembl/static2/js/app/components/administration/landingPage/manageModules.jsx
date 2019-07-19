@@ -176,4 +176,7 @@ const mapDispatchToProps = dispatch => ({
     );
   }
 });
-export default connect(mapStateToProps, mapDispatchToProps)(DumbManageModules);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbManageModules);

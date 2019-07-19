@@ -22,12 +22,11 @@ const UserMenu = ({ location, helpUrl, loginData }: UserMenuProps) => (
     <div id="search">
       <Search />
     </div>
-    {getConnectedUserId() &&
-      helpUrl && (
-        <Link to={helpUrl} target="_blank">
-          <span className="assembl-icon-faq grey" />
-        </Link>
-      )}
+    {getConnectedUserId() && helpUrl && (
+      <Link to={helpUrl} target="_blank">
+        <span className="assembl-icon-faq grey" />
+      </Link>
+    )}
     <Avatar location={location} loginData={loginData} split />
   </div>
 );

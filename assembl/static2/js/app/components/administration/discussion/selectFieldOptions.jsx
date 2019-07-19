@@ -81,7 +81,15 @@ const SelectFieldOptions = ({
   );
 };
 
-const mapStateToProps = ({ admin: { editLocale, profileOptions: { textFieldsById } } }, ownProps) => {
+const mapStateToProps = (
+  {
+    admin: {
+      editLocale,
+      profileOptions: { textFieldsById }
+    }
+  },
+  ownProps
+) => {
   const options = textFieldsById
     .getIn([ownProps.fieldId, 'options'])
     .sortBy(field => field.get('order'))
@@ -103,4 +111,7 @@ const mapDispatchToProps = dispatch => ({
   moveOptionUp: (fieldId, id) => dispatch(actions.moveSelectFieldOptionUp(fieldId, id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SelectFieldOptions);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(SelectFieldOptions);

@@ -109,8 +109,8 @@ export class DumbAcceptCookiesModal extends React.PureComponent<Props, State> {
       privacyPolicy: hasPrivacyPolicy,
       userGuidelines: hasUserGuidelines
     };
-    const legalContentsArray = Object.keys(legalContentsToAcceptByRouteName).map(
-      key => (legalContentsToAcceptByRouteName[key] ? key : null)
+    const legalContentsArray = Object.keys(legalContentsToAcceptByRouteName).map(key =>
+      (legalContentsToAcceptByRouteName[key] ? key : null)
     );
     // This array gathers all the legal contents to accept by their route name
     const cleanLegalContentsArray = legalContentsArray.filter(el => el !== null);

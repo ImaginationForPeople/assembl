@@ -77,4 +77,7 @@ const mapStateToProps = state => ({
   locale: state.i18n.locale
 });
 
-export default compose(connect(mapStateToProps), withApollo)(DumbSurveyAdminForm);
+export default compose(
+  connect(mapStateToProps),
+  withApollo
+)(DumbSurveyAdminForm);

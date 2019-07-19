@@ -150,4 +150,8 @@ const QuestionWithContext = props => (
   </DebateContext.Consumer>
 );
 
-export default compose(connect(mapStateToProps), graphql(createPostMutation), withScreenDimensions)(QuestionWithContext);
+export default compose(
+  connect(mapStateToProps),
+  graphql(createPostMutation),
+  withScreenDimensions
+)(QuestionWithContext);

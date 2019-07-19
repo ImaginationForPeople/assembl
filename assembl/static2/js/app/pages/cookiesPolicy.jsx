@@ -57,4 +57,8 @@ export const mapStateToProps: State => LegalContentsQueryVariables = state => ({
   lang: state.i18n.locale
 });
 
-export default compose(connect(mapStateToProps), withData, manageErrorAndLoading({ displayLoader: true }))(CookiesPolicy);
+export default compose(
+  connect(mapStateToProps),
+  withData,
+  manageErrorAndLoading({ displayLoader: true })
+)(CookiesPolicy);

@@ -151,6 +151,9 @@ export default compose(
     // $FlowFixMe (flow, eslint (and even prettier!) are kind of conflicting here)
     options: () => ({ notifyOnNetworkStatusChange: true })
   }),
-  connect(null, mapDispatchToProps),
+  connect(
+    null,
+    mapDispatchToProps
+  ),
   manageErrorAndLoading({ displayLoader: false })
 )(PostTranslate);

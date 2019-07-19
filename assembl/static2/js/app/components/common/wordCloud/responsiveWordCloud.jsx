@@ -64,7 +64,7 @@ class ResponsiveWordCloud extends Component<WordCloudBaseProps> {
       <ResizeAware>
         {(size: Size) => {
           const width: number = size.width || 400; // default width
-          const height: number = Math.min(width / 4 * 3, 500); // 4:3 ratio
+          const height: number = Math.min((width / 4) * 3, 500); // 4:3 ratio
           return <WordCloud {...wordCloudProps} height={height} width={width} />;
         }}
       </ResizeAware>

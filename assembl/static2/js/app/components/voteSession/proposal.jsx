@@ -118,31 +118,29 @@ class Proposal extends React.Component<Props, State> {
               })}
           </Col>
         </Row>
-        {seeCurrentVotes &&
-          this.state.showVotesInProgress && (
-            <div className="expand-result">
-              <Row className="expand-row background-grey">
-                <Col xs={12} md={12} className="center">
-                  <Button className="link-button" onClick={this.toggleShowVotesInProgress}>
-                    <Translate value="debate.voteSession.showLess" />
-                  </Button>
-                </Col>
-              </Row>
-              <VotesInProgress modules={modules} numParticipants={numParticipants} />
-            </div>
-          )}
-        {seeCurrentVotes &&
-          !this.state.showVotesInProgress && (
-            <div className="expand-result">
-              <Row className="expand-row background-grey">
-                <Col xs={12} md={12} className="center">
-                  <Button className="link-button" onClick={this.toggleShowVotesInProgress}>
-                    <Translate value="debate.voteSession.showVotesInProgress" />
-                  </Button>
-                </Col>
-              </Row>
-            </div>
-          )}
+        {seeCurrentVotes && this.state.showVotesInProgress && (
+          <div className="expand-result">
+            <Row className="expand-row background-grey">
+              <Col xs={12} md={12} className="center">
+                <Button className="link-button" onClick={this.toggleShowVotesInProgress}>
+                  <Translate value="debate.voteSession.showLess" />
+                </Button>
+              </Col>
+            </Row>
+            <VotesInProgress modules={modules} numParticipants={numParticipants} />
+          </div>
+        )}
+        {seeCurrentVotes && !this.state.showVotesInProgress && (
+          <div className="expand-result">
+            <Row className="expand-row background-grey">
+              <Col xs={12} md={12} className="center">
+                <Button className="link-button" onClick={this.toggleShowVotesInProgress}>
+                  <Translate value="debate.voteSession.showVotesInProgress" />
+                </Button>
+              </Col>
+            </Row>
+          </div>
+        )}
       </div>
     );
   }

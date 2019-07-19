@@ -127,7 +127,7 @@ export const Html = (props: HtmlProps) => {
    * The activeHtml() function will parse the raw html,
    * replace specified tags with provided components
    * and return a list of react elements
-  */
+   */
   // this anchor is shared with marionette code
   const anchor = dbId ? getExtractTagId(dbId) : EMPTY_STRING;
   let html = `<div id="${anchor}">${rawHtml}</div>`;

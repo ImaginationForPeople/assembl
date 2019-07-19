@@ -29,11 +29,15 @@ export const tagsLoader = (client: ApolloClient, exclude: Array<string> = []) =>
       fetchPolicy: 'network-only'
     })
     .then((value) => {
-      const { data: { tags } } = value;
-      return tags.filter(tag => !exclude.includes(tag.id)).map(tag => ({
-        label: tag.value,
-        value: tag.id
-      }));
+      const {
+        data: { tags }
+      } = value;
+      return tags
+        .filter(tag => !exclude.includes(tag.id))
+        .map(tag => ({
+          label: tag.value,
+          value: tag.id
+        }));
     });
 
 export const tagsComparator = (initialValues: Array<Option>, currentTags: Array<Option>): boolean => {

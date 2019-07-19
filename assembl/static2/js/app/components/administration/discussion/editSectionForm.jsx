@@ -119,4 +119,7 @@ const mapDispatchToProps = (dispatch, { id, editLocale }) => ({
 
 export { DumbEditSectionForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbEditSectionForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbEditSectionForm);

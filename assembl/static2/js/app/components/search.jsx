@@ -339,7 +339,10 @@ const mapDispatchToExtractHitProps = dispatch => ({
   toggleHarvesting: () => dispatch(toggleHarvestingAction())
 });
 
-const ExtractHit = connect(mapStateToExtractHitProps, mapDispatchToExtractHitProps)(DumbExtractHit);
+const ExtractHit = connect(
+  mapStateToExtractHitProps,
+  mapDispatchToExtractHitProps
+)(DumbExtractHit);
 
 const SynthesisHit = ({ bemBlocks, collapseSearch, locale, result }) => {
   const source = result._source;

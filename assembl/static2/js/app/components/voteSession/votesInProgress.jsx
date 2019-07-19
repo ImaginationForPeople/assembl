@@ -49,17 +49,16 @@ const VotesInProgress = ({ modules, numParticipants }: Props) => {
       <Col className="padding-s" xs={12} md={columnSizes[0]}>
         <ParticipantsCount count={numParticipants} />
       </Col>
-      {tokenVoteModule &&
-        tokenCategories.length > 0 && (
-          <Col className="padding-s" xs={12} md={columnSizes[1]}>
-            <TokenVotesResults
-              categories={tokenCategories}
-              tokenVotes={tokenVoteModule.tokenVotes}
-              numVotes={tokenVoteModule.numVotes}
-              titleMsgId="debate.voteSession.currentTokenDistribution"
-            />
-          </Col>
-        )}
+      {tokenVoteModule && tokenCategories.length > 0 && (
+        <Col className="padding-s" xs={12} md={columnSizes[1]}>
+          <TokenVotesResults
+            categories={tokenCategories}
+            tokenVotes={tokenVoteModule.tokenVotes}
+            numVotes={tokenVoteModule.numVotes}
+            titleMsgId="debate.voteSession.currentTokenDistribution"
+          />
+        </Col>
+      )}
       {allGauges.map((gauge) => {
         if (gauge.voteType === 'gauge_vote_specification') {
           const colSize = columnSizes[index];

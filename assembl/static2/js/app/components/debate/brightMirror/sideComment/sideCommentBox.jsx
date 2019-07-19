@@ -600,14 +600,11 @@ class DumbSideCommentBox extends React.Component<Props, State> {
             </div>
           )}
           {commentView}
-          {!submitting &&
-            !editComment &&
-            extracts &&
-            extracts.length > 1 && (
-              <div className="extracts-numbering">
-                {extractIndex + 1}/{extracts.length}
-              </div>
-            )}
+          {!submitting && !editComment && extracts && extracts.length > 1 && (
+            <div className="extracts-numbering">
+              {extractIndex + 1}/{extracts.length}
+            </div>
+          )}
           {!submitting && this.renderActionFooter()}
           {replyView}
         </div>

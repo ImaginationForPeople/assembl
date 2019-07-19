@@ -147,4 +147,10 @@ const mapDispatchToProps = dispatch => ({
   displayLanguageMenu: isHidden => dispatch(displayLanguageMenu(isHidden))
 });
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), withApollo)(CreateSynthesisForm);
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  withApollo
+)(CreateSynthesisForm);

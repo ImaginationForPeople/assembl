@@ -31,4 +31,8 @@ const withData: OperationComponent<LegalContentsQuery, LegalContentsQueryVariabl
   }
 });
 
-export default compose(connect(mapStateToProps), withData, manageErrorAndLoading({ displayLoader: true }))(TextWithHeaderPage);
+export default compose(
+  connect(mapStateToProps),
+  withData,
+  manageErrorAndLoading({ displayLoader: true })
+)(TextWithHeaderPage);

@@ -195,7 +195,9 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
       <Row>
         <Col xs={12} md={12}>
           <div className="color margin-left-9">
-            <span className="assembl-icon-edit" />&nbsp;<Translate value={editTitleLabelMsgId} className="sm-title" />
+            <span className="assembl-icon-edit" />
+            &nbsp;
+            <Translate value={editTitleLabelMsgId} className="sm-title" />
           </div>
         </Col>
         <Col xs={12} md={12}>

@@ -27,7 +27,9 @@ const Objectives = ({ debate, timeline, lang, buttonLabel }: Props) => {
     browserHistory.push(get('debate', { ...slug, phase: currentPhaseIdentifier }));
   };
 
-  const { debateData: { objectives } } = debate;
+  const {
+    debateData: { objectives }
+  } = debate;
   let locale = lang;
   if (locale === 'zh-CN') {
     locale = 'zh_CN';

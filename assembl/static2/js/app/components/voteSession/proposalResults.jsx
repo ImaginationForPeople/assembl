@@ -29,15 +29,14 @@ class ProposalResults extends React.Component<Props> {
             <ParticipantsCount count={numParticipants} />
           </Col>
           <Col xs={12} md={5} className="proposal-vote-modules">
-            {tokenVoteModule &&
-              tokenCategories.length > 0 && (
-                <TokenVotesResults
-                  categories={tokenCategories}
-                  tokenVotes={tokenVoteModule.tokenVotes}
-                  numVotes={tokenVoteModule.numVotes}
-                  titleMsgId="debate.voteSession.tokenDistribution"
-                />
-              )}
+            {tokenVoteModule && tokenCategories.length > 0 && (
+              <TokenVotesResults
+                categories={tokenCategories}
+                tokenVotes={tokenVoteModule.tokenVotes}
+                numVotes={tokenVoteModule.numVotes}
+                titleMsgId="debate.voteSession.tokenDistribution"
+              />
+            )}
 
             {modules &&
               filterGaugeVoteModules(modules).map((module) => {

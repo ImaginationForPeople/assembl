@@ -56,4 +56,7 @@ const mapDispatchToProps = dispatch => ({
   requestPasswordChange: (id, discussionSlug) => dispatch(requestPasswordChangeAction(id, discussionSlug))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbRequestPasswordChange);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbRequestPasswordChange);

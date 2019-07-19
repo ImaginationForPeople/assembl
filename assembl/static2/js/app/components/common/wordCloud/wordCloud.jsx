@@ -99,7 +99,7 @@ class WordCloud extends Component<Props> {
      * depending on the Keyword parameters.
      */
     const addOpacityToColorHEX = (color: string) => (d) => {
-      const opacity = 0.5 + 0.5 * (d[WORD_COUNT_KEY] - interval.min) / (interval.max - interval.min);
+      const opacity = 0.5 + (0.5 * (d[WORD_COUNT_KEY] - interval.min)) / (interval.max - interval.min);
       const stringOpacity = Math.round(15 * opacity).toString(16);
       return `${color}${stringOpacity}${color.length === 7 ? stringOpacity : ''}`;
     };

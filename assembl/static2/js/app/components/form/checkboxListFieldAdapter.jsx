@@ -34,7 +34,10 @@ export default class CheckboxListFieldAdapter extends React.Component<Props> {
   };
 
   render() {
-    const { input, meta: { error, touched } } = this.props;
+    const {
+      input,
+      meta: { error, touched }
+    } = this.props;
     return (
       <FormGroup controlId={input.name} validationState={getValidationState(error, touched)}>
         {input.value &&

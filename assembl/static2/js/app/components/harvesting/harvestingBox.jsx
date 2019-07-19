@@ -527,12 +527,11 @@ class DumbHarvestingBox extends React.Component<Props, State> {
               {extractNature && <NatureIcons qualifier={extractNature} />}
               {extractAction && !extractNature && <ActionIcons qualifier={extractAction} backgroundColor="#fff" color="#000" />}
             </div>
-            {extractNature &&
-              extractAction && (
-                <div className="box-icon box-icon-2">
-                  <ActionIcons qualifier={extractAction} backgroundColor="#fff" color="#000" />
-                </div>
-              )}
+            {extractNature && extractAction && (
+              <div className="box-icon box-icon-2">
+                <ActionIcons qualifier={extractAction} backgroundColor="#fff" color="#000" />
+              </div>
+            )}
           </div>
         )}
         <div
@@ -620,15 +619,14 @@ class DumbHarvestingBox extends React.Component<Props, State> {
               <AvatarImage userId={harvesterUserId} userName={userName} />
               <div className="harvesting-infos">
                 <div className="username">{userName}</div>
-                {extract &&
-                  extract.creationDate && (
-                    <div className="harvesting-date" title={extract.creationDate}>
-                      {harvestingDate ||
-                        moment(extract.creationDate)
-                          .locale(contentLocale)
-                          .fromNow()}
-                    </div>
-                  )}
+                {extract && extract.creationDate && (
+                  <div className="harvesting-date" title={extract.creationDate}>
+                    {harvestingDate ||
+                      moment(extract.creationDate)
+                        .locale(contentLocale)
+                        .fromNow()}
+                  </div>
+                )}
                 {!extract && (
                   <div className="harvesting-date">
                     <Translate value="harvesting.now" />
@@ -644,35 +642,33 @@ class DumbHarvestingBox extends React.Component<Props, State> {
             </div>
           )}
           <div className="harvesting-box-body">
-            {extract &&
-              !isEditable && (
-                <div className="body-container">
-                  <div className="previous-extract">
-                    {currentExtractIndex > 0 && (
-                      <div
-                        onClick={() => {
-                          this.changeCurrentExtract(-1);
-                        }}
-                      >
-                        <span className="assembl-icon-angle-left grey" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="extract-body">{extract.body}</div>
-                  <div className="next-extract">
-                    {extracts &&
-                      currentExtractIndex < extracts.length - 1 && (
-                        <div
-                          onClick={() => {
-                            this.changeCurrentExtract(1);
-                          }}
-                        >
-                          <span className="assembl-icon-angle-right grey" />
-                        </div>
-                      )}
-                  </div>
+            {extract && !isEditable && (
+              <div className="body-container">
+                <div className="previous-extract">
+                  {currentExtractIndex > 0 && (
+                    <div
+                      onClick={() => {
+                        this.changeCurrentExtract(-1);
+                      }}
+                    >
+                      <span className="assembl-icon-angle-left grey" />
+                    </div>
+                  )}
                 </div>
-              )}
+                <div className="extract-body">{extract.body}</div>
+                <div className="next-extract">
+                  {extracts && currentExtractIndex < extracts.length - 1 && (
+                    <div
+                      onClick={() => {
+                        this.changeCurrentExtract(1);
+                      }}
+                    >
+                      <span className="assembl-icon-angle-right grey" />
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
 
             {extract && isEditable ? (
               <FormControlWithLabel
@@ -685,12 +681,11 @@ class DumbHarvestingBox extends React.Component<Props, State> {
             ) : null}
             {!extract && selectionText ? <div className="selection-body">{selectionText}</div> : null}
           </div>
-          {extracts &&
-            extracts.length > 1 && (
-              <div className="extracts-numbering">
-                {currentExtractIndex + 1}/{extracts.length}
-              </div>
-            )}
+          {extracts && extracts.length > 1 && (
+            <div className="extracts-numbering">
+              {currentExtractIndex + 1}/{extracts.length}
+            </div>
+          )}
           {extract && !hasFooter ? (
             <Tags
               canEdit={connectedUserIsAdmin()}

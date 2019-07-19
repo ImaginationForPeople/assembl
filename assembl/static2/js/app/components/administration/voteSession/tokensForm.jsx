@@ -155,4 +155,7 @@ const mapDispatchToProps = (dispatch, { id, editLocale }) => ({
 
 export { DumbTokensForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbTokensForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbTokensForm);

@@ -62,4 +62,7 @@ const mapDispatchToProps = dispatch => ({
 
 export { DumbVoteProposalsSection };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbVoteProposalsSection);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbVoteProposalsSection);

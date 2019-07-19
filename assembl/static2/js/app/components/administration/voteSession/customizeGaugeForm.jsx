@@ -257,4 +257,7 @@ const mapDispatchToProps = (dispatch, { editLocale }) => ({
   updateModule: (id, params) => dispatch(updateVoteModule(id, editLocale, params))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbCustomizeGaugeForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbCustomizeGaugeForm);

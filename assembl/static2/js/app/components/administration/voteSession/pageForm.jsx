@@ -55,4 +55,7 @@ const mapDispatchToProps = (dispatch, { editLocale }) => ({
 
 export { DumbPageForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbPageForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbPageForm);

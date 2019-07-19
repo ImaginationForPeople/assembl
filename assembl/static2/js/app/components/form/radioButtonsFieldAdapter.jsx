@@ -32,7 +32,10 @@ export default class RadioButtonsFieldAdapter extends React.Component<Props> {
   };
 
   render() {
-    const { meta: { error, touched }, input: { name, value } } = this.props;
+    const {
+      meta: { error, touched },
+      input: { name, value }
+    } = this.props;
     return (
       <FormGroup controlId={name} validationState={getValidationState(error, touched)}>
         {value &&

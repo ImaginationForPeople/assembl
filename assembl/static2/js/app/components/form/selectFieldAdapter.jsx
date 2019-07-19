@@ -102,7 +102,10 @@ class SelectFieldAdapter extends React.Component<Props, State> {
   };
 
   initializeInput = () => {
-    const { isMulti, input: { value } } = this.props;
+    const {
+      isMulti,
+      input: { value }
+    } = this.props;
     // $FlowFixMe the value in this context is an Option
     const currentValue: string = (!isMulti && value && value.label) || '';
     this.setState({ inputValue: currentValue });

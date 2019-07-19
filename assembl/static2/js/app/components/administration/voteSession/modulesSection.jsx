@@ -66,7 +66,9 @@ const DumbModulesSection = ({
                 classname="inline checkbox-title"
               />
             </Checkbox>
-            {activeTokenModulesIds.map(id => <TokensForm key={id} id={id} editLocale={editLocale} />)}
+            {activeTokenModulesIds.map(id => (
+              <TokensForm key={id} id={id} editLocale={editLocale} />
+            ))}
             {(tokenModuleChecked || gaugeModuleChecked) && <div className="separator" />}
             <Checkbox
               id="gauge-checkbox"
@@ -209,4 +211,7 @@ const mapDispatchToProps = (dispatch) => {
 
 export { DumbModulesSection };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbModulesSection);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbModulesSection);

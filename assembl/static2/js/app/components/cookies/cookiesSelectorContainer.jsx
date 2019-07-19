@@ -125,9 +125,8 @@ export class DumbCookiesSelectorContainer extends React.Component<Props, State> 
       Object.keys(cookies)
         .map(cookie => cookies[cookie])
         .reduce((flat, next) => flat.concat(next), []);
-    const updatedCookiesArray = cookiesArray.map(
-      (cookie: CookieObject) =>
-        (cookie.name === updatedCookie.name ? { ...updatedCookie, cookieType: this.toggleCookieType(cookie.cookieType) } : cookie)
+    const updatedCookiesArray = cookiesArray.map((cookie: CookieObject) =>
+      (cookie.name === updatedCookie.name ? { ...updatedCookie, cookieType: this.toggleCookieType(cookie.cookieType) } : cookie)
     );
     const updatedCookiesByCategory = this.getCookiesObjectFromArray(updatedCookiesArray);
     this.setState({ cookies: updatedCookiesByCategory, settingsHaveChanged: true });

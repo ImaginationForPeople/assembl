@@ -161,7 +161,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   graphql(TimelineQuery, {
     options: ({ i18n: { locale } }) => ({
       variables: { lang: locale }

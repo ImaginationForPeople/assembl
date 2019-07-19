@@ -53,4 +53,7 @@ const mapDispatchToProps = dispatch => ({
 
 export { DumbManageSectionsForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbManageSectionsForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbManageSectionsForm);

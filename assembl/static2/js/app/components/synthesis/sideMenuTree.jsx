@@ -96,19 +96,18 @@ class SideMenuTree extends React.Component<SideMenuTreeProps, SideMenuTreeState>
       <div>
         <div className={this.getLinkContainerClassNames(id)}>
           {this.getTitle(title, level, rootIdeaUrl, id)}
-          {hasChildren &&
-            level === 1 && (
-              <span
-                className={classNames('pointer', {
-                  'assembl-icon-angle-right': !showSubIdeasTree,
-                  'assembl-icon-angle-down ': showSubIdeasTree,
-                  'no-pointer-events': isIdeaOnScroll || isChildOnScroll
-                })}
-                onClick={() => {
-                  this.setState({ activeKey: id, show: !show });
-                }}
-              />
-            )}
+          {hasChildren && level === 1 && (
+            <span
+              className={classNames('pointer', {
+                'assembl-icon-angle-right': !showSubIdeasTree,
+                'assembl-icon-angle-down ': showSubIdeasTree,
+                'no-pointer-events': isIdeaOnScroll || isChildOnScroll
+              })}
+              onClick={() => {
+                this.setState({ activeKey: id, show: !show });
+              }}
+            />
+          )}
         </div>
         <div>{showSubIdeasTree && tree}</div>
       </div>

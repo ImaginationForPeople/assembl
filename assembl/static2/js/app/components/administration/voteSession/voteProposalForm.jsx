@@ -217,10 +217,9 @@ const DumbVoteProposalForm = ({
                 )}
               </Checkbox>
 
-              {pModule &&
-                pModule.get('id') && (
-                  <div>
-                    {/* <span
+              {pModule && pModule.get('id') && (
+                <div>
+                  {/* <span
                       className="inline settings-link"
                       onClick={() => {
                         settingsModal(pModule.get('id'));
@@ -230,19 +229,19 @@ const DumbVoteProposalForm = ({
                       <Translate value="administration.voteProposals.gaugeSettings" />
                     </span> */}
 
-                    {pModule.get('isCustom') && (
-                      <span
-                        className="inline settings-link"
-                        onClick={() => {
-                          cancelCustomization(pModule.get('id'));
-                        }}
-                      >
-                        <i className="assembl-icon-cancel" />
-                        <Translate value="administration.voteProposals.cancelCustomization" />
-                      </span>
-                    )}
-                  </div>
-                )}
+                  {pModule.get('isCustom') && (
+                    <span
+                      className="inline settings-link"
+                      onClick={() => {
+                        cancelCustomization(pModule.get('id'));
+                      }}
+                    >
+                      <i className="assembl-icon-cancel" />
+                      <Translate value="administration.voteProposals.cancelCustomization" />
+                    </span>
+                  )}
+                </div>
+              )}
             </div>
           );
         })}
@@ -303,4 +302,7 @@ const mapDispatchToProps = (dispatch, { id }) => ({
 
 export { DumbVoteProposalForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbVoteProposalForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbVoteProposalForm);

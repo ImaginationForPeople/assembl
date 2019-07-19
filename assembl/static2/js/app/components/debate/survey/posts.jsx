@@ -102,7 +102,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   withRouter,
   graphql(QuestionPosts, {
     options: (props) => {
@@ -130,7 +133,12 @@ export default compose(
         };
       }
 
-      const { question: { posts }, fetchMore, refetch, networkStatus } = data;
+      const {
+        question: { posts },
+        fetchMore,
+        refetch,
+        networkStatus
+      } = data;
       return {
         error: data.error,
         loading: data.loading,

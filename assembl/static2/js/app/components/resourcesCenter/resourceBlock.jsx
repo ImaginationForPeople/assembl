@@ -41,14 +41,13 @@ const ResourceBlock = (props: Props) => {
               <img src={image.externalUrl} alt="resource" className={imgClassNames} />
             </div>
           )}
-          {embedCode &&
-            !image && (
-              <div className="resource-video-container">
-                <div className={videoClassNames}>
-                  <Medias path={embedCode} />
-                </div>
+          {embedCode && !image && (
+            <div className="resource-video-container">
+              <div className={videoClassNames}>
+                <Medias path={embedCode} />
               </div>
-            )}
+            </div>
+          )}
           <div className="resource-text">
             <p dangerouslySetInnerHTML={{ __html: text }} />
             {doc && (

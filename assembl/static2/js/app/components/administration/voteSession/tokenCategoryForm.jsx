@@ -93,4 +93,7 @@ const mapDispatchToProps = (dispatch, { moduleId, id, editLocale }) => ({
 
 export { DumbTokenCategoryForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbTokenCategoryForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbTokenCategoryForm);

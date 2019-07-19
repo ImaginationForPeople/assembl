@@ -34,7 +34,8 @@ class DontUnderstand extends React.Component<{ size: number, color: string, back
           />
           <g transform="translate(4.821192, 7.231788)" fill={color}>
             <g transform="translate(1.298013, 2.966887)">
-              <path d="M1.90993377,
+              <path
+                d="M1.90993377,
                     0.0556291391 C0.945695364,
                     0.0556291391 0.166887417,
                     0.834437086 0.166887417,
@@ -68,7 +69,8 @@ class DontUnderstand extends React.Component<{ size: number, color: string, back
                 height="1.39072848"
               />
             </g>
-            <path d="M12.2569536,
+            <path
+              d="M12.2569536,
                   10.4397351 L10.0317881,
                   12.1456954 C9.58675497,
                   12.4980132 9.4013245,

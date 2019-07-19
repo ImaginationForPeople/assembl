@@ -104,13 +104,15 @@ class Profile extends React.PureComponent<ProfileProps, ProfileState> {
 
   handleSaveClick = () => {
     const { id, lang, profileFields, updateProfileFields } = this.props;
-    const data = profileFields.filter(pf => !pf.configurableField.hidden).map(pf => ({
-      configurableFieldId: pf.configurableField.id,
-      id: pf.id,
-      valueData: {
-        value: this.state.values[pf.id]
-      }
-    }));
+    const data = profileFields
+      .filter(pf => !pf.configurableField.hidden)
+      .map(pf => ({
+        configurableFieldId: pf.configurableField.id,
+        id: pf.id,
+        valueData: {
+          value: this.state.values[pf.id]
+        }
+      }));
     const variables = { lang: lang, data: data };
     const payload = {
       refetchQueries: [

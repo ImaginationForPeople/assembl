@@ -287,4 +287,7 @@ const mapDispatchToProps = (dispatch, { id, editLocale }) => ({
 
 export { DumbGaugeForm };
 
-export default connect(mapStateToProps, mapDispatchToProps)(DumbGaugeForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(DumbGaugeForm);

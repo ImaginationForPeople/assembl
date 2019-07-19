@@ -349,21 +349,19 @@ class Idea extends React.Component<Props> {
           <HeaderStatistics statElements={statElements} />
         </Header>
         <section className="post-section">
-          {!ideaWithPostsData.loading &&
-            !isBrightMirror &&
-            announcement && (
-              <Grid fluid className="background-light padding-left-right">
-                <div className="max-container">
-                  <div className="content-section">
-                    <Announcement
-                      announcement={announcement}
-                      idea={ideaWithPostsData.idea}
-                      semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-                    />
-                  </div>
+          {!ideaWithPostsData.loading && !isBrightMirror && announcement && (
+            <Grid fluid className="background-light padding-left-right">
+              <div className="max-container">
+                <div className="content-section">
+                  <Announcement
+                    announcement={announcement}
+                    idea={ideaWithPostsData.idea}
+                    semanticAnalysisForThematicData={semanticAnalysisForThematicData}
+                  />
                 </div>
-              </Grid>
-            )}
+              </div>
+            </Grid>
+          )}
           {ideaWithPostsData.loading ? <Loader /> : view}
         </section>
         <GoUp />
@@ -388,7 +386,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const IdeaWithPosts = compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   graphql(IdeaWithPostsQuery, { name: 'ideaWithPostsData' }),
   withRouter
 )(Idea);
@@ -454,7 +455,10 @@ const mapStateToPropsForIdeaQuery = state => ({
 });
 
 export default compose(
-  connect(mapStateToPropsForIdeaQuery, mapDispatchToProps),
+  connect(
+    mapStateToPropsForIdeaQuery,
+    mapDispatchToProps
+  ),
   graphql(IdeaQuery, {
     options: { notifyOnNetworkStatusChange: true },
     // ideaData.loading stays to true when switching interface language (IdeaQuery is using lang variable)

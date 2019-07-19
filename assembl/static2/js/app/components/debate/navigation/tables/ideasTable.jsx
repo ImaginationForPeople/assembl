@@ -40,6 +40,8 @@ const mapStateToProps = state => ({
   debate: state.debate
 });
 
-export default compose(connect(mapStateToProps), IdeasTableWithData, manageErrorAndLoading({ displayLoader: true }))(
-  DumbIdeasTable
-);
+export default compose(
+  connect(mapStateToProps),
+  IdeasTableWithData,
+  manageErrorAndLoading({ displayLoader: true })
+)(DumbIdeasTable);

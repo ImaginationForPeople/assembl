@@ -255,7 +255,10 @@ const isNotInDiscussionAdmin = isNotInAdminSection('discussion');
 const isNotInLandingPageAdmin = isNotInAdminSection('landingPage');
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   graphql(VoteSessionQuery, {
     skip: ({ params }) => params.phase !== 'voteSession',
     options: ({ locale, location }) => ({

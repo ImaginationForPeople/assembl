@@ -99,4 +99,7 @@ const mapStateToProps = state => ({
   timeline: state.timeline
 });
 
-export default compose(connect(mapStateToProps), withScreenWidth)(Phase);
+export default compose(
+  connect(mapStateToProps),
+  withScreenWidth
+)(Phase);

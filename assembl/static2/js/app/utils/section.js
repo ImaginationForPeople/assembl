@@ -11,7 +11,7 @@ const LEN_NUMERIC = 2;
 const defaultGenerator = (indexes: Array<number>): string => indexes.join(SEPARATOR) + SEPARATOR;
 
 const alphanumeric = (indexes: Array<number>): string => {
-  const alphanumericIndexes = indexes.map((i, level) => (level < LEN_NUMERIC ? level : CHARS[i % LEN_CHARS - 1]));
+  const alphanumericIndexes = indexes.map((i, level) => (level < LEN_NUMERIC ? level : CHARS[(i % LEN_CHARS) - 1]));
   return alphanumericIndexes.join(SEPARATOR) + SEPARATOR;
 };
 
@@ -31,7 +31,7 @@ const alphanumericOr = (indexes: Array<number>): string => {
   const isAlpha = indexes.length > LEN_NUMERIC;
   if (isAlpha) {
     const indexesToDesplay = indexes.slice(LEN_NUMERIC);
-    const alphanumericIndexes = indexesToDesplay.map(i => CHARS[i % LEN_CHARS - 1]);
+    const alphanumericIndexes = indexesToDesplay.map(i => CHARS[(i % LEN_CHARS) - 1]);
     return alphanumericIndexes.join(SEPARATOR) + SEPARATOR;
   }
   return indexes.join(SEPARATOR) + SEPARATOR;

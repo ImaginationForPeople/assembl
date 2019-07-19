@@ -30,15 +30,18 @@ class ResizeListener extends React.Component<Props> {
   }
 }
 
-export const ScreenDimensionsProvider = connect(null, dispatch => ({
-  updateScreenDimensions: () => {
-    dispatch({
-      type: 'UPDATE_SCREEN_DIMENSIONS',
-      newWidth: window.innerWidth,
-      newHeight: window.innerHeight
-    });
-  }
-}))(ResizeListener);
+export const ScreenDimensionsProvider = connect(
+  null,
+  dispatch => ({
+    updateScreenDimensions: () => {
+      dispatch({
+        type: 'UPDATE_SCREEN_DIMENSIONS',
+        newWidth: window.innerWidth,
+        newHeight: window.innerHeight
+      });
+    }
+  })
+)(ResizeListener);
 
 type AnyComponent = React.ComponentType<any>;
 

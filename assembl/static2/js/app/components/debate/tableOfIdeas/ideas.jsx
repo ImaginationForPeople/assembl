@@ -92,12 +92,11 @@ class Ideas extends React.Component<Props, State> {
           <div className="max-container">
             {!isMobile && <PageTitle />}
             {isMobile && ideaLevel === 0 && <PageTitle />}
-            {isMobile &&
-              ideaLevel > 0 && (
-                <div className="ideas-back-arrow" onClick={this.goBackToParents}>
-                  <span className="assembl-icon-down-small color" />
-                </div>
-              )}
+            {isMobile && ideaLevel > 0 && (
+              <div className="ideas-back-arrow" onClick={this.goBackToParents}>
+                <span className="assembl-icon-down-small color" />
+              </div>
+            )}
             <div className={classnames('content-section', { 'mobile-content-section': isMobile })}>
               {!isMobile
                 ? selectedIdeasId.map((ideaId, index) => (

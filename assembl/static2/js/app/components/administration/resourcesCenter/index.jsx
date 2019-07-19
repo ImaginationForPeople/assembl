@@ -122,4 +122,7 @@ const mapStateToProps = ({ admin: { editLocale }, i18n }) => ({
   lang: i18n.locale
 });
 
-export default compose(connect(mapStateToProps), withApollo)(ResourcesCenterAdminForm);
+export default compose(
+  connect(mapStateToProps),
+  withApollo
+)(ResourcesCenterAdminForm);

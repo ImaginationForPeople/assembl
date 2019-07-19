@@ -167,7 +167,12 @@ const ManageProfileOptionsForm = ({
   );
 };
 
-const mapStateToProps = ({ admin: { editLocale, profileOptions: { textFieldsById } } }) => ({
+const mapStateToProps = ({
+  admin: {
+    editLocale,
+    profileOptions: { textFieldsById }
+  }
+}) => ({
   editLocale: editLocale,
   textFields: textFieldsById
     .filter(tf => !tf.get('_toDelete'))
@@ -195,4 +200,7 @@ const mapDispatchToProps = dispatch => ({
   moveTextFieldUp: id => dispatch(actions.moveTextFieldUp(id))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ManageProfileOptionsForm);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ManageProfileOptionsForm);

@@ -99,7 +99,7 @@ export const getNumberOfDays = (date1: Date, date2: Date) => {
   return Math.round(days);
 };
 
-export const calculatePercentage = (value1: number, value2: number) => Math.round(value1 * 100 / value2 * 100) / 100;
+export const calculatePercentage = (value1: number, value2: number) => Math.round(((value1 * 100) / value2) * 100) / 100;
 
 /*
   Handrolled instead of using lodash

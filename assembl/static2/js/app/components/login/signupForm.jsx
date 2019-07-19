@@ -275,7 +275,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   graphql(TextFieldsQuery, {
     props: ({ data }) => {
       if (data.error || data.loading) {

@@ -124,7 +124,14 @@ export default compose(
         };
       }
 
-      const { question: { numContributors, numPosts, totalSentiments, parent: { img, title, id } } } = data;
+      const {
+        question: {
+          numContributors,
+          numPosts,
+          totalSentiments,
+          parent: { img, title, id }
+        }
+      } = data;
 
       return {
         error: data.error,

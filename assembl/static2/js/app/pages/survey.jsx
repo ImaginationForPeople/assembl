@@ -239,7 +239,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 export default compose(
-  connect(mapStateToProps, mapDispatchToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
   graphql(ThematicQuery, {
     props: ({ data, ownProps }) => {
       if (data.error || data.loading) {
@@ -249,7 +252,10 @@ export default compose(
         };
       }
 
-      const { thematic: { questions, numContributors, numPosts, totalSentiments }, refetch } = data;
+      const {
+        thematic: { questions, numContributors, numPosts, totalSentiments },
+        refetch
+      } = data;
       return {
         error: data.error,
         loading: data.loading,

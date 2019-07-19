@@ -27,7 +27,7 @@ const style = {
  * @param {Int} score keyword score use to compute the font weight from a base KEYWORD_REM
  */
 const computeFontSize = (score: number) => {
-  let fontSize: number = Math.max(KEYWORD_MIN_FONT_SIZE * score / 2, KEYWORD_MIN_FONT_SIZE);
+  let fontSize: number = Math.max((KEYWORD_MIN_FONT_SIZE * score) / 2, KEYWORD_MIN_FONT_SIZE);
   fontSize = fontSize > KEYWORD_MIN_FONT_SIZE ? Math.min(fontSize, KEYWORD_MAX_FONT_SIZE) : KEYWORD_MIN_FONT_SIZE;
   return Math.ceil(fontSize);
 };

@@ -41,13 +41,12 @@ const Footer = ({
     privacyPolicy: hasPrivacyPolicy,
     userGuidelines: hasUserGuidelines
   };
-  const legalPagesInFooter = Object.keys(legalPages).map(
-    key =>
-      (legalPages[key] ? (
-        <Link to={`${get(key, debateSlug)}`} key={key}>
-          <Translate value={`footer.${key}`} />
-        </Link>
-      ) : null)
+  const legalPagesInFooter = Object.keys(legalPages).map(key =>
+    (legalPages[key] ? (
+      <Link to={`${get(key, debateSlug)}`} key={key}>
+        <Translate value={`footer.${key}`} />
+      </Link>
+    ) : null)
   );
   return (
     <Grid fluid className="background-dark relative" id="footer">
@@ -118,4 +117,8 @@ const withData = graphql(TabsConditionQuery, {
   })
 });
 
-export default compose(connect(mapStateToProps), withData, manageErrorAndLoading({ displayLoader: false }))(Footer);
+export default compose(
+  connect(mapStateToProps),
+  withData,
+  manageErrorAndLoading({ displayLoader: false })
+)(Footer);

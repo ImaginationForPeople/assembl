@@ -361,17 +361,16 @@ class DumbVoteSession extends React.Component<Props, State> {
                   className="no-padding"
                 >
                   <div className="vote-instructions">{renderRichtext(instructionsSectionContent)}</div>
-                  {tokenVoteModule &&
-                    tokenVoteModule.tokenCategories && (
-                      <div ref={this.setAvailableTokensRef}>
-                        <AvailableTokens
-                          sticky={availableTokensSticky}
-                          remainingTokensByCategory={remainingTokensByCategory}
-                          tokenCategories={tokenVoteModule.tokenCategories}
-                          windowWidth={windowWidth}
-                        />
-                      </div>
-                    )}
+                  {tokenVoteModule && tokenVoteModule.tokenCategories && (
+                    <div ref={this.setAvailableTokensRef}>
+                      <AvailableTokens
+                        sticky={availableTokensSticky}
+                        remainingTokensByCategory={remainingTokensByCategory}
+                        tokenCategories={tokenVoteModule.tokenCategories}
+                        windowWidth={windowWidth}
+                      />
+                    </div>
+                  )}
                 </Col>
               </Row>
             </Section>

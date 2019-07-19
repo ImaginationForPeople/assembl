@@ -10,7 +10,8 @@ const Error = ({ errorMessage }: Props) => (
     <p>
       <strong>
         <Translate value="error.reason" />
-      </strong>&nbsp;&quot;{errorMessage}&quot;
+      </strong>
+      &nbsp;&quot;{errorMessage}&quot;
     </p>
   </div>
 );
