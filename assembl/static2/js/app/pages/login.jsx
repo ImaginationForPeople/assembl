@@ -4,7 +4,7 @@ import { Grid, Col } from 'react-bootstrap';
 import get from 'lodash/get';
 import { I18n } from 'react-redux-i18n';
 // Route helpers imports
-import { browserHistory } from '../../app/router';
+import { browserHistory } from '../router';
 
 import AssemblLogin from '../components/login/assemblLogin';
 import { SocialMedia } from '../components/login/socialMediaLogin';
@@ -46,11 +46,7 @@ class Login extends React.Component<Props> {
             {hasSocialMedias && (
               <div>
                 <Col xs={12} md={5}>
-                  {slug ? (
-                    <SocialMedia providers={providers} next={next} slug={slug} />
-                  ) : (
-                    <SocialMedia providers={providers} next={next} />
-                  )}
+                  {slug ? <SocialMedia providers={providers} next={next} slug={slug} /> : <SocialMedia providers={providers} next={next} />}
                 </Col>
                 <Col xs={12} md={1}>
                   &nbsp;

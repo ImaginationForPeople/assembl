@@ -69,10 +69,7 @@ describe('textFieldsById reducer', () => {
         },
         {
           id: '4',
-          titleEntries: [
-            { localeCode: 'en', value: 'Custom select field' },
-            { localeCode: 'fr', value: 'Champ personnalisé select' }
-          ],
+          titleEntries: [{ localeCode: 'en', value: 'Custom select field' }, { localeCode: 'fr', value: 'Champ personnalisé select' }],
           order: 4,
           required: false,
           options: [
@@ -112,10 +109,7 @@ describe('textFieldsById reducer', () => {
       }),
       '3': Map({
         id: '3',
-        titleEntries: List.of(
-          Map({ localeCode: 'en', value: 'Custom field' }),
-          Map({ localeCode: 'fr', value: 'Champ personnalisé' })
-        ),
+        titleEntries: List.of(Map({ localeCode: 'en', value: 'Custom field' }), Map({ localeCode: 'fr', value: 'Champ personnalisé' })),
         order: 3,
         required: false,
         _hasChanged: false,
@@ -124,10 +118,7 @@ describe('textFieldsById reducer', () => {
       }),
       '4': Map({
         id: '4',
-        titleEntries: List.of(
-          Map({ localeCode: 'en', value: 'Custom select field' }),
-          Map({ localeCode: 'fr', value: 'Champ personnalisé select' })
-        ),
+        titleEntries: List.of(Map({ localeCode: 'en', value: 'Custom select field' }), Map({ localeCode: 'fr', value: 'Champ personnalisé select' })),
         order: 4,
         required: false,
         _hasChanged: false,

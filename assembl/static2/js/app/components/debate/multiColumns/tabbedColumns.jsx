@@ -32,6 +32,7 @@ export default class TabbedColumns extends React.Component<Props, State> {
             return (
               <div key={classifier} className={`${isActive ? 'active ' : ''}button-container`} style={style}>
                 <button
+                  type="button"
                   style={{
                     backgroundColor: isActive ? `rgba(${hexToRgb(messageColumn.color)},${COLUMN_OPACITY_GAIN})` : inactiveTabColor
                   }}

@@ -13,23 +13,11 @@ class Proposals extends React.Component {
   }
 
   displayProposals = () => {
-    this.setState({ hideProposals: !this.state.hideProposals });
+    this.setState(prevState => ({ hideProposals: !prevState.hideProposals }));
   };
 
   render() {
-    const {
-      hasPendingPosts,
-      identifier,
-      isPhaseCompleted,
-      questionIndex,
-      questionId,
-      themeId,
-      title,
-      posts,
-      nbPostsToShow,
-      phaseUrl,
-      questionsLength
-    } = this.props;
+    const { hasPendingPosts, identifier, isPhaseCompleted, questionIndex, questionId, themeId, title, posts, nbPostsToShow, phaseUrl, questionsLength } = this.props;
     const questionTitle = questionsLength > 1 ? `${questionIndex}/ ${title}` : title;
     const postsToShow = posts.slice(0, nbPostsToShow);
     const allProposalsLink = `${phaseUrl}${getRoute('question', {
@@ -48,11 +36,7 @@ class Proposals extends React.Component {
           <h3 className="collapsed-title padding-title">
             <span className="title-txt">{questionTitle}</span>
             <div className={postsToShow.length > 0 ? 'shown proposal-arrow' : 'hidden proposal-arrow'}>
-              <span
-                className={
-                  this.state.hideProposals ? 'assembl-icon-angle-right color pointer' : 'assembl-icon-angle-down color pointer'
-                }
-              />
+              <span className={this.state.hideProposals ? 'assembl-icon-angle-right color pointer' : 'assembl-icon-angle-down color pointer'} />
             </div>
           </h3>
         </div>

@@ -13,14 +13,7 @@ type TimelineProps = {
   showSegmentMenu: Function
 };
 
-export function DumbTimeline({
-  timeline,
-  hideMenu,
-  activeSegment,
-  activeSegmentPhase,
-  showSegmentMenu,
-  showNavigation
-}: TimelineProps) {
+export function DumbTimeline({ timeline, hideMenu, activeSegment, activeSegmentPhase, showSegmentMenu, showNavigation }: TimelineProps) {
   return (
     <div className="timeline-container">
       {timeline &&

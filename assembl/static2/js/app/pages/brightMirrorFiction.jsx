@@ -109,10 +109,7 @@ type BrightMirrorFictionGraphQLProps = {
   existingTags: Array<Tag>
 };
 
-type LocalBrightMirrorFictionProps = AdditionalProps &
-  BrightMirrorFictionProps &
-  BrightMirrorFictionReduxProps &
-  BrightMirrorFictionGraphQLProps;
+type LocalBrightMirrorFictionProps = AdditionalProps & BrightMirrorFictionProps & BrightMirrorFictionReduxProps & BrightMirrorFictionGraphQLProps;
 
 type BrightMirrorFictionState = {
   /** Fiction title */
@@ -233,19 +230,7 @@ export class BrightMirrorFiction extends Component<LocalBrightMirrorFictionProps
     // Display nothing/loader when graphQL is still loading datas
     if (loading) return null;
 
-    const {
-      brightMirrorFictionData,
-      contentLocale,
-      contentLocaleMapping,
-      fictionId,
-      ideaWithCommentsData,
-      phase,
-      slug,
-      themeId,
-      phaseId,
-      timeline,
-      screenWidth
-    } = this.props;
+    const { brightMirrorFictionData, contentLocale, contentLocaleMapping, fictionId, ideaWithCommentsData, phase, slug, themeId, phaseId, timeline, screenWidth } = this.props;
     // Handle fetching error
     if (brightMirrorFictionData.error || ideaWithCommentsData.error) {
       displayAlert('danger', I18n.t('error.loading'));
@@ -260,16 +245,13 @@ export class BrightMirrorFiction extends Component<LocalBrightMirrorFictionProps
     const commentsInfo: CommentsInfo = this.getCommentsInfo();
     // Filter extract by lang and sort extracts by order of apparition
     const { extracts } = fiction;
-    const filteredExtracts =
-      extracts && extracts.filter(extract => extract && extract.lang === contentLocale).sort(compareByTextPosition);
+    const filteredExtracts = extracts && extracts.filter(extract => extract && extract.lang === contentLocale).sort(compareByTextPosition);
 
     // Define user permission
     const userId = fiction.creator ? fiction.creator.userId : USER_ID_NOT_FOUND;
     const connectedUserId = getConnectedUserId();
     const userCanPost = connectedUserId && connectedUserCan(Permissions.ADD_POST);
-    const userCanDelete =
-      (connectedUserId === String(userId) && connectedUserCan(Permissions.DELETE_MY_POST)) ||
-      connectedUserCan(Permissions.DELETE_POST);
+    const userCanDelete = (connectedUserId === String(userId) && connectedUserCan(Permissions.DELETE_MY_POST)) || connectedUserCan(Permissions.DELETE_POST);
     const userCanEdit = connectedUserId === String(userId) && connectedUserCan(Permissions.EDIT_MY_POST);
 
     // Define callback functions - TODO: move the logic out of render
@@ -292,10 +274,7 @@ export class BrightMirrorFiction extends Component<LocalBrightMirrorFictionProps
     // Define components props
     const circleAvatarProps: CircleAvatarProps = {
       username: displayName,
-      src:
-        fiction.creator && fiction.creator.image && fiction.creator.image.externalUrl
-          ? fiction.creator.image.externalUrl
-          : EMPTY_STRING
+      src: fiction.creator && fiction.creator.image && fiction.creator.image.externalUrl ? fiction.creator.image.externalUrl : EMPTY_STRING
     };
 
     const fictionHeaderProps: FictionHeaderProps = {

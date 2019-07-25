@@ -83,9 +83,7 @@ const Doughnut = ({ elements }) => {
     </svg>
   ) : (
     <svg className="doughnut" viewBox={viewBox}>
-      {filteredElements.length === 1
-        ? simpleCircle(cx, cy, r, filteredElements[0])
-        : circlePaths(cx, cy, r, filteredElements, totalCount)}
+      {filteredElements.length === 1 ? simpleCircle(cx, cy, r, filteredElements[0]) : circlePaths(cx, cy, r, filteredElements, totalCount)}
     </svg>
   );
 };

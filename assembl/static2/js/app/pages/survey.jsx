@@ -57,8 +57,7 @@ type Props = {
 
 type State = {
   isScroll: boolean,
-  questionIndex: number | null,
-  showModal: boolean
+  questionIndex: number | null
 };
 
 class Survey extends React.Component<Props, State> {
@@ -66,7 +65,6 @@ class Survey extends React.Component<Props, State> {
     super(props);
     this.state = {
       isScroll: false,
-      showModal: false,
       questionIndex: null
     };
   }
@@ -149,10 +147,7 @@ class Survey extends React.Component<Props, State> {
               <Grid fluid className="background-light instructions-text">
                 <div className="max-container">
                   <div className="content-section section-margin-top">
-                    <SurveyAnnouncement
-                      announcement={announcement}
-                      semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-                    />
+                    <SurveyAnnouncement announcement={announcement} semanticAnalysisForThematicData={semanticAnalysisForThematicData} />
                   </div>
                 </div>
               </Grid>

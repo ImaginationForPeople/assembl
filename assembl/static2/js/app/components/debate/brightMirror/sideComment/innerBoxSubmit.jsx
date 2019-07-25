@@ -31,16 +31,11 @@ const InnerBoxSubmit = ({ userId, userName, body, updateBody, submit, cancelSubm
     </div>
     <div className="harvesting-box-body">
       <div className="submit-comment">
-        <RichTextEditor
-          editorState={body}
-          onChange={updateBody}
-          placeholder={I18n.t('debate.brightMirror.sideComment.commentLabel')}
-          withAttachmentButton
-        />
+        <RichTextEditor editorState={body} onChange={updateBody} placeholder={I18n.t('debate.brightMirror.sideComment.commentLabel')} withAttachmentButton />
       </div>
     </div>
     <div className="harvesting-box-footer">
-      <Button key="cancel" className={'button-cancel button-dark'} onClick={cancelSubmit}>
+      <Button key="cancel" className="button-cancel button-dark" onClick={cancelSubmit}>
         {I18n.t('debate.confirmDeletionButtonCancel')}
       </Button>
       <Button key="validate" className="button-submit button-dark" onClick={submit}>

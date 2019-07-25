@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Translate, I18n } from 'react-redux-i18n';
 import { Col, Tooltip } from 'react-bootstrap';
 // Components imports
-import StatisticsDoughnut from '../common/statisticsDoughnut';
+import StatisticsDoughnut from './statisticsDoughnut';
 import { sentimentDefinitionsObject, type SentimentDefinition } from './sentimentDefinitions';
 import TextAndMedia from '../../common/textAndMedia';
 import { CountablePublicationStates, MESSAGE_VIEW } from '../../../constants';
@@ -16,7 +16,9 @@ import SemanticAnalysisForThematicQuery from '../../../graphql/SemanticAnalysisF
 
 export const createTooltip = (sentiment: SentimentDefinition, count: number) => (
   <Tooltip id={`${sentiment.camelType}Tooltip`} className="no-arrow-tooltip">
-    {count} <Translate value={`debate.${sentiment.camelType}`} />
+    {count}
+    {' '}
+    <Translate value={`debate.${sentiment.camelType}`} />
   </Tooltip>
 );
 
@@ -71,8 +73,7 @@ type Props = {
 
 type ColumnsInfoType = { count: ?number, color: ?string, name: ?string };
 
-export const getColumnInfos = (messageColumns: Array<IdeaMessageColumnFragment>): Array<ColumnsInfoType> =>
-  messageColumns.map(col => ({ count: col.numPosts, color: col.color, name: col.name }));
+export const getColumnInfos = (messageColumns: Array<IdeaMessageColumnFragment>): Array<ColumnsInfoType> => messageColumns.map(col => ({ count: col.numPosts, color: col.color, name: col.name }));
 
 export const getSentimentsCount = (posts: Posts) => {
   const counters: SentimentsCounts = { ...sentimentDefinitionsObject };
@@ -108,14 +109,7 @@ export const SurveyAnnouncement = ({ announcement, semanticAnalysisForThematicDa
     </div>
   );
 
-  return (
-    <ThematicTabs
-      guidelinesContent={guidelinesContent}
-      summary={announcement.summary}
-      isMobile={!!isMobile.any()}
-      semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-    />
-  );
+  return <ThematicTabs guidelinesContent={guidelinesContent} summary={announcement.summary} isMobile={!!isMobile.any()} semanticAnalysisForThematicData={semanticAnalysisForThematicData} />;
 };
 
 export const Announcement = ({ announcement, idea, semanticAnalysisForThematicData }: Props) => {
@@ -142,7 +136,9 @@ export const Announcement = ({ announcement, idea, semanticAnalysisForThematicDa
             <div className="announcement-numbers">
               {columnInfos.map((col, index) => (
                 <div style={{ color: col.color }} key={`col-${index}`}>
-                  {col.count} <span className="col-announcement-count">{col.name}</span>
+                  {col.count}
+                  {' '}
+                  <span className="col-announcement-count">{col.name}</span>
                 </div>
               ))}
               <Counter num={numContributors} className="assembl-icon assembl-icon-profil" />
@@ -155,14 +151,7 @@ export const Announcement = ({ announcement, idea, semanticAnalysisForThematicDa
     </div>
   );
 
-  return (
-    <ThematicTabs
-      guidelinesContent={guidelinesContent}
-      summary={announcement.summary}
-      semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-      isMobile={!!isMobile.any()}
-    />
-  );
+  return <ThematicTabs guidelinesContent={guidelinesContent} summary={announcement.summary} semanticAnalysisForThematicData={semanticAnalysisForThematicData} isMobile={!!isMobile.any()} />;
 };
 
 const announcementDefaultProps = {

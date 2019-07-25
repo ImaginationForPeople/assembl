@@ -1,4 +1,5 @@
 // @flow
+/* eslint  max-len: 0 */ // --> OFF
 import React from 'react';
 
 const NoDataIcon = () => (

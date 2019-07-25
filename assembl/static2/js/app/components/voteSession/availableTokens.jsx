@@ -69,25 +69,11 @@ const AvailableTokens = ({ remainingTokensByCategory, sticky, tokenCategories, w
                 return (
                   <Col xs={12} md={sticky ? columnSizes[idx] : 12} key={id} className={sticky && idx % 2 !== 0 ? 'center' : ''}>
                     <div className={sticky ? `category-available-tokens ${columnClass[idx]}` : 'category-available-tokens'}>
-                      <div
-                        className="text"
-                        style={
-                          (sticky && tokenCategories.length % 2 !== 0 && tokenCategories.length > 2) || windowWidth < 400
-                            ? { maxWidth: '210px' }
-                            : { minWidth: '160px' }
-                        }
-                      >
+                      <div className="text" style={(sticky && tokenCategories.length % 2 !== 0 && tokenCategories.length > 2) || windowWidth < 400 ? { maxWidth: '210px' } : { minWidth: '160px' }}>
                         <h2 className="dark-title-6">{title}</h2>
                         {<Translate value={`debate.voteSession.${remainingTokens}`} count={remaining} />}
                       </div>
-                      <div
-                        className="tokens"
-                        style={
-                          (sticky && tokenCategories.length % 2 !== 0 && tokenCategories.length > 2) || windowWidth < 400
-                            ? { maxWidth: '300px' }
-                            : { minWidth: '360px' }
-                        }
-                      >
+                      <div className="tokens" style={(sticky && tokenCategories.length % 2 !== 0 && tokenCategories.length > 2) || windowWidth < 400 ? { maxWidth: '300px' } : { minWidth: '360px' }}>
                         {range(totalNumber).map(n => (
                           <Circle key={n + 1} size={24} strokeColor={color} fillColor={n + 1 <= remaining ? color : undefined} />
                         ))}

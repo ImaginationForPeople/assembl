@@ -15,10 +15,7 @@ function getVariables(values, initialValues) {
   };
 }
 
-export const createMutationsPromises = (client: ApolloClient) => (
-  values: PersonalizeInterfaceValues,
-  initialValues: PersonalizeInterfaceValues
-) => {
+export const createMutationsPromises = (client: ApolloClient) => (values: PersonalizeInterfaceValues, initialValues: PersonalizeInterfaceValues) => {
   const updateMutation = () =>
     client.mutate({
       mutation: updateDiscussionPreference,

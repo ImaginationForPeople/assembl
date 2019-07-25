@@ -177,8 +177,7 @@ const mapDispatchToProps = (dispatch) => {
           });
         } else {
           const newId = createRandomId();
-          const dispatchCreateActions =
-            moduleType === 'tokens' ? createTokenVoteModuleWithCategories : createGaugeVoteModuleWithChoices;
+          const dispatchCreateActions = moduleType === 'tokens' ? createTokenVoteModuleWithCategories : createGaugeVoteModuleWithChoices;
           dispatchCreateActions(newId);
         }
       } else {

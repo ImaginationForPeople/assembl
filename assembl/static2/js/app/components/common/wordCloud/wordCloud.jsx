@@ -53,27 +53,13 @@ class WordCloud extends Component<Props> {
   };
 
   componentDidUpdate(prevProps: Props) {
-    if (
-      this.props.keywordsColor !== prevProps.keywordsColor ||
-      this.props.keywordsColorActive !== prevProps.keywordsColorActive
-    ) {
+    if (this.props.keywordsColor !== prevProps.keywordsColor || this.props.keywordsColorActive !== prevProps.keywordsColorActive) {
       this.forceUpdate();
     }
   }
 
   render() {
-    const {
-      height,
-      keywordsAngle,
-      keywordsColor,
-      keywordsColorActive,
-      keywords,
-      numberOfKeywordsToDisplay,
-      onMouseOutWord,
-      onMouseOverWord,
-      onWordClick,
-      width
-    } = this.props;
+    const { height, keywordsAngle, keywordsColor, keywordsColorActive, keywords, numberOfKeywordsToDisplay, onMouseOutWord, onMouseOverWord, onWordClick, width } = this.props;
 
     const maxAngle = keywordsAngle;
     const minAngle = maxAngle * -1;

@@ -169,14 +169,7 @@ export class DumbSynthesis extends React.Component<SynthesisProps, SynthesisStat
                   height: setSideMenuHeight
                 }}
               >
-                <SideMenu
-                  rootIdeas={roots}
-                  descendants={descendants}
-                  synthesisPostId={synthesisPostId}
-                  ideaOnScroll={ideaOnScroll}
-                  innerRef={this.updateSideMenuNode}
-                  show={!sideMenuIsHidden}
-                />
+                <SideMenu rootIdeas={roots} descendants={descendants} synthesisPostId={synthesisPostId} ideaOnScroll={ideaOnScroll} innerRef={this.updateSideMenuNode} show={!sideMenuIsHidden} />
               </Col>
               <Col mdOffset={3} md={8} sm={11}>
                 {roots.map((rootIdea, index) => (
@@ -194,13 +187,7 @@ export class DumbSynthesis extends React.Component<SynthesisProps, SynthesisStat
               </Col>
             </Row>
             {conclusion && (
-              <Section
-                title="conclusion"
-                translate
-                className="synthesis-block"
-                id="conclusion"
-                innerRef={this.updateConclusionBlock}
-              >
+              <Section title="conclusion" translate className="synthesis-block" id="conclusion" innerRef={this.updateConclusionBlock}>
                 <Row>
                   <Col mdOffset={3} md={8} smOffset={1} sm={10}>
                     <div dangerouslySetInnerHTML={{ __html: conclusion }} />

@@ -7,10 +7,7 @@ import { action } from '@storybook/addon-actions';
 import { getExtractTagId } from '../../../../../utils/extract';
 /* eslint-enable */
 
-import {
-  DumbSideCommentBox,
-  type Props as SideCommentBoxProps
-} from '../../../../../components/debate/brightMirror/sideComment/sideCommentBox';
+import { DumbSideCommentBox, type Props as SideCommentBoxProps } from '../../../../../components/debate/brightMirror/sideComment/sideCommentBox';
 import { ExtractStates, PublicationStates } from '../../../../../constants';
 
 const currentUser = {

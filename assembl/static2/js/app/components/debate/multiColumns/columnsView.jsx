@@ -20,21 +20,7 @@ class ColumnsView extends React.Component<$FlowFixMeProps> {
   };
 
   render = () => {
-    const {
-      messageColumns,
-      posts,
-      ideaId,
-      lang,
-      contentLocaleMapping,
-      initialRowIndex,
-      noRowsRenderer,
-      refetchIdea,
-      routerParams,
-      identifier,
-      phaseId,
-      debateData,
-      timeline
-    } = this.props;
+    const { messageColumns, posts, ideaId, lang, contentLocaleMapping, initialRowIndex, noRowsRenderer, refetchIdea, routerParams, identifier, phaseId, debateData, timeline } = this.props;
     if (!Array.isArray(messageColumns)) return null;
     const showSynthesis = messageColumns.some(column => !richTextBodyIsEmpty(get(column, 'columnSynthesis.body')));
     const columnsArray = orderPostsByMessageClassifier(messageColumns, posts);
@@ -93,8 +79,6 @@ class ColumnsView extends React.Component<$FlowFixMeProps> {
   };
 }
 
-const ColumnsViewWithContext = props => (
-  <DebateContext.Consumer>{({ isHarvesting }) => <ColumnsView {...props} isHarvesting={isHarvesting} />}</DebateContext.Consumer>
-);
+const ColumnsViewWithContext = props => <DebateContext.Consumer>{({ isHarvesting }) => <ColumnsView {...props} isHarvesting={isHarvesting} />}</DebateContext.Consumer>;
 
 export default withScreenWidth(ColumnsViewWithContext);

@@ -89,9 +89,7 @@ export const sectionsById: SectionsByIdReducer = (state = Map(), action) => {
       })
       .setIn([action.id, '_hasChanged'], true);
   case UPDATE_SECTION_TITLE:
-    return state
-      .updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.id, '_hasChanged'], true);
+    return state.updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.id, '_hasChanged'], true);
   case UPDATE_SECTIONS: {
     let newState = Map();
     action.sections.forEach((section) => {

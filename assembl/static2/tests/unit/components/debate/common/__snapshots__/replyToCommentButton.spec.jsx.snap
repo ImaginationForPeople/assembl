@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots ReplyToCommentButton default 1`] = `
-<a
-  className="action-reply"
+<button
+  className="action-reply no-border no-background"
   onClick={[Function]}
-  style={Object {}}
+  type="button"
 >
   <div
     className="custom-overlay"
@@ -21,14 +21,14 @@ exports[`Storyshots ReplyToCommentButton default 1`] = `
       />
     </div>
   </div>
-</a>
+</button>
 `;
 
 exports[`Storyshots ReplyToCommentButton disabled 1`] = `
-<a
-  className="action-reply disabled"
+<button
+  className="action-reply no-border no-background disabled"
   onClick={[Function]}
-  style={Object {}}
+  type="button"
 >
   <div
     className="custom-overlay"
@@ -45,5 +45,5 @@ exports[`Storyshots ReplyToCommentButton disabled 1`] = `
       />
     </div>
   </div>
-</a>
+</button>
 `;

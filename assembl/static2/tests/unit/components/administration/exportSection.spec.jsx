@@ -34,10 +34,7 @@ describe('ExportSection component', () => {
       handleShouldTranslate: handleShouldTranslateSpy,
       handleTranslationChange: handleTranslationChangeSpy,
       shouldTranslate: true,
-      languages: [
-        { locale: 'fr', name: 'French', nativeName: 'français', __typename: 'LocalePreference' },
-        { locale: 'en', name: 'English', nativeName: 'English', __typename: 'LocalePreference' }
-      ]
+      languages: [{ locale: 'fr', name: 'French', nativeName: 'français', __typename: 'LocalePreference' }, { locale: 'en', name: 'English', nativeName: 'English', __typename: 'LocalePreference' }]
     };
     const component = renderer.create(<ExportSection {...props} />);
     const tree = component.toJSON();

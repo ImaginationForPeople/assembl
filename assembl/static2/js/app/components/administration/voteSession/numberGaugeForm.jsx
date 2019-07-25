@@ -13,37 +13,12 @@ type NumberGaugeFormProps = {
   handleUnitChange: Function
 };
 
-const DumbNumberGaugeForm = ({
-  minimum,
-  maximum,
-  unit,
-  handleMinChange,
-  handleMaxChange,
-  handleUnitChange
-}: NumberGaugeFormProps) => (
+const DumbNumberGaugeForm = ({ minimum, maximum, unit, handleMinChange, handleMaxChange, handleUnitChange }: NumberGaugeFormProps) => (
   <React.Fragment>
     <FormGroup>
-      <FormControlWithLabel
-        onChange={e => handleMinChange(parseInt(e.target.value, 10))}
-        value={minimum ? minimum.toString() : ''}
-        label={I18n.t('administration.minValue')}
-        required
-        type="number"
-      />
-      <FormControlWithLabel
-        onChange={e => handleMaxChange(parseInt(e.target.value, 10))}
-        value={maximum ? maximum.toString() : ''}
-        label={I18n.t('administration.maxValue')}
-        required
-        type="number"
-      />
-      <FormControlWithLabel
-        onChange={e => handleUnitChange(e.target.value)}
-        value={unit}
-        label={I18n.t('administration.unit')}
-        required
-        type="text"
-      />
+      <FormControlWithLabel onChange={e => handleMinChange(parseInt(e.target.value, 10))} value={minimum ? minimum.toString() : ''} label={I18n.t('administration.minValue')} required type="number" />
+      <FormControlWithLabel onChange={e => handleMaxChange(parseInt(e.target.value, 10))} value={maximum ? maximum.toString() : ''} label={I18n.t('administration.maxValue')} required type="number" />
+      <FormControlWithLabel onChange={e => handleUnitChange(e.target.value)} value={unit} label={I18n.t('administration.unit')} required type="text" />
     </FormGroup>
   </React.Fragment>
 );

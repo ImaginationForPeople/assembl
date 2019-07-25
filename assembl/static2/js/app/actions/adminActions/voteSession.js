@@ -7,10 +7,7 @@ export const updateVoteSessionPageSeeCurrentVotes = (value: string): actionTypes
   type: actionTypes.UPDATE_VOTE_SESSION_PAGE_SEECURRENTVOTES
 });
 
-export const updateVoteSessionPagePropositionsTitle = (
-  locale: string,
-  value: string
-): actionTypes.UpdateVoteSessionPagePropositionsTitle => ({
+export const updateVoteSessionPagePropositionsTitle = (locale: string, value: string): actionTypes.UpdateVoteSessionPagePropositionsTitle => ({
   locale: locale,
   value: value,
   type: actionTypes.UPDATE_VOTE_SESSION_PAGE_PROPOSITIONS_TITLE
@@ -42,11 +39,7 @@ export const updateTokenVoteExclusiveCategory = (id: string, value: boolean): ac
   type: actionTypes.UPDATE_TOKEN_VOTE_EXCLUSIVE_CATEGORY
 });
 
-export const updateTokenVoteInstructions = (
-  id: string,
-  locale: string,
-  value: string
-): actionTypes.UpdateTokenVoteInstructions => ({
+export const updateTokenVoteInstructions = (id: string, locale: string, value: string): actionTypes.UpdateTokenVoteInstructions => ({
   id: id,
   locale: locale,
   value: value,
@@ -65,12 +58,7 @@ export const deleteTokenVoteCategory = (moduleId: string, index: number): action
   type: actionTypes.DELETE_TOKEN_VOTE_CATEGORY
 });
 
-export const updateTokenVoteCategoryTitle = (
-  id: string,
-  locale: string,
-  value: string,
-  moduleId: string
-): actionTypes.UpdateTokenVoteCategoryTitle => ({
+export const updateTokenVoteCategoryTitle = (id: string, locale: string, value: string, moduleId: string): actionTypes.UpdateTokenVoteCategoryTitle => ({
   moduleId: moduleId,
   id: id,
   locale: locale,
@@ -85,22 +73,14 @@ export const updateTokenTotalNumber = (id: string, value: number, moduleId: stri
   type: actionTypes.UPDATE_TOKEN_TOTAL_NUMBER
 });
 
-export const updateTokenVoteCategoryColor = (
-  id: string,
-  value: string,
-  moduleId: string
-): actionTypes.UpdateTokenVoteCategoryColor => ({
+export const updateTokenVoteCategoryColor = (id: string, value: string, moduleId: string): actionTypes.UpdateTokenVoteCategoryColor => ({
   moduleId: moduleId,
   id: id,
   value: value,
   type: actionTypes.UPDATE_TOKEN_VOTE_CATEGORY_COLOR
 });
 
-export const updateGaugeVoteInstructions = (
-  id: string,
-  locale: string,
-  value: string
-): actionTypes.UpdateGaugeVoteInstructions => ({
+export const updateGaugeVoteInstructions = (id: string, locale: string, value: string): actionTypes.UpdateGaugeVoteInstructions => ({
   id: id,
   locale: locale,
   value: value,
@@ -131,12 +111,7 @@ export const deleteGaugeVoteChoice = (moduleId: string, index: number): actionTy
   type: actionTypes.DELETE_GAUGE_VOTE_CHOICE
 });
 
-export const updateGaugeVoteChoiceLabel = (
-  id: string,
-  locale: string,
-  value: string,
-  moduleId: string
-): actionTypes.UpdateGaugeVoteChoiceLabel => ({
+export const updateGaugeVoteChoiceLabel = (id: string, locale: string, value: string, moduleId: string): actionTypes.UpdateGaugeVoteChoiceLabel => ({
   moduleId: moduleId,
   id: id,
   locale: locale,
@@ -191,11 +166,7 @@ export const updateVoteProposalTitle = (id: string, locale: string, value: strin
   type: actionTypes.UPDATE_VOTE_PROPOSAL_TITLE
 });
 
-export const updateVoteProposalDescription = (
-  id: string,
-  locale: string,
-  value: string
-): actionTypes.UpdateVoteProposalDescription => ({
+export const updateVoteProposalDescription = (id: string, locale: string, value: string): actionTypes.UpdateVoteProposalDescription => ({
   id: id,
   value: value,
   locale: locale,
@@ -212,11 +183,7 @@ export const moveProposalDown = (id: string): actionTypes.MoveProposalDown => ({
   type: actionTypes.MOVE_PROPOSAL_DOWN
 });
 
-export const addModuleToProposal = (
-  id: string,
-  proposalId: string,
-  voteSpecTemplateId: string
-): actionTypes.AddModuleToProposal => ({
+export const addModuleToProposal = (id: string, proposalId: string, voteSpecTemplateId: string): actionTypes.AddModuleToProposal => ({
   id: id,
   proposalId: proposalId,
   voteSpecTemplateId: voteSpecTemplateId,

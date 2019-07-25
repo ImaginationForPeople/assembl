@@ -45,12 +45,11 @@ class Navbar extends React.Component<Props, State> {
 
   goToSection = (stepNb: number) => {
     const slug = { slug: getDiscussionSlug() };
-    const stepId = this.state.steps[stepNb - 1];
     const { phaseIdentifier, queryArgs } = this.props;
     browserHistory.push(`${get('administration', { ...slug, id: phaseIdentifier }, { section: stepNb, ...queryArgs })}`);
-    this.setState({
-      currentStep: stepId
-    });
+    this.setState(prevState => ({
+      currentStep: prevState.steps[stepNb - 1]
+    }));
   };
 
   render() {

@@ -112,9 +112,7 @@ export class BurgerMenu extends React.PureComponent<Props, State> {
           </div>
         )}
         <span onClick={this.toggleMenu} className="nav-burger-with-text">
-          <span
-            className={classNames([`assembl-icon-${shouldDisplayMenu ? 'cancel' : 'menu-on'}`, 'burgermenu-icon', 'black'])}
-          />
+          <span className={classNames([`assembl-icon-${shouldDisplayMenu ? 'cancel' : 'menu-on'}`, 'burgermenu-icon', 'black'])} />
           <span className="menu-text">menu</span>
         </span>
       </div>

@@ -1,7 +1,7 @@
 // @flow
 import * as React from 'react';
 import { Translate } from 'react-redux-i18n';
-import LocalizeNumber from '../common/localizeNumber';
+import LocalizeNumber from './localizeNumber';
 
 type StatisticElementProps = {
   iconName: string,
@@ -57,8 +57,7 @@ const StatisticElement = ({ metricNameTranslateKey, iconName, metricValue }: Sta
   </div>
 );
 
-const mapElementsPropsToComponents = elemsProps =>
-  elemsProps.map((elementProps, index) => <StatisticElement key={`stat-${index}`} {...elementProps} />);
+const mapElementsPropsToComponents = elemsProps => elemsProps.map((elementProps, index) => <StatisticElement key={`stat-${index}`} {...elementProps} />);
 
 const HeaderStatistics = ({ statElements }: { statElements: StatElements }) => (
   <div className="statistic">

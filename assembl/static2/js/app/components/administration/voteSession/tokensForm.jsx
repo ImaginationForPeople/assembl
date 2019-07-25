@@ -75,11 +75,7 @@ const DumbTokensForm = ({
       {tokenCategoryNumber >= 2 && (
         <div style={{ marginTop: '25px' }}>
           <label htmlFor="input-dropdown-exclusive">{I18n.t('administration.exclusive')}</label>
-          <Helper
-            helperText={I18n.t('administration.helpers.exclusive')}
-            classname="inline"
-            additionalTextClasses="helper-text-only"
-          />
+          <Helper helperText={I18n.t('administration.helpers.exclusive')} classname="inline" additionalTextClasses="helper-text-only" />
           <SplitButton
             title={exclusiveCategories ? I18n.t('administration.exclusive') : I18n.t('administration.notExclusive')}
             onSelect={(e) => {
@@ -102,14 +98,7 @@ const DumbTokensForm = ({
         <div>
           <div className="separator" />
           {tokenCategories.map((categoryId, index) => (
-            <TokenCategoryForm
-              key={`token-type-${index}`}
-              id={categoryId}
-              editLocale={editLocale}
-              index={index}
-              moduleId={id}
-              tokenCategoryNumber={tokenCategoryNumber}
-            />
+            <TokenCategoryForm key={`token-type-${index}`} id={categoryId} editLocale={editLocale} index={index} moduleId={id} tokenCategoryNumber={tokenCategoryNumber} />
           ))}
         </div>
       ) : null}

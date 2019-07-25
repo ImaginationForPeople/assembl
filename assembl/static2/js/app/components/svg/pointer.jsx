@@ -8,15 +8,7 @@ class Pointer extends React.Component {
     const height = this.props.height ? this.props.height : '46px';
     const style = { marginLeft: marginLeft, ...this.props.style };
     return (
-      <svg
-        style={style}
-        className="pointer"
-        width={width}
-        height={height}
-        viewBox="0 0 31 46"
-        version="1.1"
-        xmlns="http://www.w3.org/2000/svg"
-      >
+      <svg style={style} className="pointer" width={width} height={height} viewBox="0 0 31 46" version="1.1" xmlns="http://www.w3.org/2000/svg">
         <g transform="translate(-772.000000, -4682.000000)">
           <g transform="translate(-2.000000, 689.000000)">
             <g transform="translate(2.000000, 2971.000000)">

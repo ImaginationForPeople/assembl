@@ -4,14 +4,9 @@ import { connect } from 'react-redux';
 import { I18n, Translate } from 'react-redux-i18n';
 import type { List, Map } from 'immutable';
 import ModulesPreview from './modulesPreview';
-import SectionTitle from '../../administration/sectionTitle';
+import SectionTitle from '../sectionTitle';
 import SelectModulesForm from './selectModulesForm';
-import {
-  toggleLandingPageModule,
-  moveLandingPageModuleDown,
-  moveLandingPageModuleUp,
-  createLandingPageModule
-} from '../../../actions/adminActions/landingPage';
+import { toggleLandingPageModule, moveLandingPageModuleDown, moveLandingPageModuleUp, createLandingPageModule } from '../../../actions/adminActions/landingPage';
 import { createRandomId } from '../../../utils/globalFunctions';
 import AddModuleButton from './addModuleButton';
 
@@ -88,45 +83,24 @@ export const sortByTitle = (modules: Array<LandingPageModuleType>): Array<Landin
   return sortedModules;
 };
 
-export const DumbManageModules = ({
-  enabledModules,
-  moduleTypes,
-  locale,
-  modulesById,
-  moveModuleDown,
-  moveModuleUp,
-  toggleModule,
-  createModule
-}: Props) => {
-  const numberOfTextAndMultimediaModules = moduleTypes.filter(
-    moduleType => moduleType.identifier === MODULES_IDENTIFIERS.introduction
-  ).length;
+export const DumbManageModules = ({ enabledModules, moduleTypes, locale, modulesById, moveModuleDown, moveModuleUp, toggleModule, createModule }: Props) => {
+  const numberOfTextAndMultimediaModules = moduleTypes.filter(moduleType => moduleType.identifier === MODULES_IDENTIFIERS.introduction).length;
 
-  const numberOfEnabledTextAndMultimediaModules = enabledModules.filter(
-    module => module.getIn(['moduleType', 'identifier']) === MODULES_IDENTIFIERS.introduction
-  ).size;
+  const numberOfEnabledTextAndMultimediaModules = enabledModules.filter(module => module.getIn(['moduleType', 'identifier']) === MODULES_IDENTIFIERS.introduction).size;
   const allTextAndMultimediaAreChecked = numberOfEnabledTextAndMultimediaModules === numberOfTextAndMultimediaModules;
 
   const updatedModuleTypes = sortByTitle(moduleTypes);
 
   return (
     <div className="admin-box">
-      <SectionTitle
-        title={I18n.t('administration.landingPage.manageModules.title')}
-        annotation={I18n.t('administration.annotation')}
-      />
+      <SectionTitle title={I18n.t('administration.landingPage.manageModules.title')} annotation={I18n.t('administration.annotation')} />
       <div className="admin-content form-container" style={{ maxWidth: '700px' }}>
         <p className="admin-paragraph">
           <Translate value="administration.landingPage.manageModules.helper" />
         </p>
         <div className="two-columns-admin">
           <div className="column-left">
-            <SelectModulesForm
-              lang={locale}
-              moduleTypes={updatedModuleTypes}
-              modulesById={modulesById}
-              toggleModule={toggleModule}
-            />
+            <SelectModulesForm lang={locale} moduleTypes={updatedModuleTypes} modulesById={modulesById} toggleModule={toggleModule} />
             <div className="margin-xl">
               <AddModuleButton
                 numberOfDuplicatesModules={numberOfTextAndMultimediaModules}
@@ -165,15 +139,7 @@ const mapDispatchToProps = dispatch => ({
   toggleModule: id => dispatch(toggleLandingPageModule(id)),
   createModule: (nextOrder, numberOfDuplicatesModules, identifier = MODULES_IDENTIFIERS.introduction) => {
     const newId = createRandomId();
-    return dispatch(
-      createLandingPageModule(
-        newId,
-        identifier,
-        numberOfDuplicatesModules,
-        I18n.t('administration.landingPage.manageModules.textAndMultimedia'),
-        nextOrder
-      )
-    );
+    return dispatch(createLandingPageModule(newId, identifier, numberOfDuplicatesModules, I18n.t('administration.landingPage.manageModules.textAndMultimedia'), nextOrder));
   }
 });
 export default connect(

@@ -6,10 +6,7 @@ import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 
 import InnerBoxView from '../../../../../../js/app/components/debate/brightMirror/sideComment/innerBoxView';
-import {
-  defaultInnerBoxViewProps,
-  multipleInnerBoxViewProps
-} from '../../../../../../js/app/stories/components/debate/brightMirror/sideComment/innerBoxView.stories';
+import { defaultInnerBoxViewProps, multipleInnerBoxViewProps } from '../../../../../../js/app/stories/components/debate/brightMirror/sideComment/innerBoxView.stories';
 
 initStoryshots({
   storyKindRegex: /^InnerBoxView$/

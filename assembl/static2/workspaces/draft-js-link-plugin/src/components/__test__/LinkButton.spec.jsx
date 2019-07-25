@@ -81,9 +81,7 @@ describe('LinkButton component', () => {
     const closeModalSpy = jest.fn();
     const setModalContentSpy = jest.fn();
     store.getEditorState.mockReturnValue(EditorState.createEmpty());
-    const wrapper = shallow(
-      <LinkButton closeModal={closeModalSpy} setModalContent={setModalContentSpy} store={store} theme={theme} />
-    );
+    const wrapper = shallow(<LinkButton closeModal={closeModalSpy} setModalContent={setModalContentSpy} store={store} theme={theme} />);
     const eventMock = {
       preventDefault: jest.fn(),
       stopPropagation: jest.fn()
@@ -91,10 +89,7 @@ describe('LinkButton component', () => {
     wrapper.find('button').simulate('click', eventMock);
     expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(eventMock.stopPropagation).toHaveBeenCalled();
-    expect(setModalContentSpy).toHaveBeenCalledWith(
-      <AddLinkForm initialValues={{ text: '' }} onSubmit={wrapper.instance().addLink} />,
-      'Insert a link'
-    );
+    expect(setModalContentSpy).toHaveBeenCalledWith(<AddLinkForm initialValues={{ text: '' }} onSubmit={wrapper.instance().addLink} />, 'Insert a link');
   });
 
   it('should render a link button', () => {

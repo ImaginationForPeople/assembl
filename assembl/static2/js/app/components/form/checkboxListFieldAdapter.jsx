@@ -42,13 +42,7 @@ export default class CheckboxListFieldAdapter extends React.Component<Props> {
       <FormGroup controlId={input.name} validationState={getValidationState(error, touched)}>
         {input.value &&
           input.value.map(option => (
-            <Checkbox
-              key={option.value}
-              checked={option.isChecked}
-              onChange={() => this.onCheckboxChange(option.value)}
-              title={option.label}
-              value={option.value}
-            >
+            <Checkbox key={option.value} checked={option.isChecked} onChange={() => this.onCheckboxChange(option.value)} title={option.label} value={option.value}>
               {capitalize(option.label)}
             </Checkbox>
           ))}

@@ -8,14 +8,16 @@ const SignupCheckbox = (props) => {
     <FormGroup className="left margin-left-2">
       <Checkbox checked={checked} type="checkbox" onChange={() => toggleCheck(legalContentsType)} required inline>
         <Translate value={`${legalContentsType}.iAccept`} />
-        <a
+        <button
+          className="no-border no-background"
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             displayLegalFormModal(checked, text, legalContentsType);
           }}
         >
           <Translate value={`${legalContentsType}.link`} className="terms-link" />
-        </a>
+        </button>
       </Checkbox>
     </FormGroup>
   );

@@ -96,9 +96,7 @@ export const getAvailableLocales = (locale: string, translations: { [string]: an
 // EditorState in case of rich text
 type LangstringValue = string | EditorState;
 export type LangstringEntriesList = List<Map<string, LangstringValue>>;
-export const updateInLangstringEntries = (locale: string, value: LangstringValue) => (
-  entries: LangstringEntriesList = List()
-): LangstringEntriesList => {
+export const updateInLangstringEntries = (locale: string, value: LangstringValue) => (entries: LangstringEntriesList = List()): LangstringEntriesList => {
   const entryIndex = entries.findIndex(entry => entry.get('localeCode') === locale);
 
   if (entryIndex === -1) {
@@ -108,11 +106,7 @@ export const updateInLangstringEntries = (locale: string, value: LangstringValue
   return entries.setIn([entryIndex, 'value'], value);
 };
 
-export const getEntryValueForLocale = (
-  entries: LangstringEntriesList,
-  locale: string,
-  defaultValue: ?LangstringValue = null
-): ?LangstringValue => {
+export const getEntryValueForLocale = (entries: LangstringEntriesList, locale: string, defaultValue: ?LangstringValue = null): ?LangstringValue => {
   if (!entries) {
     return defaultValue;
   }
@@ -122,6 +116,4 @@ export const getEntryValueForLocale = (
   return entry ? entry.get('value') : defaultValue;
 };
 
-export const convertToLangstringEntries = (s: string, localeCode: string): LangstringEntries => [
-  { localeCode: localeCode, value: s }
-];
+export const convertToLangstringEntries = (s: string, localeCode: string): LangstringEntries => [{ localeCode: localeCode, value: s }];

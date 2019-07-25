@@ -19,12 +19,7 @@ type Props = {
 const MultiColumnsFields = ({ editLocale, nbColumnsInForm, fieldPrefix }: Props) => (
   <React.Fragment>
     <div className="margin-l" />
-    <Helper
-      label={I18n.t('administration.tableOfThematics.columnsConfiguration')}
-      helperUrl="/static2/img/helpers/helper_multicol.png"
-      helperText=""
-      classname="title"
-    />
+    <Helper label={I18n.t('administration.tableOfThematics.columnsConfiguration')} helperUrl="/static2/img/helpers/helper_multicol.png" helperText="" classname="title" />
     <Field required name={`${fieldPrefix}.multiColumns.radioButtons`} component={RadioButtonsFieldAdapter} />
     {range(0, nbColumnsInForm).map(index => (
       <div key={`formcol-${index}`}>

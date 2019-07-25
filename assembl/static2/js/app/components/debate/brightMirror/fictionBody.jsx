@@ -156,31 +156,8 @@ class FictionBody extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      postId,
-      title,
-      content,
-      contentLocale,
-      lang,
-      extracts,
-      refetchPost,
-      dbId,
-      bodyMimeType,
-      ideaId,
-      userCanReply,
-      sentimentCounts,
-      mySentiment,
-      isPhaseCompleted,
-      screenWidth
-    } = this.props;
-    const {
-      displayCommentAnchor,
-      displaySubmitBox,
-      commentAnchorPosition,
-      commentBadgeDynamicPosition,
-      commentBadgeFixedPosition,
-      commentSentimentFixedPosition
-    } = this.state;
+    const { postId, title, content, contentLocale, lang, extracts, refetchPost, dbId, bodyMimeType, ideaId, userCanReply, sentimentCounts, mySentiment, isPhaseCompleted, screenWidth } = this.props;
+    const { displayCommentAnchor, displaySubmitBox, commentAnchorPosition, commentBadgeDynamicPosition, commentBadgeFixedPosition, commentSentimentFixedPosition } = this.state;
 
     return (
       <div ref={this.fictionBodyView}>

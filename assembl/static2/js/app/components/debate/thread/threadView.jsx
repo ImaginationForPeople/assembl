@@ -2,11 +2,11 @@
 import React from 'react';
 import { Grid } from 'react-bootstrap';
 import Permissions, { connectedUserCan } from '../../../utils/permissions';
-import TopPostFormContainer from '../../../components/debate/common/topPostFormContainer';
-import { Tree } from '../../../components/common/tree';
+import TopPostFormContainer from '../common/topPostFormContainer';
+import { Tree } from '../../common/tree';
 import Post from '../common/post';
 import FoldedPost from '../common/post/foldedPost';
-import InfiniteSeparator from '../../../components/common/infiniteSeparator';
+import InfiniteSeparator from '../../common/infiniteSeparator';
 import { getIsPhaseCompletedById } from '../../../utils/timeline';
 import type { ContentLocaleMapping } from '../../../actions/actionTypes';
 
@@ -27,26 +27,11 @@ type Props = {
 
 class ThreadView extends React.Component<Props> {
   render() {
-    const {
-      isUserConnected,
-      ideaId,
-      contentLocaleMapping,
-      refetchIdea,
-      lang,
-      noRowsRenderer,
-      posts,
-      initialRowIndex,
-      identifier,
-      phaseId,
-      timeline,
-      messageViewOverride
-    } = this.props;
+    const { isUserConnected, ideaId, contentLocaleMapping, refetchIdea, lang, noRowsRenderer, posts, initialRowIndex, identifier, phaseId, timeline, messageViewOverride } = this.props;
     const isPhaseCompleted = getIsPhaseCompletedById(timeline, phaseId);
     return (
       <div>
-        {(!isUserConnected || connectedUserCan(Permissions.ADD_POST)) && !isPhaseCompleted ? (
-          <TopPostFormContainer ideaId={ideaId} refetchIdea={refetchIdea} topPostsCount={posts.length} />
-        ) : null}
+        {(!isUserConnected || connectedUserCan(Permissions.ADD_POST)) && !isPhaseCompleted ? <TopPostFormContainer ideaId={ideaId} refetchIdea={refetchIdea} topPostsCount={posts.length} /> : null}
         <Grid fluid className="background-grey">
           <div id="thread-view" className="max-container background-grey">
             <div className="content-section">

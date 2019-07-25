@@ -38,10 +38,7 @@ describe('<AcceptCookiesModal /> - with shallow', () => {
 
   it('should not render a modal if the user has accepted every required legal contents', () => {
     wrapper = shallow(
-      <DumbAcceptCookiesModal
-        {...defaultAcceptCookiesModalProps}
-        acceptedLegalContents={['ACCEPT_CGU', 'ACCEPT_PRIVACY_POLICY_ON_DISCUSSION', 'ACCEPT_USER_GUIDELINE_ON_DISCUSSION']}
-      />
+      <DumbAcceptCookiesModal {...defaultAcceptCookiesModalProps} acceptedLegalContents={['ACCEPT_CGU', 'ACCEPT_PRIVACY_POLICY_ON_DISCUSSION', 'ACCEPT_USER_GUIDELINE_ON_DISCUSSION']} />
     );
     expect(wrapper.find('Modal[show=false]')).toHaveLength(1);
   });

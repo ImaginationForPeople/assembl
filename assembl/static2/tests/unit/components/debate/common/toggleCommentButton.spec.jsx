@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
 /* eslint-disable import/no-extraneous-dependencies */
 import initStoryshots from '@storybook/addon-storyshots';
 import { configure, shallow } from 'enzyme';
@@ -28,7 +27,7 @@ describe('<ToggleCommentButton /> - with shallow', () => {
   });
 
   it('should render one Link with a expanded icon embedded', () => {
-    expect(wrapper.find(Link)).toHaveLength(1);
+    expect(wrapper.find('button[className="action-toggle no-border no-background"]')).toHaveLength(1);
     expect(wrapper.find('span[className="assembl-icon-up-open"]')).toHaveLength(1);
   });
 
@@ -40,7 +39,7 @@ describe('<ToggleCommentButton /> - with shallow', () => {
   it('should execute onClickHandler when clicking on the component', () => {
     const onClickHandler = jest.fn();
     wrapper.setProps({ onClickCallback: onClickHandler });
-    wrapper.find(Link).simulate('click');
+    wrapper.find('button[className="action-toggle no-border no-background"]').simulate('click');
 
     expect(onClickHandler).toHaveBeenCalledTimes(1);
   });

@@ -12,13 +12,7 @@ type Props = {
   buttonTitleTranslationKey: string
 };
 
-const AddModuleButton = ({
-  createModule,
-  numberOfDuplicatesModules,
-  numberOfEnabledModules,
-  allDuplicatesAreChecked,
-  buttonTitleTranslationKey
-}: Props) => {
+const AddModuleButton = ({ createModule, numberOfDuplicatesModules, numberOfEnabledModules, allDuplicatesAreChecked, buttonTitleTranslationKey }: Props) => {
   const displayConfirmationModal = () => {
     const body = <Translate value="administration.landingPage.manageModules.confirmationModal" />;
     const footer = [

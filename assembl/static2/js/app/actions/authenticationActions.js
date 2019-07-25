@@ -1,5 +1,5 @@
 import { signUp, changePasswordRequest } from '../services/authenticationService';
-import { setCookieItem } from '../../app/utils/globalFunctions';
+import { setCookieItem } from '../utils/globalFunctions';
 
 const signupSuccess = () => ({
   type: 'SIGNUP_SUCCESS'

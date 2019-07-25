@@ -70,8 +70,7 @@ class FormControlWithLabel extends React.Component<FormControlWithLabelProps, Fo
   getStateFromProps = ({ validationErrors }: FormControlWithLabelProps) => {
     const validationState = getValidationState(validationErrors);
     // FIXME: for now, we only treat the first error
-    const errorMessage =
-      validationErrors && validationErrors.length > 0 ? I18n.t(validationErrors[0].code, validationErrors[0].vars) : '';
+    const errorMessage = validationErrors && validationErrors.length > 0 ? I18n.t(validationErrors[0].code, validationErrors[0].vars) : '';
     return {
       errorMessage: errorMessage,
       validationState: validationState
@@ -96,10 +95,7 @@ class FormControlWithLabel extends React.Component<FormControlWithLabelProps, Fo
       validationState = 'error';
     }
 
-    this.setState(
-      { errorMessage: errorMessage, validationState: validationState },
-      validationCallback ? validationCallback(validationState === 'error') : undefined
-    );
+    this.setState({ errorMessage: errorMessage, validationState: validationState }, validationCallback ? validationCallback(validationState === 'error') : undefined);
   };
 
   getLabel = () => {
@@ -111,15 +107,7 @@ class FormControlWithLabel extends React.Component<FormControlWithLabelProps, Fo
     const { onChange, value } = this.props;
     if (typeof value !== 'string') {
       const editorState = value || EditorState.createEmpty();
-      return (
-        <RichTextEditor
-          editorState={editorState}
-          placeholder={this.getLabel()}
-          toolbarPosition="bottom"
-          onChange={onChange}
-          withAttachmentButton={false}
-        />
-      );
+      return <RichTextEditor editorState={editorState} placeholder={this.getLabel()} toolbarPosition="bottom" onChange={onChange} withAttachmentButton={false} />;
     }
 
     // don't render a RichTextEditor if value is a string
@@ -148,15 +136,7 @@ class FormControlWithLabel extends React.Component<FormControlWithLabelProps, Fo
 
     const name = this.props.name ? this.props.name : id;
     return (
-      <FormControl
-        name={name}
-        type={type}
-        placeholder={this.getLabel()}
-        onChange={onChange}
-        value={valueToShow}
-        onBlur={this.setValidationState}
-        {...additionalProps}
-      >
+      <FormControl name={name} type={type} placeholder={this.getLabel()} onChange={onChange} value={valueToShow} onBlur={this.setValidationState} {...additionalProps}>
         {children}
       </FormControl>
     );

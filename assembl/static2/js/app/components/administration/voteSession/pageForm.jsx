@@ -29,13 +29,7 @@ const DumbPageForm = ({ propositionSectionTitle, editLocale, handlePropositionSe
             helperText={I18n.t('administration.helpers.voteSessionProposalSection')}
             classname="title"
           />
-          <FormControlWithLabel
-            label={propositionSectionTitlePh}
-            onChange={handlePropositionSectionTitleChange}
-            required
-            type="text"
-            value={propositionSectionTitle}
-          />
+          <FormControlWithLabel label={propositionSectionTitlePh} onChange={handlePropositionSectionTitleChange} required type="text" value={propositionSectionTitle} />
         </div>
       </div>
     </div>

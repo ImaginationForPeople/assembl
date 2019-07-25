@@ -118,14 +118,7 @@ export const addMenuItem = (id: string, parentId: string, index: number, client:
  * @param {QueryVariablesType} variables - The ThematicsDataQuery variables.
  * Change the order of a themeatic to targetIndex.
  */
-export const swapMenuItem = (
-  id: string,
-  parentId: string,
-  index: number,
-  targetIndex: number,
-  client: ApolloClient,
-  variables: QueryVariablesType
-) => {
+export const swapMenuItem = (id: string, parentId: string, index: number, targetIndex: number, client: ApolloClient, variables: QueryVariablesType) => {
   const query = { query: ThematicsDataQuery, variables: variables };
   const data = client.readQuery(query);
   const isDownAction = targetIndex - index > 0;
@@ -162,10 +155,7 @@ const ThematicsMenuItems = ({ roots, descendants, slug, phase, indexes, sectionQ
     const subMenuTree = getPartialTreeByParentId(thematic.id, descendants);
     const hasSubMenu = subMenuTree.roots.length > 0;
     const link = (
-      <Link
-        to={`${get('administration', { ...slug, id: phase.identifier }, { ...sectionQuery, thematicId: thematic.id })}`}
-        activeClassName="active"
-      >
+      <Link to={`${get('administration', { ...slug, id: phase.identifier }, { ...sectionQuery, thematicId: thematic.id })}`} activeClassName="active">
         <Translate value="administration.menu.configureThematic" index={subIndexes.join('.')} />
       </Link>
     );
@@ -186,14 +176,7 @@ const ThematicsMenuItems = ({ roots, descendants, slug, phase, indexes, sectionQ
       >
         {hasSubMenu ? (
           <Menu>
-            <ThematicsMenuItems
-              slug={slug}
-              phase={phase}
-              descendants={subMenuTree.descendants}
-              roots={subMenuTree.roots}
-              sectionQuery={sectionQuery}
-              indexes={subIndexes}
-            />
+            <ThematicsMenuItems slug={slug} phase={phase} descendants={subMenuTree.descendants} roots={subMenuTree.roots} sectionQuery={sectionQuery} indexes={subIndexes} />
           </Menu>
         ) : null}
       </MenuItem>
@@ -204,14 +187,7 @@ ThematicsMenuItems.defaultProps = {
   indexes: []
 };
 
-const ThematicsMenu = ({
-  slug,
-  phase,
-  rootSectionId,
-  menuItem,
-  data: { rootIdea, thematicsData },
-  location
-}: ThematicsMenuProps & Props) => {
+const ThematicsMenu = ({ slug, phase, rootSectionId, menuItem, data: { rootIdea, thematicsData }, location }: ThematicsMenuProps & Props) => {
   if (!thematicsData) return null;
   const orderedThematicsData = sortBy(thematicsData, 'order');
   const sectionIndex = rootSectionId ? `${rootSectionId}.${menuItem.sectionId}` : menuItem.sectionId;
@@ -219,11 +195,7 @@ const ThematicsMenu = ({
   const { roots, descendants } = getPartialTreeByParentId(rootIdea && rootIdea.id, orderedThematicsData);
   if (roots.length === 0) return null;
   const firstThematic = roots[0];
-  const firstThematicLink = `${get(
-    'administration',
-    { ...slug, id: phase.identifier },
-    { ...sectionQuery, thematicId: firstThematic.id }
-  )}`;
+  const firstThematicLink = `${get('administration', { ...slug, id: phase.identifier }, { ...sectionQuery, thematicId: firstThematic.id })}`;
   const { section, thematicId } = location.query;
   const openedPath = [];
   if (sectionIndex === section) {
@@ -237,11 +209,11 @@ const ThematicsMenu = ({
     <Menu openedPath={openedPath}>
       <MenuItem
         className="thematics-menu-item"
-        title={
+        title={(
           <Link to={firstThematicLink} activeClassName="active">
             <Translate value={menuItem.title} />
           </Link>
-        }
+        )}
       >
         <Menu>
           <ThematicsMenuItems slug={slug} phase={phase} descendants={descendants} roots={roots} sectionQuery={sectionQuery} />

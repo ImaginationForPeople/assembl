@@ -17,15 +17,7 @@ class ResponsiveWordCloud extends Component<WordCloudBaseProps> {
   static defaultProps = { ...defaultWordCloudBaseProps };
 
   shouldComponentUpdate(nextProps: WordCloudBaseProps) {
-    const {
-      keywordsAngle,
-      keywordsColor,
-      keywordsColorActive,
-      numberOfKeywordsToDisplay,
-      onMouseOutWord,
-      onMouseOverWord,
-      onWordClick
-    } = this.props;
+    const { keywordsAngle, keywordsColor, keywordsColorActive, numberOfKeywordsToDisplay, onMouseOutWord, onMouseOverWord, onWordClick } = this.props;
     return (
       nextProps.keywordsAngle !== keywordsAngle ||
       nextProps.keywordsColor !== keywordsColor ||
@@ -38,16 +30,7 @@ class ResponsiveWordCloud extends Component<WordCloudBaseProps> {
   }
 
   render() {
-    const {
-      keywordsAngle,
-      keywordsColor,
-      keywordsColorActive,
-      keywords,
-      numberOfKeywordsToDisplay,
-      onMouseOutWord,
-      onMouseOverWord,
-      onWordClick
-    } = this.props;
+    const { keywordsAngle, keywordsColor, keywordsColorActive, keywords, numberOfKeywordsToDisplay, onMouseOutWord, onMouseOverWord, onWordClick } = this.props;
 
     const wordCloudProps: WordCloudBaseProps = {
       keywordsAngle: keywordsAngle,

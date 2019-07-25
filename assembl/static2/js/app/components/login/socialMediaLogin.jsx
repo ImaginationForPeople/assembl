@@ -47,10 +47,7 @@ export class SocialMedia extends React.Component {
               <li key={provider.name}>
                 <form id={reverseString(provider.name)} method="get" action={provider.login}>
                   {next ? <input type="hidden" name="next" value={`${next}`} /> : null}
-                  {provider.extra &&
-                    Object.keys(provider.extra).map(k => (
-                      <input key={provider.name + k} type="hidden" name={k} value={provider.extra[k]} />
-                    ))}
+                  {provider.extra && Object.keys(provider.extra).map(k => <input key={provider.name + k} type="hidden" name={k} value={provider.extra[k]} />)}
                   <button className={`btn btn-block btn-social btn-${providerName}`} type="submit">
                     <i className={`assembl-icon-${classNameIcon}`} />
                     {socialMediaName}

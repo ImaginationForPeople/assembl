@@ -48,12 +48,8 @@ const Step1 = ({ discussionPhaseId, editLocale, locale, client }: Props) => {
           deleteDisabled: deleteSubThematicDisabledTooltip
         }}
         confirmDeletionMessages={{
-          confirmDeletionTitle: ({ index }) => (
-            <Translate value="administration.tableOfThematics.confirmDeletionTitle" title={index} />
-          ),
-          confirmDeletionBody: ({ index }) => (
-            <Translate value="administration.tableOfThematics.confirmDeletionBody" title={index} />
-          )
+          confirmDeletionTitle: ({ index }) => <Translate value="administration.tableOfThematics.confirmDeletionTitle" title={index} />,
+          confirmDeletionBody: ({ index }) => <Translate value="administration.tableOfThematics.confirmDeletionBody" title={index} />
         }}
       />
     </React.Fragment>

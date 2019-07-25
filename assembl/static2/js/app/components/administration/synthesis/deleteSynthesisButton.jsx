@@ -37,14 +37,7 @@ type GraphQLProps = {
 
 type LocalProps = Props & GraphQLProps;
 
-const DeleteSynthesisButton = ({
-  deleteSynthesis,
-  linkClassName,
-  synthesisPostId,
-  refetchQueries,
-  modalBodyMessage,
-  onDeleteCallback
-}: LocalProps) => {
+const DeleteSynthesisButton = ({ deleteSynthesis, linkClassName, synthesisPostId, refetchQueries, modalBodyMessage, onDeleteCallback }: LocalProps) => {
   const displayConfirmationModal = () => {
     const title = <Translate value="debate.confirmDeletionTitle" />;
     const body = <Translate value={modalBodyMessage || 'debate.synthesis.confirmDeletionBody'} />;

@@ -42,7 +42,9 @@ class DeleteMyAccount extends React.Component<Props, State> {
   }
 
   toggleDeleteMyAccount = (): void => {
-    this.setState({ checked: !this.state.checked });
+    this.setState((prevState) => {
+      !prevState.checked; /* eslint no-unused-expressions: 0 */
+    });
   };
 
   deleteMyAccount = (): void => {
@@ -54,7 +56,9 @@ class DeleteMyAccount extends React.Component<Props, State> {
     const slug = getDiscussionSlug();
     deleteUser({ variables: variables })
       .then(() => {
-        window.location.href = `${getContextual('oldLogout', { slug: slug })}?next=${get('home', { slug: slug })}`;
+        window.location.href = `${getContextual('oldLogout', {
+          slug: slug
+        })}?next=${get('home', { slug: slug })}`;
         displayAlert('success', I18n.t('accountDeleted'));
       })
       .catch((error) => {
@@ -78,22 +82,12 @@ class DeleteMyAccount extends React.Component<Props, State> {
             <FormGroup>
               <Checkbox id="delete-account-checkbox" checked={checked} onChange={this.toggleDeleteMyAccount}>
                 <div style={{ marginTop: '-16px' }}>
-                  <Helper
-                    label={I18n.t('profile.deleteMyAccountConfirmation')}
-                    helperText={I18n.t('profile.deleteMyAccountText')}
-                    classname="text"
-                  />
+                  <Helper label={I18n.t('profile.deleteMyAccountConfirmation')} helperText={I18n.t('profile.deleteMyAccountText')} classname="text" />
                 </div>
               </Checkbox>
             </FormGroup>
             <div className="center margin-l">
-              <Button
-                id="delete-account-button"
-                disabled={!checked}
-                className="button-submit button-dark"
-                onClick={this.handleDeleteClick}
-                style={!checked ? { opacity: '0.5' } : null}
-              >
+              <Button id="delete-account-button" disabled={!checked} className="button-submit button-dark" onClick={this.handleDeleteClick} style={!checked ? { opacity: '0.5' } : null}>
                 <Translate value="delete" />
               </Button>
             </div>

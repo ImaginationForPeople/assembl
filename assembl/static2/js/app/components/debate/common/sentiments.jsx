@@ -9,7 +9,7 @@ import { SENTIMENTS } from '../../../constants';
 import { inviteUserToLogin, displayModal } from '../../../utils/utilityManager';
 import sentimentDefinitions, { type SentimentDefinition } from './sentimentDefinitions';
 import ResponsiveOverlayTrigger from '../../common/responsiveOverlayTrigger';
-import manageErrorAndLoading from '../../../components/common/manageErrorAndLoading';
+import manageErrorAndLoading from '../../common/manageErrorAndLoading';
 
 type SentimentProps = {
   isPhaseCompleted: boolean,
@@ -23,27 +23,15 @@ type SentimentProps = {
   deleteSentiment: Function
 };
 
-export const DumbSentiment = ({
-  sentimentCounts,
-  mySentiment,
-  sentiment,
-  isSelected,
-  postId,
-  placement,
-  isPhaseCompleted,
-  addSentiment,
-  deleteSentiment
-}: SentimentProps) => {
+export const DumbSentiment = ({ sentimentCounts, mySentiment, sentiment, isSelected, postId, placement, isPhaseCompleted, addSentiment, deleteSentiment }: SentimentProps) => {
   const likeCount = (sentimentCounts && sentimentCounts.like) || 0;
   const disagreeCount = (sentimentCounts && sentimentCounts.disagree) || 0;
   const dontUnderstandCount = (sentimentCounts && sentimentCounts.dontUnderstand) || 0;
   const moreInfoCount = (sentimentCounts && sentimentCounts.moreInfo) || 0;
 
-  const newDeleteCount = (count: number, countType: string): number =>
-    count - (mySentiment === sentiment.type && sentiment.type === countType ? 1 : 0);
+  const newDeleteCount = (count: number, countType: string): number => count - (mySentiment === sentiment.type && sentiment.type === countType ? 1 : 0);
 
-  const newAddCount = (count: number, countType: string): number =>
-    (sentiment.type === countType ? count + 1 : count - (mySentiment === countType ? 1 : 0));
+  const newAddCount = (count: number, countType: string): number => (sentiment.type === countType ? count + 1 : count - (mySentiment === countType ? 1 : 0));
 
   const sentimentComponent = (
     <div
@@ -134,15 +122,7 @@ type SentimentsProps = {
   onCompleted?: () => void
 };
 
-const Sentiments = ({
-  sentimentCounts,
-  mySentiment,
-  postId,
-  placement,
-  isPhaseCompleted,
-  onCompleted,
-  customSentimentDefinitions
-}: SentimentsProps) => (
+const Sentiments = ({ sentimentCounts, mySentiment, postId, placement, isPhaseCompleted, onCompleted, customSentimentDefinitions }: SentimentsProps) => (
   <div className="add-sentiment">
     {customSentimentDefinitions &&
       customSentimentDefinitions.map(sentiment => (

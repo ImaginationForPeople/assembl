@@ -43,11 +43,7 @@ const Header = ({ timeline, title, subtitle, headerImage, logoImage, buttonLabel
               {subtitle ? <span dangerouslySetInnerHTML={{ __html: subtitle }} /> : null}
               {startDate && endDate ? (
                 <div>
-                  <Translate
-                    value="home.from_start_to_end"
-                    start={I18n.l(startDate, { dateFormat: 'date.format' })}
-                    end={I18n.l(endDate, { dateFormat: 'date.format' })}
-                  />
+                  <Translate value="home.from_start_to_end" start={I18n.l(startDate, { dateFormat: 'date.format' })} end={I18n.l(endDate, { dateFormat: 'date.format' })} />
                 </div>
               ) : null}
             </h4>

@@ -35,18 +35,7 @@ export type FictionToolbarProps = {
   userCanEdit: boolean
 };
 
-const FictionToolbar = ({
-  fictionId,
-  fictionMetaInfo,
-  lang,
-  onDeleteCallback,
-  onModifyCallback,
-  originalBody,
-  publicationState,
-  title,
-  userCanDelete,
-  userCanEdit
-}: FictionToolbarProps) => {
+const FictionToolbar = ({ fictionId, fictionMetaInfo, lang, onDeleteCallback, onModifyCallback, originalBody, publicationState, title, userCanDelete, userCanEdit }: FictionToolbarProps) => {
   const openPostModal = () => {
     const content = (
       <div className="fiction-edit-modal-inner">
@@ -100,7 +89,8 @@ const FictionToolbar = ({
 
   const deletePostButton = userCanDelete ? (
     <ResponsiveOverlayTrigger placement="bottom" tooltip={deleteFictionTooltip}>
-      <DeletePostButton {...deletePostButtonProps} />{' '}
+      <DeletePostButton {...deletePostButtonProps} />
+      {' '}
     </ResponsiveOverlayTrigger>
   ) : null;
 

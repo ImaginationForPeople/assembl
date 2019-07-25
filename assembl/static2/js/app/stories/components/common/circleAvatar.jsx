@@ -22,10 +22,4 @@ storiesOf('CircleAvatar', module)
   .addDecorator(withKnobs)
   .add('default', () => <CircleAvatar />)
   .add('custom image', () => <CircleAvatar src={customCircleAvatar.src} />)
-  .add('playground', () => (
-    <CircleAvatar
-      size={text('size', playground.size)}
-      username={text('username', playground.username)}
-      src={select('src', playground.src)}
-    />
-  ));
+  .add('playground', () => <CircleAvatar size={text('size', playground.size)} username={text('username', playground.username)} src={select('src', playground.src)} />);

@@ -13,8 +13,8 @@ import { load, postLoadFormat } from './load';
 import Loader from '../../common/loader';
 import validate from './validate';
 import { save, createMutationsPromises } from './save';
-import AdminForm from '../../../components/form/adminForm';
-import CheckboxFieldAdapter from '../../../components/form/checkboxFieldAdapter';
+import AdminForm from '../../form/adminForm';
+import CheckboxFieldAdapter from '../../form/checkboxFieldAdapter';
 
 const loading = <Loader />;
 
@@ -61,38 +61,10 @@ const DumbLegalContentsForm = ({ client, editLocale, locale }: LegalContentsForm
                   type="checkbox"
                 />
                 <div className="separator" />
-                <Field
-                  key={`tac-${editLocale}`}
-                  editLocale={editLocale}
-                  name="termsAndConditions"
-                  component={MultilingualRichTextFieldAdapter}
-                  label={tacLabel}
-                  withAttachmentButton
-                />
-                <Field
-                  key={`legal-notice-${editLocale}`}
-                  editLocale={editLocale}
-                  name="legalNotice"
-                  component={MultilingualRichTextFieldAdapter}
-                  label={legalNoticeLabel}
-                  withAttachmentButton
-                />
-                <Field
-                  key={`cookie-policy-${editLocale}`}
-                  editLocale={editLocale}
-                  name="cookiesPolicy"
-                  component={MultilingualRichTextFieldAdapter}
-                  label={cookiesPolicyLabel}
-                  withAttachmentButton
-                />
-                <Field
-                  key={`privacy-policy-${editLocale}`}
-                  editLocale={editLocale}
-                  name="privacyPolicy"
-                  component={MultilingualRichTextFieldAdapter}
-                  label={privacyPolicyLabel}
-                  withAttachmentButton
-                />
+                <Field key={`tac-${editLocale}`} editLocale={editLocale} name="termsAndConditions" component={MultilingualRichTextFieldAdapter} label={tacLabel} withAttachmentButton />
+                <Field key={`legal-notice-${editLocale}`} editLocale={editLocale} name="legalNotice" component={MultilingualRichTextFieldAdapter} label={legalNoticeLabel} withAttachmentButton />
+                <Field key={`cookie-policy-${editLocale}`} editLocale={editLocale} name="cookiesPolicy" component={MultilingualRichTextFieldAdapter} label={cookiesPolicyLabel} withAttachmentButton />
+                <Field key={`privacy-policy-${editLocale}`} editLocale={editLocale} name="privacyPolicy" component={MultilingualRichTextFieldAdapter} label={privacyPolicyLabel} withAttachmentButton />
                 <Field
                   key={`user-guidelines-${editLocale}`}
                   editLocale={editLocale}

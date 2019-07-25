@@ -132,11 +132,7 @@ export const SENTIMENTS = {
   moreInfo: 'MORE_INFO'
 };
 
-export const ESSENTIAL_SIGNUP_COOKIES = [
-  'ACCEPT_CGU',
-  'ACCEPT_PRIVACY_POLICY_ON_DISCUSSION',
-  'ACCEPT_USER_GUIDELINE_ON_DISCUSSION'
-];
+export const ESSENTIAL_SIGNUP_COOKIES = ['ACCEPT_CGU', 'ACCEPT_PRIVACY_POLICY_ON_DISCUSSION', 'ACCEPT_USER_GUIDELINE_ON_DISCUSSION'];
 
 export const COOKIE_TRANSLATION_KEYS = {
   userSession: 'userSession',
@@ -273,18 +269,7 @@ export const ExtractStates = {
 
 export type ExtractState = typeof ExtractStates.SUBMITTED | typeof ExtractStates.PUBLISHED;
 
-export const pickerColors = [
-  '#B8E986',
-  '#00AA7B',
-  '#FCB900',
-  '#FF6900',
-  '#8646ED',
-  '#FF82BE',
-  '#00DCFF',
-  '#1652C1',
-  '#EB144C',
-  '#000000'
-];
+export const pickerColors = ['#B8E986', '#00AA7B', '#FCB900', '#FF6900', '#8646ED', '#FF82BE', '#00DCFF', '#1652C1', '#EB144C', '#000000'];
 
 export const fictionBackgroundColors = [
   '#ffcdd2',
@@ -306,14 +291,7 @@ export const fictionBackgroundColors = [
   '#cfd8dc'
 ];
 
-export const modulesTranslationKeys = [
-  MESSAGE_VIEW.noModule,
-  MESSAGE_VIEW.survey,
-  MESSAGE_VIEW.thread,
-  MESSAGE_VIEW.messageColumns,
-  MESSAGE_VIEW.voteSession,
-  MESSAGE_VIEW.brightMirror
-];
+export const modulesTranslationKeys = [MESSAGE_VIEW.noModule, MESSAGE_VIEW.survey, MESSAGE_VIEW.thread, MESSAGE_VIEW.messageColumns, MESSAGE_VIEW.voteSession, MESSAGE_VIEW.brightMirror];
 
 export const BlockingPublicationStates = {};
 BlockingPublicationStates[PublicationStates.MODERATED_TEXT_NEVER_AVAILABLE] = PublicationStates.MODERATED_TEXT_NEVER_AVAILABLE;
@@ -404,24 +382,7 @@ export const ANNOUNCEMENT_TAB_ITEM_ID = {
 
 export const slugAllowedCharacters = /^[a-zA-Z0-9(-]+$/g;
 
-export const availableLocales = [
-  'de',
-  'en',
-  'es',
-  'fr',
-  'hu',
-  'it',
-  'ja',
-  'nl',
-  'no',
-  'pl',
-  'pt',
-  'ro',
-  'ru',
-  'th',
-  'tr',
-  'zh_Hans'
-];
+export const availableLocales = ['de', 'en', 'es', 'fr', 'hu', 'it', 'ja', 'nl', 'no', 'pl', 'pt', 'ro', 'ru', 'th', 'tr', 'zh_Hans'];
 
 export const datePickerPresets = [
   {

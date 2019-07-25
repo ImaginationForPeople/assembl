@@ -43,17 +43,19 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
 
   preOpenMenuItems = () => {
     const { items, rootItem } = this.props;
-    const pathname = browserHistory.getCurrentLocation().pathname;
-    const thematicIdFromPathname = pathname.split('/')[5];
-    const MenuItemFromThematicId = items.find(element => element.id === thematicIdFromPathname);
-    const rootItems = this.getItemChildren(rootItem).filter(item => item.id);
-    rootItems.forEach((item) => {
-      if (MenuItemFromThematicId && MenuItemFromThematicId.ancestors.includes(item.id)) {
-        this.setState(() => ({
-          selected: item.id
-        })); // filter out item not having id (currently in table of thematics administration, but not saved yet)
-      }
-    });
+    if (browserHistory.getCurrentLocation().pathname) {
+      const pathname = browserHistory.getCurrentLocation().pathname;
+      const thematicIdFromPathname = pathname.split('/')[5];
+      const MenuItemFromThematicId = items.find(element => element.id === thematicIdFromPathname);
+      const rootItems = this.getItemChildren(rootItem).filter(item => item.id);
+      rootItems.forEach((item) => {
+        if (MenuItemFromThematicId && MenuItemFromThematicId.ancestors.includes(item.id)) {
+          this.setState(() => ({
+            selected: item.id
+          })); // filter out item not having id (currently in table of thematics administration, but not saved yet)
+        }
+      });
+    }
   };
 
   toggleMenu = (itemId) => {
@@ -77,14 +79,18 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
     const { subMenu, items, rootItem, identifier, phaseId, className, onMenuItemClick } = this.props;
     const { selected } = this.state;
     const pathname = browserHistory.getCurrentLocation().pathname;
-    const pathnameThemeId = pathname.split('/')[5];
+    const pathnameThemeId = browserHistory.getCurrentLocation().pathname ? pathname.split('/')[5] : null;
     // filter out item not having id (currently in table of thematics administration, but not saved yet)
     const rootItems = this.getItemChildren(rootItem).filter(item => item.id);
     if (rootItems.length === 0) return null;
     return (
       <React.Fragment>
         {subMenu ? <div className="sub-menu-separator" /> : null}
-        <div className={classNames('menu-table-col', className, { 'sub-menu': subMenu })}>
+        <div
+          className={classNames('menu-table-col', className, {
+            'sub-menu': subMenu
+          })}
+        >
           <div className="menu-table">
             {rootItems.map(item => (
               <div key={item.id}>
@@ -97,16 +103,7 @@ class MenuList extends React.Component<MenuListProps, MenuListState> {
                   phaseId={phaseId}
                   item={item}
                 />
-                {item.id === selected ? (
-                  <MenuList
-                    subMenu
-                    onMenuItemClick={onMenuItemClick}
-                    items={items}
-                    rootItem={selected}
-                    identifier={identifier}
-                    phaseId={phaseId}
-                  />
-                ) : null}
+                {item.id === selected ? <MenuList subMenu onMenuItemClick={onMenuItemClick} items={items} rootItem={selected} identifier={identifier} phaseId={phaseId} /> : null}
               </div>
             ))}
           </div>

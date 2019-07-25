@@ -51,11 +51,7 @@ export class DumbHarvestingButton extends React.PureComponent<HarvestingButtonPr
   }
 }
 
-const HarvestingButtonWithContext = props => (
-  <DebateContext.Consumer>
-    {({ isHarvestable }) => <DumbHarvestingButton {...props} isHarvestable={isHarvestable} />}
-  </DebateContext.Consumer>
-);
+const HarvestingButtonWithContext = props => <DebateContext.Consumer>{({ isHarvestable }) => <DumbHarvestingButton {...props} isHarvestable={isHarvestable} />}</DebateContext.Consumer>;
 
 const mapStateToProps = ({ context: { isHarvesting, connectedUserIdBase64 } }) => ({
   isActive: isHarvesting,

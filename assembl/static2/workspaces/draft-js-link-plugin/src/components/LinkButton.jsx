@@ -77,7 +77,8 @@ export default class LinkButton extends React.Component<Props> {
     const { getEditorState, store } = this.props;
     if (getEditorState) {
       return getEditorState();
-    } else if (store.getEditorState) {
+    }
+    if (store.getEditorState) {
       return store.getEditorState();
     }
     return null;

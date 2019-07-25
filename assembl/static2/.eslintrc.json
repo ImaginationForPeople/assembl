@@ -6,16 +6,23 @@
   },
   "extends": ["airbnb", "plugin:flowtype/recommended"],
   "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module",
     "ecmaFeatures": {
-      "experimentalObjectRestSpread": true,
       "jsx": true
-    },
-    "sourceType": "module"
+    }
   },
   "plugins": ["react", "flowtype"],
   "rules": {
+    "max-line-length": [
+      true,
+      {
+        "limit": 200
+      }
+    ],
     "import/no-named-as-default": 0,
     "import/prefer-default-export": 0,
+    "import/no-cycle": 0,
     "import/no-extraneous-dependencies": [
       "error",
       {
@@ -26,7 +33,18 @@
         ]
       }
     ],
+    "react/require-default-props": 0,
+    "react/destructuring-assignment": 0,
+    "react/default-props-match-prop-types": 0,
+    "jsx-a11y/click-events-have-key-events": 0,
+    "prefer-destructuring": 0,
+    "object-curly-newline": 0,
+    "implicit-arrow-linebreak": 0,
+    "sx-curly-brace-presence": 0,
+    "operator-linebreak": 0,
     "jsx-a11y/no-static-element-interactions": 0,
+    "jsx-a11y/label-has-associated-control": 0, // input must be nested in the label and htlmfor identified.
+    "jsx-a11y/label-has-for": 0, // input must be nested in the label and htlmfor identified
     "react/no-array-index-key": 0,
     "react/no-danger": 0,
     "react/prefer-stateless-function": [0, { "ignorePureComponents": false }],
@@ -43,7 +61,7 @@
         ]
       }
     ],
-    "max-len": ["warn", 130],
+    "max-len": ["warn", 200],
     "class-methods-use-this": 0,
     "no-mixed-operators": 0,
     "no-console": 2,

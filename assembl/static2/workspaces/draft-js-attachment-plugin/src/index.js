@@ -41,10 +41,7 @@ export default (config: Config) => {
   };
 
   return {
-    blockRendererFn: (
-      block: ContentBlock,
-      { getEditorState }: { getEditorState: GetEditorState, setEditorState: SetEditorState }
-    ) => {
+    blockRendererFn: (block: ContentBlock, { getEditorState }: { getEditorState: GetEditorState, setEditorState: SetEditorState }) => {
       if (block.getType() === 'atomic') {
         const entityKey = block.getEntityAt(0);
         const entity = getEditorState()

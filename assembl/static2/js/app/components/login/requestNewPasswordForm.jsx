@@ -61,23 +61,10 @@ class RequestNewPasswordForm extends React.Component<Props, State> {
           <form className="resendPwd" onSubmit={this.handleSubmit}>
             <input type="hidden" name="referer" value="v2" />
             <FormGroup className="margin-m">
-              <FormControl
-                type="text"
-                name="identifier"
-                required
-                placeholder={I18n.t('login.username')}
-                onChange={this.handleIdentifierChange}
-                value={this.state.identifier || ''}
-              />
+              <FormControl type="text" name="identifier" required placeholder={I18n.t('login.username')} onChange={this.handleIdentifierChange} value={this.state.identifier || ''} />
             </FormGroup>
             <FormGroup>
-              <Button
-                disabled={!this.state.identifier}
-                type="submit"
-                name="send_req_password"
-                value={I18n.t('login.send')}
-                className="button-submit button-dark margin-m"
-              >
+              <Button disabled={!this.state.identifier} type="submit" name="send_req_password" value={I18n.t('login.send')} className="button-submit button-dark margin-m">
                 <Translate value="login.send" />
               </Button>
             </FormGroup>

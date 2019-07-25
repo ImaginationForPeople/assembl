@@ -49,16 +49,8 @@ export default class SketchFabTheater extends React.Component<Props, State> {
         {url && open ? (
           <div className="theater-content">
             <div className="embed-video">
-              <iframe
-                title="Sketchfab"
-                id="SketchfabPlayer"
-                type="text/html"
-                width="640"
-                height="360"
-                src={`${url}/embed?autostart=1&autospin=0.5`}
-                frameBorder="0"
-              />
-              <button onClick={this.closeTheater} className="close-theater-button assembl-icon-cancel" />
+              <iframe title="Sketchfab" id="SketchfabPlayer" type="text/html" width="640" height="360" src={`${url}/embed?autostart=1&autospin=0.5`} frameBorder="0" />
+              <button type="button" onClick={this.closeTheater} className="close-theater-button assembl-icon-cancel" />
             </div>
           </div>
         ) : (

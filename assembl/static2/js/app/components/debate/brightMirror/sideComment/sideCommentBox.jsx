@@ -14,17 +14,12 @@ import createPostMutation from '../../../../graphql/mutations/createPost.graphql
 import updatePostMutation from '../../../../graphql/mutations/updatePost.graphql';
 import deletePostMutation from '../../../../graphql/mutations/deletePost.graphql';
 import deleteExtractMutation from '../../../../graphql/mutations/deleteExtract.graphql';
-import manageErrorAndLoading from '../../../../components/common/manageErrorAndLoading';
+import manageErrorAndLoading from '../../../common/manageErrorAndLoading';
 import uploadDocumentMutation from '../../../../graphql/mutations/uploadDocument.graphql';
 import { getConnectedUserId, getConnectedUserName } from '../../../../utils/globalFunctions';
 import { displayAlert, displayModal, closeModal } from '../../../../utils/utilityManager';
 import { COMMENT_BOX_OFFSET, PublicationStates } from '../../../../constants';
-import {
-  convertContentStateToHTML,
-  editorStateIsEmpty,
-  convertToEditorState,
-  uploadNewAttachments
-} from '../../../../utils/draftjs';
+import { convertContentStateToHTML, editorStateIsEmpty, convertToEditorState, uploadNewAttachments } from '../../../../utils/draftjs';
 import ReplyToCommentButton from '../../common/replyToCommentButton';
 import InnerBoxSubmit from './innerBoxSubmit';
 import InnerBoxView from './innerBoxView';
@@ -212,30 +207,12 @@ class DumbSideCommentBox extends React.Component<Props, State> {
   getCurrentCommentReply = (extract: ?FictionExtractFragment, comment: ?ExtractCommentFragment) => {
     const extractComments = extract && extract.comments;
     const commentId = comment && comment.id;
-    const replies =
-      comment &&
-      extractComments &&
-      extractComments.filter(
-        post => post && post.parentId === commentId && post.publicationState === PublicationStates.PUBLISHED
-      );
+    const replies = comment && extractComments && extractComments.filter(post => post && post.parentId === commentId && post.publicationState === PublicationStates.PUBLISHED);
     return (replies && replies[0]) || null;
   };
 
   submit = (): void => {
-    const {
-      ideaId,
-      postId,
-      contentLocale,
-      lang,
-      addPostExtract,
-      createPost,
-      toggleSubmitDisplay,
-      toggleCommentsBox,
-      refetchPost,
-      uploadDocument,
-      setPositionToCoordinates,
-      position
-    } = this.props;
+    const { ideaId, postId, contentLocale, lang, addPostExtract, createPost, toggleSubmitDisplay, toggleCommentsBox, refetchPost, uploadDocument, setPositionToCoordinates, position } = this.props;
     const { body, selectionText, serializedAnnotatorRange } = this.state;
     if (!selectionText || !serializedAnnotatorRange) {
       return;
@@ -456,11 +433,7 @@ class DumbSideCommentBox extends React.Component<Props, State> {
     const currentComment = this.getCurrentComment(currentExtract);
     const hasReply = !!this.getCurrentCommentReply(currentExtract, currentComment);
 
-    return (
-      <div className="action-box-footer">
-        {userCanReply && <ReplyToCommentButton onClickCallback={this.toggleReplying} disabled={hasReply} />}
-      </div>
-    );
+    return <div className="action-box-footer">{userCanReply && <ReplyToCommentButton onClickCallback={this.toggleReplying} disabled={hasReply} />}</div>;
   };
 
   getParticipantsCount = (): number => {
@@ -480,28 +453,12 @@ class DumbSideCommentBox extends React.Component<Props, State> {
     const currentComment = this.getCurrentComment(currentExtract);
 
     if (submitting) {
-      return (
-        <InnerBoxSubmit
-          userId={getConnectedUserId()}
-          userName={getConnectedUserName()}
-          body={body}
-          updateBody={this.updateBody}
-          submit={this.submit}
-          cancelSubmit={cancelSubmit}
-        />
-      );
-    } else if (editComment) {
-      return (
-        <InnerBoxSubmit
-          userId={getConnectedUserId()}
-          userName={getConnectedUserName()}
-          body={body}
-          updateBody={this.updateBody}
-          submit={this.editPost}
-          cancelSubmit={this.cancelEditMode}
-        />
-      );
-    } else if (currentComment) {
+      return <InnerBoxSubmit userId={getConnectedUserId()} userName={getConnectedUserName()} body={body} updateBody={this.updateBody} submit={this.submit} cancelSubmit={cancelSubmit} />;
+    }
+    if (editComment) {
+      return <InnerBoxSubmit userId={getConnectedUserId()} userName={getConnectedUserName()} body={body} updateBody={this.updateBody} submit={this.editPost} cancelSubmit={this.cancelEditMode} />;
+    }
+    if (currentComment) {
       return (
         <InnerBoxView
           contentLocale={contentLocale}
@@ -525,36 +482,13 @@ class DumbSideCommentBox extends React.Component<Props, State> {
     const currentReply = this.getCurrentCommentReply(currentExtract, currentComment);
 
     if (replying) {
-      return (
-        <InnerBoxSubmit
-          userId={getConnectedUserId()}
-          userName={getConnectedUserName()}
-          body={body}
-          updateBody={this.updateBody}
-          submit={this.submitReply}
-          cancelSubmit={this.toggleReplying}
-        />
-      );
-    } else if (editReply) {
-      return (
-        <InnerBoxSubmit
-          userId={getConnectedUserId()}
-          userName={getConnectedUserName()}
-          body={body}
-          updateBody={this.updateBody}
-          submit={this.editPost}
-          cancelSubmit={this.cancelEditMode}
-        />
-      );
-    } else if (!submitting && !!currentReply) {
-      return (
-        <InnerBoxView
-          contentLocale={contentLocale}
-          comment={currentReply}
-          deletePost={this.deletePost}
-          setEditMode={this.setCommentReplyMode}
-        />
-      );
+      return <InnerBoxSubmit userId={getConnectedUserId()} userName={getConnectedUserName()} body={body} updateBody={this.updateBody} submit={this.submitReply} cancelSubmit={this.toggleReplying} />;
+    }
+    if (editReply) {
+      return <InnerBoxSubmit userId={getConnectedUserId()} userName={getConnectedUserName()} body={body} updateBody={this.updateBody} submit={this.editPost} cancelSubmit={this.cancelEditMode} />;
+    }
+    if (!submitting && !!currentReply) {
+      return <InnerBoxView contentLocale={contentLocale} comment={currentReply} deletePost={this.deletePost} setEditMode={this.setCommentReplyMode} />;
     }
     return null;
   };
@@ -602,7 +536,9 @@ class DumbSideCommentBox extends React.Component<Props, State> {
           {commentView}
           {!submitting && !editComment && extracts && extracts.length > 1 && (
             <div className="extracts-numbering">
-              {extractIndex + 1}/{extracts.length}
+              {extractIndex + 1}
+/
+              {extracts.length}
             </div>
           )}
           {!submitting && this.renderActionFooter()}

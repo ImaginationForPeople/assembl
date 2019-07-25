@@ -2,12 +2,7 @@ import React from 'react';
 import renderer from 'react-test-renderer';
 import ShallowRenderer from 'react-test-renderer/shallow';
 
-import {
-  DumbPostBody,
-  ExtractInPost,
-  Html,
-  postBodyReplacementComponents
-} from '../../../../../../js/app/components/debate/common/post/postBody';
+import { DumbPostBody, ExtractInPost, Html, postBodyReplacementComponents } from '../../../../../../js/app/components/debate/common/post/postBody';
 import * as fakeData from '../../../harvesting/fakeData';
 
 describe('PostBody component', () => {

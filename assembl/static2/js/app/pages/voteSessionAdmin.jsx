@@ -196,10 +196,8 @@ type State = {
 
 type TestModuleType = VoteModule => boolean;
 const isTokenVoteModule: TestModuleType = m => m.voteType === 'token_vote_specification' || m.type === 'tokens';
-export const isTextGaugeModule: TestModuleType = m =>
-  m.voteType === 'gauge_vote_specification' || (m.type === 'gauge' && !m.isNumberGauge);
-export const isNumberGaugeModule: TestModuleType = m =>
-  m.voteType === 'number_gauge_vote_specification' || (m.type === 'gauge' && Boolean(m.isNumberGauge));
+export const isTextGaugeModule: TestModuleType = m => m.voteType === 'gauge_vote_specification' || (m.type === 'gauge' && !m.isNumberGauge);
+export const isNumberGaugeModule: TestModuleType = m => m.voteType === 'number_gauge_vote_specification' || (m.type === 'gauge' && Boolean(m.isNumberGauge));
 export const isGaugeModule: TestModuleType = m => isTextGaugeModule(m) || isNumberGaugeModule(m);
 
 export const getProposalValidationErrors = (p: VoteProposalMap, editLocale: string): ValidationErrors => {
@@ -443,9 +441,7 @@ class VoteSessionAdmin extends React.Component<Props, State> {
         proposalsToDeleteOrUpdate.forEach((proposal) => {
           if (proposal._toDelete) {
             // delete all modules and then delete the proposal
-            mutationsPromises = mutationsPromises.concat(
-              proposal.modules.map(m => deleteVoteSpecification({ variables: createVariablesForDeleteMutation(m) }))
-            );
+            mutationsPromises = mutationsPromises.concat(proposal.modules.map(m => deleteVoteSpecification({ variables: createVariablesForDeleteMutation(m) })));
             mutationsPromises.push(() => deleteProposal({ variables: createVariablesForDeleteMutation(proposal) }));
           }
 
@@ -503,25 +499,14 @@ class VoteSessionAdmin extends React.Component<Props, State> {
   render() {
     const { editLocale, goBackPhaseIdentifier, phaseIdentifier, section, thematicId } = this.props;
     const saveDisabled = !this.dataHaveChanged();
-    const configureThematicUrl = get(
-      'administration',
-      { slug: getDiscussionSlug() || '', id: goBackPhaseIdentifier },
-      { section: 'configThematics', thematicId: thematicId }
-    );
+    const configureThematicUrl = get('administration', { slug: getDiscussionSlug() || '', id: goBackPhaseIdentifier }, { section: 'configThematics', thematicId: thematicId });
     return (
       <div className="token-vote-admin">
         <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />
         {section === '1' && <PageForm editLocale={editLocale} />}
         {section === '2' && <ModulesSection />}
         {section === '3' && <VoteProposalsSection />}
-        {section && (
-          <Navbar
-            currentStep={section}
-            steps={['1', '2', '3']}
-            phaseIdentifier={phaseIdentifier}
-            queryArgs={{ thematicId: thematicId, goBackPhaseIdentifier: goBackPhaseIdentifier }}
-          />
-        )}
+        {section && <Navbar currentStep={section} steps={['1', '2', '3']} phaseIdentifier={phaseIdentifier} queryArgs={{ thematicId: thematicId, goBackPhaseIdentifier: goBackPhaseIdentifier }} />}
         <BackToThematic url={configureThematicUrl} />
       </div>
     );
@@ -529,15 +514,7 @@ class VoteSessionAdmin extends React.Component<Props, State> {
 }
 
 const mapStateToProps = ({ admin: { editLocale, voteSession }, i18n, context, timeline }) => {
-  const {
-    modulesById,
-    modulesInOrder,
-    tokenCategoriesById,
-    gaugeChoicesById,
-    modulesOrProposalsHaveChanged,
-    voteProposalsById,
-    page
-  } = voteSession;
+  const { modulesById, modulesInOrder, tokenCategoriesById, gaugeChoicesById, modulesOrProposalsHaveChanged, voteProposalsById, page } = voteSession;
 
   type Module = Map<string, any>;
   const expandModuleData = (initialModule: Module): Module => {
@@ -560,7 +537,8 @@ const mapStateToProps = ({ admin: { editLocale, voteSession }, i18n, context, ti
 
     if (m.has('choices')) {
       return m.set('choices', m.get('choices').map(c => gaugeChoicesById.get(c)));
-    } else if (m.has('tokenCategories')) {
+    }
+    if (m.has('tokenCategories')) {
       return m.set('tokenCategories', m.get('tokenCategories').map(tc => tokenCategoriesById.get(tc)));
     }
 

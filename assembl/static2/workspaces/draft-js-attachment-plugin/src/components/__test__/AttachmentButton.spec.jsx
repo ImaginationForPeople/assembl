@@ -33,9 +33,7 @@ describe('addAttachment method', () => {
 
   beforeEach(() => {
     store.getEditorState.mockReturnValue('DUMMY_EDITOR_STATE');
-    wrapper = mount(
-      <AttachmentButton closeModal={closeModalSpy} setModalContent={setModalContentSpy} store={store} theme={theme} />
-    );
+    wrapper = mount(<AttachmentButton closeModal={closeModalSpy} setModalContent={setModalContentSpy} store={store} theme={theme} />);
   });
 
   it('should only close modal if no file is provided', () => {
@@ -91,10 +89,7 @@ describe('AttachmentButton component', () => {
     wrapper.find('button').simulate('click', eventMock);
     expect(eventMock.preventDefault).toHaveBeenCalled();
     expect(eventMock.stopPropagation).toHaveBeenCalled();
-    expect(setModalContentSpy).toHaveBeenCalledWith(
-      <AddAttachmentForm onSubmit={wrapper.instance().addAttachment} />,
-      'Add an attachment'
-    );
+    expect(setModalContentSpy).toHaveBeenCalledWith(<AddAttachmentForm onSubmit={wrapper.instance().addAttachment} />, 'Add an attachment');
   });
 
   it('should prevent default onMouseDown', () => {

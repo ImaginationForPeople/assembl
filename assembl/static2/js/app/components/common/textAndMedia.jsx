@@ -24,9 +24,7 @@ const Quote = ({ content }: DescriptionProps) => (
   </div>
 );
 
-const Body = ({ content }: DescriptionProps) => (
-  <div className="media-description-layer media-description-top">{renderRichtext(content)}</div>
-);
+const Body = ({ content }: DescriptionProps) => <div className="media-description-layer media-description-top">{renderRichtext(content)}</div>;
 
 class TextAndMedia extends React.Component<Props> {
   render() {

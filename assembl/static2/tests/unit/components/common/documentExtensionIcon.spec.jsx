@@ -1,10 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import DocumentExtensionIcon, {
-  getExtension,
-  getIconPathByExtension
-} from '../../../../js/app/components/common/documentExtensionIcon';
+import DocumentExtensionIcon, { getExtension, getIconPathByExtension } from '../../../../js/app/components/common/documentExtensionIcon';
 
 describe('getExtension function', () => {
   it('should return the extension from filename', () => {

@@ -66,11 +66,7 @@ type State = {
 
 type bodyAndSubject = { body: string, subject: string, originalBody: string, originalSubject: string };
 
-export const getOriginalBodyAndSubject = (
-  translate: boolean,
-  subjectEntries: LangstringEntries,
-  bodyEntries: LangstringEntries
-): bodyAndSubject => {
+export const getOriginalBodyAndSubject = (translate: boolean, subjectEntries: LangstringEntries, bodyEntries: LangstringEntries): bodyAndSubject => {
   let body;
   let subject;
   let originalBody;
@@ -189,13 +185,7 @@ export class DumbPost extends React.PureComponent<Props, State> {
     };
 
     if (publicationState in DeletedPublicationStates) {
-      return (
-        <DeletedPost
-          id={id}
-          subject={modifiedSubject}
-          deletedBy={publicationState === PublicationStates.DELETED_BY_USER ? 'user' : 'admin'}
-        />
-      );
+      return <DeletedPost id={id} subject={modifiedSubject} deletedBy={publicationState === PublicationStates.DELETED_BY_USER ? 'user' : 'admin'} />;
     }
 
     const divClassnames = classnames('posts', { 'column-post': multiColumns });
@@ -245,13 +235,7 @@ export class DumbPost extends React.PureComponent<Props, State> {
 const PostWithContext = props => (
   <DebateContext.Consumer>
     {({ isHarvesting, connectedUserId, isDebateModerated, isHarvestable }) => (
-      <DumbPost
-        {...props}
-        isHarvesting={isHarvesting}
-        isHarvestable={isHarvestable}
-        connectedUserId={connectedUserId}
-        isDebateModerated={isDebateModerated}
-      />
+      <DumbPost {...props} isHarvesting={isHarvesting} isHarvestable={isHarvestable} connectedUserId={connectedUserId} isDebateModerated={isDebateModerated} />
     )}
   </DebateContext.Consumer>
 );

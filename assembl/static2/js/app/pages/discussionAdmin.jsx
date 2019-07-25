@@ -22,14 +22,7 @@ import updateTextFieldMutation from '../graphql/mutations/updateTextField.graphq
 import deleteTextFieldMutation from '../graphql/mutations/deleteTextField.graphql';
 import { type State as ReduxState } from '../reducers/rootReducer';
 
-import {
-  SECTION_PERSONALIZE_INTERFACE,
-  SECTION_DISCUSSION_PREFERENCES,
-  SECTION_TIMELINE,
-  SECTION_PROFILE_OPTIONS,
-  SECTION_MENU_SECTION,
-  SECTION_LEGAL_CONTENTS
-} from './../constants';
+import { SECTION_PERSONALIZE_INTERFACE, SECTION_DISCUSSION_PREFERENCES, SECTION_TIMELINE, SECTION_PROFILE_OPTIONS, SECTION_MENU_SECTION, SECTION_LEGAL_CONTENTS } from '../constants';
 
 type Section = Object;
 
@@ -185,11 +178,7 @@ class DiscussionAdmin extends React.Component<Props, State> {
     const { section } = this.props;
     const saveDisabled = !this.dataHaveChanged();
     // @TODO use final-form logic
-    const showSaveButton =
-      section !== SECTION_PERSONALIZE_INTERFACE &&
-      section !== SECTION_DISCUSSION_PREFERENCES &&
-      section !== SECTION_TIMELINE &&
-      section !== SECTION_LEGAL_CONTENTS;
+    const showSaveButton = section !== SECTION_PERSONALIZE_INTERFACE && section !== SECTION_DISCUSSION_PREFERENCES && section !== SECTION_TIMELINE && section !== SECTION_LEGAL_CONTENTS;
     return (
       <div className="discussion-admin">
         {showSaveButton && <SaveButton disabled={saveDisabled} saveAction={this.saveAction} />}

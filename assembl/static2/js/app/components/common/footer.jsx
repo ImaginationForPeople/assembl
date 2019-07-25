@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import { graphql, compose } from 'react-apollo';
 import { connectedUserIsAdmin } from '../../utils/permissions';
 import { get } from '../../utils/routeMap';
-import manageErrorAndLoading from '../../components/common/manageErrorAndLoading';
+import manageErrorAndLoading from './manageErrorAndLoading';
 import TabsConditionQuery from '../../graphql/TabsConditionQuery.graphql';
 
 type Props = {
@@ -22,17 +22,7 @@ type Props = {
   footerLinks: Array<Object>
 };
 
-const Footer = ({
-  assemblVersion,
-  slug,
-  socialMedias,
-  footerLinks,
-  hasLegalNotice,
-  hasTermsAndConditions,
-  hasPrivacyPolicy,
-  hasUserGuidelines,
-  lang
-}: Props) => {
+const Footer = ({ assemblVersion, slug, socialMedias, footerLinks, hasLegalNotice, hasTermsAndConditions, hasPrivacyPolicy, hasUserGuidelines, lang }: Props) => {
   const debateSlug = { slug: slug };
   const legalPages = {
     terms: hasTermsAndConditions,
@@ -46,8 +36,7 @@ const Footer = ({
       <Link to={`${get(key, debateSlug)}`} key={key}>
         <Translate value={`footer.${key}`} />
       </Link>
-    ) : null)
-  );
+    ) : null));
   return (
     <Grid fluid className="background-dark relative" id="footer">
       <div className="max-container">
@@ -81,18 +70,26 @@ const Footer = ({
           )}
           <div className="footer-links">
             <div className="copyright">
-              ©{' '}
+              ©
+              {' '}
               <Link to="https://bluenove.com/offres/assembl/" target="_blank">
                 Assembl
-              </Link>{' '}
-              powered by{' '}
+              </Link>
+              {' '}
+              powered by
+              {' '}
               <Link to="http://bluenove.com/" target="_blank">
                 bluenove
               </Link>
             </div>
             <div />
             <div className="legal-pages">{legalPagesInFooter}</div>
-            {connectedUserIsAdmin() && assemblVersion && <div className="assembl-version">v{assemblVersion}</div>}
+            {connectedUserIsAdmin() && assemblVersion && (
+              <div className="assembl-version">
+v
+                {assemblVersion}
+              </div>
+            )}
           </div>
         </div>
       </div>

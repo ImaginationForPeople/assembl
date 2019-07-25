@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
 import classNames from 'classnames';
 // Components imports
 import ResponsiveOverlayTrigger from '../../common/responsiveOverlayTrigger';
@@ -14,11 +13,11 @@ export type ReplyToCommentButtonProps = {
 };
 
 const ReplyToCommentButton = ({ onClickCallback, disabled, tooltipPlacement }: ReplyToCommentButtonProps) => (
-  <Link className={classNames('action-reply', { disabled: disabled })} onClick={onClickCallback}>
+  <button type="button" className={classNames('action-reply no-border no-background', { disabled: disabled })} onClick={onClickCallback}>
     <ResponsiveOverlayTrigger placement={tooltipPlacement || 'top'} tooltip={answerTooltip}>
       <span className="assembl-icon-back-arrow" />
     </ResponsiveOverlayTrigger>
-  </Link>
+  </button>
 );
 
 ReplyToCommentButton.defaultProps = {

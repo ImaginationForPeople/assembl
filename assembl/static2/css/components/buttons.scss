@@ -1,7 +1,11 @@
 /* Begin Code specific to the button hover animation (horizontal fill of background and inversion of text color) */
 
 @mixin button-with-hover-animation(
-  $text-color, $border-color, $hover-background-color: $border-color, $background-color: initial) {
+  $text-color,
+  $border-color,
+  $hover-background-color: $border-color,
+  $background-color: initial
+) {
   position: relative; /* so that on hover, background animation can fill the button instead of its parent */
   background-color: $background-color;
   border-color: $border-color;
@@ -248,7 +252,10 @@
 }
 
 .back-btn {
-  color: $black;
+  background-color: $first-color;
+  color: $white;
+  border: none;
+  padding: 0;
 
   .icon-button {
     font-size: 20px;

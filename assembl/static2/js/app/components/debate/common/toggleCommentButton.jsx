@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
 
 export type ToggleCommentButtonProps = {
   /** Expand flag that changes the icon style */
@@ -13,9 +12,9 @@ const ToggleCommentButton = ({ isExpanded, onClickCallback }: ToggleCommentButto
   const iconStyle = isExpanded ? 'up' : 'down';
 
   return (
-    <Link className="action-toggle" onClick={onClickCallback}>
+    <button type="button" className="action-toggle no-border no-background" onClick={onClickCallback}>
       <span className={`assembl-icon-${iconStyle}-open`} />
-    </Link>
+    </button>
   );
 };
 

@@ -6,10 +6,7 @@ import { DumbExportData } from '../../../../js/app/pages/exportData';
 describe('ExportData page', () => {
   const props = {
     locale: 'fr',
-    languages: [
-      { locale: 'fr', name: 'French', nativeName: 'français', __typename: 'LocalePreference' },
-      { locale: 'en', name: 'English', nativeName: 'English', __typename: 'LocalePreference' }
-    ],
+    languages: [{ locale: 'fr', name: 'French', nativeName: 'français', __typename: 'LocalePreference' }, { locale: 'en', name: 'English', nativeName: 'English', __typename: 'LocalePreference' }],
     phases: [
       {
         id: 'foo',

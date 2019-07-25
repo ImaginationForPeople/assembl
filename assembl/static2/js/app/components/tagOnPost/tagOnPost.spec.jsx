@@ -63,12 +63,7 @@ describe('<TagOnPost /> - with shallow', () => {
     describe('when tagList includes one suggested tag from suggestedTagList with mutliples tags', () => {
       it('should render a SuggestionContainer component ', () => {
         wrapper.setProps({
-          suggestedTagList: [
-            'Habitat et SDF',
-            'Complete account of the system',
-            'Great pleasure',
-            'Actual teachings of the great explorer of the truth'
-          ]
+          suggestedTagList: ['Habitat et SDF', 'Complete account of the system', 'Great pleasure', 'Actual teachings of the great explorer of the truth']
         });
         expect(wrapper.find(SuggestionContainer)).toHaveLength(1);
       });

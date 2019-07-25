@@ -63,9 +63,7 @@ export const voteSessionPage: VoteSessionPageReducer = (state = initialPage, act
   case UPDATE_VOTE_SESSION_PAGE_SEECURRENTVOTES:
     return state.set('seeCurrentVotes', action.value).set('_hasChanged', true);
   case UPDATE_VOTE_SESSION_PAGE_PROPOSITIONS_TITLE:
-    return state
-      .update('propositionsSectionTitleEntries', updateInLangstringEntries(action.locale, fromJS(action.value)))
-      .set('_hasChanged', true);
+    return state.update('propositionsSectionTitleEntries', updateInLangstringEntries(action.locale, fromJS(action.value))).set('_hasChanged', true);
   case UPDATE_VOTE_SESSION_PAGE: {
     return Map({
       _hasChanged: false,
@@ -272,17 +270,11 @@ export const modulesById = (state: Map<string, Map> = Map(), action: ReduxAction
   case UPDATE_TOKEN_VOTE_EXCLUSIVE_CATEGORY:
     return state.setIn([action.id, 'exclusiveCategories'], action.value).setIn([action.id, '_hasChanged'], true);
   case UPDATE_TOKEN_VOTE_INSTRUCTIONS:
-    return state
-      .updateIn([action.id, 'instructionsEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.id, '_hasChanged'], true);
+    return state.updateIn([action.id, 'instructionsEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.id, '_hasChanged'], true);
   case CREATE_TOKEN_VOTE_CATEGORY:
-    return state
-      .updateIn([action.moduleId, 'tokenCategories'], tokenCategories => tokenCategories.push(action.id))
-      .setIn([action.moduleId, '_hasChanged'], true);
+    return state.updateIn([action.moduleId, 'tokenCategories'], tokenCategories => tokenCategories.push(action.id)).setIn([action.moduleId, '_hasChanged'], true);
   case DELETE_TOKEN_VOTE_CATEGORY:
-    return state
-      .updateIn([action.moduleId, 'tokenCategories'], tokenCategories => tokenCategories.delete(action.index))
-      .setIn([action.moduleId, '_hasChanged'], true);
+    return state.updateIn([action.moduleId, 'tokenCategories'], tokenCategories => tokenCategories.delete(action.index)).setIn([action.moduleId, '_hasChanged'], true);
   case UPDATE_TOKEN_VOTE_CATEGORY_TITLE:
   case UPDATE_TOKEN_VOTE_CATEGORY_COLOR:
   case UPDATE_TOKEN_TOTAL_NUMBER:
@@ -290,9 +282,7 @@ export const modulesById = (state: Map<string, Map> = Map(), action: ReduxAction
   case CREATE_GAUGE_VOTE_MODULE:
     return state.set(action.id, defaultTextGaugeModule.set('id', action.id));
   case UPDATE_GAUGE_VOTE_INSTRUCTIONS:
-    return state
-      .updateIn([action.id, 'instructionsEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.id, '_hasChanged'], true);
+    return state.updateIn([action.id, 'instructionsEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.id, '_hasChanged'], true);
   case UPDATE_GAUGE_VOTE_IS_NUMBER: {
     if (action.value) {
       return state.set(action.id, defaultNumberGaugeModule.set('id', action.id)).setIn([action.id, '_hasChanged'], true);
@@ -302,13 +292,9 @@ export const modulesById = (state: Map<string, Map> = Map(), action: ReduxAction
   case UPDATE_GAUGE_VOTE_NUMBER_TICKS:
     return state.setIn([action.id, 'nbTicks'], action.value).setIn([action.id, '_hasChanged'], true);
   case CREATE_GAUGE_VOTE_CHOICE:
-    return state
-      .updateIn([action.moduleId, 'choices'], choices => choices.push(action.id))
-      .setIn([action.moduleId, '_hasChanged'], true);
+    return state.updateIn([action.moduleId, 'choices'], choices => choices.push(action.id)).setIn([action.moduleId, '_hasChanged'], true);
   case DELETE_GAUGE_VOTE_CHOICE:
-    return state
-      .updateIn([action.moduleId, 'choices'], choices => choices.delete(action.index))
-      .setIn([action.moduleId, '_hasChanged'], true);
+    return state.updateIn([action.moduleId, 'choices'], choices => choices.delete(action.index)).setIn([action.moduleId, '_hasChanged'], true);
   case UPDATE_GAUGE_VOTE_CHOICE_LABEL:
     return state.setIn([action.moduleId, '_hasChanged'], true);
   case UPDATE_GAUGE_MINIMUM:
@@ -377,8 +363,7 @@ export const modulesById = (state: Map<string, Map> = Map(), action: ReduxAction
           .set('isCustom', isCustom)
           .set('type', type)
           .set('_hasChanged', true)
-          .update('instructionsEntries', updateInLangstringEntries(action.locale, instructions))
-      )
+          .update('instructionsEntries', updateInLangstringEntries(action.locale, instructions)))
       .update(action.id, updateGaugeSpecificInfo(specificInfo));
   }
   default:
@@ -401,8 +386,7 @@ const getTokenCategories = (m) => {
         titleEntries: fromJS(t.titleEntries),
         color: t.color,
         totalNumber: t.totalNumber
-      })
-    );
+      }));
   }
 
   return [];
@@ -493,13 +477,9 @@ export const voteProposalsById = (state: Map<string, Map> = Map(), action: Redux
   case MOVE_PROPOSAL_DOWN:
     return moveItemDown(state, action.id);
   case UPDATE_VOTE_PROPOSAL_TITLE:
-    return state
-      .updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.id, '_hasChanged'], true);
+    return state.updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.id, '_hasChanged'], true);
   case UPDATE_VOTE_PROPOSAL_DESCRIPTION:
-    return state
-      .updateIn([action.id, 'descriptionEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.id, '_hasChanged'], true);
+    return state.updateIn([action.id, 'descriptionEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.id, '_hasChanged'], true);
   case ADD_MODULE_TO_PROPOSAL:
     return state.updateIn([action.proposalId, 'modules'], modules => modules.push(action.id));
   case SET_VALIDATION_ERRORS:
@@ -516,8 +496,7 @@ const getGaugeChoices = (m) => {
         id: c.id,
         labelEntries: fromJS(c.labelEntries),
         value: c.value
-      })
-    );
+      }));
   }
 
   return [];
@@ -533,12 +512,7 @@ export const gaugeChoicesById = (state: Map<string, Map> = Map(), action: ReduxA
         if (state.has(cid)) {
           newState = newState.updateIn([cid, 'labelEntries'], updateInLangstringEntries(action.locale, choice.get('title')));
         } else {
-          newState = newState.set(
-            cid,
-            defaultTextGaugeChoice
-              .set('id', cid)
-              .update('labelEntries', updateInLangstringEntries(action.locale, choice.get('title')))
-          );
+          newState = newState.set(cid, defaultTextGaugeChoice.set('id', cid).update('labelEntries', updateInLangstringEntries(action.locale, choice.get('title'))));
         }
       });
 

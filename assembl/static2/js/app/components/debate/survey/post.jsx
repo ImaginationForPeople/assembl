@@ -15,14 +15,7 @@ import addSentimentMutation from '../../../graphql/mutations/addSentiment.graphq
 import deleteSentimentMutation from '../../../graphql/mutations/deleteSentiment.graphql';
 import validatePostMutation from '../../../graphql/mutations/validatePost.graphql';
 import PostQuery from '../../../graphql/PostQuery.graphql';
-import {
-  deleteMessageTooltip,
-  deniedMessageTooltip,
-  disagreeTooltip,
-  likeTooltip,
-  sharePostTooltip,
-  validateMessageTooltip
-} from '../../common/tooltips';
+import { deleteMessageTooltip, deniedMessageTooltip, disagreeTooltip, likeTooltip, sharePostTooltip, validateMessageTooltip } from '../../common/tooltips';
 import { sentimentDefinitionsObject } from '../common/sentimentDefinitions';
 import StatisticsDoughnut from '../common/statisticsDoughnut';
 import { DeletedPublicationStates, PublicationStates, SMALL_SCREEN_WIDTH } from '../../../constants';
@@ -37,7 +30,7 @@ import TagOnPost from '../../tagOnPost/tagOnPost';
 import QuestionQuery from '../../../graphql/QuestionQuery.graphql';
 import ThematicQuery from '../../../graphql/ThematicQuery.graphql';
 // Import types
-import type { Props as TagOnPostProps } from '../../../components/tagOnPost/tagOnPost';
+import type { Props as TagOnPostProps } from '../../tagOnPost/tagOnPost';
 import SharePostButton from '../common/sharePostButton';
 
 type Props = {
@@ -114,10 +107,7 @@ class Post extends React.Component<Props> {
               id: id,
               sentimentCounts: {
                 like: type === 'LIKE' ? currentCounts.like + 1 : currentCounts.like - (mySentiment === 'LIKE' ? 1 : 0),
-                disagree:
-                  type === 'DISAGREE'
-                    ? currentCounts.disagree + 1
-                    : currentCounts.disagree - (mySentiment === 'DISAGREE' ? 1 : 0),
+                disagree: type === 'DISAGREE' ? currentCounts.disagree + 1 : currentCounts.disagree - (mySentiment === 'DISAGREE' ? 1 : 0),
                 dontUnderstand: 0,
                 moreInfo: 0,
                 __typename: 'SentimentCounts'
@@ -198,17 +188,7 @@ class Post extends React.Component<Props> {
       return null;
     }
 
-    const {
-      contentLocale,
-      identifier,
-      isHarvesting,
-      lang,
-      originalLocale,
-      questionId,
-      questionIndex,
-      screenWidth,
-      themeId
-    } = this.props;
+    const { contentLocale, identifier, isHarvesting, lang, originalLocale, questionId, questionIndex, screenWidth, themeId } = this.props;
     const { debateData } = this.props.debate;
     const translate = contentLocale !== originalLocale;
 
@@ -281,19 +261,11 @@ class Post extends React.Component<Props> {
     if (post.creator) {
       const { displayName, isDeleted } = post.creator;
       const connectedUserId = getConnectedUserId();
-      userCanDeleteThisMessage =
-        (post.creator && (connectedUserId === String(post.creator.userId) && connectedUserCan(Permissions.DELETE_MY_POST))) ||
-        connectedUserCan(Permissions.DELETE_POST);
+      userCanDeleteThisMessage = (post.creator && (connectedUserId === String(post.creator.userId) && connectedUserCan(Permissions.DELETE_MY_POST))) || connectedUserCan(Permissions.DELETE_POST);
       creatorName = isDeleted ? I18n.t('deletedUser') : displayName || '';
     }
     const deleteButton = (
-      <DeletePostButton
-        modalBodyMessage={deleteModalMessage}
-        isPendingForModerator={isPendingForModerator}
-        postId={post.id}
-        refetchQueries={refetchQueries}
-        linkClassName="overflow-action"
-      />
+      <DeletePostButton modalBodyMessage={deleteModalMessage} isPendingForModerator={isPendingForModerator} postId={post.id} refetchQueries={refetchQueries} linkClassName="overflow-action" />
     );
     const deleteButtonOverlay = userCanDeleteThisMessage ? (
       <ResponsiveOverlayTrigger placement="top" tooltip={isPendingForModerator ? deniedMessageTooltip : deleteMessageTooltip}>
@@ -301,9 +273,7 @@ class Post extends React.Component<Props> {
       </ResponsiveOverlayTrigger>
     ) : null;
 
-    const validatePostButton = (
-      <ValidatePostButton postId={post.id} refetchQueries={refetchQueries} linkClassName="overflow-action" />
-    );
+    const validatePostButton = <ValidatePostButton postId={post.id} refetchQueries={refetchQueries} linkClassName="overflow-action" />;
     const validateButtonOverlay =
       userIsModerator && isPending ? (
         <ResponsiveOverlayTrigger placement="top" tooltip={validateMessageTooltip}>
@@ -335,7 +305,7 @@ class Post extends React.Component<Props> {
       type: 'questionPost'
     };
     const shareButton = (
-      <button className="overflow-action overflow-action-default">
+      <button type="button" className="overflow-action overflow-action-default">
         <SharePostButton {...sharePostButtonProps} />
       </button>
     );
@@ -401,21 +371,29 @@ class Post extends React.Component<Props> {
           <div className={classnames({ hidden: isPending })}>
             <StatisticsDoughnut
               elements={[
-                { color: sentimentDefinitionsObject.like.color, count: currentCounts.like },
-                { color: sentimentDefinitionsObject.disagree.color, count: currentCounts.disagree }
+                {
+                  color: sentimentDefinitionsObject.like.color,
+                  count: currentCounts.like
+                },
+                {
+                  color: sentimentDefinitionsObject.disagree.color,
+                  count: currentCounts.disagree
+                }
               ]}
             />
             <div className="stat-sentiment">
               <div>
                 <div className="min-sentiment">
                   <Like size={15} />
-                  &nbsp;<span className="txt">{currentCounts.like}</span>
+                  &nbsp;
+                  <span className="txt">{currentCounts.like}</span>
                 </div>
               </div>
               <div>
                 <div className="min-sentiment">
                   <Disagree size={15} />
-                  &nbsp;<span className="txt">{currentCounts.disagree}</span>
+                  &nbsp;
+                  <span className="txt">{currentCounts.disagree}</span>
                 </div>
               </div>
             </div>

@@ -47,12 +47,7 @@ const SurveyAdmin = ({ phaseIdentifier, section, thematicId, discussionPhaseId }
       <div className="admin-box">
         <SectionTitle title={I18n.t(sectionTitleMsgId)} annotation={I18n.t('administration.annotation')} />
         <SectionHelper section={section} thematicId={thematicId} />
-        <SurveyAdminForm
-          section={section}
-          thematicId={thematicId}
-          phaseIdentifier={phaseIdentifier}
-          discussionPhaseId={discussionPhaseId}
-        />
+        <SurveyAdminForm section={section} thematicId={thematicId} phaseIdentifier={phaseIdentifier} discussionPhaseId={discussionPhaseId} />
       </div>
     </div>
   );

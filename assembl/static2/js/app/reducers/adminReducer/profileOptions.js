@@ -91,9 +91,7 @@ export const textFieldsById: TextFieldsByIdReducer = (state = initialTextFields,
   case actionTypes.DELETE_TEXT_FIELD:
     return state.setIn([action.id, '_toDelete'], true);
   case actionTypes.UPDATE_TEXT_FIELD_TITLE:
-    return state
-      .updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.id, '_hasChanged'], true);
+    return state.updateIn([action.id, 'titleEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.id, '_hasChanged'], true);
   case actionTypes.TOGGLE_TEXT_FIELD_REQUIRED:
     return state.updateIn([action.id, 'required'], value => !value).setIn([action.id, '_hasChanged'], true);
   case actionTypes.TOGGLE_TEXT_FIELD_HIDDEN:
@@ -105,17 +103,11 @@ export const textFieldsById: TextFieldsByIdReducer = (state = initialTextFields,
   case actionTypes.DELETE_SELECT_FIELD_OPTION:
     return state.deleteIn([action.fieldId, 'options', action.id]).setIn([action.fieldId, '_hasChanged'], true);
   case actionTypes.UPDATE_SELECT_FIELD_OPTION_LABEL:
-    return state
-      .updateIn([action.fieldId, 'options', action.id, 'labelEntries'], updateInLangstringEntries(action.locale, action.value))
-      .setIn([action.fieldId, '_hasChanged'], true);
+    return state.updateIn([action.fieldId, 'options', action.id, 'labelEntries'], updateInLangstringEntries(action.locale, action.value)).setIn([action.fieldId, '_hasChanged'], true);
   case actionTypes.MOVE_SELECT_FIELD_OPTION_DOWN:
-    return state
-      .setIn([action.fieldId, 'options'], moveItemDown(state.getIn([action.fieldId, 'options']), action.id))
-      .setIn([action.fieldId, '_hasChanged'], true);
+    return state.setIn([action.fieldId, 'options'], moveItemDown(state.getIn([action.fieldId, 'options']), action.id)).setIn([action.fieldId, '_hasChanged'], true);
   case actionTypes.MOVE_SELECT_FIELD_OPTION_UP:
-    return state
-      .setIn([action.fieldId, 'options'], moveItemUp(state.getIn([action.fieldId, 'options']), action.id))
-      .setIn([action.fieldId, '_hasChanged'], true);
+    return state.setIn([action.fieldId, 'options'], moveItemUp(state.getIn([action.fieldId, 'options']), action.id)).setIn([action.fieldId, '_hasChanged'], true);
   default:
     return state;
   }

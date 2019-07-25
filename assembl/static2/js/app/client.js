@@ -31,9 +31,7 @@ const myFragmentMatcher = new IntrospectionFragmentMatcher({
 // http://dev.apollodata.com/react/query-splitting.html
 
 const dataIdFromObject = o => o.id;
-const useCSRFProtection = document.getElementById('useCSRFProtection')
-  ? document.getElementById('useCSRFProtection').value
-  : 'false';
+const useCSRFProtection = document.getElementById('useCSRFProtection') ? document.getElementById('useCSRFProtection').value : 'false';
 
 const networkInterface = createNetworkInterface({
   uri: getFullPathV2('graphql', { slug: getDiscussionSlug() }),

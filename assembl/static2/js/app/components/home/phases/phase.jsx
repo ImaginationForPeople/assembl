@@ -72,7 +72,8 @@ class Phase extends React.Component {
     const boxTopMargin = () => {
       if (isMobileSizedScreen(screenWidth)) {
         return computeBoxTopMargin(BOX_TOP_MARGIN.mobile);
-      } else if (isTabletSizedScreen(screenWidth)) {
+      }
+      if (isTabletSizedScreen(screenWidth)) {
         return computeBoxTopMargin(BOX_TOP_MARGIN.tablet);
       }
       return computeBoxTopMargin(BOX_TOP_MARGIN.desktop);

@@ -52,15 +52,7 @@ export const submittingState = (value: boolean) => ({
 });
 
 export const getClassNames = (ideaOnColumn: boolean, submitting: boolean) =>
-  classNames([
-    'button-submit',
-    'button-dark',
-    'btn',
-    'btn-default',
-    'right',
-    !ideaOnColumn ? 'margin-l' : 'margin-m',
-    submitting && 'cursor-wait'
-  ]);
+  classNames(['button-submit', 'button-dark', 'btn', 'btn-default', 'right', !ideaOnColumn ? 'margin-l' : 'margin-m', submitting && 'cursor-wait']);
 
 export class DumbTopPostForm extends React.Component<Props, State> {
   formContainer: ?HTMLDivElement;
@@ -109,34 +101,22 @@ export class DumbTopPostForm extends React.Component<Props, State> {
   getWarningMessageToDisplay = (publicationState: string, subject: string, bodyIsEmpty: boolean, ideaOnColumn: boolean) => {
     if (publicationState === PublicationStates.DRAFT && (!subject && bodyIsEmpty)) {
       return 'debate.brightMirror.fillEitherTitleContent';
-    } else if (!subject && !ideaOnColumn) {
+    }
+    if (!subject && !ideaOnColumn) {
       return 'debate.thread.fillSubject';
-    } else if (bodyIsEmpty) {
+    }
+    if (bodyIsEmpty) {
       return this.props.fillBodyLabelMsgId;
     }
     return null;
   };
 
   createTopPost = (publicationState: string) => {
-    const {
-      contentLocale,
-      createPost,
-      ideaId,
-      refetchIdea,
-      uploadDocument,
-      messageClassifier,
-      postSuccessMsgId,
-      ideaOnColumn,
-      draftSuccessMsgId,
-      messageViewOverride
-    } = this.props;
+    const { contentLocale, createPost, ideaId, refetchIdea, uploadDocument, messageClassifier, postSuccessMsgId, ideaOnColumn, draftSuccessMsgId, messageViewOverride } = this.props;
     const { body, subject } = this.state;
     this.setState(submittingState(true));
     const bodyIsEmpty = editorStateIsEmpty(body);
-    if (
-      ((subject || ideaOnColumn) && !bodyIsEmpty) ||
-      (publicationState === PublicationStates.DRAFT && (subject || !bodyIsEmpty))
-    ) {
+    if (((subject || ideaOnColumn) && !bodyIsEmpty) || (publicationState === PublicationStates.DRAFT && (subject || !bodyIsEmpty))) {
       displayAlert('success', I18n.t('loading.wait'), false, 10000);
 
       // first, we upload each attachment
@@ -146,9 +126,7 @@ export class DumbTopPostForm extends React.Component<Props, State> {
           const variables = {
             contentLocale: contentLocale,
             ideaId: ideaId,
-            subject:
-              subject ||
-              (messageViewOverride === MESSAGE_VIEW.brightMirror ? I18n.t('debate.brightMirror.draftEmptyTitle') : null),
+            subject: subject || (messageViewOverride === MESSAGE_VIEW.brightMirror ? I18n.t('debate.brightMirror.draftEmptyTitle') : null),
             messageClassifier: messageClassifier || null,
             // use the updated content state with new entities
             body: convertContentStateToHTML(result.contentState),
@@ -219,10 +197,7 @@ export class DumbTopPostForm extends React.Component<Props, State> {
     const { subject, body, isActive, submitting } = this.state;
     const userIsModerator = connectedUserIsModerator();
     const isBrightMirror = messageViewOverride === MESSAGE_VIEW.brightMirror;
-    const publicationState =
-      !userIsModerator && isDebateModerated && !isBrightMirror
-        ? PublicationStates.SUBMITTED_AWAITING_MODERATION
-        : PublicationStates.PUBLISHED;
+    const publicationState = !userIsModerator && isDebateModerated && !isBrightMirror ? PublicationStates.SUBMITTED_AWAITING_MODERATION : PublicationStates.PUBLISHED;
     return (
       <div className="form-container" ref={this.setFormContainerRef}>
         <FormGroup>
@@ -239,33 +214,18 @@ export class DumbTopPostForm extends React.Component<Props, State> {
           ) : null}
           {isActive || ideaOnColumn ? (
             <div className="margin-m">
-              <RichTextEditor
-                editorState={body}
-                handleInputFocus={this.handleInputFocus}
-                onChange={this.updateBody}
-                placeholder={I18n.t(bodyPlaceholderMsgId)}
-                withAttachmentButton
-              />
+              <RichTextEditor editorState={body} handleInputFocus={this.handleInputFocus} onChange={this.updateBody} placeholder={I18n.t(bodyPlaceholderMsgId)} withAttachmentButton />
               <div className="clear" />
               {!ideaOnColumn ? (
                 <Button className="button-cancel button-dark btn btn-default left margin-l" onClick={this.resetForm}>
                   <Translate value="cancel" />
                 </Button>
               ) : null}
-              <Button
-                className={getClassNames(ideaOnColumn, submitting)}
-                onClick={() => this.createTopPost(publicationState)}
-                style={{ marginBottom: '30px' }}
-                disabled={submitting}
-              >
+              <Button className={getClassNames(ideaOnColumn, submitting)} onClick={() => this.createTopPost(publicationState)} style={{ marginBottom: '30px' }} disabled={submitting}>
                 <Translate value="debate.post" />
               </Button>
               {draftable ? (
-                <Button
-                  className={`${getClassNames(ideaOnColumn, submitting)} btn-draft`}
-                  onClick={() => this.createTopPost(PublicationStates.DRAFT)}
-                  disabled={submitting}
-                >
+                <Button className={`${getClassNames(ideaOnColumn, submitting)} btn-draft`} onClick={() => this.createTopPost(PublicationStates.DRAFT)} disabled={submitting}>
                   <Translate value="debate.brightMirror.saveDraft" />
                 </Button>
               ) : null}
@@ -283,9 +243,7 @@ const mapStateToProps = state => ({
 
 const TopPostFormWithContext = props => (
   <DebateContext.Consumer>
-    {({ isDebateModerated, messageViewOverride }) => (
-      <DumbTopPostForm {...props} isDebateModerated={isDebateModerated} messageViewOverride={messageViewOverride} />
-    )}
+    {({ isDebateModerated, messageViewOverride }) => <DumbTopPostForm {...props} isDebateModerated={isDebateModerated} messageViewOverride={messageViewOverride} />}
   </DebateContext.Consumer>
 );
 

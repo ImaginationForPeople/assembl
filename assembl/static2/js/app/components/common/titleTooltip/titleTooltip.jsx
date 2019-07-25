@@ -3,8 +3,8 @@ import * as React from 'react';
 // Helper imports
 import { isMobile } from '../../../utils/globalFunctions';
 // Import components
-import ResponsiveOverlayTrigger from '../../common/responsiveOverlayTrigger';
-import { titleTooltip } from '../../common/tooltips';
+import ResponsiveOverlayTrigger from '../responsiveOverlayTrigger';
+import { titleTooltip } from '../tooltips';
 import TooltipIcon from '../icons/tooltipIcon/tooltipIcon';
 
 export type Props = {

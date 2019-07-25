@@ -20,11 +20,7 @@ export const DumbSelectModulesForm = ({ modulesById, moduleTypes, toggleModule }
         const helperLabel = moduleType.title || I18n.t('administration.landingPage.manageModules.textAndMultimedia');
         const identifierLowerCase = moduleType.identifier.toLowerCase();
         return (
-          <Checkbox
-            key={moduleType.moduleId}
-            checked={(module && module.get('enabled')) || moduleType.required}
-            onChange={() => (!moduleType.required ? toggleModule(moduleType.moduleId) : null)}
-          >
+          <Checkbox key={moduleType.moduleId} checked={(module && module.get('enabled')) || moduleType.required} onChange={() => (!moduleType.required ? toggleModule(moduleType.moduleId) : null)}>
             <Helper
               classname="margin-left-20"
               label={helperLabel}

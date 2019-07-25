@@ -19,7 +19,10 @@ export type FictionCommentHeaderProps = {
 const FictionCommentHeader = ({ strongTitle, title, imgSrc, imgAlt, commentsCount }: FictionCommentHeaderProps) => (
   <div className="comments-header">
     <h1 className="title">
-      <span className="highlight">{strongTitle}&nbsp;</span>
+      <span className="highlight">
+        {strongTitle}
+        &nbsp;
+      </span>
       {title}
     </h1>
     <p>

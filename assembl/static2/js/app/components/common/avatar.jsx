@@ -48,16 +48,12 @@ class Avatar extends React.Component<Props, State> {
     const { slug, connectedUserId, loginData, displayName, split } = this.props;
     let loginUrl = `${getContextual('login', { slug: slug })}?next=${this.state.next}`;
     if (loginData && loginData.url) {
-      loginUrl = loginData.url.includes('?')
-        ? `${loginData.url}&next=${this.state.next}`
-        : `${loginData.url}?next=${this.state.next}`;
+      loginUrl = loginData.url.includes('?') ? `${loginData.url}&next=${this.state.next}` : `${loginData.url}?next=${this.state.next}`;
     }
     const dropdownUser = (
       <div className="inline">
         <span className="assembl-icon-profil grey" />
-        <span className="user-account">
-          {displayName && displayName.length >= 17 && split ? `${displayName.substring(0, 17)}...` : displayName}
-        </span>
+        <span className="user-account">{displayName && displayName.length >= 17 && split ? `${displayName.substring(0, 17)}...` : displayName}</span>
       </div>
     );
 
@@ -75,10 +71,7 @@ class Avatar extends React.Component<Props, State> {
               >
                 <Translate value="profile.panelTitle" />
               </MenuItem>
-              <MenuItem
-                id="logout-dropdown"
-                href={`${getContextual('oldLogout', { slug: slug })}?next=${get('home', { slug: slug })}`}
-              >
+              <MenuItem id="logout-dropdown" href={`${getContextual('oldLogout', { slug: slug })}?next=${get('home', { slug: slug })}`}>
                 <Translate value="navbar.logout" />
               </MenuItem>
             </NavDropdown>

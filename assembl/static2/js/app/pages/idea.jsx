@@ -22,7 +22,7 @@ import { updateTags } from '../actions/tagActions';
 import GoUp from '../components/common/goUp';
 import Loader from '../components/common/loader';
 import { getConnectedUserId } from '../utils/globalFunctions';
-import Announcement, { getSentimentsCount } from './../components/debate/common/announcement';
+import Announcement, { getSentimentsCount } from '../components/debate/common/announcement';
 import ColumnsView from '../components/debate/multiColumns/columnsView';
 import ThreadView from '../components/debate/thread/threadView';
 import { DeletedPublicationStates, DELETE_CALLBACK, MESSAGE_VIEW } from '../constants';
@@ -162,9 +162,7 @@ export const transformPosts = (edges: Array<Node>, messageColumns: Array<Column>
 // transformedFilteredPosts parameter is built from transformPosts filtered with the current displayed fiction
 export const getDebateTotalMessages = (transformedFilteredPosts: Array<Object>) => {
   if (transformedFilteredPosts.length) {
-    return (
-      1 + getDebateTotalMessages(transformedFilteredPosts[0].children) + getDebateTotalMessages(transformedFilteredPosts.slice(1))
-    );
+    return 1 + getDebateTotalMessages(transformedFilteredPosts[0].children) + getDebateTotalMessages(transformedFilteredPosts.slice(1));
   }
   return 0;
 };
@@ -264,26 +262,11 @@ class Idea extends React.Component<Props> {
   }
 
   render() {
-    const {
-      contentLocaleMapping,
-      debateData,
-      lang,
-      ideaWithPostsData,
-      identifier,
-      messageViewOverride,
-      phaseId,
-      routerParams,
-      semanticAnalysisForThematicData,
-      timeline
-    } = this.props;
+    const { contentLocaleMapping, debateData, lang, ideaWithPostsData, identifier, messageViewOverride, phaseId, routerParams, semanticAnalysisForThematicData, timeline } = this.props;
     const refetchIdea = ideaWithPostsData.refetch;
     const { announcement, id, headerImgUrl, title, description } = this.props;
-    const isMultiColumns = ideaWithPostsData.loading
-      ? false
-      : ideaWithPostsData.idea.messageViewOverride === MESSAGE_VIEW.messageColumns;
-    const isBrightMirror = ideaWithPostsData.loading
-      ? false
-      : ideaWithPostsData.idea.messageViewOverride === MESSAGE_VIEW.brightMirror;
+    const isMultiColumns = ideaWithPostsData.loading ? false : ideaWithPostsData.idea.messageViewOverride === MESSAGE_VIEW.messageColumns;
+    const isBrightMirror = ideaWithPostsData.loading ? false : ideaWithPostsData.idea.messageViewOverride === MESSAGE_VIEW.brightMirror;
     const messageColumns = ideaWithPostsData.loading
       ? undefined
       : [...ideaWithPostsData.idea.messageColumns].sort((a, b) => {
@@ -311,22 +294,14 @@ class Idea extends React.Component<Props> {
       noRowsRenderer: noRowsRenderer,
       messageColumns: messageColumns,
       posts: topPosts,
-      initialRowIndex: ideaWithPostsData.loading
-        ? undefined
-        : this.getInitialRowIndex(topPosts, ideaWithPostsData.idea.posts.edges)
+      initialRowIndex: ideaWithPostsData.loading ? undefined : this.getInitialRowIndex(topPosts, ideaWithPostsData.idea.posts.edges)
     };
 
     let view;
     if (isMultiColumns) {
       view = <ColumnsView {...childProps} routerParams={routerParams} />;
     } else if (isBrightMirror) {
-      view = (
-        <InstructionView
-          {...childProps}
-          announcementContent={announcement}
-          semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-        />
-      );
+      view = <InstructionView {...childProps} announcementContent={announcement} semanticAnalysisForThematicData={semanticAnalysisForThematicData} />;
     } else {
       view = <ThreadView {...childProps} />;
     }
@@ -353,11 +328,7 @@ class Idea extends React.Component<Props> {
             <Grid fluid className="background-light padding-left-right">
               <div className="max-container">
                 <div className="content-section">
-                  <Announcement
-                    announcement={announcement}
-                    idea={ideaWithPostsData.idea}
-                    semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-                  />
+                  <Announcement announcement={announcement} idea={ideaWithPostsData.idea} semanticAnalysisForThematicData={semanticAnalysisForThematicData} />
                 </div>
               </div>
             </Grid>
@@ -432,23 +403,13 @@ class SwitchView extends React.Component<SwitchViewProps> {
 
 const SwitchViewWithContext = props => (
   <DebateContext.Consumer>
-    {({ modifyContext, isHarvestable, messageViewOverride }) => (
-      <SwitchView
-        {...props}
-        isHarvestable={isHarvestable}
-        contextMessageViewOverride={messageViewOverride}
-        modifyContext={modifyContext}
-      />
-    )}
+    {({ modifyContext, isHarvestable, messageViewOverride }) => <SwitchView {...props} isHarvestable={isHarvestable} contextMessageViewOverride={messageViewOverride} modifyContext={modifyContext} />}
   </DebateContext.Consumer>
 );
 
-const semanticAnalysisForThematicQuery: OperationComponent<SemanticAnalysisForThematicQuery, IdeaQueryVariables, Props> = graphql(
-  SemanticAnalysisForThematicQuery,
-  {
-    props: ({ data }) => data
-  }
-);
+const semanticAnalysisForThematicQuery: OperationComponent<SemanticAnalysisForThematicQuery, IdeaQueryVariables, Props> = graphql(SemanticAnalysisForThematicQuery, {
+  props: ({ data }) => data
+});
 
 const mapStateToPropsForIdeaQuery = state => ({
   lang: state.i18n.locale

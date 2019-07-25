@@ -13,9 +13,7 @@ describe('Vote Session DumbPageForm component', () => {
     const handleInstructionsTitleChangeSpy = jest.fn(() => {});
     const handleInstructionsContentChangeSpy = jest.fn(() => {});
     const handlePropositionSectionTitleChangeSpy = jest.fn(() => {});
-    let rawContentState = convertToRaw(
-      ContentState.createFromText('Vous disposez de 8 jetons favorables et de 3 jetons défavorables')
-    );
+    let rawContentState = convertToRaw(ContentState.createFromText('Vous disposez de 8 jetons favorables et de 3 jetons défavorables'));
     // We remove the generated key to avoid problems with the Snapshot testing
     rawContentState = { ...rawContentState, blocks: [{ ...rawContentState.blocks[0], key: '' }] };
     const props = {

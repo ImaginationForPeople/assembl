@@ -3,12 +3,7 @@ import Like from '../../svg/like';
 import Disagree from '../../svg/disagree';
 import DontUnderstand from '../../svg/dontUnderstand';
 import MoreInfo from '../../svg/moreInfo';
-import {
-  fictionLikeTooltip,
-  fictionDislikeTooltip,
-  fictionDontUnderstandTooltip,
-  fictionMoreInfoTooltip
-} from '../../common/tooltips';
+import { fictionLikeTooltip, fictionDislikeTooltip, fictionDontUnderstandTooltip, fictionMoreInfoTooltip } from '../../common/tooltips';
 import { type SentimentDefinition } from '../common/sentimentDefinitions';
 
 const fictionSentimentDefinitions: Array<SentimentDefinition> = [

@@ -22,15 +22,7 @@ type IdeasTableProps = {
 export function DumbIdeasTable(props: IdeasTableProps) {
   const { identifier, phaseId, onMenuItemClick, data } = props;
   const { ideas, rootIdea } = data;
-  return (
-    <MenuList
-      items={ideas}
-      rootItem={rootIdea && rootIdea.id}
-      phaseId={phaseId}
-      identifier={identifier}
-      onMenuItemClick={onMenuItemClick}
-    />
-  );
+  return <MenuList items={ideas} rootItem={rootIdea && rootIdea.id} phaseId={phaseId} identifier={identifier} onMenuItemClick={onMenuItemClick} />;
 }
 
 const IdeasTableWithData = graphql(AllIdeasQuery);

@@ -11,9 +11,7 @@ describe('entityToHTML function', () => {
       src: 'http://www.example.com/foobar.png',
       title: 'Foobar'
     });
-    const expected =
-      '<img class="attachment-image" src="http://www.example.com/foobar.png" alt=""' +
-      ' title="Foobar" data-id="foobar" data-mimetype="image/png" />';
+    const expected = '<img class="attachment-image" src="http://www.example.com/foobar.png" alt="" title="Foobar" data-id="foobar" data-mimetype="image/png" />';
     const actual = entityToHTML(entity);
     expect(actual).toEqual(expected);
   });

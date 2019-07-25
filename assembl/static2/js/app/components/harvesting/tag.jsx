@@ -22,8 +22,7 @@ type Props = {
 };
 
 type State = {
-  editing: boolean,
-  submitting: boolean
+  editing: boolean
 };
 
 type TagData = {
@@ -89,8 +88,7 @@ class Tag extends React.Component<Props, State> {
   };
 
   state = {
-    editing: false,
-    submitting: false
+    editing: false
   };
 
   updateTag = (values: TagData) => {
@@ -98,18 +96,16 @@ class Tag extends React.Component<Props, State> {
     const {
       tag: { label }
     } = values;
-    this.setState({ submitting: true }, () => {
-      updateTag({ id: tag.value, value: label, taggableId: contextId })
-        .then(({ data }) => {
-          this.setState({ submitting: false, editing: false }, () => {
-            const newTag = data.updateTag.tag;
-            if (onUpdate) onUpdate({ value: newTag.id, label: newTag.value });
-          });
-        })
-        .catch((error) => {
-          displayAlert('danger', `${error}`);
+    updateTag({ id: tag.value, value: label, taggableId: contextId })
+      .then(({ data }) => {
+        this.setState({ editing: false }, () => {
+          const newTag = data.updateTag.tag;
+          if (onUpdate) onUpdate({ value: newTag.id, label: newTag.value });
         });
-    });
+      })
+      .catch((error) => {
+        displayAlert('danger', `${error}`);
+      });
   };
 
   cancel = (event: SyntheticEvent<HTMLDivElement>) => {
@@ -141,7 +137,10 @@ class Tag extends React.Component<Props, State> {
     const { editing } = this.state;
     return (
       <div
-        className={classNames('harvesting-tag-container', { editing: editing, editable: canEdit })}
+        className={classNames('harvesting-tag-container', {
+          editing: editing,
+          editable: canEdit
+        })}
         onClick={canEdit ? this.edit : null}
       >
         {!editing ? (

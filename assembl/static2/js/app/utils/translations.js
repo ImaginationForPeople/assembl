@@ -23,8 +23,7 @@ const Translations = {
       tooltip: "Assemb'Bot"
     },
     cookiesBar: {
-      cookiesNotice:
-        "Assembl utilise les cookies afin de vous offrir la meilleure expérience possible. Pour utiliser Assembl, vous devez accepter la politique d'utilisation des cookies du débat.",
+      cookiesNotice: "Assembl utilise les cookies afin de vous offrir la meilleure expérience possible. Pour utiliser Assembl, vous devez accepter la politique d'utilisation des cookies du débat.",
       accept: "J'accepte",
       seeCookiesPolicy: "En savoir plus"
     },
@@ -84,10 +83,8 @@ const Translations = {
       cgu: "Conditions générales d'utilisation",
       matomoSettings: "Pour modifier les paramètres de ce cookie, veuillez cliquer ici",
       userSessionHelper: "Ce cookie est nécessaire pour vous maintenir connecté sur Assembl.",
-      localeHelper:
-        "Ce cookie est nécessaire afin d'afficher les textes dans la langue de votre navigateur ou bien celle que vous avez sélectionné dans la barre de navigation.",
-      privacyPolicyHelper:
-        "Ce cookie permet d'enregistrer que vous avez accepté la politique de confidentialité de la consultation.",
+      localeHelper: "Ce cookie est nécessaire afin d'afficher les textes dans la langue de votre navigateur ou bien celle que vous avez sélectionné dans la barre de navigation.",
+      privacyPolicyHelper: "Ce cookie permet d'enregistrer que vous avez accepté la politique de confidentialité de la consultation.",
       userGuidelineHelper: "Ce cookie permet d'enregistrer que vous avez accepté la charte de participation de la consultation.",
       cguHelper: "Ce cookie permet d'enregistrer que vous avez accepté les conditions générales d'utilisation.",
       matomoHelper: "Ce cookie est utilisé à des fins statistiques concernant les participants à la consultation.",
@@ -255,8 +252,7 @@ const Translations = {
       existingUsername: "Le nom d’utilisateur que vous avez renseigné existe déjà",
       existingEmail: "L’e-mail que vous avez renseigné existe déjà",
       emailNotFound: "L’e-mail que vous avez renseigné n’a pas été trouvé. Veuillez réessayer.",
-      incorrectPasswordLogin:
-        "Le mot de passe que vous avez entré ne correspond pas avec l’utilisateur saisi. Veuillez réessayer.",
+      incorrectPasswordLogin: "Le mot de passe que vous avez entré ne correspond pas avec l’utilisateur saisi. Veuillez réessayer.",
       newPassword: "Nouveau mot de passe",
       newPassword2: "Ré-entrez le nouveau mot de passe",
       oldPasswordWarning: "Une remarque : le nouveau mot de passe doit être différent des 5 derniers mots de passe."
@@ -311,8 +307,7 @@ const Translations = {
       title: "synthèse",
       seeConversation: "Voir la conversation",
       noSynthesisYet: "Il n'y a pas encore de synthèse disponible.",
-      noSynthesisYetCanCreate:
-        "Aucune synthèse n'a encore été créée, vous pouvez en créer une, puis la sauvegarder avant de la publier.",
+      noSynthesisYetCanCreate: "Aucune synthèse n'a encore été créée, vous pouvez en créer une, puis la sauvegarder avant de la publier.",
       tableOfContents: "Sommaire"
     },
     common: {
@@ -479,11 +474,9 @@ const Translations = {
         long: "Sémantique",
         short: "Analyse",
         occurence: "Occurence",
-        occurenceDefinition:
-          "nombre de fois où le mot clé apparaît dans le débat ou dans les discussions relatives à la thématique en question",
+        occurenceDefinition: "nombre de fois où le mot clé apparaît dans le débat ou dans les discussions relatives à la thématique en question",
         relevance: "Pertinence",
-        relevanceDefinition:
-          "qualifie l'importance du mot clé pour comprendre le sens général du texte analysé. Le score varie de 0 à 1, de faible à fort.",
+        relevanceDefinition: "qualifie l'importance du mot clé pour comprendre le sens général du texte analysé. Le score varie de 0 à 1, de faible à fort.",
         keywordCloud: "Nuage de mots-clés",
         keywordCloudDefinition:
           "Le nuage de mots-clés ci-dessous est une représentation visuelle des mots-clefs les plus utilisés dans le débat (ou \"dans les échanges liés à la thématique en question\" lorsque l'analyse est faite sur une thématique particulière). Les mots s'affichent dans des tailles de caractères d'autant plus visibles qu'ils sont utilisés ou populaires.",
@@ -491,8 +484,7 @@ const Translations = {
         numberKeyword: "Nombre de mots clés",
         noKeywordSelected: "Pas de mot sélectionné",
         sentimentAnalysis: "Analyse du sentiment",
-        sentimentAnalysisDefinition:
-          "L'analyse du sentiment caractérise la tonalité positive ou négative des échanges du débat (ou \"des échanges relatifs à la thématique en question\")."
+        sentimentAnalysisDefinition: "L'analyse du sentiment caractérise la tonalité positive ou négative des échanges du débat (ou \"des échanges relatifs à la thématique en question\")."
       },
       tagOnPost: {
         suggestionContainerTitle: "Suggestions de mots-clés :",
@@ -581,8 +573,7 @@ const Translations = {
         estimate: "Estimation moyenne",
         isCompleted: "La phase de vote est désormais terminée. Nous vous remercions d'avoir participé !",
         voteResultsPlusTitle: "Résultats des votes : %{title}",
-        postSuccess:
-          "Merci pour votre participation ! Votre vote a bien été pris en compte. Vous pouvez le modifier à tout moment jusqu’à la fermeture de la session de vote.",
+        postSuccess: "Merci pour votre participation ! Votre vote a bien été pris en compte. Vous pouvez le modifier à tout moment jusqu’à la fermeture de la session de vote.",
         remainingToken: "%{count} jeton disponible",
         remainingTokens: "%{count} jetons disponibles",
         resetTokens: "Supprimer mon vote",
@@ -684,8 +675,7 @@ const Translations = {
       confirmSelectFieldOptionDeletion: "Êtes-vous certain de vouloir supprimer cet item ?",
       addThematic: "Ajouter une thématique de niveau %{level}",
       addQuestion: "Ajouter une question",
-      anErrorOccured:
-        "Il y a eu une erreur lors de la sauvegarde, veuillez vérifier que vous avez bien renseigné tous les champs requis.",
+      anErrorOccured: "Il y a eu une erreur lors de la sauvegarde, veuillez vérifier que vous avez bien renseigné tous les champs requis.",
       deleteThematic: "Supprimer la thématique",
       deleteSubThematicDisabled: "Vous ne pouvez pas supprimer une thématique ayant des sous-thématiques.",
       confirmDeleteThematicTitle: "Confirmer la suppression",
@@ -823,8 +813,7 @@ const Translations = {
       configureVoteSessionButton: "Configurer un module de vote",
       goBackToThematic: "Retour à la thématique",
       saveBeforeConfigureVoteSession: "Veuillez sauvegarder avant de pouvoir accéder à la configuration d'un module de vote",
-      postsExistsWarning:
-        "Cette thématique contient des messages. Si vous changez de module, vous supprimerez définitivement tous les messages associés à cette thématique lors de la sauvegarde.",
+      postsExistsWarning: "Cette thématique contient des messages. Si vous changez de module, vous supprimerez définitivement tous les messages associés à cette thématique lors de la sauvegarde.",
       configureVoteSession: "Vous devez configurer une session de vote.",
       configureVoteModules: "Vous devez avoir configuré au moins un module de vote.",
       backToPreviousStep: "Revenir à l'étape %{number}",
@@ -848,20 +837,17 @@ const Translations = {
         sectionsTitle: "Renseigner les rubriques"
       },
       helpers: {
-        surveyQuestion:
-          "Le module de questions est composé d'une question et d'un champ de réponse dédié au participant. Vous pouvez ajouter des questions en cliquant sur l'icône + ci-dessous.",
+        surveyQuestion: "Le module de questions est composé d'une question et d'un champ de réponse dédié au participant. Vous pouvez ajouter des questions en cliquant sur l'icône + ci-dessous.",
         timelinePhases: "Choisissez une description et une image pour chaque phase du débat visible dans la page d'accueil",
         timelineTitle: "Configurez le titre et le sous-titre de la section timeline visible dans la page d'accueil",
         voteSessionProposalSection:
           "La partie qui comporte les diverses propositions est introduite par un titre. À vous de définir le titre selon qu'il s'agisse de propositions, d'idées, de projets ou autre...",
         tokenCategoryNumber: "Sélectionnez le nombre de types de jetons différents souhaité pour ce vote",
-        exclusive:
-          "Vous pouvez décider si le participant peut distributer un seul type de jetons (exclusif) ou plusieurs types de jetons par proposition (non exclusif).",
+        exclusive: "Vous pouvez décider si le participant peut distributer un seul type de jetons (exclusif) ou plusieurs types de jetons par proposition (non exclusif).",
         tokenVoteInstructions: "En fonction de l'objectif du module de jetons, incitez les participants à passer à l'action.",
         gaugeVoteInstructions: "En fonction de l'objectif du module jauge, incitez les participants à passer à l'action.",
         landingPage: {
-          header:
-            "Bandeau image en haut de la page. Il contient le titre de la consultation, et un sous-titre informatif, ainsi qu'un bouton d'accès à la consultation.",
+          header: "Bandeau image en haut de la page. Il contient le titre de la consultation, et un sous-titre informatif, ainsi qu'un bouton d'accès à la consultation.",
           timeline:
             "La section timeline met en avant les différentes phases de la consultation ainsi que le niveau de progression dans le temps. Elle contient un titre, un sous-titre, et pour chaque phase, un descriptif et des images associées. Pour la configuration du débat en phases, revenir au menu Éditer la discussion.",
           tweets:
@@ -879,8 +865,7 @@ const Translations = {
           partners: " "
         }
       },
-      videoHelp:
-        "*Liens vidéo autorisés : \"https://www.youtube.com/embed/[videoId]\" ou \"https://player.vimeo.com/video/[videoId]?\"",
+      videoHelp: "*Liens vidéo autorisés : \"https://www.youtube.com/embed/[videoId]\" ou \"https://player.vimeo.com/video/[videoId]?\"",
       annotation: "Les champs * sont requis.",
       discussion: {
         "0": "Préférences de la discussion",
@@ -899,17 +884,14 @@ const Translations = {
       },
       tableOfThematics: {
         quote: "Citation",
-        bannerHeader:
-          "Le bandeau de haut de page comporte le titre de la thématique que vous avez défini en amont, ainsi qu’une image de fond et éventuellement un sous-titre.",
+        bannerHeader: "Le bandeau de haut de page comporte le titre de la thématique que vous avez défini en amont, ainsi qu’une image de fond et éventuellement un sous-titre.",
         thematicTitle: "Titre de la Thématique",
         bannerSubtitleLabel: "Sous-titre dans le bandeau du haut de page",
         bannerImagePickerLabel: "Choisir l'image de fond du bandeau",
         moduleTypeLabel: "Configuration du module de participation",
-        instructionHeader:
-          "La section Consigne comporte un titre et une consigne et un média (vidéo, slideshare ou image ) qui permettent de guider les participants dans leur contribution.",
+        instructionHeader: "La section Consigne comporte un titre et une consigne et un média (vidéo, slideshare ou image ) qui permettent de guider les participants dans leur contribution.",
         instructionLabel: "Consigne",
-        summaryHeader:
-          "La section 'À retenir' comporte une résumé succinct de la thématique et elle peut être enrichie de différents média.",
+        summaryHeader: "La section 'À retenir' comporte une résumé succinct de la thématique et elle peut être enrichie de différents média.",
         summaryLabel: "À retenir",
         sectionTitleLabel: "Titre de la section",
         questionsHeader: "Questions",
@@ -979,8 +961,7 @@ const Translations = {
         privacyPolicyLabel: "Politique de protection des données personnelles",
         userGuidelinesLabel: "Charte de participation",
         successSave: "Les contenus juridiques ont été enregistrés avec succès !",
-        mandatoryLegalContentsValidation:
-          "Activer la modale obligeant les utilisateurs à accepter les contenus légaux à la première visite",
+        mandatoryLegalContentsValidation: "Activer la modale obligeant les utilisateurs à accepter les contenus légaux à la première visite",
         legalContentsValidation: "Acceptation des textes légaux pour une authentification via SSO"
       },
       landingPage: {
@@ -1001,16 +982,13 @@ const Translations = {
           buttonLabel: "Nom du bouton de renvoi vers le débat",
           headerImage: "Choisir l'image de fond du bandeau",
           logoImage: "Choisir le logo du débat",
-          headerDescription:
-            "L'image doit avoir une hauteur de 480px et une largeur de 1480px. Le poids ne doit pas dépasser 300 ko.",
-          logoDescription:
-            "Le logo doit avoir une hauteur maximale de 78px et une largeur maximale de 200px. Le poids ne doit pas dépasser 1Mo. Le fond doit être transparent.",
+          headerDescription: "L'image doit avoir une hauteur de 480px et une largeur de 1480px. Le poids ne doit pas dépasser 300 ko.",
+          logoDescription: "Le logo doit avoir une hauteur maximale de 78px et une largeur maximale de 200px. Le poids ne doit pas dépasser 1Mo. Le fond doit être transparent.",
           startDate: "Du",
           endDate: "Au",
           timePlaceholder: "Optionnel : Entrez les dates du débat",
           dateLabel: "Choisissez les dates de la discussion qui apparaissent dans le bandeau.",
-          dateDescription:
-            "Pour configurer les dates du debat. Si vous n'avez pas sélectionné de dates, les dates sont déduites des timelines.",
+          dateDescription: "Pour configurer les dates du debat. Si vous n'avez pas sélectionné de dates, les dates sont déduites des timelines.",
           startDateError: "La date de début ne peut pas être postérieure à la date de fin",
           endDateError: "La date de fin ne peut pas être antérieure à la date de début"
         },
@@ -1031,11 +1009,9 @@ const Translations = {
         addSelectFieldOption: "Ajouter un nouvel item",
         deleteTextField: "Supprimer le champ",
         deleteSelectFieldOption: "Supprimer l'item",
-        toggleLegalContentIntro:
-          "Activer ou non la validation obligatoire des contenus juridiques après l'inscription sur la plateforme par SSO.",
+        toggleLegalContentIntro: "Activer ou non la validation obligatoire des contenus juridiques après l'inscription sur la plateforme par SSO.",
         LegalContentButton: "Activer la validation obligatoire du contenu juridique",
-        introText:
-          "Configurez les champs que vous souhaitez afficher dans le formulaire d'inscription. Renseignez les noms ainsi que la mention obligatoire/non obligatoire.",
+        introText: "Configurez les champs que vous souhaitez afficher dans le formulaire d'inscription. Renseignez les noms ainsi que la mention obligatoire/non obligatoire.",
         textFieldToggleOptional: "Rendre ce champ optionnel",
         textFieldToggleRequired: "Rendre ce champ obligatoire",
         successSave: "Les options de profils ont été enregistrées avec succès !",
@@ -1047,8 +1023,7 @@ const Translations = {
         title: "Titre de la page web (visuel 1)",
         favicon: "Favicon (visuel 2)",
         faviconInstruction: "La favicon doit être au format .ico et avoir une hauteur maximum de 110px.",
-        logoInstruction:
-          "L'image du logo doit avoir une hauteur d'au plus 110px, et une largeur d'au plus 215px. Le fond doit être transparent.",
+        logoInstruction: "L'image du logo doit avoir une hauteur d'au plus 110px, et une largeur d'au plus 215px. Le fond doit être transparent.",
         icoRequired: "Le favicon doit être un fichier .ico uniquement"
       },
       semanticAnalysis: {
@@ -1107,8 +1082,7 @@ const Translations = {
       tooltip: "Assemb'Bot"
     },
     cookiesBar: {
-      cookiesNotice:
-        "Assembl uses cookies to offer you the best possible experience. To use Assembl, you have to agree to the cookies policy of the debate.",
+      cookiesNotice: "Assembl uses cookies to offer you the best possible experience. To use Assembl, you have to agree to the cookies policy of the debate.",
       accept: "I agree",
       seeCookiesPolicy: "See more"
     },
@@ -1166,8 +1140,7 @@ const Translations = {
       userGuideline: "User Guidelines",
       matomoSettings: "To modify this cookie's setting please click here",
       userSessionHelper: "This cookie is necessary to maintain the user connected on Assembl.",
-      localeHelper:
-        "This cookie is necessary to display the texts in the language of your browser or the one you selected in the navigation bar.",
+      localeHelper: "This cookie is necessary to display the texts in the language of your browser or the one you selected in the navigation bar.",
       privacyPolicyHelper: "This cookie registers that you have accepted the privacy policy of the consultation.",
       userGuidelineHelper: "This cookie registers that you have accepted the user guidelines of the consultation.",
       cguHelper: "This cookie registers that you have accepted the terms and conditions of the consultation.",
@@ -1510,8 +1483,7 @@ const Translations = {
         noProposals: "There is no point of view for the moment. Be the first to contribute!",
         submit: "Submit",
         postSuccess: "Thanks for your participation. Your proposal has been sent!",
-        postToBeValidated:
-          "Your contribution has been saved. To insure the quality of the debate, it will be visible to all participants once it has been reviewed by the animation team.",
+        postToBeValidated: "Your contribution has been saved. To insure the quality of the debate, it will be visible to all participants once it has been reviewed by the animation team.",
         endPhase: "The \"%{closedPhaseName}\" phase is closed."
       },
       question: {
@@ -1529,8 +1501,7 @@ const Translations = {
         postDeletedByUser: "This message has been deleted by the author.",
         postEdited: "edited",
         postSuccess: "Thanks for your participation. Your comment has been sent!",
-        postToBeValidated:
-          "Your contribution has been saved. To insure the quality of the debate, it will be visible to all participants once it has been reviewed by the animators.",
+        postToBeValidated: "Your contribution has been saved. To insure the quality of the debate, it will be visible to all participants once it has been reviewed by the animators.",
         fillSubject: "Please, write a title",
         fillBody: "Please, write a comment",
         linkIdea: "This post is related to the following themes:",
@@ -1558,11 +1529,9 @@ const Translations = {
         long: "Analysis",
         short: "Semantic",
         occurence: "Occurence",
-        occurenceDefinition:
-          "frequency of keywords throughout the debate or throughout the discussions related to the theme being addressed.",
+        occurenceDefinition: "frequency of keywords throughout the debate or throughout the discussions related to the theme being addressed.",
         relevance: "Relevance",
-        relevanceDefinition:
-          "measures how important the keyword is in order to understand the general meaning of the text. The score varies from 0 to 1, from weak to strong.",
+        relevanceDefinition: "measures how important the keyword is in order to understand the general meaning of the text. The score varies from 0 to 1, from weak to strong.",
         keywordCloud: "Keyword cloud",
         keywordCloudDefinition:
           "The following keyword cloud is a visual representation of the most frequently used keywords in the debate (or \"in the conversations related to the theme being addressed\" when the analysis is done on a particular thematic). The importance of each keyword is shown with font size.",
@@ -1660,8 +1629,7 @@ const Translations = {
         estimate: "Average estimate",
         isCompleted: "This vote phase is closed. Thank you for your participation!",
         voteResultsPlusTitle: "Vote results: %{title}",
-        postSuccess:
-          "Thank you for your participation! Your vote has been set. You can modify this vote during the entire duration of the vote session.",
+        postSuccess: "Thank you for your participation! Your vote has been set. You can modify this vote during the entire duration of the vote session.",
         remainingToken: "%{count} token remaining",
         remainingTokens: "%{count} tokens remaining",
         resetTokens: "Reset my vote",
@@ -1692,16 +1660,13 @@ const Translations = {
       password: "Password",
       cookies: "Cookies configuration",
       changePassword: "Change my password",
-      usernameInformations:
-        "If you configured a username, it will be used when you post a message or vote. If you haven't configured one, the full name that you configured will be used instead.",
+      usernameInformations: "If you configured a username, it will be used when you post a message or vote. If you haven't configured one, the full name that you configured will be used instead.",
       passwordModifiedSuccess: "Your password has been changed with success",
       saveSuccess: "Your profile is updated",
       deleteMyAccount: "Delete my account",
       deleteMyAccountConfirmation: "Delete my account and my data",
-      deleteMyAccountText:
-        "By deleting your account, you permanently delete all of your personal data and your account. You will no longer be able to contribute to the debate without an account.",
-      deleteMyAccountModal:
-        "Are you sure you want to permanently delete your account and all of your personal data? By validating, you will no longer be able to contribute to the consultation.",
+      deleteMyAccountText: "By deleting your account, you permanently delete all of your personal data and your account. You will no longer be able to contribute to the debate without an account.",
+      deleteMyAccountModal: "Are you sure you want to permanently delete your account and all of your personal data? By validating, you will no longer be able to contribute to the consultation.",
       updateUser: {
         errorMessage: {
           "1": "We already have a user with this username.",
@@ -1868,8 +1833,7 @@ const Translations = {
       configureVoteSessionButton: "Configure a vote session",
       goBackToThematic: "Go back to thematic",
       saveBeforeConfigureVoteSession: "Please save before you can access to the vote session configuration",
-      postsExistsWarning:
-        "This thematic contains posts. If you change the module, you'll delete all messages associated to this thematic when you'll save.",
+      postsExistsWarning: "This thematic contains posts. If you change the module, you'll delete all messages associated to this thematic when you'll save.",
       configureVoteSession: "You need to configure a vote session.",
       configureVoteModules: "You need to configure at least one vote module.",
       saveFirstStep: "Please return to step 1 and save the instructions first.",
@@ -1906,8 +1870,7 @@ const Translations = {
       },
       gaugeModal: {
         title: "Modification of the gauge's settings",
-        subTitle:
-          "You are about to modify the settings on this gauge only. If you wish to modify all of the gauges, please check the box at the end of the form.",
+        subTitle: "You are about to modify the settings on this gauge only. If you wish to modify all of the gauges, please check the box at the end of the form.",
         applyToAllProposalsCheckboxLabel: "Apply these changes to all of the proposals"
       },
       seeCurrentVotes: "Do you want participants to see the evolution of the votes in progress?",
@@ -1925,20 +1888,16 @@ const Translations = {
         sectionsTitle: "Set sections"
       },
       helpers: {
-        surveyQuestion:
-          "The survey module is composed of one question and a response field dedicated to the participant. You can add questions by clicking on the + icon below.",
+        surveyQuestion: "The survey module is composed of one question and a response field dedicated to the participant. You can add questions by clicking on the + icon below.",
         timelinePhases: "Choose a description and an image for each phase of the debate displayed in the landing page",
         timelineTitle: "Configure the title and the sub-title of the timeline section displayed in the landing page",
-        voteSessionProposalSection:
-          "The proposals section is introduced by a title. You define the title based on the proposal content.",
+        voteSessionProposalSection: "The proposals section is introduced by a title. You define the title based on the proposal content.",
         tokenCategoryNumber: "Select the number of different token types for this vote",
-        exclusive:
-          "You can decide wether the participant can distribute a single type of token (exclusive) or several types of token per proposal.",
+        exclusive: "You can decide wether the participant can distribute a single type of token (exclusive) or several types of token per proposal.",
         tokenVoteInstructions: "Depending on the objective of the token module, incite the participants to take action.",
         gaugeVoteInstructions: "Depending on the objective of the gauge module, incite the participants to take action.",
         landingPage: {
-          header:
-            "Top page header. It contains the consultation's title and subtitle and a button to access to the consultation.",
+          header: "Top page header. It contains the consultation's title and subtitle and a button to access to the consultation.",
           timeline: " ",
           tweets: " ",
           chatbot: " ",
@@ -1952,8 +1911,7 @@ const Translations = {
           partners: " "
         }
       },
-      videoHelp:
-        "*Authorized video links: \"https://www.youtube.com/embed/[videoId]\" or \"https://player.vimeo.com/video/[videoId]?\"",
+      videoHelp: "*Authorized video links: \"https://www.youtube.com/embed/[videoId]\" or \"https://player.vimeo.com/video/[videoId]?\"",
       annotation: "* Fields are required.",
       discussion: {
         "0": "Discussion preferences",
@@ -1972,14 +1930,12 @@ const Translations = {
       },
       tableOfThematics: {
         quote: "Quote",
-        bannerHeader:
-          "Top banner must include the thematic title defined previously, a background image and eventually a subtitle.",
+        bannerHeader: "Top banner must include the thematic title defined previously, a background image and eventually a subtitle.",
         thematicTitle: "Thematic title",
         bannerSubtitleLabel: "Top banner subtitle",
         bannerImagePickerLabel: "Banner image",
         moduleTypeLabel: "Participation module configuration",
-        instructionHeader:
-          "Instruction section include a title, an instruction and a media (video, slideshare or image) which guides users in their contribution.",
+        instructionHeader: "Instruction section include a title, an instruction and a media (video, slideshare or image) which guides users in their contribution.",
         instructionLabel: "Instructions",
         summaryHeader: "The 'Summary' section contains a brief abstract of the thematic and can be enriched with various medias.",
         summaryLabel: "Summary",
@@ -2073,14 +2029,12 @@ const Translations = {
           headerImage: "Choose the header image",
           logoImage: "Choose the header logo",
           headerDescription: "The image must have a height of 480px and a width of 1480px. The weight must not exceed 300ko.",
-          logoDescription:
-            "The logo must have a maximum height of 78px and a maximum width of 200px. The weight must not exceed 1 MB. The background must be transparent.",
+          logoDescription: "The logo must have a maximum height of 78px and a maximum width of 200px. The weight must not exceed 1 MB. The background must be transparent.",
           startDate: "From",
           endDate: "To",
           timePlaceholder: "Optional: Enter the dates of the debate",
           dateLabel: "Enter the dates of the the debate that appear in the header.",
-          dateDescription:
-            "Please enter the debate's date range. If no dates are selected, the dates are inferred from the timelines created.",
+          dateDescription: "Please enter the debate's date range. If no dates are selected, the dates are inferred from the timelines created.",
           startDateError: "The start date cannot be after the end date",
           endDateError: "The end date cannot be after the start date"
         },
@@ -2103,8 +2057,7 @@ const Translations = {
         deleteSelectFieldOption: "Delete this item",
         toggleLegalContentIntro: "Make the legal validation mandatory or not for a user after signing up in the platform by SSO.",
         LegalContentButton: "Activate the mandatory validation of the legal contents",
-        introText:
-          "Configure the fields that you want to display in the registration form. Fill in the names and whether the fields are required or optional.",
+        introText: "Configure the fields that you want to display in the registration form. Fill in the names and whether the fields are required or optional.",
         textFieldToggleOptional: "Make this field optional",
         textFieldToggleRequired: "Make this field required",
         successSave: "The profile options has been saved with success!",
@@ -2116,8 +2069,7 @@ const Translations = {
         title: "Web page Title (visual 1)",
         favicon: "Favicon (visual 2)",
         faviconInstruction: "Favicon should have a maximum height of 110px. Its extension should be .ico",
-        logoInstruction:
-          "Logo should have a maximum height of 110px and a maximum width of 215px. The background must be transparent.",
+        logoInstruction: "Logo should have a maximum height of 110px and a maximum width of 215px. The background must be transparent.",
         icoRequired: "The favicon must be an .ico file only"
       },
       semanticAnalysis: {
@@ -2132,8 +2084,7 @@ const Translations = {
       }
     },
     unauthorizedAdministration: {
-      unauthorizedMessage:
-        "You are not authorized to access the administration section. Please contact the administrator of the website.",
+      unauthorizedMessage: "You are not authorized to access the administration section. Please contact the administrator of the website.",
       returnButton: "Back to home"
     },
     date: {

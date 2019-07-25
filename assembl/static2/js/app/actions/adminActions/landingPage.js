@@ -25,13 +25,7 @@ export const moveLandingPageModuleDown: moveLandingPageModuleDownAction = id => 
   type: actionTypes.MOVE_LANDING_PAGE_MODULE_DOWN
 });
 
-export const createLandingPageModule = (
-  id: string,
-  identifier: string,
-  numberOfDuplicatesModules: number,
-  title: string,
-  order: number
-): actionTypes.createLandingPageModule => ({
+export const createLandingPageModule = (id: string, identifier: string, numberOfDuplicatesModules: number, title: string, order: number): actionTypes.createLandingPageModule => ({
   id: id,
   identifier: identifier,
   numberOfDuplicatesModules: numberOfDuplicatesModules,

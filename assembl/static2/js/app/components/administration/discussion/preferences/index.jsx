@@ -8,10 +8,10 @@ import { Field, FormSpy } from 'react-final-form';
 import classnames from 'classnames';
 import Loader from '../../../common/loader';
 import LoadSaveReinitializeForm from '../../../form/LoadSaveReinitializeForm';
-import AdminForm from '../../../../components/form/adminForm';
-import CheckboxFieldAdapter from '../../../../components/form/checkboxFieldAdapter';
+import AdminForm from '../../../form/adminForm';
+import CheckboxFieldAdapter from '../../../form/checkboxFieldAdapter';
 import CheckboxListFieldAdapter from '../../../form/checkboxListFieldAdapter';
-import SectionTitle from '../../../../components/administration/sectionTitle';
+import SectionTitle from '../../sectionTitle';
 import { load, postLoadFormat } from './load';
 import { save, createMutationsPromises } from './save';
 import validate from './validate';
@@ -106,13 +106,7 @@ class DiscussionPreferencesForm extends React.Component<Props, State> {
                   <div className="title">
                     <Translate value="administration.moderation" />
                   </div>
-                  <Field
-                    component={CheckboxFieldAdapter}
-                    name="withModeration"
-                    isChecked={values.withModeration}
-                    label={I18n.t('administration.activateModeration')}
-                    type="checkbox"
-                  />
+                  <Field component={CheckboxFieldAdapter} name="withModeration" isChecked={values.withModeration} label={I18n.t('administration.activateModeration')} type="checkbox" />
                   <div className="separator" />
                   <div className="title">
                     <Translate value="administration.translationService.title" />
@@ -122,13 +116,7 @@ class DiscussionPreferencesForm extends React.Component<Props, State> {
                       <Translate value="administration.translationService.description" />
                     </div>
                   ) : null}
-                  <Field
-                    component={CheckboxFieldAdapter}
-                    name="withTranslation"
-                    isChecked
-                    label={I18n.t('administration.translationService.activate')}
-                    type="checkbox"
-                  />
+                  <Field component={CheckboxFieldAdapter} name="withTranslation" isChecked label={I18n.t('administration.translationService.activate')} type="checkbox" />
                   <div className="separator" />
                   <OnChangeFieldSetField field="withSemanticAnalysis" becomes set="withTranslation" to />
                   <div className="title">
@@ -137,13 +125,7 @@ class DiscussionPreferencesForm extends React.Component<Props, State> {
                   <div className="label-indication">
                     <Translate value="administration.semanticAnalysis.description" />
                   </div>
-                  <Field
-                    component={CheckboxFieldAdapter}
-                    name="withSemanticAnalysis"
-                    isChecked
-                    label={I18n.t('administration.semanticAnalysis.activate')}
-                    type="checkbox"
-                  />
+                  <Field component={CheckboxFieldAdapter} name="withSemanticAnalysis" isChecked label={I18n.t('administration.semanticAnalysis.activate')} type="checkbox" />
                 </div>
               </AdminForm>
             </div>

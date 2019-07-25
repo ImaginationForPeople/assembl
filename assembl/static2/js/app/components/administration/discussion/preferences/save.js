@@ -14,10 +14,7 @@ const getVariables = async (client: ApolloClient, values: DiscussionPreferencesF
   slug: values.slug
 });
 
-export const createMutationsPromises = (client: ApolloClient) => (
-  values: DiscussionPreferencesFormValues,
-  initialValues: DiscussionPreferencesFormValues
-) => [
+export const createMutationsPromises = (client: ApolloClient) => (values: DiscussionPreferencesFormValues, initialValues: DiscussionPreferencesFormValues) => [
   () =>
     getVariables(client, values).then(variables =>
       client
@@ -30,12 +27,9 @@ export const createMutationsPromises = (client: ApolloClient) => (
         .then(() => {
           if (values.slug !== initialValues.slug) {
             // When the slug is changed we need to redirect the user to the updated url with the new slug
-            window.location.assign(
-              get('administration', { slug: values.slug, id: 'discussion' }, { section: SECTION_DISCUSSION_PREFERENCES })
-            );
+            window.location.assign(get('administration', { slug: values.slug, id: 'discussion' }, { section: SECTION_DISCUSSION_PREFERENCES }));
           }
-        })
-    )
+        }))
 ];
 
 export const save = createSave('administration.successDiscussionPreference');

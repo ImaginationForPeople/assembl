@@ -5,8 +5,8 @@ import { storiesOf } from '@storybook/react';
 import { withKnobs, select } from '@storybook/addon-knobs';
 /* eslint-enable */
 
-import Loader, { LOADER_TYPE } from '../../common/loader/loader';
-import type { Props as LoaderProps } from '../../common/loader/loader';
+import Loader, { LOADER_TYPE } from './loader';
+import type { Props as LoaderProps } from './loader';
 
 export const defaultLoaderProps: LoaderProps = {
   type: LOADER_TYPE.LOADING

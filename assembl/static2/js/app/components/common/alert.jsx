@@ -36,11 +36,7 @@ class AssemblAlert extends React.Component<Props, State> {
       return <Alert className="hideAlert" />;
     }
     return (
-      <Alert
-        style={topPosition ? { top: 0 } : { margin: 0 }}
-        className={showAlert ? 'showAlert' : 'hideAlert'}
-        bsStyle={alertStyle}
-      >
+      <Alert style={topPosition ? { top: 0 } : { margin: 0 }} className={showAlert ? 'showAlert' : 'hideAlert'} bsStyle={alertStyle}>
         {alertMsg}
       </Alert>
     );

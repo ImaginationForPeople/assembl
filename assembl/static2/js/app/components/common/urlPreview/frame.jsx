@@ -50,14 +50,7 @@ class Frame extends React.Component<FrameProps> {
   render() {
     const { html } = this.props;
     return (
-      <ReactFrame
-        className="url-iframe"
-        id={this.id}
-        contentDidMount={this.frameContentDidMount}
-        style={styles}
-        initialContent={this.getDocument()}
-        mountTarget="#htmlmount"
-      >
+      <ReactFrame className="url-iframe" id={this.id} contentDidMount={this.frameContentDidMount} style={styles} initialContent={this.getDocument()} mountTarget="#htmlmount">
         <div dangerouslySetInnerHTML={{ __html: html }} />
       </ReactFrame>
     );

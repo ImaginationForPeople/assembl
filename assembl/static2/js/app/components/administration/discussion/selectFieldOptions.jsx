@@ -23,16 +23,7 @@ type Props = {
   moveOptionUp: Function
 };
 
-const SelectFieldOptions = ({
-  addOption,
-  deleteSelectFieldOption,
-  updateLabel,
-  moveOptionDown,
-  moveOptionUp,
-  editLocale,
-  fieldId,
-  options
-}: Props) => {
+const SelectFieldOptions = ({ addOption, deleteSelectFieldOption, updateLabel, moveOptionDown, moveOptionUp, editLocale, fieldId, options }: Props) => {
   const confirmOptionDeletion = (id) => {
     const modalTitle = <Translate value="administration.confirmSelectFieldOptionDeletionTitle" />;
     const body = <Translate value="administration.confirmSelectFieldOptionDeletion" />;

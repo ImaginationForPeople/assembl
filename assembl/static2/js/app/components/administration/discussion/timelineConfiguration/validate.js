@@ -19,16 +19,12 @@ const validatePhase = (phase: PhaseValue): Errors => {
   if (!phase.start || !phase.start.time) {
     errors.start = I18n.t('error.required');
   } else if (phase.start && phase.start.time && phase.end && phase.end.time) {
-    errors.start = validStartDate(phase.start.time, phase.end.time)
-      ? undefined
-      : I18n.t('administration.landingPage.header.startDateError');
+    errors.start = validStartDate(phase.start.time, phase.end.time) ? undefined : I18n.t('administration.landingPage.header.startDateError');
   }
   if (!phase.end || !phase.end.time) {
     errors.end = I18n.t('error.required');
   } else if (phase.start && phase.start.time && phase.end && phase.end.time) {
-    errors.end = validEndDate(phase.start.time, phase.end.time)
-      ? undefined
-      : I18n.t('administration.landingPage.header.endDateError');
+    errors.end = validEndDate(phase.start.time, phase.end.time) ? undefined : I18n.t('administration.landingPage.header.endDateError');
   }
   return errors;
 };

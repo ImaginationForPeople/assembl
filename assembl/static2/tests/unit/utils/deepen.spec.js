@@ -11,10 +11,6 @@ describe('This test concerns the deepen function', () => {
 describe('This test concerns the nestedObjects2messages function used in the translations2messages script', () => {
   it('transform nested objects to the messages.json format used by react-intl-po', () => {
     const result = nestedObjects2messages({ ab: { cd: { e: 'foo', f: 'bar' }, g: 'foo2' } });
-    expect(result).toEqual([
-      { defaultMessage: 'foo', id: 'ab.cd.e' },
-      { defaultMessage: 'bar', id: 'ab.cd.f' },
-      { defaultMessage: 'foo2', id: 'ab.g' }
-    ]);
+    expect(result).toEqual([{ defaultMessage: 'foo', id: 'ab.cd.e' }, { defaultMessage: 'bar', id: 'ab.cd.f' }, { defaultMessage: 'foo2', id: 'ab.g' }]);
   });
 });

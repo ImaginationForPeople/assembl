@@ -1,13 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots SharePostButton default 1`] = `
-<a
+<button
   className=""
   onClick={[Function]}
-  style={Object {}}
+  type="button"
 >
   <span
     className="assembl-icon-share"
   />
-</a>
+</button>
 `;

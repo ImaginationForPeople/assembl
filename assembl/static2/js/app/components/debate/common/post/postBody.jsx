@@ -12,7 +12,7 @@ import { getConnectedUserId } from '../../../../utils/globalFunctions';
 import { isSpecialURL } from '../../../../utils/urlPreview';
 import { transformLinksInHtml } from '../../../../utils/linkify';
 import UpdateHarvestingTranslationPreference from '../../../../graphql/mutations/updateHarvestingTranslationPreference.graphql';
-import PostTranslate from '../../common/translations/postTranslate';
+import PostTranslate from '../translations/postTranslate';
 import Embed from '../../../common/urlPreview/embed';
 import URLMetadataLoader from '../../../common/urlPreview/urlMetadataLoader';
 import { getExtractTagId, getExtractColor } from '../../../../utils/extract';
@@ -78,11 +78,7 @@ export const ExtractInPost = ({ extractedByMachine, id, nature, state, children 
 export const postBodyReplacementComponents = (afterLoad?: Function, isHarvesting?: boolean = false) => ({
   iframe: (attributes: Object) => (
     // the src iframe url is different from the resource url
-    <Embed
-      key={attributes.key}
-      url={attributes['data-source-url'] || attributes.src}
-      defaultEmbed={<iframe title="post-embed" {...attributes} />}
-    />
+    <Embed key={attributes.key} url={attributes['data-source-url'] || attributes.src} defaultEmbed={<iframe title="post-embed" {...attributes} />} />
   ),
   a: (attributes: Object) => {
     const { href, key, target, title, children } = attributes;
@@ -92,10 +88,7 @@ export const postBodyReplacementComponents = (afterLoad?: Function, isHarvesting
         {children}
       </a>
     );
-    const urlMetadataPreview =
-      typeof children[0] === 'string' && children[0].startsWith('http') ? (
-        <URLMetadataLoader key={`url-preview-${href}`} url={href} afterLoad={afterLoad} />
-      ) : null;
+    const urlMetadataPreview = typeof children[0] === 'string' && children[0].startsWith('http') ? <URLMetadataLoader key={`url-preview-${href}`} url={href} afterLoad={afterLoad} /> : null;
     return (
       <React.Fragment>
         {embeddedUrl ? <Embed key={`url-embed-${href}`} url={href} /> : urlMetadataPreview}

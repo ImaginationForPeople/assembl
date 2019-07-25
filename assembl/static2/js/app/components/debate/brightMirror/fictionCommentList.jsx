@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 // Components imports
-import { Tree } from '../../../components/common/tree';
+import { Tree } from '../../common/tree';
 import FictionComment from './fictionComment';
 import FoldedPost from '../common/post/foldedPost';
 import { noRowsRenderer } from '../../../pages/idea';
@@ -23,14 +23,7 @@ export type FictionCommentListProps = {
   onSubmitHandler: Function
 };
 
-const FictionCommentList = ({
-  comments,
-  contentLocale,
-  contentLocaleMapping,
-  identifier,
-  messageViewOverride,
-  onSubmitHandler
-}: FictionCommentListProps) => {
+const FictionCommentList = ({ comments, contentLocale, contentLocaleMapping, identifier, messageViewOverride, onSubmitHandler }: FictionCommentListProps) => {
   const FIRST_ROW_INDEX = 0;
 
   const fictionCommentExtraProps: FictionCommentExtraProps = {

@@ -124,10 +124,7 @@ export const ExportSection = ({
 
   return (
     <div className="admin-box admin-export-section">
-      <SectionTitle
-        title={I18n.t(`administration.export.${sectionTitle}`)}
-        annotation={I18n.t(`administration.export.${annotation}`)}
-      />
+      <SectionTitle title={I18n.t(`administration.export.${sectionTitle}`)} annotation={I18n.t(`administration.export.${annotation}`)} />
       <div className="admin-content">
         <FormGroup>
           <div className="export-options">

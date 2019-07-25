@@ -32,20 +32,35 @@ class ModifyPasswordForm extends React.Component<Props, State> {
 
   handleOldPasswordChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const disabled = isEmpty(value) || isEmpty(this.state.newPassword) || isEmpty(this.state.newPassword2);
-    this.setState({ oldPassword: value, disabled: disabled });
+    this.setState((prevState) => {
+      const disabled = isEmpty(value) || isEmpty(prevState.newPassword) || isEmpty(prevState.newPassword2);
+      return {
+        oldPassword: value,
+        disabled: disabled
+      };
+    });
   };
 
   handleNewPasswordChange = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const disabled = isEmpty(this.state.oldPassword) || isEmpty(value) || isEmpty(this.state.newPassword2);
-    this.setState({ newPassword: value, disabled: disabled });
+    this.setState((prevState) => {
+      const disabled = isEmpty(prevState.oldPassword) || isEmpty(prevState.newPassword2) || isEmpty(value);
+      return {
+        newPassword: value,
+        disabled: disabled
+      };
+    });
   };
 
   handleNewPassword2Change = (e: SyntheticInputEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    const disabled = isEmpty(this.state.oldPassword) || isEmpty(this.state.newPassword) || isEmpty(value);
-    this.setState({ newPassword2: value, disabled: disabled });
+    this.setState((prevState) => {
+      const disabled = isEmpty(prevState.oldPassword) || isEmpty(prevState.newPassword) || isEmpty(value);
+      return {
+        newPassword2: value,
+        disabled: disabled
+      };
+    });
   };
 
   handleSaveClick = () => {
@@ -89,38 +104,15 @@ class ModifyPasswordForm extends React.Component<Props, State> {
     const { oldPassword, newPassword, newPassword2 } = this.state;
     return (
       <div>
-        <FormControlWithLabel
-          label={oldPasswordLabel}
-          onChange={this.handleOldPasswordChange}
-          type="password"
-          required
-          value={oldPassword}
-        />
-        <FormControlWithLabel
-          label={newPasswordLabel}
-          onChange={this.handleNewPasswordChange}
-          type="password"
-          required
-          value={newPassword}
-        />
-        <FormControlWithLabel
-          label={newPassword2Label}
-          onChange={this.handleNewPassword2Change}
-          type="password"
-          required
-          value={newPassword2}
-        />
+        <FormControlWithLabel label={oldPasswordLabel} onChange={this.handleOldPasswordChange} type="password" required value={oldPassword} />
+        <FormControlWithLabel label={newPasswordLabel} onChange={this.handleNewPasswordChange} type="password" required value={newPassword} />
+        <FormControlWithLabel label={newPassword2Label} onChange={this.handleNewPassword2Change} type="password" required value={newPassword2} />
         <div>
           <span className="warning">
             <Translate value="login.oldPasswordWarning" />
           </span>
         </div>
-        <Button
-          disabled={this.state.disabled}
-          id="save-new-password"
-          className="button-submit button-dark margin-l"
-          onClick={this.handleSaveClick}
-        >
+        <Button disabled={this.state.disabled} id="save-new-password" className="button-submit button-dark margin-l" onClick={this.handleSaveClick}>
           <Translate value="profile.save" />
         </Button>
       </div>

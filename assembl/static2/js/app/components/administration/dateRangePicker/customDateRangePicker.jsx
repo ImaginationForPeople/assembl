@@ -53,11 +53,7 @@ class CustomDateRangePicker extends React.PureComponent<Props, State> {
           small
           numberOfMonths={1}
           isOutsideRange={() => false}
-          renderCalendarInfo={() =>
-            (presets ? (
-              <PresetsList presets={presets} onPresetSelect={this.handlePresetSelect} selectedPreset={selectedPreset} />
-            ) : null)
-          }
+          renderCalendarInfo={() => (presets ? <PresetsList presets={presets} onPresetSelect={this.handlePresetSelect} selectedPreset={selectedPreset} /> : null)}
         />
       </div>
     );

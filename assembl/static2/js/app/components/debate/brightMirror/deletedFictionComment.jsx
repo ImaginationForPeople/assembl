@@ -18,12 +18,7 @@ export type DeletedFictionCommentProps = {
   numChildren: number
 };
 
-const DeletedFictionComment = ({
-  expandCollapseCallbackFromTree,
-  expandedFromTree,
-  isDeletedByAuthor,
-  numChildren
-}: DeletedFictionCommentProps) => {
+const DeletedFictionComment = ({ expandCollapseCallbackFromTree, expandedFromTree, isDeletedByAuthor, numChildren }: DeletedFictionCommentProps) => {
   // Translation key
   const deletedByAuthorMsgKey = 'debate.thread.postDeletedByUser';
   const deletedByAdminMsgKey = 'debate.thread.postDeletedByAdmin';

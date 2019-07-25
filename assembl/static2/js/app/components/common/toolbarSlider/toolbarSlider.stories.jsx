@@ -23,12 +23,7 @@ const playground = {
 
 storiesOf('Semantic Analysis|ToolbarSlider', module)
   .addDecorator(withKnobs)
-  .add('default', () => (
-    <ToolbarSlider
-      defaultValue={defaultToolbarSliderProps.defaultValue}
-      onSliderChange={defaultToolbarSliderProps.onSliderChange}
-    />
-  ))
+  .add('default', () => <ToolbarSlider defaultValue={defaultToolbarSliderProps.defaultValue} onSliderChange={defaultToolbarSliderProps.onSliderChange} />)
   .add('playground', () => (
     <ToolbarSlider
       color={color('color', playground.color)}

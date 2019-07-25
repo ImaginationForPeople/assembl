@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
 import { Translate } from 'react-redux-i18n';
 // Utils imports
 import { openShareModal } from '../../../utils/utilityManager';
@@ -28,9 +27,9 @@ const SharePostButton = ({ routerParams, linkClassName, modalTitleMsgKey, type, 
   };
 
   return (
-    <Link className={linkClassName} onClick={() => openShareModal(openShareModalParams)}>
+    <button type="button" className={linkClassName} onClick={() => openShareModal(openShareModalParams)}>
       <span className="assembl-icon-share" />
-    </Link>
+    </button>
   );
 };
 SharePostButton.defaultProps = {

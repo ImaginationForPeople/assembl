@@ -63,15 +63,12 @@ class DebateThread extends React.Component<Props> {
         id: themeId || questionId,
         identifier: identifier,
         phaseId: phaseId
-      })
-    );
+      }));
 
     return (
       <div className="debate">
         {loading && isParentRoute && <Loader color="black" />}
-        {!loading && ideas && isParentRoute && rootIdea ? (
-          <Ideas key={phaseId} ideas={ideas} rootIdeaId={rootIdea.id} identifier={identifier} phaseId={phaseId} />
-        ) : null}
+        {!loading && ideas && isParentRoute && rootIdea ? <Ideas key={phaseId} ideas={ideas} rootIdeaId={rootIdea.id} identifier={identifier} phaseId={phaseId} /> : null}
         {!isParentRoute && <section className="debate-section">{childrenElm}</section>}
       </div>
     );

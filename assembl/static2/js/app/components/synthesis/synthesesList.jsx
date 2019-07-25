@@ -53,13 +53,7 @@ const SynthesesList = ({ syntheses, refetchQueries }: Props) => {
       <Grid fluid className="background-grey">
         <div className="max-container">
           <div className="content-section">
-            <Masonry
-              className={'fictions-list'}
-              elementType={'div'}
-              options={masonryOptions}
-              disableImagesLoaded={false}
-              updateOnEachImageLoad={false}
-            >
+            <Masonry className="fictions-list" elementType="div" options={masonryOptions} disableImagesLoaded={false} updateOnEachImageLoad={false}>
               {childElements}
             </Masonry>
           </div>

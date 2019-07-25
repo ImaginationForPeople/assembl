@@ -31,10 +31,7 @@ describe('transformPosts function', () => {
       {
         children: [
           {
-            children: [
-              { children: [], id: '8', parentId: '5', subject: 'First grandchild of One' },
-              { children: [], id: '9', parentId: '5', subject: 'Second grandchild of One' }
-            ],
+            children: [{ children: [], id: '8', parentId: '5', subject: 'First grandchild of One' }, { children: [], id: '9', parentId: '5', subject: 'Second grandchild of One' }],
             id: '5',
             parentId: '1',
             subject: 'First child of One'

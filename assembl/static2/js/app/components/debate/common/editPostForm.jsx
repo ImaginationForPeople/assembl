@@ -6,19 +6,13 @@ import { Translate, I18n } from 'react-redux-i18n';
 import { EditorState } from 'draft-js';
 import { PublicationStates } from '../../../constants';
 import { connectedUserIsModerator } from '../../../utils/permissions';
-import { DebateContext } from '../../../../app/app';
+import { DebateContext } from '../../../app';
 
 import uploadDocumentMutation from '../../../graphql/mutations/uploadDocument.graphql';
 import updatePostMutation from '../../../graphql/mutations/updatePost.graphql';
 import { displayAlert, inviteUserToLogin } from '../../../utils/utilityManager';
 import { getConnectedUserId } from '../../../utils/globalFunctions';
-import {
-  convertToEditorState,
-  convertContentStateToHTML,
-  editorStateIsEmpty,
-  uploadNewAttachments,
-  type UploadNewAttachmentsPromiseResult
-} from '../../../utils/draftjs';
+import { convertToEditorState, convertContentStateToHTML, editorStateIsEmpty, uploadNewAttachments, type UploadNewAttachmentsPromiseResult } from '../../../utils/draftjs';
 import RichTextEditor from '../../common/richTextEditor';
 import { TextInputWithRemainingChars } from '../../common/textInputWithRemainingChars';
 import { TEXT_INPUT_MAX_LENGTH } from './topPostForm';
@@ -95,15 +89,7 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
   };
 
   handleSubmit = (publicationState) => {
-    const {
-      uploadDocument,
-      updatePost,
-      postSuccessMsgId,
-      childrenUpdate,
-      draftSuccessMsgId,
-      fillBodyLabelMsgId,
-      multiColumns
-    } = this.props;
+    const { uploadDocument, updatePost, postSuccessMsgId, childrenUpdate, draftSuccessMsgId, fillBodyLabelMsgId, multiColumns } = this.props;
     const { subject, body } = this.state;
     const subjectIsEmpty = subject.length === 0;
     const bodyIsEmpty = editorStateIsEmpty(body);
@@ -169,18 +155,9 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
 
   render() {
     const { subject, body } = this.state;
-    const {
-      editTitleLabelMsgId,
-      modifiedOriginalSubject,
-      bodyDescriptionMsgId,
-      draftable,
-      isDebateModerated,
-      multiColumns,
-      textareaRef
-    } = this.props;
+    const { editTitleLabelMsgId, modifiedOriginalSubject, bodyDescriptionMsgId, draftable, isDebateModerated, multiColumns, textareaRef } = this.props;
     const userIsModerator = connectedUserIsModerator();
-    const publicationState =
-      !userIsModerator && isDebateModerated ? PublicationStates.SUBMITTED_AWAITING_MODERATION : PublicationStates.PUBLISHED;
+    const publicationState = !userIsModerator && isDebateModerated ? PublicationStates.SUBMITTED_AWAITING_MODERATION : PublicationStates.PUBLISHED;
     const titleInputForThreadPost = !multiColumns ? (
       <TextInputWithRemainingChars
         alwaysDisplayLabel
@@ -211,13 +188,7 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
               titleInputForThreadPost
             )}
             <FormGroup>
-              <RichTextEditor
-                editorState={body}
-                placeholder={I18n.t(bodyDescriptionMsgId)}
-                onChange={this.updateBody}
-                textareaRef={textareaRef}
-                withAttachmentButton
-              />
+              <RichTextEditor editorState={body} placeholder={I18n.t(bodyDescriptionMsgId)} onChange={this.updateBody} textareaRef={textareaRef} withAttachmentButton />
 
               <div className="button-container">
                 <Button className="button-cancel button-dark btn btn-default" onClick={this.handleCancel}>
@@ -227,10 +198,7 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
                   <Translate value="debate.post" />
                 </Button>
                 {draftable ? (
-                  <Button
-                    className="button-submit button-dark btn btn-default right btn-draft"
-                    onClick={() => this.handleSubmit(PublicationStates.DRAFT)}
-                  >
+                  <Button className="button-submit button-dark btn btn-default right btn-draft" onClick={() => this.handleSubmit(PublicationStates.DRAFT)}>
                     <Translate value="debate.brightMirror.saveDraft" />
                   </Button>
                 ) : null}
@@ -243,11 +211,7 @@ class DumbEditPostForm extends React.PureComponent<EditPostFormProps, EditPostFo
   }
 }
 
-const EditPostFormWithContext = props => (
-  <DebateContext.Consumer>
-    {({ isDebateModerated }) => <DumbEditPostForm {...props} isDebateModerated={isDebateModerated} />}
-  </DebateContext.Consumer>
-);
+const EditPostFormWithContext = props => <DebateContext.Consumer>{({ isDebateModerated }) => <DumbEditPostForm {...props} isDebateModerated={isDebateModerated} />}</DebateContext.Consumer>;
 
 export default compose(
   graphql(uploadDocumentMutation, { name: 'uploadDocument' }),

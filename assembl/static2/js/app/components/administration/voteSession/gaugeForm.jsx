@@ -86,14 +86,7 @@ type ChangeNbTicksParams = {
   deleteChoice: number => void,
   updateNbTicks: number => void
 };
-export const changeNbTicks = ({
-  createChoice,
-  deleteChoice,
-  isNumberGauge,
-  nbTicks,
-  updateNbTicks,
-  value
-}: ChangeNbTicksParams): void => {
+export const changeNbTicks = ({ createChoice, deleteChoice, isNumberGauge, nbTicks, updateNbTicks, value }: ChangeNbTicksParams): void => {
   if (isNumberGauge) {
     updateNbTicks(value);
   } else if (nbTicks < value) {
@@ -140,10 +133,7 @@ const DumbGaugeForm = ({
     {index !== null && <Translate value="administration.gauge" number={index + 1} />}
     {handleDeleteGauge && (
       <OverlayTrigger placement="top" overlay={deleteGaugeTooltip}>
-        <Button
-          onClick={() => confirmDeletionModal(confirmDeletionTitle, confirmDeletionBody, () => handleDeleteGauge(id))}
-          className="admin-icons"
-        >
+        <Button onClick={() => confirmDeletionModal(confirmDeletionTitle, confirmDeletionBody, () => handleDeleteGauge(id))} className="admin-icons">
           <span className="assembl-icon-delete grey" />
         </Button>
       </OverlayTrigger>
@@ -191,20 +181,10 @@ const DumbGaugeForm = ({
     </FormGroup>
     {canChangeType && (
       <div className="margin-m">
-        <Radio
-          onChange={handleNumberGaugeUncheck}
-          checked={!isNumberGauge}
-          name={`gauge-type-${id}`}
-          id={`radio-text-${index + 1}`}
-        >
+        <Radio onChange={handleNumberGaugeUncheck} checked={!isNumberGauge} name={`gauge-type-${id}`} id={`radio-text-${index + 1}`}>
           <Translate value="administration.textValue" />
         </Radio>
-        <Radio
-          onChange={handleNumberGaugeCheck}
-          checked={isNumberGauge}
-          name={`gauge-type-${id}`}
-          id={`radio-number-${index + 1}`}
-        >
+        <Radio onChange={handleNumberGaugeCheck} checked={isNumberGauge} name={`gauge-type-${id}`} id={`radio-number-${index + 1}`}>
           <Translate value="administration.numberValue" />
         </Radio>
       </div>

@@ -36,20 +36,14 @@ describe('voteSession admin reducers', () => {
         _hasChanged: false,
         seeCurrentVotes: false,
         id: '',
-        propositionsSectionTitleEntries: [
-          { localeCode: 'fr', value: 'Titre des propositions en français' },
-          { localeCode: 'en', value: 'Title of the propositions in english' }
-        ],
+        propositionsSectionTitleEntries: [{ localeCode: 'fr', value: 'Titre des propositions en français' }, { localeCode: 'en', value: 'Title of the propositions in english' }],
         headerImage: { externalUrl: '', mimeType: '', title: '' }
       });
       const expected = fromJS({
         _hasChanged: true,
         seeCurrentVotes: false,
         id: '',
-        propositionsSectionTitleEntries: [
-          { localeCode: 'fr', value: 'Titre des propositions en français' },
-          { localeCode: 'en', value: 'Much better propositions title in english' }
-        ],
+        propositionsSectionTitleEntries: [{ localeCode: 'fr', value: 'Titre des propositions en français' }, { localeCode: 'en', value: 'Much better propositions title in english' }],
         headerImage: { externalUrl: '', mimeType: '', title: '' }
       });
       const action = {

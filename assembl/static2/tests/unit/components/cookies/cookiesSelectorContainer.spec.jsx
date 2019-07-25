@@ -19,12 +19,7 @@ describe('CookiesSelectorContainer component', () => {
   let instance;
   beforeEach(() => {
     updateAcceptedCookiesSpy = jest.fn();
-    wrapper = mount(
-      <DumbCookiesSelectorContainer
-        updateAcceptedCookies={updateAcceptedCookiesSpy}
-        cookiesList={['ACCEPT_TRACKING_ON_DISCUSSION']}
-      />
-    );
+    wrapper = mount(<DumbCookiesSelectorContainer updateAcceptedCookies={updateAcceptedCookiesSpy} cookiesList={['ACCEPT_TRACKING_ON_DISCUSSION']} />);
     instance = wrapper.instance();
   });
   it('should render a Cookies Selector', () => {

@@ -8,7 +8,7 @@ import { CellMeasurerCache, List } from 'react-virtualized';
 import { scrollToPost } from '../../../utils/hashLinkScroll';
 import NuggetsManager from '../nuggetsManager';
 import { MESSAGE_VIEW } from '../../../constants';
-import type { FictionCommentExtraProps } from '../../../components/debate/brightMirror/fictionComment';
+import type { FictionCommentExtraProps } from '../../debate/brightMirror/fictionComment';
 import type { ContentLocaleMapping } from '../../../actions/actionTypes';
 
 type BaseProps = {
@@ -235,11 +235,7 @@ class Child extends React.PureComponent<Props, State> {
           }
         }}
       >
-        {isVisible ? (
-          <InnerComponent {...forwardProps} measureTreeHeight={this.resizeTreeHeight} />
-        ) : (
-          <div style={{ height: 0.5 * window.innerHeight }} />
-        )}
+        {isVisible ? <InnerComponent {...forwardProps} measureTreeHeight={this.resizeTreeHeight} /> : <div style={{ height: 0.5 * window.innerHeight }} />}
         {numChildren > 0 ? (
           <React.Fragment>
             {messageViewOverride !== MESSAGE_VIEW.brightMirror ? this.renderToggleLink(expanded, level < 4, id) : null}

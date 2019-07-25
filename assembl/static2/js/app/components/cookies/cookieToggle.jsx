@@ -37,9 +37,7 @@ const CookieToggle = ({ handleToggle, cookie, toggleCookieType, locale }: Cookie
 
   const cookieName = Object.keys(COOKIE_TRANSLATION_KEYS).includes(name) ? I18n.t(`cookies.${name}`) : name;
   const cookieIsPiwik = name === 'matomo';
-  const matomoOptOutLink = matomoHost
-    ? `https://${matomoHost}/index.php?module=CoreAdminHome&action=optOut&language=${locale}`
-    : null;
+  const matomoOptOutLink = matomoHost ? `https://${matomoHost}/index.php?module=CoreAdminHome&action=optOut&language=${locale}` : null;
 
   return (
     <div className={cookieIsPiwik && matomoOptOutLink ? 'cookie-with-link' : 'cookie-toggle'}>
@@ -58,14 +56,7 @@ const CookieToggle = ({ handleToggle, cookie, toggleCookieType, locale }: Cookie
           <Translate value="cookies.matomoSettings" />
         </a>
       ) : (
-        <SwitchButton
-          label={I18n.t('refuse')}
-          labelRight={I18n.t('accept')}
-          onChange={toggleSwitch}
-          checked={!accepted}
-          disabled={category === 'essential'}
-          name={name}
-        />
+        <SwitchButton label={I18n.t('refuse')} labelRight={I18n.t('accept')} onChange={toggleSwitch} checked={!accepted} disabled={category === 'essential'} name={name} />
       )}
     </div>
   );

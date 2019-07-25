@@ -18,11 +18,7 @@ export default {
     return this.createEntity(ENTITY_TYPES.document, ENTITY_MUTABILITY.immutable, data);
   },
 
-  createEditorStateWithTwoAttachments: function (
-    imgSrc: string | File = 'my-img.png',
-    fileSrc: string | File = 'my-file.pdf',
-    text: string = ''
-  ) {
+  createEditorStateWithTwoAttachments: function (imgSrc: string | File = 'my-img.png', fileSrc: string | File = 'my-file.pdf', text: string = '') {
     let contentState = ContentState.createFromText(text);
     contentState = contentState.createEntity(ENTITY_TYPES.image, ENTITY_MUTABILITY.immutable, {
       id: '1',

@@ -30,14 +30,12 @@ const ColumnHeader = ({
         <div className="start-discussion-icon">
           <span className="assembl-icon-discussion color" />
         </div>
-        <div className={'start-discussion start-discussion-multicol'}>
+        <div className="start-discussion start-discussion-multicol">
           <h3 className="dark-title-3 no-margin">{title}</h3>
         </div>
         <div className="clear" />
       </div>
-      {withColumnHeader ? (
-        <TopPostForm ideaId={ideaId} refetchIdea={refetchIdea} ideaOnColumn messageClassifier={classifier} scrollOffset={240} />
-      ) : null}
+      {withColumnHeader ? <TopPostForm ideaId={ideaId} refetchIdea={refetchIdea} ideaOnColumn messageClassifier={classifier} scrollOffset={240} /> : null}
       <div className="clear" />
     </div>
   </div>

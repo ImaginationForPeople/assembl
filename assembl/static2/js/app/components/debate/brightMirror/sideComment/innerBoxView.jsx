@@ -40,9 +40,7 @@ class InnerBoxView extends React.Component<Props, State> {
     const { creator } = comment;
     const displayName = creator && !creator.isDeleted ? creator.displayName : I18n.t('deletedUser');
     const canEdit = isConnectedUser(creator && creator.userId) && connectedUserCan(Permissions.EDIT_MY_POST);
-    const canDelete =
-      (isConnectedUser(creator && creator.userId) && connectedUserCan(Permissions.DELETE_MY_POST)) ||
-      connectedUserCan(Permissions.DELETE_POST);
+    const canDelete = (isConnectedUser(creator && creator.userId) && connectedUserCan(Permissions.DELETE_MY_POST)) || connectedUserCan(Permissions.DELETE_POST);
     const currentExtractId = extracts ? extracts[extractIndex].id : '';
     const canGoPrevious = extracts && extractIndex != null && extractIndex > 0;
     const canGoNext = extracts && extractIndex != null && extractIndex < extracts.length - 1;

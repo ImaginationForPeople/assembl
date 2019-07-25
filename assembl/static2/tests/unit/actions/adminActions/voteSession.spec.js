@@ -30,10 +30,7 @@ describe('updateVoteSessionPageSeeCurrentVotes action true', () => {
 describe('updateVoteSessionPagePropositionsTitle', () => {
   const { updateVoteSessionPagePropositionsTitle } = actions;
   it('should return an UPDATE_VOTE_SESSION_PAGE_PROPOSITIONS_TITLE action type', () => {
-    const actual = updateVoteSessionPagePropositionsTitle(
-      'en',
-      'Title of the propositions section for the vote session page in english'
-    );
+    const actual = updateVoteSessionPagePropositionsTitle('en', 'Title of the propositions section for the vote session page in english');
     const expected = {
       locale: 'en',
       value: 'Title of the propositions section for the vote session page in english',

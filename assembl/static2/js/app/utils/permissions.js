@@ -1,6 +1,6 @@
 import intersection from 'lodash/intersection';
 
-import { getConnectedUserPermissions } from '../utils/globalFunctions';
+import { getConnectedUserPermissions } from './globalFunctions';
 
 const Permissions = {
   READ: 'read',

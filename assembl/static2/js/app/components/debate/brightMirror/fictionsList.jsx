@@ -67,9 +67,7 @@ const FictionsList = ({ posts, identifier, refetchIdea, lang, themeId }: Props) 
       const { userId, displayName, isDeleted } = post.creator;
       authorName = isDeleted ? I18n.t('deletedUser') : displayName;
       userCanEdit = connectedUserId === String(userId) && connectedUserCan(Permissions.EDIT_MY_POST);
-      userCanDelete =
-        (connectedUserId === String(userId) && connectedUserCan(Permissions.DELETE_MY_POST)) ||
-        connectedUserCan(Permissions.DELETE_POST);
+      userCanDelete = (connectedUserId === String(userId) && connectedUserCan(Permissions.DELETE_MY_POST)) || connectedUserCan(Permissions.DELETE_POST);
     }
     // Define bright mirror fiction props
     const fictionMetaInfo: BrightMirrorFictionProps = {
@@ -118,13 +116,7 @@ const FictionsList = ({ posts, identifier, refetchIdea, lang, themeId }: Props) 
             </h1>
           </div>
           <div className="content-section">
-            <Masonry
-              className={'fictions-list'}
-              elementType={'div'}
-              options={masonryOptions}
-              disableImagesLoaded={false}
-              updateOnEachImageLoad={false}
-            >
+            <Masonry className="fictions-list" elementType="div" options={masonryOptions} disableImagesLoaded={false} updateOnEachImageLoad={false}>
               {childElements}
             </Masonry>
           </div>

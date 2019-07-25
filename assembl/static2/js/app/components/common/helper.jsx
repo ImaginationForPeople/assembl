@@ -5,7 +5,7 @@ import classnames from 'classnames';
 
 import { isMobile } from '../../utils/globalFunctions';
 import { MEDIUM_SCREEN_WIDTH } from '../../constants';
-import { withScreenWidth } from '../common/screenDimensions';
+import { withScreenWidth } from './screenDimensions';
 
 type HelperProps = {
   label?: string,

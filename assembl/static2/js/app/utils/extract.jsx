@@ -162,7 +162,8 @@ export function getExtractColor(nature: string, state: ExtractState, extractedBy
   if (extractedByMachine) {
     if (state === ExtractStates.SUBMITTED) {
       return harvestingColors.pink;
-    } else if (state === ExtractStates.PUBLISHED) {
+    }
+    if (state === ExtractStates.PUBLISHED) {
       return harvestingColors.paleGreen;
     }
   }

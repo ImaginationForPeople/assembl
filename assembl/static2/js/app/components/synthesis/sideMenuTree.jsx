@@ -43,7 +43,7 @@ class SideMenuTree extends React.Component<SideMenuTreeProps, SideMenuTreeState>
   getLinkContainerClassNames = (id: string) => {
     const { ideaOnScroll } = this.props;
     const isIdeaOnScroll = ideaOnScroll === id;
-    return classNames('link-container', { active: (location.hash === `#${id}` && isIdeaOnScroll) || isIdeaOnScroll });
+    return classNames('link-container', { active: (window.location.hash === `#${id}` && isIdeaOnScroll) || isIdeaOnScroll });
   };
 
   getTitle = (title: string, level: number, url: string, id: string) => {
@@ -57,7 +57,9 @@ class SideMenuTree extends React.Component<SideMenuTreeProps, SideMenuTreeState>
         }}
         className={`side-menu-link-${level}`}
       >
-        {indexGenerator(indexes)} {title}
+        {indexGenerator(indexes)}
+        {' '}
+        {title}
       </Link>
     );
   };

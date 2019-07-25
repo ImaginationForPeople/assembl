@@ -11,14 +11,6 @@ type Props = {
   desc: string
 };
 
-const Glyphicon = ({ glyph, color, size, desc }: Props) => (
-  <img
-    width={`${size}px`}
-    height={`${size}px`}
-    src={getIconPath(`${glyph}.svg`, color)}
-    alt={I18n.t(desc)}
-    title={I18n.t(desc)}
-  />
-);
+const Glyphicon = ({ glyph, color, size, desc }: Props) => <img width={`${size}px`} height={`${size}px`} src={getIconPath(`${glyph}.svg`, color)} alt={I18n.t(desc)} title={I18n.t(desc)} />;
 
 export default Glyphicon;

@@ -1,13 +1,7 @@
 // @flow
 
 import type { ApolloClient } from 'react-apollo';
-import {
-  createSave,
-  convertToEntries,
-  convertRichTextToVariables,
-  getFileVariable,
-  convertDateTimeToISO8601String
-} from '../../../form/utils';
+import { createSave, convertToEntries, convertRichTextToVariables, getFileVariable, convertDateTimeToISO8601String } from '../../../form/utils';
 import type { DatePickerValue } from './types.flow';
 import updateDiscussion from '../../../../graphql/mutations/updateDiscussion.graphql';
 
@@ -15,11 +9,7 @@ type UpdateDiscussion = updateDiscussion;
 
 export const save = createSave('administration.landingPage.successSave');
 
-const createVariablesFromValues = async (
-  values: DatePickerValue,
-  initialValues: DatePickerValue,
-  client: ApolloClient
-): Promise<UpdateDiscussion> => {
+const createVariablesFromValues = async (values: DatePickerValue, initialValues: DatePickerValue, client: ApolloClient): Promise<UpdateDiscussion> => {
   const subTitlesVariables = values.headerSubtitle ? await convertRichTextToVariables(values.headerSubtitle, client) : null;
   return {
     titleEntries: values.headerTitle ? convertToEntries(values.headerTitle) : null,
@@ -32,15 +22,11 @@ const createVariablesFromValues = async (
   };
 };
 
-export const createMutationsPromises = (client: ApolloClient) => (
-  values: UpdateDiscussion,
-  initalValues: DatePickerValue
-): Array<() => Promise<UpdateDiscussion>> => [
-    () =>
-      createVariablesFromValues(values, initalValues, client).then(variables =>
-        client.mutate({
-          mutation: updateDiscussion,
-          variables: variables
-        })
-      )
-  ];
+export const createMutationsPromises = (client: ApolloClient) => (values: UpdateDiscussion, initalValues: DatePickerValue): Array<() => Promise<UpdateDiscussion>> => [
+  () =>
+    createVariablesFromValues(values, initalValues, client).then(variables =>
+      client.mutate({
+        mutation: updateDiscussion,
+        variables: variables
+      }))
+];

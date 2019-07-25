@@ -12,13 +12,7 @@ export type displayResponseAuthorProps = {
   displayIsEdited: React.Node
 };
 
-const displayResponseAuthor = ({
-  authorFullname,
-  parentPostAuthorFullname,
-  publishedDate,
-  displayedPublishedDate,
-  displayIsEdited
-}: displayResponseAuthorProps) => (
+const displayResponseAuthor = ({ authorFullname, parentPostAuthorFullname, publishedDate, displayedPublishedDate, displayIsEdited }: displayResponseAuthorProps) => (
   <header className="meta">
     <p className="author">
       <strong>{authorFullname}</strong>

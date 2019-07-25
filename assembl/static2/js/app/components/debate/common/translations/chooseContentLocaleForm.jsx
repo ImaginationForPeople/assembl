@@ -73,22 +73,12 @@ class ChooseContentLocaleForm extends React.Component<ChooseContentLocaleFormPro
         <Modal.Body>
           <FormGroup>
             <FormGroup>
-              <Radio
-                checked={scope === 'global'}
-                title={translateAllLabel}
-                value="global"
-                onChange={() => this.updateScope('global')}
-              >
+              <Radio checked={scope === 'global'} title={translateAllLabel} value="global" onChange={() => this.updateScope('global')}>
                 {translateAllLabel}
               </Radio>
             </FormGroup>
             <FormGroup>
-              <Radio
-                checked={scope === 'local'}
-                title={translateOneLabel}
-                value="local"
-                onChange={() => this.updateScope('local')}
-              >
+              <Radio checked={scope === 'local'} title={translateOneLabel} value="local" onChange={() => this.updateScope('local')}>
                 {translateOneLabel}
               </Radio>
             </FormGroup>
@@ -119,12 +109,7 @@ class ChooseContentLocaleForm extends React.Component<ChooseContentLocaleFormPro
           <Button key="translate-cancel" onClick={closeModal} className="button-cancel button-dark left">
             <Translate value="cancel" />
           </Button>
-          <Button
-            key="translate-submit"
-            disabled={selectedLocale === 'select' || !scope}
-            onClick={this.handleSubmit}
-            className="button-submit button-dark right"
-          >
+          <Button key="translate-submit" disabled={selectedLocale === 'select' || !scope} onClick={this.handleSubmit} className="button-submit button-dark right">
             <Translate value="validate" />
           </Button>
         </Modal.Footer>

@@ -5,11 +5,7 @@ import { I18n, Translate } from 'react-redux-i18n';
 import { BlockPicker as ColorPicker } from 'react-color';
 import { getEntryValueForLocale } from '../../../utils/i18n';
 import FormControlWithLabel from '../../common/formControlWithLabel';
-import {
-  updateTokenVoteCategoryTitle,
-  updateTokenVoteCategoryColor,
-  updateTokenTotalNumber
-} from '../../../actions/adminActions/voteSession';
+import { updateTokenVoteCategoryTitle, updateTokenVoteCategoryColor, updateTokenTotalNumber } from '../../../actions/adminActions/voteSession';
 import { pickerColors } from '../../../constants';
 
 type TokenCategoryFormProps = {
@@ -23,27 +19,11 @@ type TokenCategoryFormProps = {
   tokenCategoryNumber: number
 };
 
-const DumbTokenCategoryForm = ({
-  title,
-  color,
-  totalNumber,
-  index,
-  handleTitleChange,
-  handleColorChange,
-  handleNumberChange,
-  tokenCategoryNumber
-}: TokenCategoryFormProps) => (
+const DumbTokenCategoryForm = ({ title, color, totalNumber, index, handleTitleChange, handleColorChange, handleNumberChange, tokenCategoryNumber }: TokenCategoryFormProps) => (
   <div className="token-type-form" id={`type-form-${index}`}>
     <Translate value="administration.token" number={index + 1} />
     <div className="margin-m">
-      <FormControlWithLabel
-        id={`token-title-${index}`}
-        label={I18n.t('administration.tokenTitle')}
-        required
-        type="text"
-        onChange={handleTitleChange}
-        value={title}
-      />
+      <FormControlWithLabel id={`token-title-${index}`} label={I18n.t('administration.tokenTitle')} required type="text" onChange={handleTitleChange} value={title} />
       <FormControlWithLabel
         id={`token-number-${index}`}
         label={I18n.t('administration.tokenNumber')}
@@ -56,15 +36,7 @@ const DumbTokenCategoryForm = ({
         }}
       />
       <label htmlFor={`color-picker-${index}`}>{I18n.t('administration.tokenColor')}</label>
-      <ColorPicker
-        colors={pickerColors}
-        onChange={handleColorChange}
-        color={color}
-        width="100%"
-        id={`color-picker-${index}`}
-        triangle="hide"
-        className="no-box-shadow no-border-radius"
-      />
+      <ColorPicker colors={pickerColors} onChange={handleColorChange} color={color} width="100%" id={`color-picker-${index}`} triangle="hide" className="no-box-shadow no-border-radius" />
     </div>
     {index + 1 !== tokenCategoryNumber && <div className="separator" />}
   </div>

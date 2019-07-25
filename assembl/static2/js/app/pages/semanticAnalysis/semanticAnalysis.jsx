@@ -15,7 +15,7 @@ import Title from '../../components/common/title/title';
 import WordCloudForIE from '../../components/common/wordCloud/wordCloudForIE';
 
 // Type imports
-import type { Keyword, SemanticAnalysisData } from '../../pages/semanticAnalysis/dataType';
+import type { Keyword, SemanticAnalysisData } from './dataType';
 
 // Helper imports
 import { isMicrosoftBrowser } from '../../utils/globalFunctions';
@@ -128,10 +128,20 @@ export class SemanticAnalysis extends Component<Props, State> {
     const informationKeywordTooltip = (
       <div>
         <p>
-          <strong>{occurenceTitle}:</strong> {occurenceDefinition}
+          <strong>
+            {occurenceTitle}
+:
+          </strong>
+          {' '}
+          {occurenceDefinition}
         </p>
         <p>
-          <strong>{relevanceTitle}:</strong> {relevanceDefinition}
+          <strong>
+            {relevanceTitle}
+:
+          </strong>
+          {' '}
+          {relevanceDefinition}
         </p>
       </div>
     );
@@ -143,11 +153,7 @@ export class SemanticAnalysis extends Component<Props, State> {
     );
 
     const wordCloud = isMicrosoftBrowser() ? (
-      <WordCloudForIE
-        keywords={keywords}
-        numberOfKeywordsToDisplay={numberOfKeywordsToDisplay}
-        onKeywordClick={this.onKeywordClickHandler}
-      />
+      <WordCloudForIE keywords={keywords} numberOfKeywordsToDisplay={numberOfKeywordsToDisplay} onKeywordClick={this.onKeywordClickHandler} />
     ) : (
       <ResponsiveWordCloud
         keywordsColor={firstColor}
@@ -189,13 +195,7 @@ export class SemanticAnalysis extends Component<Props, State> {
           <Col xsHidden smHidden md={12} className="no-padding">
             <Title level={2}>{numberKeywordTitle}</Title>
 
-            <ToolbarSlider
-              color={firstColor}
-              defaultValue={this.NUM_WORDS_DEFAULT}
-              maxValue={keywordsLength}
-              minValue={this.MIN_WORDS}
-              onSliderChange={this.onNumberOfKeywordSliderChangeHandler}
-            />
+            <ToolbarSlider color={firstColor} defaultValue={this.NUM_WORDS_DEFAULT} maxValue={keywordsLength} minValue={this.MIN_WORDS} onSliderChange={this.onNumberOfKeywordSliderChangeHandler} />
           </Col>
 
           <Col xs={12} sm={6} md={12} smPush={1} mdPush={0} className="no-padding">

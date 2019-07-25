@@ -15,8 +15,8 @@ import TextFieldAdapter from '../../form/textFieldAdapter';
 import { compareEditorState } from '../../form/utils';
 import { createResourceTooltip, deleteResourceTooltip } from '../../common/tooltips';
 
-import AdminForm from '../../../components/form/adminForm';
-import LoadSaveReinitializeForm from '../../../components/form/LoadSaveReinitializeForm';
+import AdminForm from '../../form/adminForm';
+import LoadSaveReinitializeForm from '../../form/LoadSaveReinitializeForm';
 import { load, postLoadFormat } from './load';
 import { createMutationsPromises, save } from './save';
 import validate from './validate';
@@ -51,18 +51,8 @@ class ResourcesCenterAdminForm extends React.Component<Props> {
             <div className="admin-content">
               <AdminForm handleSubmit={handleSubmit} pristine={pristine} submitting={submitting}>
                 <div className="form-container">
-                  <Field
-                    editLocale={editLocale}
-                    name="pageTitle"
-                    component={MultilingualTextFieldAdapter}
-                    label={I18n.t('administration.resourcesCenter.pageTitleLabel')}
-                    required
-                  />
-                  <Field
-                    name="pageHeader"
-                    component={FileUploaderFieldAdapter}
-                    label={I18n.t('administration.resourcesCenter.headerImageLabel')}
-                  />
+                  <Field editLocale={editLocale} name="pageTitle" component={MultilingualTextFieldAdapter} label={I18n.t('administration.resourcesCenter.pageTitleLabel')} required />
+                  <Field name="pageHeader" component={FileUploaderFieldAdapter} label={I18n.t('administration.resourcesCenter.headerImageLabel')} />
                   <div className="separator" />
                 </div>
 
@@ -89,22 +79,9 @@ class ResourcesCenterAdminForm extends React.Component<Props> {
                         component={MultilingualRichTextFieldAdapter}
                         label={`${I18n.t('administration.resourcesCenter.textLabel')} ${editLocale.toUpperCase()}`}
                       />
-                      <Field
-                        componentClass="textarea"
-                        name={`${name}.embedCode`}
-                        component={TextFieldAdapter}
-                        label={I18n.t('administration.resourcesCenter.embedCodeLabel')}
-                      />
-                      <Field
-                        name={`${name}.img`}
-                        component={FileUploaderFieldAdapter}
-                        label={I18n.t('administration.resourcesCenter.imageLabel')}
-                      />
-                      <Field
-                        name={`${name}.doc`}
-                        component={FileUploaderFieldAdapter}
-                        label={I18n.t('administration.resourcesCenter.documentLabel')}
-                      />
+                      <Field componentClass="textarea" name={`${name}.embedCode`} component={TextFieldAdapter} label={I18n.t('administration.resourcesCenter.embedCodeLabel')} />
+                      <Field name={`${name}.img`} component={FileUploaderFieldAdapter} label={I18n.t('administration.resourcesCenter.imageLabel')} />
+                      <Field name={`${name}.doc`} component={FileUploaderFieldAdapter} label={I18n.t('administration.resourcesCenter.documentLabel')} />
                     </React.Fragment>
                   )}
                 />

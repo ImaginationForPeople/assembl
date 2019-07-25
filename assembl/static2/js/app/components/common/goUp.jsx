@@ -54,9 +54,9 @@ class GoUp extends React.Component<Props, State> {
     return (
       <div className={classnames('go-up', { hidden: isHidden })} style={{ position: position }}>
         <div>
-          <a onClick={this.onClick}>
+          <button type="button" onClick={this.onClick}>
             <span className="assembl-icon-up-open">&nbsp;</span>
-          </a>
+          </button>
         </div>
         <div>
           <Translate value="common.goUp" />

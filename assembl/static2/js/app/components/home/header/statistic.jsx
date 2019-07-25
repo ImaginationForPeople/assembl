@@ -5,8 +5,8 @@ import { I18n } from 'react-redux-i18n';
 import moment from 'moment';
 import 'moment-duration-format'; // needed for momentDuration.format()
 import RootIdeaStatsQuery from '../../../graphql/RootIdeaStats.graphql';
-import manageErrorAndLoading from '../../../components/common/manageErrorAndLoading';
-import HeaderStatistics, { statMessages, statParticipants, statSentiments } from '../../../components/common/headerStatistics';
+import manageErrorAndLoading from '../../common/manageErrorAndLoading';
+import HeaderStatistics, { statMessages, statParticipants, statSentiments } from '../../common/headerStatistics';
 
 export type VisitsAnalytics = {
   nbPageviews: ?number,
@@ -62,9 +62,7 @@ class Statistic extends React.PureComponent<Props> {
 
 export default compose(
   graphql(RootIdeaStatsQuery, {
-    props: ({
-      data: { rootIdea, numParticipants, totalSentiments, visitsAnalytics, loading, error, totalVoteSessionParticipations }
-    }) => {
+    props: ({ data: { rootIdea, numParticipants, totalSentiments, visitsAnalytics, loading, error, totalVoteSessionParticipations } }) => {
       if (error || loading) {
         return {
           error: error,

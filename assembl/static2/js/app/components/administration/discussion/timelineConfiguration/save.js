@@ -23,10 +23,7 @@ async function getPhaseVariables(client, phase, initialPhase, order) {
   };
 }
 
-export const createMutationsPromises = (client: ApolloClient, lang: string) => (
-  values: PhasesValues,
-  initialValues: PhasesValues
-) => {
+export const createMutationsPromises = (client: ApolloClient, lang: string) => (values: PhasesValues, initialValues: PhasesValues) => {
   const allMutations = [];
 
   const initialIds = initialValues.phases.map(t => t.id);
@@ -38,8 +35,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string) => (
     client.mutate({
       mutation: deleteDiscussionPhaseMutation,
       variables: { id: id }
-    })
-  );
+    }));
   allMutations.push(...deleteMutations);
 
   const createUpdateMutations = values.phases.map((phase, idx) => {
@@ -54,8 +50,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string) => (
               lang: lang,
               ...variables
             }
-          })
-        );
+          }));
     }
 
     const orderHasChanged = initialIds.indexOf(phase.id) !== currentIds.indexOf(phase.id);
@@ -70,8 +65,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string) => (
               lang: lang,
               ...variables
             }
-          })
-        );
+          }));
     }
 
     return () => Promise.resolve();

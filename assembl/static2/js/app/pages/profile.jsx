@@ -179,11 +179,7 @@ class Profile extends React.PureComponent<ProfileProps, ProfileState> {
                           )
                       )}
                     <Translate value="profile.usernameInformations" />
-                    <Button
-                      className="button-submit button-dark margin-l"
-                      onClick={!saveDisabled ? this.handleSaveClick : null}
-                      disabled={saveDisabled}
-                    >
+                    <Button className="button-submit button-dark margin-l" onClick={!saveDisabled ? this.handleSaveClick : null} disabled={saveDisabled}>
                       <Translate value="profile.save" />
                     </Button>
                   </div>

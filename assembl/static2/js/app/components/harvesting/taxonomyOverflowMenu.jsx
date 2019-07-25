@@ -68,11 +68,7 @@ class TaxonomyOverflowMenu extends React.Component<Props, State> {
             </div>
             <div className="pointer">
               {extractNatures.map(n => (
-                <div
-                  onClick={() => this.handleTaxonomySelection(CATEGORIES.nature, n.qualifier)}
-                  key={n.qualifier}
-                  className={classnames('taxonomy-label', { active: nature === n.qualifier })}
-                >
+                <div onClick={() => this.handleTaxonomySelection(CATEGORIES.nature, n.qualifier)} key={n.qualifier} className={classnames('taxonomy-label', { active: nature === n.qualifier })}>
                   <NatureIcons qualifier={n.qualifier} />
                   <div className="nature-label">
                     <Translate value={n.label} />
@@ -85,11 +81,7 @@ class TaxonomyOverflowMenu extends React.Component<Props, State> {
             </div>
             <div className="pointer">
               {extractActions.map(a => (
-                <div
-                  onClick={() => this.handleTaxonomySelection(CATEGORIES.action, a.qualifier)}
-                  key={a.qualifier}
-                  className={classnames('taxonomy-label', { active: action === a.qualifier })}
-                >
+                <div onClick={() => this.handleTaxonomySelection(CATEGORIES.action, a.qualifier)} key={a.qualifier} className={classnames('taxonomy-label', { active: action === a.qualifier })}>
                   <ActionIcons qualifier={a.qualifier} backgroundColor="#fff" color="#000" />
                   <div className="action-label">
                     <Translate value={a.label} />

@@ -13,11 +13,7 @@ describe('getEntityRange function', () => {
   });
 
   it('should get the range (start/end offsets) of this entity', () => {
-    let contentState = ContentState.createFromText('we need to connect the bluetooth SSL capacitor!').createEntity(
-      ENTITY_TYPES.link,
-      ENTITY_MUTABILITY.mutable,
-      {}
-    );
+    let contentState = ContentState.createFromText('we need to connect the bluetooth SSL capacitor!').createEntity(ENTITY_TYPES.link, ENTITY_MUTABILITY.mutable, {});
     const block = contentState.getFirstBlock();
     const entityKey = contentState.getLastCreatedEntityKey();
     const selection = createSelectionState(block.getKey(), 2, 8);

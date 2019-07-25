@@ -79,15 +79,7 @@ class ToolbarSlider extends Component<Props, State> {
 
     return (
       <MuiThemeProvider theme={theme(color)}>
-        <Slider
-          className="slider"
-          max={maxValue}
-          min={minValue}
-          onChange={onSliderChangeHandler}
-          step={2}
-          thumb={thumbComponent}
-          value={currentValue}
-        />
+        <Slider className="slider" max={maxValue} min={minValue} onChange={onSliderChangeHandler} step={2} thumb={thumbComponent} value={currentValue} />
       </MuiThemeProvider>
     );
   }

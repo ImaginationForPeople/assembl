@@ -15,7 +15,7 @@ import updateExtractMutation from '../../graphql/mutations/updateExtract.graphql
 import deleteExtractMutation from '../../graphql/mutations/deleteExtract.graphql';
 import confirmExtractMutation from '../../graphql/mutations/confirmExtract.graphql';
 import updateExtractTagsMutation from '../../graphql/mutations/updateExtractTags.graphql';
-import manageErrorAndLoading from '../../components/common/manageErrorAndLoading';
+import manageErrorAndLoading from '../common/manageErrorAndLoading';
 import { getConnectedUserId, getConnectedUserName } from '../../utils/globalFunctions';
 import AvatarImage from '../common/avatarImage';
 import TaxonomyOverflowMenu from './taxonomyOverflowMenu';
@@ -373,12 +373,9 @@ class DumbHarvestingBox extends React.Component<Props, State> {
 
   showValidatedHarvesting = (nature: ?string, action: ?string) => {
     if (nature && action) {
-      return (
-        <div className="harvesting-taxonomy-label">
-          {`${I18n.t(`search.taxonomy_nature.${nature}`)} + ${I18n.t(`search.taxonomy_action.${action}`)}`}
-        </div>
-      );
-    } else if (nature) {
+      return <div className="harvesting-taxonomy-label">{`${I18n.t(`search.taxonomy_nature.${nature}`)} + ${I18n.t(`search.taxonomy_action.${action}`)}`}</div>;
+    }
+    if (nature) {
       return <div className="harvesting-taxonomy-label">{I18n.t(`search.taxonomy_nature.${nature}`)}</div>;
     }
     return action ? <div className="harvesting-taxonomy-label">{I18n.t(`search.taxonomy_action.${action}`)}</div> : null;
@@ -479,33 +476,11 @@ class DumbHarvestingBox extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      annotation,
-      contentLocale,
-      harvestingDate,
-      isAuthorAccountDeleted,
-      showNuggetAction,
-      extracts,
-      toggleExtractsBox,
-      displayHarvestingBox,
-      cancelHarvesting
-    } = this.props;
-    const {
-      disabled,
-      extractIsValidated,
-      isNugget,
-      isEditable,
-      editableExtract,
-      extractNature,
-      extractAction,
-      menuTarget,
-      overflowMenuTop,
-      currentExtractIndex
-    } = this.state;
+    const { annotation, contentLocale, harvestingDate, isAuthorAccountDeleted, showNuggetAction, extracts, toggleExtractsBox, displayHarvestingBox, cancelHarvesting } = this.props;
+    const { disabled, extractIsValidated, isNugget, isEditable, editableExtract, extractNature, extractAction, menuTarget, overflowMenuTop, currentExtractIndex } = this.state;
     const extract = this.getCurrentExtractByIndex(currentExtractIndex);
     const selectionText = annotation ? annotation.body : '';
-    const harvesterUserName =
-      extract && extract.creator && extract.creator.displayName ? extract.creator.displayName : getConnectedUserName();
+    const harvesterUserName = extract && extract.creator && extract.creator.displayName ? extract.creator.displayName : getConnectedUserName();
     const extractState = extract && extract.extractState;
     const isSubmitted = extractState === ExtractStates.SUBMITTED;
     const userName = isAuthorAccountDeleted ? I18n.t('deletedUser') : harvesterUserName;
@@ -581,11 +556,7 @@ class DumbHarvestingBox extends React.Component<Props, State> {
               </OverlayTrigger>
               {showNuggetAction && (
                 <OverlayTrigger placement="top" overlay={nuggetExtractTooltip}>
-                  <Button
-                    disabled={menuDisabled}
-                    onClick={this.updateHarvestingNugget}
-                    className={classnames({ active: isNugget })}
-                  >
+                  <Button disabled={menuDisabled} onClick={this.updateHarvestingNugget} className={classnames({ active: isNugget })}>
                     <span className="assembl-icon-pepite grey" />
                   </Button>
                 </OverlayTrigger>
@@ -670,20 +641,14 @@ class DumbHarvestingBox extends React.Component<Props, State> {
               </div>
             )}
 
-            {extract && isEditable ? (
-              <FormControlWithLabel
-                label=""
-                componentClass="textarea"
-                className="text-area"
-                value={editableExtract}
-                onChange={e => this.editExtract(e.target.value)}
-              />
-            ) : null}
+            {extract && isEditable ? <FormControlWithLabel label="" componentClass="textarea" className="text-area" value={editableExtract} onChange={e => this.editExtract(e.target.value)} /> : null}
             {!extract && selectionText ? <div className="selection-body">{selectionText}</div> : null}
           </div>
           {extracts && extracts.length > 1 && (
             <div className="extracts-numbering">
-              {currentExtractIndex + 1}/{extracts.length}
+              {currentExtractIndex + 1}
+/
+              {extracts.length}
             </div>
           )}
           {extract && !hasFooter ? (

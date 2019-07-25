@@ -5,7 +5,7 @@ import { Grid, Col, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { Translate, I18n } from 'react-redux-i18n';
 import Helper from '../components/common/helper';
 import inputHandler from '../utils/inputHandler';
-import { getAuthorizationToken, getDiscussionSlug } from '../utils/globalFunctions';
+import { getDiscussionSlug } from '../utils/globalFunctions';
 import { postChangePassword } from '../services/authenticationService';
 import { get } from '../utils/routeMap';
 import { displayAlert } from '../utils/utilityManager';
@@ -16,10 +16,6 @@ class ChangePassword extends React.Component {
     super(props);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.submitForm = this.submitForm.bind(this);
-
-    this.state = {
-      token: getAuthorizationToken(this.props.location)
-    };
   }
 
   handleChangePassword(e) {
@@ -78,32 +74,14 @@ class ChangePassword extends React.Component {
                 </span>
               </div>
               <FormGroup className="margin-m center-align-flex">
-                <FormControl
-                  type="password"
-                  name="password1"
-                  required
-                  placeholder={I18n.t('login.newPassword')}
-                  onChange={this.handleChangePassword}
-                />
+                <FormControl type="password" name="password1" required placeholder={I18n.t('login.newPassword')} onChange={this.handleChangePassword} />
                 <Helper classname="title" helperText={<PasswordRequirements />} />
               </FormGroup>
               <FormGroup className="margin-m">
-                <FormControl
-                  type="password"
-                  name="password2"
-                  required
-                  placeholder={I18n.t('login.newPassword2')}
-                  onChange={this.handleChangePassword}
-                />
+                <FormControl type="password" name="password2" required placeholder={I18n.t('login.newPassword2')} onChange={this.handleChangePassword} />
               </FormGroup>
               <FormGroup className="margin-l">
-                <Button
-                  type="submit"
-                  name="change_password"
-                  value={I18n.t('login.changePassword')}
-                  className="button-submit button-dark"
-                  onClick={this.submitForm}
-                >
+                <Button type="submit" name="change_password" value={I18n.t('login.changePassword')} className="button-submit button-dark" onClick={this.submitForm}>
                   <Translate value="login.changePassword" />
                 </Button>
               </FormGroup>

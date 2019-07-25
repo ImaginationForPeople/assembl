@@ -1,13 +1,6 @@
 import sortBy from 'lodash/sortBy';
 
-import {
-  getChildren,
-  getPartialTree,
-  getPartialTreeByParentId,
-  getTree,
-  getAncestors,
-  getPath
-} from '../../../js/app/utils/tree';
+import { getChildren, getPartialTree, getPartialTreeByParentId, getTree, getAncestors, getPath } from '../../../js/app/utils/tree';
 
 describe('Tree', () => {
   describe('Children getter', () => {
@@ -50,12 +43,7 @@ describe('Tree', () => {
 
   describe('Get Tree', () => {
     it('should return the tree', () => {
-      const nodes = [
-        { id: 'foo', parentId: 'root' },
-        { id: 'bar', parentId: 'foo' },
-        { id: 'tar', parentId: 'bar' },
-        { id: 'lar', parentId: 'foo' }
-      ];
+      const nodes = [{ id: 'foo', parentId: 'root' }, { id: 'bar', parentId: 'foo' }, { id: 'tar', parentId: 'bar' }, { id: 'lar', parentId: 'foo' }];
       const tree = getTree('root', nodes);
       expect(tree.length).toEqual(1);
       expect(tree[0].id).toEqual('foo');
@@ -71,12 +59,7 @@ describe('Tree', () => {
 
   describe('Get ancestors', () => {
     it('should return ancestors', () => {
-      const nodes = [
-        { id: 'foo', parentId: 'root' },
-        { id: 'bar', parentId: 'foo' },
-        { id: 'tar', parentId: 'bar' },
-        { id: 'lar', parentId: 'foo' }
-      ];
+      const nodes = [{ id: 'foo', parentId: 'root' }, { id: 'bar', parentId: 'foo' }, { id: 'tar', parentId: 'bar' }, { id: 'lar', parentId: 'foo' }];
       let ancestors = getAncestors({ id: 'tar', parentId: 'bar' }, nodes);
       expect(ancestors.length).toEqual(2);
       const expected = ['bar', 'foo'];
@@ -89,12 +72,7 @@ describe('Tree', () => {
 
   describe('Get item path', () => {
     it('should return the path of an item in a tree', () => {
-      const nodes = [
-        { id: 'foo', parentId: 'root' },
-        { id: 'bar', parentId: 'foo' },
-        { id: 'tar', parentId: 'bar' },
-        { id: 'lar', parentId: 'foo' }
-      ];
+      const nodes = [{ id: 'foo', parentId: 'root' }, { id: 'bar', parentId: 'foo' }, { id: 'tar', parentId: 'bar' }, { id: 'lar', parentId: 'foo' }];
       const sortItems = items => sortBy(items, 'id');
       let path = getPath({ id: 'tar', parentId: 'bar' }, sortItems(nodes));
       let expected = [0, 0, 0];

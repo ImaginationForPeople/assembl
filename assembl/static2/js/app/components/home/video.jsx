@@ -39,9 +39,7 @@ export class Video extends React.Component<Props, State> {
           <div className="max-container">
             <div className="title-section">
               <div className="title-hyphen">&nbsp;</div>
-              <h1 className="dark-title-1">
-                {video.titleEntries ? video.titleEntries[locale] : <Translate value="home.video" />}
-              </h1>
+              <h1 className="dark-title-1">{video.titleEntries ? video.titleEntries[locale] : <Translate value="home.video" />}</h1>
             </div>
             <div className="content-section">
               <div className="content-margin">

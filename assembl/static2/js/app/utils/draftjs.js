@@ -58,7 +58,8 @@ const customConvertToHTML = convertToHTML({
   entityToHTML: (entity: EntityInstance, originalText: string): string => {
     if (entity.type === ENTITY_TYPES.document || entity.type === ENTITY_TYPES.image) {
       return attachmentsConverters.entityToHTML(entity);
-    } else if (entity.type === ENTITY_TYPES.link) {
+    }
+    if (entity.type === ENTITY_TYPES.link) {
       return linkConverters.entityToHTML(entity, originalText);
     }
 
@@ -113,10 +114,7 @@ export type UploadNewAttachmentsPromiseResult = {
   documentIds: Array<string>
 };
 
-export function uploadNewAttachments(
-  editorState: EditorState,
-  uploadDocument: Function
-): Promise<UploadNewAttachmentsPromiseResult> {
+export function uploadNewAttachments(editorState: EditorState, uploadDocument: Function): Promise<UploadNewAttachmentsPromiseResult> {
   const documentIds = [];
   let contentState = editorState.getCurrentContent();
   const entities = [];
@@ -160,8 +158,7 @@ export function uploadNewAttachments(
               mimeType: mimeType
             });
           }
-        })
-      );
+        }));
     } else {
       documentIds.push(entity.data.id);
     }

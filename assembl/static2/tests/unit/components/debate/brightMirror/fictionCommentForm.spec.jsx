@@ -6,10 +6,7 @@ import Adapter from 'enzyme-adapter-react-16';
 // Components imports
 import FictionCommentForm from '../../../../../js/app/components/debate/brightMirror/fictionCommentForm';
 
-import type {
-  FictionCommentFormProps,
-  FictionCommentFormState
-} from '../../../../../js/app/components/debate/brightMirror/fictionCommentForm';
+import type { FictionCommentFormProps, FictionCommentFormState } from '../../../../../js/app/components/debate/brightMirror/fictionCommentForm';
 
 // Import existing storybook data
 import { defaultFictionCommentForm } from '../../../../../js/app/stories/components/debate/brightMirror/fictionCommentForm.stories'; // eslint-disable-line max-len
@@ -41,9 +38,7 @@ describe('<FictionCommentForm /> - with shallow', () => {
     });
 
     it('should render one TextareaAutosize with value', () => {
-      expect(
-        wrapper.find('TextareaAutosize[value="Life was like a box of chocolates. You never know what you\'re gonna get."]')
-      ).toHaveLength(1);
+      expect(wrapper.find('TextareaAutosize[value="Life was like a box of chocolates. You never know what you\'re gonna get."]')).toHaveLength(1);
     });
 
     it('should render one cancel Button', () => {

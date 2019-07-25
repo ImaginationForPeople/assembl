@@ -4,7 +4,7 @@ import * as React from 'react';
 import { Tree } from '../../common/tree';
 import ColumnHeader from './columnHeader';
 import FoldedPost from '../common/post/foldedPost';
-import ColumnsPost from '../../../components/debate/multiColumns/columnsPost';
+import ColumnsPost from './columnsPost';
 import ColumnSynthesis, { type Props as ColumnSynthesisProps } from './columnSynthesis';
 import type { ContentLocaleMapping } from '../../../actions/actionTypes';
 
@@ -48,14 +48,7 @@ const PostColumn = ({
   messageViewOverride
 }: Props) => (
   <div className="column-view" style={{ width: width }}>
-    <ColumnHeader
-      color={color}
-      classifier={classifier}
-      title={title}
-      ideaId={ideaId}
-      refetchIdea={refetchIdea}
-      withColumnHeader={withColumnHeader}
-    />
+    <ColumnHeader color={color} classifier={classifier} title={title} ideaId={ideaId} refetchIdea={refetchIdea} withColumnHeader={withColumnHeader} />
     {synthesisProps && <ColumnSynthesis {...synthesisProps} />}
     <div className="column-tree">
       {data.length > 0 ? (

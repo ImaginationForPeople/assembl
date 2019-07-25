@@ -6,16 +6,16 @@ import { Modal, FormGroup, Checkbox, Button } from 'react-bootstrap';
 import { Translate } from 'react-redux-i18n';
 
 import { legalContentSlugs, ESSENTIAL_SIGNUP_COOKIES as LEGAL_CONTENTS_TO_ACCEPT } from '../../constants';
-import manageErrorAndLoading from './../../components/common/manageErrorAndLoading';
+import manageErrorAndLoading from '../common/manageErrorAndLoading';
 import { getRouteLastString, getDiscussionSlug, setCookieItem, getCookieItem } from '../../utils/globalFunctions';
 import { get, getContextual } from '../../utils/routeMap';
 
 import LegalContentsLinksList from './legalContentsLinksList';
 
 // GraphQL imports
-import TabsConditionQuery from './../../graphql/TabsConditionQuery.graphql';
-import updateAcceptedCookies from './../../graphql/mutations/updateAcceptedCookies.graphql';
-import acceptedCookiesQuery from './../../graphql/acceptedCookiesQuery.graphql';
+import TabsConditionQuery from '../../graphql/TabsConditionQuery.graphql';
+import updateAcceptedCookies from '../../graphql/mutations/updateAcceptedCookies.graphql';
+import acceptedCookiesQuery from '../../graphql/acceptedCookiesQuery.graphql';
 
 type LegalContentsArray = Array<string>;
 
@@ -60,8 +60,7 @@ export class DumbAcceptCookiesModal extends React.PureComponent<Props, State> {
       const cookiesFromBrowser = getCookieItem('cookies_configuration') && getCookieItem('cookies_configuration').split(',');
       const userHasAcceptedAllLegalContents =
         legalContentsToAcceptByCookieName.every(legalContent => acceptedLegalContents.includes(legalContent)) ||
-        (cookiesFromBrowser &&
-          legalContentsToAcceptByCookieName.every(legalContent => cookiesFromBrowser.includes(legalContent)));
+        (cookiesFromBrowser && legalContentsToAcceptByCookieName.every(legalContent => cookiesFromBrowser.includes(legalContent)));
 
       // The modal is only showed to a user who is connected but hasn't yet
       // accepted legal contents and isn't currently reading them
@@ -109,9 +108,7 @@ export class DumbAcceptCookiesModal extends React.PureComponent<Props, State> {
       privacyPolicy: hasPrivacyPolicy,
       userGuidelines: hasUserGuidelines
     };
-    const legalContentsArray = Object.keys(legalContentsToAcceptByRouteName).map(key =>
-      (legalContentsToAcceptByRouteName[key] ? key : null)
-    );
+    const legalContentsArray = Object.keys(legalContentsToAcceptByRouteName).map(key => (legalContentsToAcceptByRouteName[key] ? key : null));
     // This array gathers all the legal contents to accept by their route name
     const cleanLegalContentsArray = legalContentsArray.filter(el => el !== null);
 
@@ -125,18 +122,15 @@ export class DumbAcceptCookiesModal extends React.PureComponent<Props, State> {
         <Modal.Body>
           <FormGroup className="justify">
             <Checkbox onChange={this.handleModalCheckbox} checked={modalCheckboxIsChecked} type="checkbox" inline>
-              <Translate value="legalContentsModal.iAccept" /> {/* $FlowFixMe */}
+              <Translate value="legalContentsModal.iAccept" />
+              {' '}
+              {/* $FlowFixMe */}
               <LegalContentsLinksList legalContentsList={cleanLegalContentsArray} />
             </Checkbox>
           </FormGroup>
         </Modal.Body>
         <Modal.Footer>
-          <Button
-            key="cancel"
-            onClick={this.closeModal}
-            className="button-cancel button-dark"
-            href={`${getContextual('oldLogout', { slug: slug })}?next=${get('home', { slug: slug })}`}
-          >
+          <Button key="cancel" onClick={this.closeModal} className="button-cancel button-dark" href={`${getContextual('oldLogout', { slug: slug })}?next=${get('home', { slug: slug })}`}>
             <Translate value="refuse" />
           </Button>
           <Button

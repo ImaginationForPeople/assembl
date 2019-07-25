@@ -8,9 +8,7 @@ import Adapter from 'enzyme-adapter-react-16';
 // GraphQL imports
 import CommentQuery from '../../../../../js/app/graphql/BrightMirrorFictionQuery.graphql';
 // Components imports
-import FictionComment, {
-  FictionComment as ShallowFictionComment
-} from '../../../../../js/app/components/debate/brightMirror/fictionComment';
+import FictionComment, { FictionComment as ShallowFictionComment } from '../../../../../js/app/components/debate/brightMirror/fictionComment';
 import DeletedFictionComment from '../../../../../js/app/components/debate/brightMirror/deletedFictionComment';
 import CircleAvatar from '../../../../../js/app/components/debate/brightMirror/circleAvatar';
 import ToggleCommentButton from '../../../../../js/app/components/debate/common/toggleCommentButton';
@@ -22,10 +20,7 @@ import DeletePostButton from '../../../../../js/app/components/debate/common/del
 import type { FictionCommentGraphQLProps } from '../../../../../js/app/components/debate/brightMirror/fictionComment';
 
 // Import existing storybook data
-import {
-  defaultFictionComment,
-  defaultFictionCommentGraphQL
-} from '../../../../../js/app/stories/components/debate/brightMirror/fictionComment.stories';
+import { defaultFictionComment, defaultFictionCommentGraphQL } from '../../../../../js/app/stories/components/debate/brightMirror/fictionComment.stories';
 
 // Separate the snapshots in directories next to each component
 // Name should match with the story name

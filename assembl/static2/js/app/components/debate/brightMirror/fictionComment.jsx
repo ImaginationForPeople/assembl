@@ -248,8 +248,7 @@ export class FictionComment extends Component<LocalFictionCommentProps, FictionC
 
     // Display FictionCommentForm when ReplyToCommentButton is clicked.
     // ReplyToCommentButton is hidden when FictionCommentForm is displayed
-    const displayReplyToCommentButton =
-      connectedUserId && !showFictionCommentForm ? <ReplyToCommentButton {...replyToCommentButtonProps} /> : null;
+    const displayReplyToCommentButton = connectedUserId && !showFictionCommentForm ? <ReplyToCommentButton {...replyToCommentButtonProps} /> : null;
     const displayFictionCommentForm = showFictionCommentForm ? <FictionCommentForm {...fictionCommentFormProps} /> : null;
 
     // Display EditPostButton only when the user have the required rights
@@ -269,8 +268,7 @@ export class FictionComment extends Component<LocalFictionCommentProps, FictionC
       ) : null;
 
     // Display DeletePostButton only when the user have the required rights
-    const userCanDelete =
-      (isUserTheConnectedUser && connectedUserCan(Permissions.DELETE_MY_POST)) || connectedUserCan(Permissions.DELETE_POST);
+    const userCanDelete = (isUserTheConnectedUser && connectedUserCan(Permissions.DELETE_MY_POST)) || connectedUserCan(Permissions.DELETE_POST);
     const refetchQueries = [
       {
         query: CommentQuery,
@@ -279,12 +277,7 @@ export class FictionComment extends Component<LocalFictionCommentProps, FictionC
     ];
     const displayDeletePostButton = userCanDelete ? (
       <ResponsiveOverlayTrigger placement="bottom" tooltip={deleteFictionCommentTooltip}>
-        <DeletePostButton
-          linkClassName="action-delete"
-          modalBodyMessage={deleteCommentBodyMessageMsgKey}
-          postId={commentId}
-          refetchQueries={refetchQueries}
-        />
+        <DeletePostButton linkClassName="action-delete" modalBodyMessage={deleteCommentBodyMessageMsgKey} postId={commentId} refetchQueries={refetchQueries} />
       </ResponsiveOverlayTrigger>
     ) : null;
 
@@ -298,11 +291,7 @@ export class FictionComment extends Component<LocalFictionCommentProps, FictionC
       />
     );
 
-    const displayCommentContent = isEditing ? (
-      <FictionCommentForm {...editCommentFormProps} />
-    ) : (
-      <p className="comment">{updatedCommentContent || commentContent || I18n.t('loading.wait')}</p>
-    );
+    const displayCommentContent = isEditing ? <FictionCommentForm {...editCommentFormProps} /> : <p className="comment">{updatedCommentContent || commentContent || I18n.t('loading.wait')}</p>;
 
     const displayFooter = (
       <footer className="toolbar">
@@ -346,10 +335,7 @@ const mapQueryToProps = ({ data }) => {
     const noAuthorSpecified = I18n.t('debate.brightMirror.noAuthorSpecified');
     const circleAvatarProps: CircleAvatarProps = {
       username: fiction.creator.displayName,
-      src:
-        fiction.creator && fiction.creator.image && fiction.creator.image.externalUrl
-          ? fiction.creator.image.externalUrl
-          : EMPTY_STRING
+      src: fiction.creator && fiction.creator.image && fiction.creator.image.externalUrl ? fiction.creator.image.externalUrl : EMPTY_STRING
     };
 
     const { originalBody } = getOriginalBodyAndSubject(false, fiction.subjectEntries, fiction.bodyEntries);

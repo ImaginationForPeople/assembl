@@ -63,16 +63,13 @@ const SectionLink = ({ section, options }) => {
   if (url || sectionType === 'CUSTOM') {
     const urlWithHttpProtocol = addProtocol(url);
     return (
-      <a href={urlWithHttpProtocol} className="navbar-menu-item pointer" data-text={title} target="_blank" rel="noopener">
+      <a href={urlWithHttpProtocol} className="navbar-menu-item pointer" data-text={title} target="_blank" rel="noopener noreferrer">
         {title}
       </a>
     );
   }
-  const sectionName =
-    sectionType === 'SEMANTIC_ANALYSIS'
-      ? sectionType.toLowerCase().replace('_', '-')
-      : sectionType.toLowerCase().replace('_', '');
-  const isActiveUrl = location.pathname
+  const sectionName = sectionType === 'SEMANTIC_ANALYSIS' ? sectionType.toLowerCase().replace('_', '-') : sectionType.toLowerCase().replace('_', '');
+  const isActiveUrl = window.location.pathname
     .split('/')
     .slice(2)
     .join('/')
@@ -103,11 +100,7 @@ type Section = {
 };
 
 export const mapSectionToElement = (section: Section, options: MapSectionOptions) =>
-  (section.sectionType === 'DEBATE' ? (
-    <SectionLink key={sectionKey(section)} section={section} options={options} />
-  ) : (
-    <SectionLink key={sectionKey(section)} section={section} options={options} />
-  ));
+  (section.sectionType === 'DEBATE' ? <SectionLink key={sectionKey(section)} section={section} options={options} /> : <SectionLink key={sectionKey(section)} section={section} options={options} />);
 
 const phaseContext = () => 'new';
 
@@ -172,11 +165,7 @@ export class AssemblNavbar extends React.PureComponent<AssemblNavbarProps, Assem
             </div>
           )}
           <div className="nav-bar max-container" id="navbar">
-            {screenTooSmall ? (
-              <MobileNavbar {...commonProps} />
-            ) : (
-              <DesktopNavbar {...commonProps} setWidth={this.setFlatWidth} maxWidth={maxAppWidth} isLargeLogo={isLargeLogo} />
-            )}
+            {screenTooSmall ? <MobileNavbar {...commonProps} /> : <DesktopNavbar {...commonProps} setWidth={this.setFlatWidth} maxWidth={maxAppWidth} isLargeLogo={isLargeLogo} />}
           </div>
         </Navbar>
       </div>

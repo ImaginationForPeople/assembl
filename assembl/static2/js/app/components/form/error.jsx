@@ -8,11 +8,7 @@ type Props = {
 };
 
 const Error = ({ name }: Props) => (
-  <Field
-    name={name}
-    subscription={{ touched: true, error: true }}
-    render={({ meta: { touched, error } }) => (touched && error ? <HelpBlock>{error}</HelpBlock> : null)}
-  />
+  <Field name={name} subscription={{ touched: true, error: true }} render={({ meta: { touched, error } }) => (touched && error ? <HelpBlock>{error}</HelpBlock> : null)} />
 );
 
 export default Error;

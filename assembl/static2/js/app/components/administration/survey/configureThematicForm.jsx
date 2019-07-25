@@ -64,14 +64,7 @@ class ConfigureThematicForm extends React.PureComponent<Props> {
     const slug = getDiscussionSlug();
     const voteModuleLink = (
       <p>
-        <Link
-          to={get(
-            'voteSessionAdmin',
-            { slug: slug },
-            { section: '1', thematicId: thematicId, goBackPhaseIdentifier: phaseIdentifier }
-          )}
-          className="button-link button-dark"
-        >
+        <Link to={get('voteSessionAdmin', { slug: slug }, { section: '1', thematicId: thematicId, goBackPhaseIdentifier: phaseIdentifier })} className="button-link button-dark">
           <Translate value="administration.configureVoteSessionButton" />
         </Link>
       </p>
@@ -97,27 +90,12 @@ class ConfigureThematicForm extends React.PureComponent<Props> {
     const announcementTitleName = `${name}.announcement.title`;
     const announcementBodyName = `${name}.announcement.body`;
     const announcementSummaryName = `${name}.announcement.summary`;
-    const checkedForm =
-      theme &&
-      theme.multiColumns &&
-      theme.multiColumns.radioButtons &&
-      theme.multiColumns.radioButtons.find(button => button.isChecked);
+    const checkedForm = theme && theme.multiColumns && theme.multiColumns.radioButtons && theme.multiColumns.radioButtons.find(button => button.isChecked);
     const nbColumnsInForm = checkedForm ? checkedForm.size : 2;
     return (
       <div className="form-container" key={name}>
-        <Helper
-          label={I18n.t('administration.headerTitle')}
-          helperUrl="/static2/img/helpers/helper1.png"
-          helperText={I18n.t('administration.tableOfThematics.bannerHeader')}
-          classname="title"
-        />
-        <Field
-          required
-          editLocale={editLocale}
-          name={titleName}
-          component={MultilingualTextFieldAdapter}
-          label={`${I18n.t('administration.tableOfThematics.thematicTitle')} ${upperCaseLocale}`}
-        />
+        <Helper label={I18n.t('administration.headerTitle')} helperUrl="/static2/img/helpers/helper1.png" helperText={I18n.t('administration.tableOfThematics.bannerHeader')} classname="title" />
+        <Field required editLocale={editLocale} name={titleName} component={MultilingualTextFieldAdapter} label={`${I18n.t('administration.tableOfThematics.thematicTitle')} ${upperCaseLocale}`} />
         <Field
           key={`${descriptionName}-${editLocale}`}
           editLocale={editLocale}
@@ -125,12 +103,7 @@ class ConfigureThematicForm extends React.PureComponent<Props> {
           component={MultilingualTextFieldAdapter}
           label={`${I18n.t('administration.tableOfThematics.bannerSubtitleLabel')} ${upperCaseLocale}`}
         />
-        <Field
-          deleteTooltip={deleteThematicImageTooltip}
-          name={imageName}
-          component={FileUploaderFieldAdapter}
-          label={I18n.t('administration.tableOfThematics.bannerImagePickerLabel')}
-        />
+        <Field deleteTooltip={deleteThematicImageTooltip} name={imageName} component={FileUploaderFieldAdapter} label={I18n.t('administration.tableOfThematics.bannerImagePickerLabel')} />
         <div className="label-indication">
           <Translate value="administration.landingPage.header.headerDescription" />
         </div>
@@ -194,9 +167,7 @@ class ConfigureThematicForm extends React.PureComponent<Props> {
           </React.Fragment>
         ) : null}
         {theme ? this.addVoteModuleLink(theme) : null}
-        {theme && theme.messageViewOverride && theme.messageViewOverride.value === MESSAGE_VIEW.survey ? (
-          <SurveyFields editLocale={editLocale} fieldPrefix={name} />
-        ) : null}
+        {theme && theme.messageViewOverride && theme.messageViewOverride.value === MESSAGE_VIEW.survey ? <SurveyFields editLocale={editLocale} fieldPrefix={name} /> : null}
         {theme && theme.messageViewOverride && theme.messageViewOverride.value === MESSAGE_VIEW.messageColumns ? (
           <MultiColumnsFields editLocale={editLocale} fieldPrefix={name} nbColumnsInForm={nbColumnsInForm} />
         ) : null}

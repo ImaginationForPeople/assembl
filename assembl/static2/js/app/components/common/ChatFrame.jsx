@@ -29,11 +29,11 @@ const ChatFrameButton = ({ isOpen, toggle }: { isOpen: boolean, toggle: () => vo
   ) : (
     <OverlayTrigger
       placement="left"
-      overlay={
+      overlay={(
         <Tooltip id="chatframe-tooltip">
           <Translate value="chatframe.tooltip" />
         </Tooltip>
-      }
+      )}
     >
       <div onClick={toggle} className="chatframe-icon chatframe-button assembl-icon-robot" />
     </OverlayTrigger>

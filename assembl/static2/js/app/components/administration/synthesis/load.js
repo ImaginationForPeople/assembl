@@ -5,11 +5,7 @@ import { convertEntriesToI18nRichText, convertEntriesToI18nValue } from '../../f
 import { PublicationStates } from '../../../constants';
 import type { MultilingualSynthesisPost, SynthesisFormValues } from './types.flow';
 
-export const load = async (
-  client: ApolloClient,
-  fetchPolicy: FetchPolicy,
-  id: ?string
-): Promise<{ synthesisPost: MultilingualSynthesisPost | null }> => {
+export const load = async (client: ApolloClient, fetchPolicy: FetchPolicy, id: ?string): Promise<{ synthesisPost: MultilingualSynthesisPost | null }> => {
   if (!id) return Promise.resolve({ synthesisPost: null });
 
   const { data } = await client.query({

@@ -1,8 +1,8 @@
 import React from 'react';
 import { I18n, Translate } from 'react-redux-i18n';
 import { Link } from 'react-router';
-import { getFullPath } from '../utils/routeMap';
-import { getConnectedUserId } from '../utils/globalFunctions';
+import { getFullPath } from './routeMap';
+import { getConnectedUserId } from './globalFunctions';
 import SocialShare from '../components/common/socialShare';
 import LoginButton from '../components/common/loginButton';
 

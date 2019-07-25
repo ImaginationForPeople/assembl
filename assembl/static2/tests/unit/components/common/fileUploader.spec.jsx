@@ -6,9 +6,7 @@ import FileUploader from '../../../../js/app/components/common/fileUploader';
 describe('FileUploader component', () => {
   it('should render a file uploader for an image file', () => {
     const handleChangeSpy = jest.fn(() => {});
-    const component = renderer.create(
-      <FileUploader fileOrUrl="http://www.example.com/foobar.png" handleChange={handleChangeSpy} mimeType="image/png" />
-    );
+    const component = renderer.create(<FileUploader fileOrUrl="http://www.example.com/foobar.png" handleChange={handleChangeSpy} mimeType="image/png" />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
@@ -34,9 +32,7 @@ describe('FileUploader component', () => {
     const handleChangeSpy = jest.fn(() => {});
     const filename = 'myfile.pdf';
     const fileOrUrl = 'http:/www.example.com/myfile';
-    const component = renderer.create(
-      <FileUploader filename={filename} fileOrUrl={fileOrUrl} mimeType="application/pdf" handleChange={handleChangeSpy} />
-    );
+    const component = renderer.create(<FileUploader filename={filename} fileOrUrl={fileOrUrl} mimeType="application/pdf" handleChange={handleChangeSpy} />);
     const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });

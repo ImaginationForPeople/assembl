@@ -70,9 +70,7 @@ const DatePickerFieldAdapter = ({
     <FormGroup validationState={getValidationState(error, touched)}>
       <div className="date-picker-field">
         <ControlLabel htmlFor={`date-picker-${name}`} className="datepicker-label">
-          {picker && picker.pickerType && (
-            <div className={`date-picker-type ${picker.pickerClasses || ''}`}>{picker.pickerType}</div>
-          )}
+          {picker && picker.pickerType && <div className={`date-picker-type ${picker.pickerClasses || ''}`}>{picker.pickerType}</div>}
           <DatePicker
             placeholderText={decoratedPlaceholder}
             selected={value.time}

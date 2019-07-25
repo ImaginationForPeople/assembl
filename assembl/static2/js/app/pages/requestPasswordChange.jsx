@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Grid, Row, Col } from 'react-bootstrap';
 // Route helper import
-import { browserHistory } from '../../app/router';
+import { browserHistory } from '../router';
 
 import { requestPasswordChangeAction } from '../actions/authenticationActions';
 import RequestNewPasswordForm from '../components/login/requestNewPasswordForm';
@@ -33,14 +33,7 @@ export class DumbRequestPasswordChange extends React.Component<Props> {
         <Row className="max-container">
           <Col xs={12} md={6} className="col-centered">
             <BackButton handleClick={redirectToPreviousPage} linkClassName="back-btn" />
-            {passwordChangeResponse.success ? (
-              <SendPwdConfirm />
-            ) : (
-              <RequestNewPasswordForm
-                passwordChangeResponse={passwordChangeResponse}
-                requestPasswordChange={requestPasswordChange}
-              />
-            )}
+            {passwordChangeResponse.success ? <SendPwdConfirm /> : <RequestNewPasswordForm passwordChangeResponse={passwordChangeResponse} requestPasswordChange={requestPasswordChange} />}
           </Col>
         </Row>
       </Grid>

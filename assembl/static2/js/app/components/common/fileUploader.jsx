@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { Translate } from 'react-redux-i18n';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
-import { deleteFileTooltip } from '../common/tooltips';
+import { deleteFileTooltip } from './tooltips';
 
 type FileUploaderProps = {
   deleteFileTooltip: React.Element<Tooltip>,

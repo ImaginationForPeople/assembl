@@ -30,8 +30,7 @@ export class SemanticAnalysisForDiscussion extends Component<Props> {
     };
 
     // Display content only when there are top keywords defined
-    const content =
-      topKeywordsCount > 0 ? <SemanticAnalysis {...semanticAnalysisProps} /> : <Loader type={LOADER_TYPE.NO_DATA} />;
+    const content = topKeywordsCount > 0 ? <SemanticAnalysis {...semanticAnalysisProps} /> : <Loader type={LOADER_TYPE.NO_DATA} />;
 
     const bannerBackground = { backgroundImage: `url(${SEMANTIC_ANALYSIS_PICTURE_BANNER_URL})` };
 
@@ -54,11 +53,9 @@ const mapStateToProps: State => DiscussionDataQueryVariables = state => ({
   lang: state.i18n.locale
 });
 
-const semanticAnalysisForDiscussionQuery: OperationComponent<SemanticAnalysisForDiscussionQuery,
-  DiscussionDataQueryVariables,
-  Props> = graphql(SemanticAnalysisForDiscussionQuery, {
-    props: ({ data }) => data
-  });
+const semanticAnalysisForDiscussionQuery: OperationComponent<SemanticAnalysisForDiscussionQuery, DiscussionDataQueryVariables, Props> = graphql(SemanticAnalysisForDiscussionQuery, {
+  props: ({ data }) => data
+});
 
 export default compose(
   connect(mapStateToProps),

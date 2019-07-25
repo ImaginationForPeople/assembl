@@ -22,7 +22,7 @@ type Props = {
   style: Object,
   className: string,
   setWidth: Function,
-  data: Object
+  data: Object /* eslint react/no-unused-prop-types: 0 */
 };
 
 class LanguageMenu extends React.Component<Props> {
@@ -38,7 +38,7 @@ class LanguageMenu extends React.Component<Props> {
     }
     setCookieItem('_LOCALE_', locale);
     changeLanguage(key);
-    location.reload(true);
+    window.location.reload(true);
   }
 
   getAvailableLanguages = (

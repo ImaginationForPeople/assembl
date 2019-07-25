@@ -33,17 +33,13 @@ async function getResourceVariables(client, resource, initialResource, order) {
   };
 }
 
-export const createMutationsPromises = (client: ApolloClient, lang: string) => (
-  values: ResourcesValues,
-  initialValues: ResourcesValues
-) => {
+export const createMutationsPromises = (client: ApolloClient, lang: string) => (values: ResourcesValues, initialValues: ResourcesValues) => {
   const allMutations = [];
   allMutations.push(() =>
     client.mutate({
       mutation: updateResourcesCenterMutation,
       variables: getResourcesCenterVariables(values)
-    })
-  );
+    }));
 
   const initialIds = initialValues.resources.map(t => t.id);
   const currentIds = values.resources.map(t => t.id);
@@ -54,8 +50,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string) => (
     client.mutate({
       mutation: deleteResourceMutation,
       variables: { resourceId: id }
-    })
-  );
+    }));
   allMutations.push(...deleteMutations);
 
   const createUpdateMutations = values.resources.map((resource, idx) => {
@@ -70,8 +65,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string) => (
               lang: lang,
               ...variables
             }
-          })
-        );
+          }));
     }
 
     const orderHasChanged = initialIds.indexOf(resource.id) !== currentIds.indexOf(resource.id);
@@ -86,8 +80,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string) => (
               lang: lang,
               ...variables
             }
-          })
-        );
+          }));
     }
 
     return () => Promise.resolve();

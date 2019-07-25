@@ -36,15 +36,7 @@ type GraphQLProps = {
 
 type LocalProps = Props & GraphQLProps;
 
-const DeletePostButton = ({
-  deletePost,
-  linkClassName,
-  postId,
-  refetchQueries,
-  modalBodyMessage,
-  onDeleteCallback,
-  isPendingForModerator
-}: LocalProps) => {
+const DeletePostButton = ({ deletePost, linkClassName, postId, refetchQueries, modalBodyMessage, onDeleteCallback, isPendingForModerator }: LocalProps) => {
   const displayConfirmationModal = () => {
     const title = !isPendingForModerator && <Translate value="debate.confirmDeletionTitle" />;
     const body = <Translate value={modalBodyMessage || 'debate.confirmDeletionBody'} />;

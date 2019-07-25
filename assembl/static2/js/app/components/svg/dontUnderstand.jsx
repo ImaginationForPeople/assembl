@@ -54,20 +54,8 @@ class DontUnderstand extends React.Component<{ size: number, color: string, back
               <ellipse cx="13.6662252" cy="1.78013245" rx="1.74304636" ry="1.74304636" />
             </g>
             <g>
-              <rect
-                transform="translate(15.209636, 1.684541) rotate(-69.910674) translate(-15.209636, -1.684541) "
-                x="14.514241"
-                y="-1.09703938"
-                width="1.39072848"
-                height="5.56291391"
-              />
-              <rect
-                transform="translate(2.964735, 1.694145) rotate(-20.078564) translate(-2.964735, -1.694145) "
-                x="0.183345952"
-                y="0.99879725"
-                width="5.56291391"
-                height="1.39072848"
-              />
+              <rect transform="translate(15.209636, 1.684541) rotate(-69.910674) translate(-15.209636, -1.684541) " x="14.514241" y="-1.09703938" width="1.39072848" height="5.56291391" />
+              <rect transform="translate(2.964735, 1.694145) rotate(-20.078564) translate(-2.964735, -1.694145) " x="0.183345952" y="0.99879725" width="5.56291391" height="1.39072848" />
             </g>
             <path
               d="M12.2569536,

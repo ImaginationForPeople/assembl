@@ -34,8 +34,7 @@ class Main extends React.Component<Props> {
         identifier: identifier,
         phaseId: phaseId,
         discussionPhaseId: discussionPhaseId
-      })
-    );
+      }));
     return (
       <div className="main">
         <Navbar location={location.pathname} themeId={themeId} />

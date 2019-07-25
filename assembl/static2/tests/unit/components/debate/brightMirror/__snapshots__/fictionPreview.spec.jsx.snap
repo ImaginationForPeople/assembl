@@ -102,15 +102,15 @@ exports[`Storyshots FictionPreview default 1`] = `
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <a
+            <button
               className="share"
               onClick={[Function]}
-              style={Object {}}
+              type="button"
             >
               <span
                 className="assembl-icon-share"
               />
-            </a>
+            </button>
           </div>
         </div>
       </li>
@@ -248,15 +248,15 @@ exports[`Storyshots FictionPreview playground 1`] = `
             onMouseOut={[Function]}
             onMouseOver={[Function]}
           >
-            <a
+            <button
               className="share"
               onClick={[Function]}
-              style={Object {}}
+              type="button"
             >
               <span
                 className="assembl-icon-share"
               />
-            </a>
+            </button>
           </div>
         </div>
       </li>

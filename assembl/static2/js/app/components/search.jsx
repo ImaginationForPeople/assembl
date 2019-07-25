@@ -1,4 +1,7 @@
-/* eslint no-underscore-dangle: 0, max-len: ["warn", 136] */
+/* eslint no-underscore-dangle: 0 */
+/* eslint indent: 0 */
+/* eslint max-len: 0 */
+
 import React from 'react';
 import { Localize, Translate, I18n } from 'react-redux-i18n';
 import { connect } from 'react-redux';
@@ -82,7 +85,8 @@ function getPostUrl(ideaId, postId, phaseIdentifier, messageViewOverride, slug, 
       themeId: ideaBase64id,
       postId: postBase64id
     });
-  } else if (messageViewOverride === MESSAGE_VIEW.survey) {
+  }
+  if (messageViewOverride === MESSAGE_VIEW.survey) {
     return getRoute('questionPost', {
       slug: slug,
       phase: phaseIdentifier,
@@ -90,7 +94,8 @@ function getPostUrl(ideaId, postId, phaseIdentifier, messageViewOverride, slug, 
       questionIndex: 1,
       postId: postBase64id
     });
-  } else if (extractId) {
+  }
+  if (extractId) {
     return getRoute('extract', {
       slug: slug,
       phase: phaseIdentifier,
@@ -120,32 +125,32 @@ const slug = slugElement ? slugElement.value : '';
 const getUrl = (hit) => {
   const id = hit._source.id;
   switch (hit._type) {
-  case 'synthesis': {
-    const postBase64id = btoa(`Post:${id}`);
-    return getRoute('synthesis', { slug: slug, synthesisId: postBase64id });
-  }
-  case 'user':
-    return undefined;
-  case 'idea': {
-    const phaseIdentifier = hit._source.phase_identifier;
-    const ideaId = id;
-    return getIdeaUrl(ideaId, phaseIdentifier, slug);
-  }
-  case 'extract': {
-    const phaseIdentifier = hit._source.phase_identifier;
-    const ideaId = hit._source.idea_id[0];
-    const postId = hit._source.post_id;
-    const extractId = hit._source.id;
-    const messageViewOverride = hit._source.message_view_override;
-    return getPostUrl(ideaId, postId, phaseIdentifier, messageViewOverride, slug, extractId);
-  }
-  default: {
-    // post
-    const phaseIdentifier = hit._source.phase_identifier;
-    const ideaId = hit._source.idea_id[0];
-    const messageViewOverride = hit._source.message_view_override;
-    return getPostUrl(ideaId, id, phaseIdentifier, messageViewOverride, slug);
-  }
+    case 'synthesis': {
+      const postBase64id = btoa(`Post:${id}`);
+      return getRoute('synthesis', { slug: slug, synthesisId: postBase64id });
+    }
+    case 'user':
+      return undefined;
+    case 'idea': {
+      const phaseIdentifier = hit._source.phase_identifier;
+      const ideaId = id;
+      return getIdeaUrl(ideaId, phaseIdentifier, slug);
+    }
+    case 'extract': {
+      const phaseIdentifier = hit._source.phase_identifier;
+      const ideaId = hit._source.idea_id[0];
+      const postId = hit._source.post_id;
+      const extractId = hit._source.id;
+      const messageViewOverride = hit._source.message_view_override;
+      return getPostUrl(ideaId, postId, phaseIdentifier, messageViewOverride, slug, extractId);
+    }
+    default: {
+      // post
+      const phaseIdentifier = hit._source.phase_identifier;
+      const ideaId = hit._source.idea_id[0];
+      const messageViewOverride = hit._source.message_view_override;
+      return getPostUrl(ideaId, id, phaseIdentifier, messageViewOverride, slug);
+    }
   }
 };
 
@@ -159,7 +164,12 @@ const PublishedInfo = ({ date, publishedOnMsgId, userId, userName, relatedIdeasT
 
   return (
     <React.Fragment>
-      <Translate value={publishedOnMsgId} /> <Localize value={date} dateFormat="date.format" /> <Translate value="search.by" />{' '}
+      <Translate value={publishedOnMsgId} />
+      {' '}
+      <Localize value={date} dateFormat="date.format" />
+      {' '}
+      <Translate value="search.by" />
+      {' '}
       <TagFilter key={userId} field="creator_id" value={userId}>
         <ProfileLine userId={userId} userName={userName} />
       </TagFilter>
@@ -237,13 +247,7 @@ const highlightedLSOrTruncatedLS = (hit, field, locale) => {
 const BaseHit = ({ bemBlocks, imageType, onLinkClick, title, url, renderBody, renderFooter }) => (
   <div className={bemBlocks.item().mix(bemBlocks.container('item'))}>
     <ImageType type={imageType} className={bemBlocks.item('imgtype')} />
-    <div className={bemBlocks.item('title')}>
-      {url ? (
-        <Link onClick={onLinkClick} to={url} dangerouslySetInnerHTML={{ __html: title }} />
-      ) : (
-        <div dangerouslySetInnerHTML={{ __html: title }} />
-      )}
-    </div>
+    <div className={bemBlocks.item('title')}>{url ? <Link onClick={onLinkClick} to={url} dangerouslySetInnerHTML={{ __html: title }} /> : <div dangerouslySetInnerHTML={{ __html: title }} />}</div>
     {renderBody && <div className={bemBlocks.item('content')}>{renderBody()}</div>}
     <div className={bemBlocks.item('info')}>{renderFooter()}</div>
   </div>
@@ -283,14 +287,7 @@ const PostHit = ({ bemBlocks, collapseSearch, locale, result }) => {
         </React.Fragment>
       )}
       renderFooter={() => (
-        <PublishedInfo
-          date={source.creation_date}
-          userId={source.creator_id}
-          userName={source.creator_display_name}
-          relatedIdeasTitles={[ideaTitle]}
-          ideaUrl={ideaUrl}
-          onLinkClick={collapseSearch}
-        />
+        <PublishedInfo date={source.creation_date} userId={source.creator_id} userName={source.creator_display_name} relatedIdeasTitles={[ideaTitle]} ideaUrl={ideaUrl} onLinkClick={collapseSearch} />
       )}
     />
   );
@@ -364,9 +361,7 @@ const SynthesisHit = ({ bemBlocks, collapseSearch, locale, result }) => {
           <div style={{ backgroundColor: '#f4f4f4', marginTop: '1em' }} dangerouslySetInnerHTML={{ __html: conclusion }} />
         </React.Fragment>
       )}
-      renderFooter={() => (
-        <PublishedInfo date={source.creation_date} userId={source.creator_id} userName={source.creator_display_name} />
-      )}
+      renderFooter={() => <PublishedInfo date={source.creation_date} userId={source.creator_id} userName={source.creator_display_name} />}
     />
   );
 };
@@ -393,7 +388,9 @@ const UserHit = ({ bemBlocks, collapseSearch, result }) => {
           </UserMessagesTagFilter>
           {source.creation_date ? (
             <span>
-              <Translate value="search.member_since" /> <Localize value={source.creation_date} dateFormat="date.format" />
+              <Translate value="search.member_since" />
+              {' '}
+              <Localize value={source.creation_date} dateFormat="date.format" />
             </span>
           ) : null}
         </React.Fragment>
@@ -456,17 +453,17 @@ const IdeaHit = ({ bemBlocks, collapseSearch, locale, result }) => {
 
 const DumbHitItem = (props) => {
   switch (props.result._type) {
-  case 'synthesis':
-    return <SynthesisHit {...props} />;
-  case 'user':
-    return <UserHit {...props} />;
-  case 'idea':
-    return <IdeaHit {...props} />;
-  case 'extract':
-    return <ExtractHit {...props} />;
-  default:
-    // post
-    return <PostHit {...props} />;
+    case 'synthesis':
+      return <SynthesisHit {...props} />;
+    case 'user':
+      return <UserHit {...props} />;
+    case 'idea':
+      return <IdeaHit {...props} />;
+    case 'extract':
+      return <ExtractHit {...props} />;
+    default:
+      // post
+      return <PostHit {...props} />;
   }
 };
 
@@ -518,7 +515,10 @@ export class SearchComponent extends React.Component {
   constructor(props) {
     super(props);
     const host = '/';
-    this.searchkit = new SearchkitManager(host, { searchOnLoad: false, useHistory: false });
+    this.searchkit = new SearchkitManager(host, {
+      searchOnLoad: false,
+      useHistory: false
+    });
     this.searchkit.setQueryProcessor((plainQueryObject) => {
       // rewrite the query to filter on the current discussion
       const modifiedQuery = plainQueryObject;
@@ -540,21 +540,27 @@ export class SearchComponent extends React.Component {
       modifiedQuery.query = { bool: { filter: filters } };
       modifiedQuery.query.bool.must = [];
       if (simpleQueryString) {
-        this.setState({ show: true, queryString: simpleQueryString.query });
+        this.setState({ show: true });
         simpleQueryString.query = `${simpleQueryString.query}*`;
-        modifiedQuery.query.bool.must.push({ simple_query_string: simpleQueryString });
-      } else {
-        this.setState({ queryString: null });
+        modifiedQuery.query.bool.must.push({
+          simple_query_string: simpleQueryString
+        });
       }
       if (Object.prototype.hasOwnProperty.call(modifiedQuery.sort[0], 'num_posts')) {
-        modifiedQuery.sort[0] = { _score: modifiedQuery.sort[0].num_posts.order };
+        modifiedQuery.sort[0] = {
+          _score: modifiedQuery.sort[0].num_posts.order
+        };
         modifiedQuery.query.bool.must.push({
           has_child: {
             type: 'post',
             score_mode: 'sum',
             query: {
               function_score: {
-                query: { bool: { filter: { term: { discussion_id: props.discussionId } } } },
+                query: {
+                  bool: {
+                    filter: { term: { discussion_id: props.discussionId } }
+                  }
+                },
                 script_score: {
                   script: '1'
                 }
@@ -567,7 +573,7 @@ export class SearchComponent extends React.Component {
     });
     const translate = I18n.t.bind(I18n);
     this.searchkit.translateFunction = key => translate(`search.${key}`);
-    this.state = { show: false, queryString: null };
+    this.state = { show: false };
   }
 
   collapseSearch = () => {
@@ -592,26 +598,36 @@ export class SearchComponent extends React.Component {
       }
     }
     let sorts = [
-      { label: 'By relevance', key: 'common:relevance_desc', field: '_score', order: 'desc', defaultOption: true },
-      { label: 'Most recent first', key: 'common:creation_date_desc', field: 'creation_date', order: 'desc' },
-      { label: 'Oldest first', key: 'common:creation_date_asc', field: 'creation_date', order: 'asc' }
+      {
+        label: 'By relevance',
+        key: 'common:relevance_desc',
+        field: '_score',
+        order: 'desc',
+        defaultOption: true
+      },
+      {
+        label: 'Most recent first',
+        key: 'common:creation_date_desc',
+        field: 'creation_date',
+        order: 'desc'
+      },
+      {
+        label: 'Oldest first',
+        key: 'common:creation_date_asc',
+        field: 'creation_date',
+        order: 'asc'
+      }
     ];
     sorts = sorts.concat([
       {
         label: 'Most popular messages',
         key: 'post:popularity_desc',
-        fields: [
-          { field: 'sentiment_counts.popularity', options: { order: 'desc' } },
-          { field: 'creation_date', options: { order: 'desc' } }
-        ]
+        fields: [{ field: 'sentiment_counts.popularity', options: { order: 'desc' } }, { field: 'creation_date', options: { order: 'desc' } }]
       },
       {
         label: 'Less popular messages',
         key: 'post:popularity_asc',
-        fields: [
-          { field: 'sentiment_counts.popularity', options: { order: 'asc' } },
-          { field: 'creation_date', options: { order: 'desc' } }
-        ]
+        fields: [{ field: 'sentiment_counts.popularity', options: { order: 'asc' } }, { field: 'creation_date', options: { order: 'desc' } }]
       },
       {
         label: 'Most controversial messages',
@@ -635,7 +651,10 @@ export class SearchComponent extends React.Component {
         label: 'Messages judged unclear',
         key: 'post:unclear_desc',
         fields: [
-          { field: 'sentiment_counts.dont_understand', options: { order: 'desc' } },
+          {
+            field: 'sentiment_counts.dont_understand',
+            options: { order: 'desc' }
+          },
           { field: 'creation_date', options: { order: 'desc' } }
         ]
       }
@@ -682,13 +701,7 @@ export class SearchComponent extends React.Component {
                 include={isExpert ? ['post', 'user', 'idea', 'extract', 'synthesis'] : ['post', 'user', 'idea', 'synthesis']}
               />
               <Panel title={I18n.t('search.Messages')} className={messagesSelected ? null : 'hidden'}>
-                <MenuFilter
-                  containerComponent={NoPanel}
-                  listComponent={CheckboxItemList}
-                  field="sentiment_tags"
-                  id="sentiment_tags"
-                  title={I18n.t('search.Messages')}
-                />
+                <MenuFilter containerComponent={NoPanel} listComponent={CheckboxItemList} field="sentiment_tags" id="sentiment_tags" title={I18n.t('search.Messages')} />
                 {connectedUserId ? (
                   <div className="sk-panel">
                     <CheckboxFilter
@@ -711,24 +724,9 @@ export class SearchComponent extends React.Component {
               <Panel title={I18n.t('search.Extracts')} className={extractsSelected ? null : 'hidden'}>
                 {isExpert && (
                   <div className="sk-panel">
-                    <MenuFilter
-                      listComponent={CheckboxItemList}
-                      field="extract_state"
-                      id="extract_state"
-                      title={I18n.t('search.State')}
-                    />
-                    <MenuFilter
-                      listComponent={CheckboxItemList}
-                      field="extract_nature"
-                      id="extract_nature"
-                      title={I18n.t('search.Nature')}
-                    />
-                    <MenuFilter
-                      listComponent={CheckboxItemList}
-                      field="extract_action"
-                      id="extract_action"
-                      title={I18n.t('search.Action')}
-                    />
+                    <MenuFilter listComponent={CheckboxItemList} field="extract_state" id="extract_state" title={I18n.t('search.State')} />
+                    <MenuFilter listComponent={CheckboxItemList} field="extract_nature" id="extract_nature" title={I18n.t('search.Nature')} />
+                    <MenuFilter listComponent={CheckboxItemList} field="extract_action" id="extract_action" title={I18n.t('search.Action')} />
                   </div>
                 )}
               </Panel>
@@ -739,10 +737,7 @@ export class SearchComponent extends React.Component {
                     id="creative-participants"
                     title={I18n.t('search.Creative participants')}
                     label={I18n.t('search.Creative participants')}
-                    filter={HasChildQuery(
-                      'post',
-                      BoolMust([TermQuery('discussion_id', discussionId), TermQuery('parent_id', 0)])
-                    )}
+                    filter={HasChildQuery('post', BoolMust([TermQuery('discussion_id', discussionId), TermQuery('parent_id', 0)]))}
                   />
                   <CheckboxFilter
                     containerComponent={NoPanel}
@@ -750,13 +745,8 @@ export class SearchComponent extends React.Component {
                     title={I18n.t('search.Reactive participants')}
                     label={I18n.t('search.Reactive participants')}
                     filter={BoolMust([
-                      HasChildQuery(
-                        'post',
-                        BoolMust([TermQuery('discussion_id', discussionId), RangeQuery('parent_id', { gt: 0 })])
-                      ),
-                      BoolMustNot(
-                        HasChildQuery('post', BoolMust([TermQuery('discussion_id', discussionId), TermQuery('parent_id', 0)]))
-                      )
+                      HasChildQuery('post', BoolMust([TermQuery('discussion_id', discussionId), RangeQuery('parent_id', { gt: 0 })])),
+                      BoolMustNot(HasChildQuery('post', BoolMust([TermQuery('discussion_id', discussionId), TermQuery('parent_id', 0)])))
                     ])}
                   />
                   <CheckboxFilter
@@ -771,10 +761,7 @@ export class SearchComponent extends React.Component {
                     id="participants-peers"
                     title={I18n.t('search.Participants pleased by their peers')}
                     label={I18n.t('search.Participants pleased by their peers')}
-                    filter={HasChildQuery(
-                      'post',
-                      BoolMust([TermQuery('discussion_id', discussionId), RangeQuery('sentiment_counts.like', { gt: 0 })])
-                    )}
+                    filter={HasChildQuery('post', BoolMust([TermQuery('discussion_id', discussionId), RangeQuery('sentiment_counts.like', { gt: 0 })]))}
                   />
                 </Panel>
               ) : null}
@@ -782,18 +769,11 @@ export class SearchComponent extends React.Component {
               <Panel title={I18n.t('search.Sort')}>
                 <FilteredSortingSelector options={sorts} filterPrefix={selectedCategory} listComponent={CheckboxItemList} />
               </Panel>
-              <RangeFilter
-                field="creation_date"
-                id="creation_date"
-                title={I18n.t('search.Filter by date')}
-                rangeComponent={DateRangeFilter}
-                min={946684800000}
-                max={new Date().getTime()}
-              />
+              <RangeFilter field="creation_date" id="creation_date" title={I18n.t('search.Filter by date')} rangeComponent={DateRangeFilter} min={946684800000} max={new Date().getTime()} />
             </SideBar>
             <LayoutResults>
               <ActionBar>
-                <button className="btn btn-default btn-sm right" id="search-expand" onClick={this.collapseSearch}>
+                <button type="button" className="btn btn-default btn-sm right" id="search-expand" onClick={this.collapseSearch}>
                   <Translate value="search.collapse_search" />
                 </button>
                 <ActionBarRow>

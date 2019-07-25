@@ -6,7 +6,7 @@ import { configure, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 /* eslint-enable */
 
-import DeletePostIcon from '../deletePostIcon/deletePostIcon';
+import DeletePostIcon from './deletePostIcon';
 
 // Separate the snapshots in directories next to each component
 // Name should match with the story name

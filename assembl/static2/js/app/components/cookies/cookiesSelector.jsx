@@ -62,15 +62,7 @@ class CookiesSelector extends React.PureComponent<CookiesSelectorProps, CookiesS
                   {selectedCategory === category &&
                     cookies &&
                     cookies[category] &&
-                    cookies[category].map(cookie => (
-                      <CookieSetter
-                        cookie={cookie}
-                        key={cookie.name}
-                        handleToggle={handleToggle}
-                        toggleCookieType={toggleCookieType}
-                        locale={locale}
-                      />
-                    ))}
+                    cookies[category].map(cookie => <CookieSetter cookie={cookie} key={cookie.name} handleToggle={handleToggle} toggleCookieType={toggleCookieType} locale={locale} />)}
                 </div>
               </div>
             ))}

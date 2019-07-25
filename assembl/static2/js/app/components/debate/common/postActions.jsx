@@ -7,13 +7,7 @@ import { Translate } from 'react-redux-i18n';
 import { OverlayTrigger } from 'react-bootstrap';
 import classnames from 'classnames';
 import { MEDIUM_SCREEN_WIDTH } from '../../../constants';
-import {
-  sharePostTooltip,
-  validateMessageTooltip,
-  deniedMessageTooltip,
-  editMessageTooltip,
-  deleteMessageTooltip
-} from '../../common/tooltips';
+import { sharePostTooltip, validateMessageTooltip, deniedMessageTooltip, editMessageTooltip, deleteMessageTooltip } from '../../common/tooltips';
 
 import ResponsiveOverlayTrigger from '../../common/responsiveOverlayTrigger';
 import { getConnectedUserId } from '../../../utils/globalFunctions';
@@ -73,13 +67,9 @@ export class PostActions extends React.Component<Props> {
       isDebateModerated
     } = this.props;
     let count = 0;
-    const totalSentimentsCount = sentimentCounts
-      ? sentimentCounts.like + sentimentCounts.disagree + sentimentCounts.dontUnderstand + sentimentCounts.moreInfo
-      : 0;
+    const totalSentimentsCount = sentimentCounts ? sentimentCounts.like + sentimentCounts.disagree + sentimentCounts.dontUnderstand + sentimentCounts.moreInfo : 0;
     const connectedUserId = getConnectedUserId();
-    const userCanDeleteThisMessage =
-      (connectedUserId === String(creatorUserId) && connectedUserCan(Permissions.DELETE_MY_POST)) ||
-      connectedUserCan(Permissions.DELETE_POST);
+    const userCanDeleteThisMessage = (connectedUserId === String(creatorUserId) && connectedUserCan(Permissions.DELETE_MY_POST)) || connectedUserCan(Permissions.DELETE_POST);
     const modalTitle = <Translate value="debate.sharePost" />;
     if (!debateData) return null;
     const useSocial = debateData.useSocialMedia;
@@ -89,12 +79,8 @@ export class PostActions extends React.Component<Props> {
     const isPendingForModerator = isPending && connectedUserIsModerator();
     const isPendingForUser = isPending && !connectedUserIsModerator();
     const deleteModalMessage = isPendingForModerator ? 'debate.confirmRefusalBody' : null;
-    const userCanEditThisMessage =
-      connectedUserId === String(creatorUserId) &&
-      connectedUserCan(Permissions.EDIT_MY_POST) &&
-      (isPendingForUser || !isDebateModerated || connectedUserIsModerator());
-    const showLastSeparator =
-      !isPendingForUser && ((editable && userCanEditThisMessage) || userCanDeleteThisMessage || isPendingForModerator);
+    const userCanEditThisMessage = connectedUserId === String(creatorUserId) && connectedUserCan(Permissions.EDIT_MY_POST) && (isPendingForUser || !isDebateModerated || connectedUserIsModerator());
+    const showLastSeparator = !isPendingForUser && ((editable && userCanEditThisMessage) || userCanDeleteThisMessage || isPendingForModerator);
     return (
       <div className="post-actions">
         <div className="post-icons">
@@ -119,21 +105,11 @@ export class PostActions extends React.Component<Props> {
             </React.Fragment>
           ) : null}
           {!isPendingForUser ? (
-            <Sentiments
-              sentimentCounts={sentimentCounts}
-              mySentiment={mySentiment}
-              placement={tooltipPlacement}
-              client={client}
-              postId={postId}
-              isPhaseCompleted={isPhaseCompleted}
-            />
+            <Sentiments sentimentCounts={sentimentCounts} mySentiment={mySentiment} placement={tooltipPlacement} client={client} postId={postId} isPhaseCompleted={isPhaseCompleted} />
           ) : null}
         </div>
         {totalSentimentsCount > 0 ? (
-          <OverlayTrigger
-            overlay={getSentimentStats(totalSentimentsCount, sentimentCounts, mySentiment)}
-            placement={tooltipPlacement}
-          >
+          <OverlayTrigger overlay={getSentimentStats(totalSentimentsCount, sentimentCounts, mySentiment)} placement={tooltipPlacement}>
             <div className="sentiments-count">
               <div>
                 {sentimentDefinitions.reduce((result, sentiment) => {
@@ -148,13 +124,7 @@ export class PostActions extends React.Component<Props> {
                   return result;
                 }, [])}
               </div>
-              <div className="txt">
-                {screenWidth >= MEDIUM_SCREEN_WIDTH ? (
-                  totalSentimentsCount
-                ) : (
-                  <Translate value="debate.thread.numberOfReactions" count={totalSentimentsCount} />
-                )}
-              </div>
+              <div className="txt">{screenWidth >= MEDIUM_SCREEN_WIDTH ? totalSentimentsCount : <Translate value="debate.thread.numberOfReactions" count={totalSentimentsCount} />}</div>
             </div>
           </OverlayTrigger>
         ) : (
@@ -167,16 +137,8 @@ export class PostActions extends React.Component<Props> {
           </ResponsiveOverlayTrigger>
         ) : null}
         {userCanDeleteThisMessage ? (
-          <ResponsiveOverlayTrigger
-            placement={tooltipPlacement}
-            tooltip={isPendingForModerator ? deniedMessageTooltip : deleteMessageTooltip}
-          >
-            <DeletePostButton
-              modalBodyMessage={deleteModalMessage}
-              postId={postId}
-              linkClassName="post-action"
-              isPendingForModerator={isPendingForModerator}
-            />
+          <ResponsiveOverlayTrigger placement={tooltipPlacement} tooltip={isPendingForModerator ? deniedMessageTooltip : deleteMessageTooltip}>
+            <DeletePostButton modalBodyMessage={deleteModalMessage} postId={postId} linkClassName="post-action" isPendingForModerator={isPendingForModerator} />
           </ResponsiveOverlayTrigger>
         ) : null}
         {editable && userCanEditThisMessage ? (

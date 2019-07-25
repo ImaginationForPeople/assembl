@@ -8,11 +8,7 @@ import { withKnobs, text, number, object, boolean } from '@storybook/addon-knobs
 
 // import components
 import { FictionComment } from '../../../../components/debate/brightMirror/fictionComment';
-import type {
-  FictionCommentExtraProps,
-  FictionCommentBaseProps,
-  FictionCommentGraphQLProps
-} from '../../../../components/debate/brightMirror/fictionComment';
+import type { FictionCommentExtraProps, FictionCommentBaseProps, FictionCommentGraphQLProps } from '../../../../components/debate/brightMirror/fictionComment';
 
 // import existing storybook data
 import { defaultCircleAvatar } from './circleAvatar.stories';
@@ -34,8 +30,7 @@ export const defaultFictionCommentGraphQL: FictionCommentGraphQLProps = {
   authorFullname: 'Luke Skywalker',
   circleAvatar: { ...defaultCircleAvatar },
   commentId: 'dummyId',
-  commentContent:
-    'Est et rerum. Ut sed voluptatem possimus. Ut cumque magni sapiente voluptatem ut rerum aut harum quo. Non delectus quo.',
+  commentContent: 'Est et rerum. Ut sed voluptatem possimus. Ut cumque magni sapiente voluptatem ut rerum aut harum quo. Non delectus quo.',
   contentLocale: 'fr',
   displayedPublishedDate: 'August 8th, 2018',
   modified: false,

@@ -60,11 +60,7 @@ const DebateChild = (props) => {
   }
 };
 
-const AdminChild = (props: {
-  discussionPhaseId: string,
-  location: { query: { section?: string, thematicId?: string, goBackPhaseIdentifier?: string } },
-  params: { phase: string }
-}) => {
+const AdminChild = (props: { discussionPhaseId: string, location: { query: { section?: string, thematicId?: string, goBackPhaseIdentifier?: string } }, params: { phase: string } }) => {
   switch (props.params.phase) {
   case 'discussion':
     return <DiscussionAdmin {...props} section={props.location.query.section} />;
@@ -86,14 +82,7 @@ const AdminChild = (props: {
   case 'exportDebateData':
     return <ExportData {...props} section={props.location.query.section} />;
   default:
-    return (
-      <SurveyAdmin
-        {...props}
-        phaseIdentifier={props.params.phase}
-        thematicId={props.location.query.thematicId}
-        section={props.location.query.section}
-      />
-    );
+    return <SurveyAdmin {...props} phaseIdentifier={props.params.phase} thematicId={props.location.query.thematicId} section={props.location.query.section} />;
   }
 };
 
@@ -105,10 +94,7 @@ export default [
     <Route path={routeForRouter('integrationPage', false, { preSlash: true })} component={IntMainPage} />
     <Route path={routeForRouter('integration101Page', false, { preSlash: true })} component={Int101Page} />
     <Route path={routeForRouter('integration101FormBuilderPage', false, { preSlash: true })} component={Int101FormBuilderPage} />
-    <Route
-      path={routeForRouter('integrationBrightMirrorFiction', false, { preSlash: true })}
-      component={IntBrightMirrorFiction}
-    />
+    <Route path={routeForRouter('integrationBrightMirrorFiction', false, { preSlash: true })} component={IntBrightMirrorFiction} />
     <Route path={routeForRouter('integrationSemanticAnalysis', false, { preSlash: true })} component={IntSemanticAnalysis} />
     <Route path={routeForRouter('integrationTagOnPost', false, { preSlash: true })} component={IntTagOnPost} />
     {/* once the integration workflow is mature, Styleguide component will be replaced by Storybook and thus can be removed */}
@@ -160,10 +146,7 @@ export default [
             component={QuestionModeratePosts}
           />
         </Route>
-        <Route
-          path={routeForRouter('brightMirrorFiction', false, { phase: ':phase', themeId: ':themeId', fictionId: ':fictionId' })}
-          component={BuildBrightMirrorFiction}
-        />
+        <Route path={routeForRouter('brightMirrorFiction', false, { phase: ':phase', themeId: ':themeId', fictionId: ':fictionId' })} component={BuildBrightMirrorFiction} />
         <Route path={routeForRouter('unauthorizedAdministration')} component={UnauthorizedAdministration} />
         <Route path={routeForRouter('administrationRoot')} component={Administration}>
           <Route path={routeForRouter('adminPhase', false, { phase: ':phase' })} component={AdminChild} />

@@ -41,10 +41,6 @@ type TimelineSegmentState = {
 };
 
 export class DumbTimelineSegment extends React.Component<TimelineSegmentProps, TimelineSegmentState> {
-  state = {
-    active: false
-  };
-
   componentWillMount() {
     const { phaseId, phaseIdentifier, title, startDate, endDate, locale, client } = this.props;
     this.isTouchScreenDevice = isMobile.any();

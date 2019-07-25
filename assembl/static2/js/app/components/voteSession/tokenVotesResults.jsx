@@ -18,11 +18,7 @@ type Props = {
 
 type CreateTooltip = (TokenCategory, number) => React.Element<any>;
 export const createTooltip: CreateTooltip = (category, count) => (
-  <Tooltip
-    id={`${category.typename}-token-tooltip`}
-    className="no-arrow-tooltip token-tooltip"
-    style={{ backgroundColor: category.color, marginTop: 7 }}
-  >
+  <Tooltip id={`${category.typename}-token-tooltip`} className="no-arrow-tooltip token-tooltip" style={{ backgroundColor: category.color, marginTop: 7 }}>
     <Translate value="debate.voteSession.tokenTooltip" count={count} name={category.title} />
   </Tooltip>
 );

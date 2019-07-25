@@ -11,14 +11,7 @@ const MixMatch = ({ backgroundColor, color }: Props) => (
     <g id="icone-Croiser" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
       <g id="Croiser">
         <circle id="Oval-6" fill={backgroundColor} cx="10" cy="10" r="10" />
-        <g
-          id="shuffle"
-          transform="translate(5.000000, 5.000000)"
-          fill={color}
-          fillRule="nonzero"
-          stroke={color}
-          strokeWidth="0.5"
-        >
+        <g id="shuffle" transform="translate(5.000000, 5.000000)" fill={color} fillRule="nonzero" stroke={color} strokeWidth="0.5">
           <path
             d="M3.74145786,7.5142369 C3.6047836,7.41173121 3.41343964,7.43906606 3.31093394,7.57574032 C2.79840547,8.25455581 2.01708428,8.64407745 1.16742597,8.64407745 L0.320045558,8.64407745 C0.149202733,8.64407745 0.0125284738,8.78075171 0.0125284738,8.95159453 C0.0125284738,9.12243736 0.149202733,9.25911162 0.320045558,9.25911162 L1.16970387,9.25911162 C1.69589977,9.25911162 2.19931663,9.13838269 2.66400911,8.90148064 C3.10820046,8.67596811 3.5022779,8.34567198 3.80296128,7.94476082 C3.90318907,7.81036446 3.87813212,7.6167426 3.74145786,7.5142369 Z" // eslint-disable-line
             id="Shape"

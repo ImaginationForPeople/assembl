@@ -116,11 +116,7 @@ export class DumbFlatList extends React.Component<FlatListProps> {
     }
 
     const { networkStatus, items, ListItem, itemData, className, loadPreviousMessage } = this.props;
-    if (
-      items == null ||
-      networkStatus === APOLLO_NETWORK_STATUS.loading ||
-      networkStatus === APOLLO_NETWORK_STATUS.setVariables
-    ) {
+    if (items == null || networkStatus === APOLLO_NETWORK_STATUS.loading || networkStatus === APOLLO_NETWORK_STATUS.setVariables) {
       return <Loader color="black" />;
     }
     const entities = items.edges;

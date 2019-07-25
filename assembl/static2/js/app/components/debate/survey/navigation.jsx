@@ -128,11 +128,7 @@ class Navigation extends React.Component {
   render() {
     const barWidth = calculatePercentage(this.state.currentQuestionNumber, this.state.questionsLength);
     return (
-      <section
-        className={this.state.isHidden ? 'hidden' : 'shown navigation-section background-color'}
-        id="nav"
-        style={{ position: this.state.navPosition, bottom: this.state.navBottom }}
-      >
+      <section className={this.state.isHidden ? 'hidden' : 'shown navigation-section background-color'} id="nav" style={{ position: this.state.navPosition, bottom: this.state.navBottom }}>
         <Grid fluid>
           <div className="max-container">
             <div className="question-nav">
@@ -140,11 +136,7 @@ class Navigation extends React.Component {
                 <Col xs={6} md={6} className="no-padding">
                   <div className="question-numbers">
                     <div className="txt">
-                      <Translate
-                        value="debate.survey.question_x_on_total"
-                        current={this.state.currentQuestionNumber}
-                        total={this.state.questionsLength}
-                      />
+                      <Translate value="debate.survey.question_x_on_total" current={this.state.currentQuestionNumber} total={this.state.questionsLength} />
                     </div>
                     <div className="bar" style={{ width: `${barWidth}%` }}>
                       &nbsp;

@@ -3,8 +3,8 @@ import * as React from 'react';
 import type { ContentBlock, ContentState } from 'draft-js';
 
 type Props = {
-  block: ContentBlock,
-  contentState: ContentState
+  block: ContentBlock /* eslint react/no-unused-prop-types: 0 */,
+  contentState: ContentState /* eslint react/no-unused-prop-types: 0 */
 };
 
 type State = {

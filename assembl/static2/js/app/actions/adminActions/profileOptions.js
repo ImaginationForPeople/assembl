@@ -56,12 +56,7 @@ export const deleteSelectFieldOption = (fieldId: string, id: string): actionType
   type: actionTypes.DELETE_SELECT_FIELD_OPTION
 });
 
-export const updateSelectFieldOptionLabel = (
-  fieldId: string,
-  id: string,
-  locale: string,
-  value: string
-): actionTypes.UpdateSelectFieldOptionLabel => ({
+export const updateSelectFieldOptionLabel = (fieldId: string, id: string, locale: string, value: string): actionTypes.UpdateSelectFieldOptionLabel => ({
   fieldId: fieldId,
   id: id,
   locale: locale,

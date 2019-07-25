@@ -6,9 +6,7 @@ import { withKnobs, number } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 /* eslint-enable */
 
-import SideCommentBadge, {
-  type Props as SideCommentBadgeProps
-} from '../../../../../components/debate/brightMirror/sideComment/sideCommentBadge';
+import SideCommentBadge, { type Props as SideCommentBadgeProps } from '../../../../../components/debate/brightMirror/sideComment/sideCommentBadge';
 
 export const defaultSideCommentBadge: SideCommentBadgeProps = {
   toggleExtractsBox: action('toggleExtractBox'),

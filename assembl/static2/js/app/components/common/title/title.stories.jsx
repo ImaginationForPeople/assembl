@@ -20,6 +20,4 @@ const playground: TitleProps = {
 storiesOf('Semantic Analysis|Title', module)
   .addDecorator(withKnobs)
   .add('default', () => <Title {...defaultTitleProps} />)
-  .add('playground', () => (
-    <Title level={number('title level', playground.level)}>{text('title content', playground.children)}</Title>
-  ));
+  .add('playground', () => <Title level={number('title level', playground.level)}>{text('title content', playground.children)}</Title>);

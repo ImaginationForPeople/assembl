@@ -30,19 +30,9 @@ describe('ManageModules component', () => {
 
 describe('sortByTitle function', () => {
   it('should return an array of modules sorted on title', () => {
-    const fakeModulesTypes = [
-      { title: 'lorem 1', identifier: 'TEXT' },
-      { title: 'ipsum', identifier: 'TEXT' },
-      { title: 'lorem 2', identifier: 'HEADER' },
-      { title: 'foo', identifier: 'FOOTER' }
-    ];
+    const fakeModulesTypes = [{ title: 'lorem 1', identifier: 'TEXT' }, { title: 'ipsum', identifier: 'TEXT' }, { title: 'lorem 2', identifier: 'HEADER' }, { title: 'foo', identifier: 'FOOTER' }];
     const actual = sortByTitle(fakeModulesTypes);
-    const expected = [
-      { title: 'lorem 2', identifier: 'HEADER' },
-      { title: 'ipsum', identifier: 'TEXT' },
-      { title: 'lorem 1', identifier: 'TEXT' },
-      { title: 'foo', identifier: 'FOOTER' }
-    ];
+    const expected = [{ title: 'lorem 2', identifier: 'HEADER' }, { title: 'ipsum', identifier: 'TEXT' }, { title: 'lorem 1', identifier: 'TEXT' }, { title: 'foo', identifier: 'FOOTER' }];
     expect(actual).toEqual(expected);
   });
 });

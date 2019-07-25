@@ -3,11 +3,7 @@ import type ReduxAction from 'redux';
 import { fromJS, Map } from 'immutable';
 
 import type { Action, ContentLocaleMapping } from '../actions/actionTypes';
-import {
-  UPDATE_CONTENT_LOCALE,
-  UPDATE_CONTENT_LOCALE_BY_ID,
-  UPDATE_CONTENT_LOCALE_BY_ORIGINAL_LOCALE
-} from '../actions/actionTypes';
+import { UPDATE_CONTENT_LOCALE, UPDATE_CONTENT_LOCALE_BY_ID, UPDATE_CONTENT_LOCALE_BY_ORIGINAL_LOCALE } from '../actions/actionTypes';
 
 export function defaultContentLocaleMapping(state: Map = Map(), action: ReduxAction<Action>): Map<string, string> {
   if (action.type === UPDATE_CONTENT_LOCALE_BY_ORIGINAL_LOCALE) {

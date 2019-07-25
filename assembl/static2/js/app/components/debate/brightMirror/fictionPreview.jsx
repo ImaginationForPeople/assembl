@@ -94,11 +94,7 @@ const FictionPreview = ({
   const deleteButton = userCanDelete ? (
     <li>
       <ResponsiveOverlayTrigger placement="left" tooltip={deleteFictionTooltip}>
-        <DeletePostButton
-          postId={id}
-          modalBodyMessage="debate.brightMirror.deleteFictionModalBody"
-          onDeleteCallback={deleteFictionHandler}
-        />
+        <DeletePostButton postId={id} modalBodyMessage="debate.brightMirror.deleteFictionModalBody" onDeleteCallback={deleteFictionHandler} />
       </ResponsiveOverlayTrigger>
     </li>
   ) : null;
@@ -124,9 +120,7 @@ const FictionPreview = ({
 
   // Display preview picture only when the post is not a draft
   // We add a black overlay with an opacity of 0.2 to fix contrast issue when displaying a light label
-  const previewStyle = isDraft
-    ? null
-    : { backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${getPictureUrl(pictureId)})` };
+  const previewStyle = isDraft ? null : { backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${getPictureUrl(pictureId)})` };
 
   return (
     <div className={classNames('fiction-preview', { draft: isDraft })} style={previewStyle}>

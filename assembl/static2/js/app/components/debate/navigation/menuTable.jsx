@@ -11,10 +11,7 @@ const queries = {
   default: AllIdeasQuery
 };
 
-export function prefetchMenuQuery(
-  client: ApolloClient,
-  variables: { identifier: string, discussionPhaseId: string, lang: string }
-) {
+export function prefetchMenuQuery(client: ApolloClient, variables: { identifier: string, discussionPhaseId: string, lang: string }) {
   const query = queries[variables.identifier];
   client.query({
     query: query || queries.default,

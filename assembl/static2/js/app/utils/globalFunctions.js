@@ -5,15 +5,7 @@ import { type Map } from 'immutable';
 import type { SuggestedTags, Tags } from '../pages/semanticAnalysis/dataType';
 import type { TagProps } from '../components/common/tags/tags';
 
-import {
-  ICONS_PATH,
-  BM_PICTURE_BASE_URL,
-  PICTURE_EXTENSION,
-  PublicationStates,
-  SM_SCREEN_WIDTH,
-  LG_SCREEN_WIDTH,
-  KEYWORD_SCORE_THRESHOLD
-} from '../constants';
+import { ICONS_PATH, BM_PICTURE_BASE_URL, PICTURE_EXTENSION, PublicationStates, SM_SCREEN_WIDTH, LG_SCREEN_WIDTH, KEYWORD_SCORE_THRESHOLD } from '../constants';
 
 const getInputValue = (id: string) => {
   const elem = document.getElementById(id);
@@ -84,7 +76,8 @@ export function getSortedArrayByKey<KeyType>(arr: Array<{ [KeyType]: number }>, 
   arr.sort((a, b) => {
     if (a[key] < b[key]) {
       return -1;
-    } else if (a[key] > b[key]) {
+    }
+    if (a[key] > b[key]) {
       return 1;
     }
     return 0;
@@ -107,20 +100,12 @@ export const calculatePercentage = (value1: number, value2: number) => Math.roun
 */
 export const capitalize = (s: string) => s.charAt(0).toUpperCase() + s.slice(1);
 
-export const getDocumentScrollTop = () =>
-  window.pageYOffset ||
-  (document.documentElement && document.documentElement.scrollTop) ||
-  (document.body && document.body.scrollTop) ||
-  0;
+export const getDocumentScrollTop = () => window.pageYOffset || (document.documentElement && document.documentElement.scrollTop) || (document.body && document.body.scrollTop) || 0;
 
 export const getDomElementOffset = (el: HTMLElement) => {
   const rect = el.getBoundingClientRect();
   const scrollTop = getDocumentScrollTop();
-  const scrollLeft =
-    window.pageXOffset ||
-    (document.documentElement && document.documentElement.scrollLeft) ||
-    (document.body && document.body.scrollLeft) ||
-    0;
+  const scrollLeft = window.pageXOffset || (document.documentElement && document.documentElement.scrollLeft) || (document.body && document.body.scrollLeft) || 0;
   return { top: rect.top + scrollTop, left: rect.left + scrollLeft };
 };
 
@@ -137,10 +122,7 @@ export const computeDomElementOffset = (ref: HTMLElement, offset: { top?: number
   return result;
 };
 
-export const createEvent = (
-  typeArg: string,
-  eventInit: { bubbles: boolean, cancelable: boolean } = { bubbles: false, cancelable: false }
-) => {
+export const createEvent = (typeArg: string, eventInit: { bubbles: boolean, cancelable: boolean } = { bubbles: false, cancelable: false }) => {
   // inspired from https://developer.mozilla.org/en-US/docs/Web/API/Event/Event
   const event = document.createEvent('Event'); // we can't use 'new Event()' because ie
   event.initEvent(typeArg, eventInit.bubbles, eventInit.cancelable);
@@ -188,14 +170,7 @@ export const getCookieItem = (sKey: string) => {
   if (!sKey) {
     return null;
   }
-  return (
-    decodeURIComponent(
-      document.cookie.replace(
-        new RegExp(`(?:(?:^|.*;)\\s*${encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&')}\\s*\\=\\s*([^;]*).*$)|^.*$`),
-        '$1'
-      )
-    ) || null
-  );
+  return decodeURIComponent(document.cookie.replace(new RegExp(`(?:(?:^|.*;)\\s*${encodeURIComponent(sKey).replace(/[-.+*]/g, '\\$&')}\\s*\\=\\s*([^;]*).*$)|^.*$`), '$1')) || null;
 };
 
 // TODO: Replace with js-cookie

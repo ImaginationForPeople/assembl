@@ -54,33 +54,16 @@ const PersonalizeInterface = ({ client }: Props) => (
               <Translate value="administration.personalizeInterface.titleFormTitle" />
             </div>
             <div className="img-helper-container">
-              <img
-                className="img-helper"
-                src={'/static2/img/helpers/discussion_admin/favicon_title.png'}
-                alt="personalize-interface-helper"
-              />
+              <img className="img-helper" src="/static2/img/helpers/discussion_admin/favicon_title.png" alt="personalize-interface-helper" />
             </div>
             <form className="language-list" onSubmit={handleSubmit}>
               <SaveButton disabled={pristine || submitting} saveAction={handleSubmit} />
-              <Field
-                required
-                name="title"
-                component={TextFieldAdapter}
-                label={I18n.t('administration.personalizeInterface.title')}
-              />
+              <Field required name="title" component={TextFieldAdapter} label={I18n.t('administration.personalizeInterface.title')} />
               <div className="separator" />
-              <Field
-                name="favicon"
-                component={FileUploaderFieldAdapter}
-                label={I18n.t('administration.personalizeInterface.favicon')}
-              />
+              <Field name="favicon" component={FileUploaderFieldAdapter} label={I18n.t('administration.personalizeInterface.favicon')} />
               <p className="label-indication">{I18n.t('administration.personalizeInterface.faviconInstruction')}</p>
               <div className="separator" />
-              <Field
-                component={FileUploaderFieldAdapter}
-                name="logo"
-                label={I18n.t('administration.discussionPreferences.debateLogoLabel')}
-              />
+              <Field component={FileUploaderFieldAdapter} name="logo" label={I18n.t('administration.discussionPreferences.debateLogoLabel')} />
               <p className="label-indication">{I18n.t('administration.personalizeInterface.logoInstruction')}</p>
             </form>
           </React.Fragment>

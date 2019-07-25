@@ -24,9 +24,7 @@ describe('ResourcesCenter component', () => {
         embedCode: null,
         id: 'res2',
         image: 'http://img.lemde.fr/2017/11/13/0/0/3847/2565/534/0/60/0/aaa6aa4_31822-8xbq9n.k1vw019k9.jpg',
-        text:
-          '<p>Depuis sa réouverture, il y a un an, la salle emblématique tente d’écrire une ' +
-          'nouvelle page de son histoire.</p>',
+        text: '<p>Depuis sa réouverture, il y a un an, la salle emblématique tente d’écrire une nouvelle page de son histoire.</p>',
         title: 'Autre titre'
       },
       {
@@ -34,22 +32,12 @@ describe('ResourcesCenter component', () => {
         embedCode: 'https://www.youtube.com/embed/3m7BgIvC-uQ',
         id: 'res3',
         image: 'http://img.lemde.fr/2017/11/13/0/0/3847/2565/534/0/60/0/aaa6aa4_31822-8xbq9n.k1vw019k9.jpg',
-        text:
-          '<p>Les données rassemblées par les scientifiques du GCP suggèrent en outre que le ' +
-          'découplage entre croissance économique et croissance des émissions de carbone est ' +
-          'possible</p>',
+        text: '<p>Les données rassemblées par les scientifiques du GCP suggèrent en outre que le découplage entre croissance économique et croissance des émissions de carbone est possible</p>',
         title: 'I add both an image and a video'
       }
     ];
     const shallowRenderer = new ShallowRenderer();
-    shallowRenderer.render(
-      <ResourcesCenter
-        resources={mockResources}
-        headerBackgroundUrl={headerBackgroundUrl}
-        headerTitle={headerTitle}
-        phaseId="my-phase-id"
-      />
-    );
+    shallowRenderer.render(<ResourcesCenter resources={mockResources} headerBackgroundUrl={headerBackgroundUrl} headerTitle={headerTitle} phaseId="my-phase-id" />);
     const result = shallowRenderer.getRenderOutput();
     expect(result).toMatchSnapshot();
   });

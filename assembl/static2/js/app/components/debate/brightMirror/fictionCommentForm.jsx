@@ -155,12 +155,7 @@ class FictionCommentForm extends Component<FictionCommentFormProps, FictionComme
         <Button id={COMMENT_CANCEL_BUTTON_ID} className="cancel" onMouseDown={this.formCancelHandler}>
           {I18n.t('debate.brightMirror.commentFiction.cancel')}
         </Button>
-        <Button
-          id={COMMENT_SUBMIT_BUTTON_ID}
-          className="submit"
-          onMouseDown={this.formSubmitHandler}
-          disabled={commentTextareaValue === EMPTY_STRING}
-        >
+        <Button id={COMMENT_SUBMIT_BUTTON_ID} className="submit" onMouseDown={this.formSubmitHandler} disabled={commentTextareaValue === EMPTY_STRING}>
           {I18n.t('debate.brightMirror.commentFiction.submit')}
         </Button>
       </div>

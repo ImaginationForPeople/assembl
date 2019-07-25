@@ -54,9 +54,7 @@ const IdeaPreview = ({
     <div className={previewClasses}>
       <div className="image-box" style={imgUrl ? { backgroundImage: `url(${imgUrl})` } : null} />
       <div className="content-box position-content-box" to={link}>
-        <h3 className={classnames('light-title-3', 'center', { ellipsis: isMobile && nbLevel && ideaLevel < nbLevel })}>
-          {title}
-        </h3>
+        <h3 className={classnames('light-title-3', 'center', { ellipsis: isMobile && nbLevel && ideaLevel < nbLevel })}>{title}</h3>
         <div className="access-discussion">
           {numChildren ? (
             <div>
@@ -67,9 +65,7 @@ const IdeaPreview = ({
                     setSelectedIdeas(ideaId, ideaLevel, ideaIndex);
                     const slider = document.getElementById(`slider-${ideaLevel}`);
                     if (slider) {
-                      slider.scrollLeft =
-                        (ideaPreviewWidth + APP_CONTAINER_PADDING) * ideaIndex -
-                        (ideaPreviewWidth + APP_CONTAINER_PADDING * 2 - window.innerWidth / 2);
+                      slider.scrollLeft = (ideaPreviewWidth + APP_CONTAINER_PADDING) * ideaIndex - (ideaPreviewWidth + APP_CONTAINER_PADDING * 2 - window.innerWidth / 2);
                     }
                     setTimeout(() => {
                       window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
@@ -95,13 +91,7 @@ const IdeaPreview = ({
           )}
           {messageViewOverride !== MESSAGE_VIEW.noModule ? (
             <div className="see-discussion">
-              <Link to={link}>
-                {messageViewOverride === MESSAGE_VIEW.voteSession ? (
-                  <Translate value="debate.thread.voteForProposals" />
-                ) : (
-                  <Translate value="debate.thread.goToIdea" />
-                )}
-              </Link>
+              <Link to={link}>{messageViewOverride === MESSAGE_VIEW.voteSession ? <Translate value="debate.thread.voteForProposals" /> : <Translate value="debate.thread.goToIdea" />}</Link>
             </div>
           ) : null}
         </div>

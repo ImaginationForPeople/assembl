@@ -8,12 +8,7 @@ import manageErrorAndLoading from '../components/common/manageErrorAndLoading';
 import ResourcesCenter from '../components/resourcesCenter';
 
 const ResourcesCenterContainer = ({ data, phaseId, resourcesCenterHeaderUrl, resourcesCenterTitle }) => (
-  <ResourcesCenter
-    {...data}
-    headerBackgroundUrl={resourcesCenterHeaderUrl}
-    headerTitle={resourcesCenterTitle}
-    phaseId={phaseId}
-  />
+  <ResourcesCenter {...data} headerBackgroundUrl={resourcesCenterHeaderUrl} headerTitle={resourcesCenterTitle} phaseId={phaseId} />
 );
 
 const mapStateToProps = state => ({

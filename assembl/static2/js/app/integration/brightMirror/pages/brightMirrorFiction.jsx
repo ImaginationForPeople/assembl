@@ -19,10 +19,7 @@ import { defaultFictionToolbar } from '../../../stories/components/debate/bright
 import { defaultFictionBody } from '../../../stories/components/debate/brightMirror/fictionBody.stories';
 import { defaultFictionCommentHeader } from '../../../stories/components/debate/brightMirror/fictionCommentHeader.stories';
 import { defaultFictionCommentForm } from '../../../stories/components/debate/brightMirror/fictionCommentForm.stories';
-import {
-  defaultFictionComment,
-  defaultFictionCommentGraphQL
-} from '../../../stories/components/debate/brightMirror/fictionComment.stories';
+import { defaultFictionComment, defaultFictionCommentGraphQL } from '../../../stories/components/debate/brightMirror/fictionComment.stories';
 
 const defaultBackBtnProps: BackButtonProps = {
   handleClick: Function,

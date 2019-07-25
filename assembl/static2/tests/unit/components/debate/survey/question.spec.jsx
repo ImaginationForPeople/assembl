@@ -59,12 +59,7 @@ describe('DumbQuestion component', () => {
 
       expect(refetchThemeSpy).toHaveBeenCalled();
       expect(scrollToQuestionSpy).toHaveBeenCalledWith(true, 1);
-      expect(displayAlert).toHaveBeenCalledWith(
-        'success',
-        'Thanks for your participation. Your proposal has been sent!',
-        false,
-        10000
-      );
+      expect(displayAlert).toHaveBeenCalledWith('success', 'Thanks for your participation. Your proposal has been sent!', false, 10000);
       expect(wrapper.state('buttonDisabled')).toBeFalsy();
       expect(
         wrapper
@@ -97,8 +92,7 @@ describe('DumbQuestion component', () => {
       expect(scrollToQuestionSpy).toHaveBeenCalledWith(true, 1);
       expect(displayAlert).toHaveBeenCalledWith(
         'success',
-        'Your contribution has been saved. To insure the quality of the debate, ' +
-          'it will be visible to all participants once it has been reviewed by the animation team.',
+        'Your contribution has been saved. To insure the quality of the debate, it will be visible to all participants once it has been reviewed by the animation team.',
         false,
         10000
       );

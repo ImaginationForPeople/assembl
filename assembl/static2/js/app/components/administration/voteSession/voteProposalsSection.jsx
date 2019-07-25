@@ -20,10 +20,7 @@ type VoteProposalsSectionProps = {
 const DumbVoteProposalsSection = ({ addVoteProposal, editLocale, voteProposals }: VoteProposalsSectionProps) => (
   <div className="vote-proposals-section">
     <div className="admin-box">
-      <SectionTitle
-        title={I18n.t('administration.voteProposals.sectionTitle')}
-        annotation={I18n.t('administration.annotation')}
-      />
+      <SectionTitle title={I18n.t('administration.voteProposals.sectionTitle')} annotation={I18n.t('administration.annotation')} />
       <div className="admin-content">
         <form>
           {voteProposals.map((id, index) => (

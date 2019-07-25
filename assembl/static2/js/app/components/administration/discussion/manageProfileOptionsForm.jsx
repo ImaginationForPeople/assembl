@@ -128,12 +128,7 @@ const ManageProfileOptionsForm = ({
               {textFields.map((tf, idx) => (
                 <div className="flex" key={tf.get('id')}>
                   <OverlayTrigger placement="top" overlay={hideTextFieldTooltip}>
-                    <Checkbox
-                      className="textfield-checkbox"
-                      checked={tf.get('hidden')}
-                      disabled={isNotHideable(tf)}
-                      onChange={() => toggleTextFieldHidden(tf.get('id'))}
-                    />
+                    <Checkbox className="textfield-checkbox" checked={tf.get('hidden')} disabled={isNotHideable(tf)} onChange={() => toggleTextFieldHidden(tf.get('id'))} />
                   </OverlayTrigger>
                   <TextField
                     deleteField={() => confirmTextFieldDeletion(tf.get('id'))}

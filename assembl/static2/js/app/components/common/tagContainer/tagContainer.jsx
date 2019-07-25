@@ -19,18 +19,10 @@ export type Props = {
 };
 
 const TagContainer = ({ postId, isAdmin, tagList, onTagListUpdateCallback }: Props) => {
-  const tagContainerTitle = isAdmin
-    ? I18n.t('debate.tagOnPost.tagContainerAdminTitle')
-    : I18n.t('debate.tagOnPost.tagContainerTitle');
+  const tagContainerTitle = isAdmin ? I18n.t('debate.tagOnPost.tagContainerAdminTitle') : I18n.t('debate.tagOnPost.tagContainerTitle');
 
   const displayTagList = (
-    <Tags
-      postId={postId}
-      tagsList={tagList}
-      isAdmin={isAdmin}
-      alreadyAddedWarningMessage={I18n.t('debate.tagOnPost.alreadyAddedWarningMessage')}
-      onTagListUpdateCallback={onTagListUpdateCallback}
-    />
+    <Tags postId={postId} tagsList={tagList} isAdmin={isAdmin} alreadyAddedWarningMessage={I18n.t('debate.tagOnPost.alreadyAddedWarningMessage')} onTagListUpdateCallback={onTagListUpdateCallback} />
   );
 
   return (

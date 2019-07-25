@@ -107,14 +107,7 @@ class SideCommentMenu extends React.Component<Props, State> {
 
     return (
       <div className="side-comment-container">
-        {showCommentBadge ? (
-          <SideCommentBadge
-            toggleExtractsBox={this.toggleCommentsBox}
-            extractsNumber={extracts.length}
-            position={badgePosition}
-            showBox={showBox}
-          />
-        ) : null}
+        {showCommentBadge ? <SideCommentBadge toggleExtractsBox={this.toggleCommentsBox} extractsNumber={extracts.length} position={badgePosition} showBox={showBox} /> : null}
         {showBox ? (
           <SideCommentBox
             ideaId={ideaId}
@@ -135,13 +128,7 @@ class SideCommentMenu extends React.Component<Props, State> {
             userCanReply={userCanReply}
           />
         ) : null}
-        {showCommentAnchor ? (
-          <SideCommentAnchor
-            handleMouseDown={this.handleMouseDown}
-            anchorPosition={commentAnchorPosition}
-            handleClickAnchor={handleClickAnchor}
-          />
-        ) : null}
+        {showCommentAnchor ? <SideCommentAnchor handleMouseDown={this.handleMouseDown} anchorPosition={commentAnchorPosition} handleClickAnchor={handleClickAnchor} /> : null}
       </div>
     );
   }

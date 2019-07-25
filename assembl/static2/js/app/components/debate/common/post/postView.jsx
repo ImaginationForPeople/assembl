@@ -3,17 +3,12 @@ import * as React from 'react';
 import { Translate, I18n } from 'react-redux-i18n';
 import classnames from 'classnames';
 import moment from 'moment';
-import {
-  getDomElementOffset,
-  elementContainsSelection,
-  formatedSuggestedTagList,
-  formatedTagList
-} from '../../../../utils/globalFunctions';
+import { getDomElementOffset, elementContainsSelection, formatedSuggestedTagList, formatedTagList } from '../../../../utils/globalFunctions';
 import { connectedUserIsModerator, connectedUserIsAdmin } from '../../../../utils/permissions';
 import DisplayResponseAuthor from '../../../common/displayResponseAuthor';
 import CircleAvatar from '../../../common/circleAvatar';
 import Attachments from '../../../common/attachments';
-import PostActions from '../../common/postActions';
+import PostActions from '../postActions';
 import AnswerForm from '../../thread/answerForm';
 import Nuggets from '../../thread/nuggets';
 import TagOnPost from '../../../tagOnPost/tagOnPost';
@@ -89,8 +84,7 @@ class PostView extends React.PureComponent<Props, State> {
       Array.from(images).forEach(img =>
         img.addEventListener('load', () => {
           this.props.measureTreeHeight(400);
-        })
-      );
+        }));
     }
   };
 
@@ -192,17 +186,14 @@ class PostView extends React.PureComponent<Props, State> {
     let canReply = !multiColumns;
     // If we're in thread mode, check if the first idea associated to the post is multi columns.
     if (!multiColumns && indirectIdeaContentLinks && indirectIdeaContentLinks.length > 0) {
-      canReply =
-        indirectIdeaContentLinks[0].idea && indirectIdeaContentLinks[0].idea.messageViewOverride !== MESSAGE_VIEW.messageColumns;
+      canReply = indirectIdeaContentLinks[0].idea && indirectIdeaContentLinks[0].idea.messageViewOverride !== MESSAGE_VIEW.messageColumns;
     }
 
     const { displayHarvestingAnchor, displayHarvestingBox, harvestingAnchorPosition } = this.state;
 
     const { refetch } = this.props.data;
 
-    const relatedIdeasTitles = indirectIdeaContentLinks
-      ? indirectIdeaContentLinks.map(link => link && link.idea && link.idea.title)
-      : [];
+    const relatedIdeasTitles = indirectIdeaContentLinks ? indirectIdeaContentLinks.map(link => link && link.idea && link.idea.title) : [];
     const hasRelatedIdeas = relatedIdeasTitles.length > 0;
     const isPublished = publicationState === 'PUBLISHED';
     let userName = isPublished ? creator.displayName : I18n.t('debate.postAwaitingModeration');
@@ -232,9 +223,7 @@ class PostView extends React.PureComponent<Props, State> {
           this.postView = p;
         }}
       >
-        {!multiColumns && (
-          <Nuggets extracts={extracts} postId={id} nuggetsManager={nuggetsManager} completeLevel={completeLevelArray.join('-')} />
-        )}
+        {!multiColumns && <Nuggets extracts={extracts} postId={id} nuggetsManager={nuggetsManager} completeLevel={completeLevelArray.join('-')} />}
         {isHarvesting && (
           <HarvestingMenu
             postId={id}

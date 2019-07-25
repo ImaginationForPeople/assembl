@@ -40,7 +40,7 @@ class URLPreview extends React.Component<Props> {
         {isContribution ? (
           <div className="url-header">
             {authorAvatar && <img src={authorAvatar} className="url-contribution-avatar" alt={authorName} />}
-            <a target="_blank" href={url} className="url-contribution-title">
+            <a target="_blank" rel="noopener noreferrer" href={url} className="url-contribution-title">
               {title}
             </a>
             <span className="url-author-name">{authorName}</span>
@@ -51,7 +51,7 @@ class URLPreview extends React.Component<Props> {
               {faviconUrl && <img alt="favicon" className="url-header-avatar" src={faviconUrl} />}
               <span className="url-header-title">{providerName}</span>
             </div>,
-            <a key={`${id}url-link`} target="_blank" href={url} className="url-link">
+            <a key={`${id}url-link`} target="_blank" rel="noopener noreferrer" href={url} className="url-link">
               {title}
             </a>
           ]
@@ -59,12 +59,7 @@ class URLPreview extends React.Component<Props> {
         <div className="url-content-container">
           <div className="url-description">{description}</div>
           <div className="url-media-container">
-            <Embed
-              url={url}
-              defaultEmbed={
-                thumbnailUrl ? <div style={{ backgroundImage: `url("${thumbnailUrl}")` }} className="url-img-preview" /> : null
-              }
-            />
+            <Embed url={url} defaultEmbed={thumbnailUrl ? <div style={{ backgroundImage: `url("${thumbnailUrl}")` }} className="url-img-preview" /> : null} />
           </div>
         </div>
         {isContribution && (

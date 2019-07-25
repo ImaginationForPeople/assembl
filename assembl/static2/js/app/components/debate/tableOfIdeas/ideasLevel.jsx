@@ -8,13 +8,7 @@ import { getDiscussionSlug, isMobile } from '../../../utils/globalFunctions';
 import VisibilityComponent from '../../common/visibilityComponent';
 import { withScreenWidth } from '../../common/screenDimensions';
 
-import {
-  APP_CONTAINER_MAX_WIDTH,
-  NB_IDEA_PREVIEW_TO_SHOW,
-  APP_CONTAINER_PADDING,
-  IDEA_PREVIEW_MAX_WIDTH,
-  IDEA_PREVIEW_MIN_WIDTH
-} from '../../../constants';
+import { APP_CONTAINER_MAX_WIDTH, NB_IDEA_PREVIEW_TO_SHOW, APP_CONTAINER_PADDING, IDEA_PREVIEW_MAX_WIDTH, IDEA_PREVIEW_MIN_WIDTH } from '../../../constants';
 
 const xsCol = 12;
 const smCol = 6;
@@ -260,10 +254,7 @@ class IdeasLevel extends React.Component {
     };
     const isTouchScreenDevice = isMobile.any();
     return (
-      <div
-        className={isTouchScreenDevice ? 'mobile-tdi slider-container relative' : 'slider-container relative'}
-        style={nbLevel > 1 ? { width: `${sliderContainerWidth}px` } : {}}
-      >
+      <div className={isTouchScreenDevice ? 'mobile-tdi slider-container relative' : 'slider-container relative'} style={nbLevel > 1 ? { width: `${sliderContainerWidth}px` } : {}}>
         <VisibilityComponent isVisible={isArrowVisible && nbLevel > 1 && sliderCount > 0} classname="slider-arrow-container">
           <div
             className="slider-arrow slider-arrow-left"
@@ -284,14 +275,7 @@ class IdeasLevel extends React.Component {
         >
           <Row id={`row-${ideaLevel}`} className={nbLevel > 1 ? 'no-margin row-inline' : 'no-margin'}>
             {ideas.map((idea, index) => (
-              <Col
-                xs={xsCol}
-                sm={smCol}
-                md={mdCol}
-                key={index}
-                className={this.getColClassNames(index)}
-                style={nbLevel > 1 ? { width: ideaPreviewWidth } : {}}
-              >
+              <Col xs={xsCol} sm={smCol} md={mdCol} key={index} className={this.getColClassNames(index)} style={nbLevel > 1 ? { width: ideaPreviewWidth } : {}}>
                 <IdeaPreview
                   imgUrl={idea.img ? idea.img.externalUrl : ''}
                   messageViewOverride={idea.messageViewOverride}

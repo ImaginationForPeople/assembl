@@ -48,8 +48,7 @@ type VoteProposalFormProps = {
   validationErrors: ValidationErrors
 };
 
-export const getValidationState = (validationErrors: ?Array<ErrorDef>): ?string =>
-  (validationErrors && validationErrors.length > 0 ? 'error' : null);
+export const getValidationState = (validationErrors: ?Array<ErrorDef>): ?string => (validationErrors && validationErrors.length > 0 ? 'error' : null);
 
 const DumbVoteProposalForm = ({
   index,
@@ -80,8 +79,7 @@ const DumbVoteProposalForm = ({
   const handleTitleChange = e => updateTitle(editLocale, e.target.value);
   const handleDescriptionChange = value => updateDescription(editLocale, value);
 
-  const moduleIsSelected = voteSpecTemplateId =>
-    proposalModules.some(m => m.get('voteSpecTemplateId') === voteSpecTemplateId && !m.get('_toDelete'));
+  const moduleIsSelected = voteSpecTemplateId => proposalModules.some(m => m.get('voteSpecTemplateId') === voteSpecTemplateId && !m.get('_toDelete'));
 
   const toggleModule = (voteSpecTemplateId) => {
     const pModule = proposalModules.find(m => m.get('voteSpecTemplateId') === voteSpecTemplateId);
@@ -183,12 +181,7 @@ const DumbVoteProposalForm = ({
           ))}
 
         {tokenModules.map((voteSpecTemplateId, idx) => (
-          <Checkbox
-            id={`token-checkbox-${idx}`}
-            key={voteSpecTemplateId}
-            checked={moduleIsSelected(voteSpecTemplateId)}
-            onChange={() => toggleModule(voteSpecTemplateId)}
-          >
+          <Checkbox id={`token-checkbox-${idx}`} key={voteSpecTemplateId} checked={moduleIsSelected(voteSpecTemplateId)} onChange={() => toggleModule(voteSpecTemplateId)}>
             <Translate value="administration.voteProposals.tokenVote" />
           </Checkbox>
         ))}
@@ -198,23 +191,16 @@ const DumbVoteProposalForm = ({
           const voteSpecTemplate = modulesById.get(voteSpecTemplateId);
           return (
             <div key={voteSpecTemplateId}>
-              <Checkbox
-                id={`gauge-checkbox-${idx}`}
-                className="inline"
-                checked={moduleIsSelected(voteSpecTemplateId)}
-                onChange={() => toggleModule(voteSpecTemplateId)}
-              >
+              <Checkbox id={`gauge-checkbox-${idx}`} className="inline" checked={moduleIsSelected(voteSpecTemplateId)} onChange={() => toggleModule(voteSpecTemplateId)}>
                 {pModule && pModule.get('isCustom') ? (
                   <Translate value="administration.voteProposals.customGauge" number={number} />
                 ) : (
                   <Translate value="administration.voteProposals.gauge" number={number} />
-                )}{' '}
-                -{' '}
-                {getEntryValueForLocale(
-                  voteSpecTemplate.get('instructionsEntries'),
-                  editLocale,
-                  getEntryValueForLocale(voteSpecTemplate.get('instructionsEntries'), 'en')
                 )}
+                {' '}
+                -
+                {' '}
+                {getEntryValueForLocale(voteSpecTemplate.get('instructionsEntries'), editLocale, getEntryValueForLocale(voteSpecTemplate.get('instructionsEntries'), 'en'))}
               </Checkbox>
 
               {pModule && pModule.get('id') && (
@@ -265,15 +251,11 @@ const mapStateToProps = ({ admin }, { id, editLocale }) => {
     modulesById: modulesById,
     tokenModules: modulesInOrder.filter(
       voteSpecTemplateId =>
-        !modulesById.getIn([voteSpecTemplateId, 'proposalId']) &&
-        modulesById.getIn([voteSpecTemplateId, 'type']) === 'tokens' &&
-        !modulesById.getIn([voteSpecTemplateId, '_toDelete'])
+        !modulesById.getIn([voteSpecTemplateId, 'proposalId']) && modulesById.getIn([voteSpecTemplateId, 'type']) === 'tokens' && !modulesById.getIn([voteSpecTemplateId, '_toDelete'])
     ),
     gaugeModules: modulesInOrder.filter(
       voteSpecTemplateId =>
-        !modulesById.getIn([voteSpecTemplateId, 'proposalId']) &&
-        modulesById.getIn([voteSpecTemplateId, 'type']) === 'gauge' &&
-        !modulesById.getIn([voteSpecTemplateId, '_toDelete'])
+        !modulesById.getIn([voteSpecTemplateId, 'proposalId']) && modulesById.getIn([voteSpecTemplateId, 'type']) === 'gauge' && !modulesById.getIn([voteSpecTemplateId, '_toDelete'])
     )
   };
 };

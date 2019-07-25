@@ -32,12 +32,7 @@ const InstructionsText = ({ title, body, summary, semanticAnalysisForThematicDat
     <div className="background-light instructions-text padding-left-right">
       <div className="max-container">
         <div className="content-section section-margin-top">
-          <ThematicTabs
-            guidelinesContent={guidelinesContent}
-            summary={summary}
-            semanticAnalysisForThematicData={semanticAnalysisForThematicData}
-            isMobile={!!isMobile.any()}
-          />
+          <ThematicTabs guidelinesContent={guidelinesContent} summary={summary} semanticAnalysisForThematicData={semanticAnalysisForThematicData} isMobile={!!isMobile.any()} />
         </div>
       </div>
     </div>

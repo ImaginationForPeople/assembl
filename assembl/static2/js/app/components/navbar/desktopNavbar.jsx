@@ -52,18 +52,12 @@ export default class DesktopNavbar extends React.PureComponent<Props, State> {
     const remainingWidth = maxWidth - this.state.leftWidth + this.state.languageMenuWidth;
     return (
       <div className="flat-navbar" style={style}>
-        <div
-          className="left-part"
-          ref={refWidthUpdate(newWidth => this.setState(() => ({ leftWidth: newWidth }), this.updateWidth))}
-        >
+        <div className="left-part" ref={refWidthUpdate(newWidth => this.setState(() => ({ leftWidth: newWidth }), this.updateWidth))}>
           <BurgerMenu />
           <Logo slug={slug} src={logoSrc} url={logoLink} />
           <NavigationMenu elements={elements} />
         </div>
-        <div
-          className="right-part"
-          ref={refWidthUpdate(newWidth => this.setState(() => ({ rightWidth: newWidth }), this.updateWidth))}
-        >
+        <div className="right-part" ref={refWidthUpdate(newWidth => this.setState(() => ({ rightWidth: newWidth }), this.updateWidth))}>
           {renderUserMenu(remainingWidth)}
           <LanguageMenu size="xs" className="navbar-language" setWidth={this.setLanguageMenuWidth} />
         </div>

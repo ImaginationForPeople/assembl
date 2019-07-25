@@ -32,15 +32,7 @@ const CookieSwitch = ({ cookieIsMatomo, matomoOptOutLink, toggleSwitch, accepted
     return <Translate value="cookies.required" />;
   }
 
-  return (
-    <SwitchButton
-      label={I18n.t('refuse')}
-      labelRight={I18n.t('accept')}
-      onChange={toggleSwitch}
-      checked={!accepted}
-      name={name}
-    />
-  );
+  return <SwitchButton label={I18n.t('refuse')} labelRight={I18n.t('accept')} onChange={toggleSwitch} checked={!accepted} name={name} />;
 };
 
 export default CookieSwitch;

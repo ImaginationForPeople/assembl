@@ -33,12 +33,18 @@ export type TokenCategory = {|
   color: ?string
 |};
 
-export type TokenVoteSpecification = { ...tokenVoteSpecificationFragment, ...tokenVoteSpecificationResultsFragment };
+export type TokenVoteSpecification = {
+  ...tokenVoteSpecificationFragment,
+  ...tokenVoteSpecificationResultsFragment
+};
 export type NumberGaugeVoteSpecification = {
   ...numberGaugeVoteSpecificationFragment,
   ...numberGaugeVoteSpecificationResultsFragment
 };
-export type GaugeVoteSpecification = { ...gaugeVoteSpecificationFragment, ...gaugeVoteSpecificationResultsFragment };
+export type GaugeVoteSpecification = {
+  ...gaugeVoteSpecificationFragment,
+  ...gaugeVoteSpecificationResultsFragment
+};
 
 export type VoteSpecification = TokenVoteSpecification | NumberGaugeVoteSpecification | GaugeVoteSpecification;
 
@@ -117,9 +123,7 @@ export const findTokenVoteModule: FindTokenVoteModule = modules => modules.find(
 // $FlowFixMe: we know it is a GaugeVoteSpecification or NumberGaugeVoteSpecification
 type SortGaugeVoteModules = (Array<VoteSpecification>) => Array<GaugeVoteSpecification | NumberGaugeVoteSpecification>;
 export const filterGaugeVoteModules: SortGaugeVoteModules = modules =>
-  modules.filter(
-    module => module.voteType === 'gauge_vote_specification' || module.voteType === 'number_gauge_vote_specification'
-  );
+  modules.filter(module => module.voteType === 'gauge_vote_specification' || module.voteType === 'number_gauge_vote_specification');
 // .sort(moduleComparator);
 
 class DumbVoteSession extends React.Component<Props, State> {
@@ -171,12 +175,8 @@ class DumbVoteSession extends React.Component<Props, State> {
     let userGaugeVotes = Map();
     const propos = proposals || [];
     propos.forEach((proposal) => {
-      const tokenModules = proposal.modules
-        ? proposal.modules.filter(module => module.voteType === 'token_vote_specification')
-        : [];
-      const gaugeModules = proposal.modules
-        ? proposal.modules.filter(module => module.voteType !== 'token_vote_specification')
-        : [];
+      const tokenModules = proposal.modules ? proposal.modules.filter(module => module.voteType === 'token_vote_specification') : [];
+      const gaugeModules = proposal.modules ? proposal.modules.filter(module => module.voteType !== 'token_vote_specification') : [];
       tokenModules.forEach((tokenModule) => {
         tokenModule.myVotes.forEach((myVote) => {
           // $FlowFixMe: issue with generated type, myVote can be {} from the generated type, but not in reality.
@@ -212,21 +212,21 @@ class DumbVoteSession extends React.Component<Props, State> {
 
   voteForProposalToken = (proposalId: string, tokenVoteModuleId: string, categoryId: string, value: number): void => {
     const setVote = () =>
-      this.setState({
-        userTokenVotes: this.state.userTokenVotes.setIn([proposalId, tokenVoteModuleId, categoryId], value),
+      this.setState(prevState => ({
+        userTokenVotes: prevState.userTokenVotes.setIn([proposalId, tokenVoteModuleId, categoryId], value),
         submitting: false,
         hasChanged: true
-      });
+      }));
     promptForLoginOr(setVote)();
   };
 
   voteForProposalGauge = (proposalId: string, voteSpecificationId: string, value: ?number): void => {
     const setVote = () =>
-      this.setState({
-        userGaugeVotes: this.state.userGaugeVotes.setIn([proposalId, voteSpecificationId], value),
+      this.setState(prevState => ({
+        userGaugeVotes: prevState.userGaugeVotes.setIn([proposalId, voteSpecificationId], value),
         submitting: false,
         hasChanged: true
-      });
+      }));
     promptForLoginOr(setVote)();
   };
 
@@ -341,7 +341,9 @@ class DumbVoteSession extends React.Component<Props, State> {
     const subTitleToShow = !isPhaseCompleted ? subTitle : I18n.t('debate.voteSession.isCompleted');
     const propositionsSectionTitleToShow = !isPhaseCompleted
       ? propositionsSectionTitle
-      : I18n.t('debate.voteSession.voteResultsPlusTitle', { title: propositionsSectionTitle });
+      : I18n.t('debate.voteSession.voteResultsPlusTitle', {
+        title: propositionsSectionTitle
+      });
 
     return (
       <div className="votesession-page">
@@ -353,13 +355,7 @@ class DumbVoteSession extends React.Component<Props, State> {
           <Grid fluid className="background-light">
             <Section title={instructionsSectionTitle} containerAdditionalClassNames={availableTokensSticky ? ['no-margin'] : ''}>
               <Row>
-                <Col
-                  mdOffset={!availableTokensSticky ? 3 : null}
-                  smOffset={!availableTokensSticky ? 1 : null}
-                  md={8}
-                  sm={10}
-                  className="no-padding"
-                >
+                <Col mdOffset={!availableTokensSticky ? 3 : null} smOffset={!availableTokensSticky ? 1 : null} md={8} sm={10} className="no-padding">
                   <div className="vote-instructions">{renderRichtext(instructionsSectionContent)}</div>
                   {tokenVoteModule && tokenVoteModule.tokenCategories && (
                     <div ref={this.setAvailableTokensRef}>

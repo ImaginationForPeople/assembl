@@ -5,7 +5,7 @@ import { AutoSizer, CellMeasurer, CellMeasurerCache, List, WindowScroller } from
 
 import NuggetsManager from '../nuggetsManager';
 import Child from './treeItem';
-import type { FictionCommentExtraProps } from '../../../components/debate/brightMirror/fictionComment';
+import type { FictionCommentExtraProps } from '../../debate/brightMirror/fictionComment';
 import type { ContentLocaleMapping } from '../../../actions/actionTypes';
 
 type Props = {
@@ -75,15 +75,7 @@ class Tree extends React.Component<Props> {
 
   // override overscanIndicesGetter to not remove from the dom the posts once rendered
   // to fix various issue with scrolling with WindowScroller
-  overscanIndicesGetter = ({
-    cellCount,
-    overscanCellsCount,
-    stopIndex
-  }: {
-    cellCount: number,
-    overscanCellsCount: number,
-    stopIndex: number
-  }) => {
+  overscanIndicesGetter = ({ cellCount, overscanCellsCount, stopIndex }: { cellCount: number, overscanCellsCount: number, stopIndex: number }) => {
     let overscanStopIndex;
     if (cellCount === 1) {
       // overscanIndicesGetter is called for columns, not rows
@@ -99,17 +91,7 @@ class Tree extends React.Component<Props> {
     };
   };
 
-  cellRenderer = ({
-    index,
-    key,
-    parent,
-    style
-  }: {
-    index: number,
-    key: string,
-    parent: { props: Props },
-    style: { [string]: string }
-  }) => {
+  cellRenderer = ({ index, key, parent, style }: { index: number, key: string, parent: { props: Props }, style: { [string]: string } }) => {
     const {
       data,
       identifier,

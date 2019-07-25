@@ -15,6 +15,7 @@ exports[`Modal component should render a form to add a link 1`] = `
         className="close"
         onClick={[MockFunction]}
         title="Close"
+        type="button"
       >
         <span
           className="assembl-icon-cancel"

@@ -16,14 +16,7 @@ type TimelineSegmentMenuProps = {
   onMenuItemClick: Function
 };
 
-export function DumbTimelineSegmentMenu({
-  phaseIdentifier,
-  phaseId,
-  onMenuItemClick,
-  startDate,
-  endDate,
-  title
-}: TimelineSegmentMenuProps) {
+export function DumbTimelineSegmentMenu({ phaseIdentifier, phaseId, onMenuItemClick, startDate, endDate, title }: TimelineSegmentMenuProps) {
   const phaseStatus = getPhaseStatus(startDate, endDate);
   const isNotStarted = phaseStatus === PHASE_STATUS.notStarted;
   if (isNotStarted) {

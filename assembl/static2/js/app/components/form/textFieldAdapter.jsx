@@ -21,22 +21,10 @@ type Props = {
   label: string
 } & FieldRenderProps;
 
-const TextFieldAdapter = ({
-  input: { name, onChange, value, ...otherListeners },
-  label,
-  meta: { error, touched },
-  required,
-  ...rest
-}: Props) => (
+const TextFieldAdapter = ({ input: { name, onChange, value, ...otherListeners }, label, meta: { error, touched }, required, ...rest }: Props) => (
   <FormGroup controlId={name} validationState={getValidationState(error, touched)}>
     {value ? <ControlLabel>{required ? `${label} *` : label}</ControlLabel> : null}
-    <FormControl
-      {...otherListeners}
-      {...rest}
-      onChange={event => onChange(event.target.value)}
-      placeholder={label}
-      value={value || ''}
-    />
+    <FormControl {...otherListeners} {...rest} onChange={event => onChange(event.target.value)} placeholder={label} value={value || ''} />
     <Error name={name} />
   </FormGroup>
 );

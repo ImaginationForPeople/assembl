@@ -6,19 +6,12 @@ import { I18n } from 'react-redux-i18n';
 import { type ApolloClient, compose, withApollo } from 'react-apollo';
 import classNames from 'classnames';
 
-import MailIcon from '../common/icons/mailIcon/mailIcon';
-import LinkIcon from '../common/icons/linkIcon/linkIcon';
-import ThickIcon from '../common/icons/tickIcon/tickIcon';
+import MailIcon from './icons/mailIcon/mailIcon';
+import LinkIcon from './icons/linkIcon/linkIcon';
+import ThickIcon from './icons/tickIcon/tickIcon';
 import updateShareCount from '../../graphql/mutations/updateShareCount.graphql';
 
-const {
-  FacebookShareButton,
-  GooglePlusShareButton,
-  LinkedinShareButton,
-  TwitterShareButton,
-  WhatsappShareButton,
-  TelegramShareButton
-} = ShareButtons;
+const { FacebookShareButton, GooglePlusShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton, TelegramShareButton } = ShareButtons;
 
 type Props = {
   url: string,
@@ -32,7 +25,10 @@ type State = {
 };
 
 type SuperShareButtonProps = {
-  Component: React.ComponentType<{ url: string, onShareWindowClose: () => void }>,
+  Component: React.ComponentType<{
+    url: string,
+    onShareWindowClose: () => void
+  }>,
   Icon: React.ComponentType<{ size: number, round: boolean }>,
   url: string,
   onClose: () => void
@@ -58,7 +54,7 @@ const EmailButton = ({ url }: EmailButtonProps) => {
     window.location.href = `mailto:?body=${url}`;
   };
   return (
-    <button className="btn btn-default btn-share btn-mail" onClick={() => onClick()}>
+    <button type="button" className="btn btn-default btn-share btn-mail" onClick={() => onClick()}>
       <MailIcon />
       {I18n.t('debate.shareMail')}
     </button>
@@ -95,9 +91,7 @@ export class DumbSocialShare extends React.Component<Props, State> {
         Component: TelegramShareButton,
         iconName: 'telegram'
       }
-    ].map(({ Component, iconName }, index) => (
-      <SuperShareButton Component={Component} Icon={generateShareIcon(iconName)} url={url} onClose={onClose} key={index} />
-    ));
+    ].map(({ Component, iconName }, index) => <SuperShareButton type="button" Component={Component} Icon={generateShareIcon(iconName)} url={url} onClose={onClose} key={index} />);
 
     const contentCopied = (
       <React.Fragment>
@@ -116,7 +110,7 @@ export class DumbSocialShare extends React.Component<Props, State> {
     return (
       <div className="share-buttons-container center">
         <CopyToClipboard text={url} onCopy={() => this.setState({ copied: true })}>
-          <button className={classNames('btn btn-default btn-share', copied ? 'btn-copied' : 'btn-copy')}>
+          <button type="button" className={classNames('btn btn-default btn-share', copied ? 'btn-copied' : 'btn-copy')}>
             {copied ? contentCopied : contentCopy}
           </button>
         </CopyToClipboard>

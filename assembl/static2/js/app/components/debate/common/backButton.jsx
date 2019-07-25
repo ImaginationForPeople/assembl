@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
 import { Translate } from 'react-redux-i18n';
 
 import BackIcon from '../../common/icons/backIcon/backIcon';
@@ -11,7 +10,7 @@ export type Props = {
 };
 
 const BackButton = ({ handleClick, linkClassName }: Props) => (
-  <Link className={linkClassName} onClick={handleClick}>
+  <button type="button" className={linkClassName} onClick={handleClick}>
     <BackIcon className="blackIcon hidden-sm hidden-md hidden-lg" />
     <div className="share-button action-button hidden-xs">
       <div className="share-icon-container">
@@ -21,7 +20,7 @@ const BackButton = ({ handleClick, linkClassName }: Props) => (
         <Translate value="debate.back" />
       </div>
     </div>
-  </Link>
+  </button>
 );
 
 export default BackButton;

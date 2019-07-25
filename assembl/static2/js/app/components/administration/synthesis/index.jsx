@@ -73,24 +73,11 @@ class CreateSynthesisForm extends React.Component<Props> {
                   <Col xs={12} md={10}>
                     <div className="admin-box admin-content">
                       <BackButton handleClick={redirectToPreviousPage} linkClassName="back-btn" />
-                      <Section
-                        title={!synthesisPostId ? 'debate.syntheses.createNewSynthesis' : 'debate.syntheses.editSynthesis'}
-                        translate
-                      >
-                        <Field
-                          editLocale={editLocale}
-                          name="subject"
-                          component={MultilingualTextFieldAdapter}
-                          label={I18n.t('debate.syntheses.title')}
-                          required
-                        />
+                      <Section title={!synthesisPostId ? 'debate.syntheses.createNewSynthesis' : 'debate.syntheses.editSynthesis'} translate>
+                        <Field editLocale={editLocale} name="subject" component={MultilingualTextFieldAdapter} label={I18n.t('debate.syntheses.title')} required />
                         <div className="flex">
                           <Field name="image" component={FileUploaderFieldAdapter} label={I18n.t('debate.syntheses.picture')} />
-                          <Helper
-                            helperUrl="/static2/img/helpers/helper1.png"
-                            helperText={I18n.t('debate.syntheses.pictureHelper')}
-                            popOverClass=""
-                          />
+                          <Helper helperUrl="/static2/img/helpers/helper1.png" helperText={I18n.t('debate.syntheses.pictureHelper')} popOverClass="" />
                         </div>
                         <div className="richtext-large">
                           <Field

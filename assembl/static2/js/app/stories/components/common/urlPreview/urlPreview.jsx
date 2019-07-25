@@ -8,8 +8,7 @@ import URLPreview from '../../../../components/common/urlPreview/urlPreview';
 
 const imgUrl = 'https://images.unsplash.com/uploads/141155339325423394b24/03982423';
 
-const authorAvatar =
-  'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
+const authorAvatar = 'https://images.pexels.com/photos/67636/rose-blue-flower-rose-blooms-67636.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 
 const faviconUrl = 'https://images.pexels.com/photos/247932/pexels-photo-247932.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260';
 

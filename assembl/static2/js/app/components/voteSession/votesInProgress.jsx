@@ -51,12 +51,7 @@ const VotesInProgress = ({ modules, numParticipants }: Props) => {
       </Col>
       {tokenVoteModule && tokenCategories.length > 0 && (
         <Col className="padding-s" xs={12} md={columnSizes[1]}>
-          <TokenVotesResults
-            categories={tokenCategories}
-            tokenVotes={tokenVoteModule.tokenVotes}
-            numVotes={tokenVoteModule.numVotes}
-            titleMsgId="debate.voteSession.currentTokenDistribution"
-          />
+          <TokenVotesResults categories={tokenCategories} tokenVotes={tokenVoteModule.tokenVotes} numVotes={tokenVoteModule.numVotes} titleMsgId="debate.voteSession.currentTokenDistribution" />
         </Col>
       )}
       {allGauges.map((gauge) => {
@@ -64,14 +59,14 @@ const VotesInProgress = ({ modules, numParticipants }: Props) => {
           const colSize = columnSizes[index];
           index += 1;
           // $FlowFixMe title incompatible type
-          const title: string =
-            gauge.averageLabel === null ? I18n.t('debate.voteSession.participantsCount', { count: 0 }) : gauge.averageLabel || '';
+          const title: string = gauge.averageLabel === null ? I18n.t('debate.voteSession.participantsCount', { count: 0 }) : gauge.averageLabel || '';
           return (
             <Col className="padding-s" xs={12} md={colSize} key={gauge.id}>
               <GaugeVotesResults title={title} instructions={gauge.instructions} />
             </Col>
           );
-        } else if (gauge.voteType === 'number_gauge_vote_specification') {
+        }
+        if (gauge.voteType === 'number_gauge_vote_specification') {
           const colSize = columnSizes[index];
           index += 1;
           const title =

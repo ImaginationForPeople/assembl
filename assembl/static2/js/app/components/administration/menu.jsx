@@ -66,18 +66,7 @@ class Menu extends React.PureComponent<Props> {
             goBackPhaseIdentifier: goBackPhaseIdentifier
           })
           : null}
-        {timeline
-          ? timeline.map((phase, index) => (
-            <PhaseMenu
-              key={phase.id}
-              slug={slug}
-              index={index}
-              phase={phase}
-              isActive={phase.identifier === requestedPhase}
-              locale={locale}
-            />
-          ))
-          : null}
+        {timeline ? timeline.map((phase, index) => <PhaseMenu key={phase.id} slug={slug} index={index} phase={phase} isActive={phase.identifier === requestedPhase} locale={locale} />) : null}
       </ul>
     );
   }

@@ -104,15 +104,7 @@ class GaugeVoteForProposal extends React.Component<GaugeVoteForProposalProps> {
       <React.Fragment>
         {instructions ? <p>{instructions}</p> : null}
         <div className={classNames('gauge-container', { 'gauge-no-value': sliderProps.value === null })}>
-          <Slider
-            included
-            trackStyle={trackStyle}
-            railStyle={railStyle}
-            handleStyle={handleStyle}
-            handle={handleIcon}
-            onChange={this.handleChange}
-            {...sliderProps}
-          />
+          <Slider included trackStyle={trackStyle} railStyle={railStyle} handleStyle={handleStyle} handle={handleIcon} onChange={this.handleChange} {...sliderProps} />
           {!sliderProps.disabled && <span className="assembl-icon-delete grey" onClick={this.reset} />}
         </div>
       </React.Fragment>
@@ -183,15 +175,7 @@ type NumberGaugeVoteForProposalProps = SharedProps & {
   value: ?number
 };
 
-export const NumberGaugeVoteForProposal = ({
-  disabled,
-  maximum,
-  minimum,
-  nbTicks,
-  unit,
-  value,
-  ...rest
-}: NumberGaugeVoteForProposalProps) => {
+export const NumberGaugeVoteForProposal = ({ disabled, maximum, minimum, nbTicks, unit, value, ...rest }: NumberGaugeVoteForProposalProps) => {
   const marks = {};
   let step;
   if (minimum !== undefined && minimum !== null && maximum !== undefined && maximum !== null) {

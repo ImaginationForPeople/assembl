@@ -13,9 +13,7 @@ type Props = {
   src?: string
 };
 
-const CircleAvatar = ({ size, username, src }: Props) => (
-  <img className="circle-avatar" src={src} width={size} height={size} alt={username ? `${username}-avatar` : EMPTY_STRING} />
-);
+const CircleAvatar = ({ size, username, src }: Props) => <img className="circle-avatar" src={src} width={size} height={size} alt={username ? `${username}-avatar` : EMPTY_STRING} />;
 
 CircleAvatar.defaultProps = {
   size: '34',

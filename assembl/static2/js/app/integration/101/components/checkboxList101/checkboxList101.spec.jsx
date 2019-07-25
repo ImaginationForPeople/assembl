@@ -24,13 +24,7 @@ const defaultCheckbox: Checkbox101Type = {
 };
 
 const defaultCheckboxList: CheckboxList101Type = {
-  checkboxes: [
-    { ...defaultCheckbox },
-    { ...defaultCheckbox },
-    { ...defaultCheckbox },
-    { ...defaultCheckbox },
-    { ...defaultCheckbox }
-  ]
+  checkboxes: [{ ...defaultCheckbox }, { ...defaultCheckbox }, { ...defaultCheckbox }, { ...defaultCheckbox }, { ...defaultCheckbox }]
 };
 
 describe('<CheckboxList101 /> - with shallow', () => {

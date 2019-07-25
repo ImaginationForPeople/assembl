@@ -97,11 +97,7 @@ const FictionBodyToolbar = ({ postId, mySentiment, screenWidth, position, sentim
               }, [])}
             </div>
             <div className="txt" style={{ paddingLeft: `${(count + 5.5) * 6}px` }}>
-              {screenWidth >= MEDIUM_SCREEN_WIDTH ? (
-                totalSentimentsCount
-              ) : (
-                <Translate value="debate.thread.numberOfReactions" count={totalSentimentsCount} />
-              )}
+              {screenWidth >= MEDIUM_SCREEN_WIDTH ? totalSentimentsCount : <Translate value="debate.thread.numberOfReactions" count={totalSentimentsCount} />}
             </div>
           </div>
         </OverlayTrigger>

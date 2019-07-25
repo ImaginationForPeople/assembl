@@ -24,8 +24,7 @@ const getMessageColumnsVariables = (theme, client) => {
   if (!theme.multiColumns) {
     return [];
   }
-  const checkedForm =
-    theme.multiColumns && theme.multiColumns.radioButtons && theme.multiColumns.radioButtons.find(button => button.isChecked);
+  const checkedForm = theme.multiColumns && theme.multiColumns.radioButtons && theme.multiColumns.radioButtons.find(button => button.isChecked);
   let nbColumnsInForm = checkedForm ? checkedForm.size : theme.multiColumns.messageColumns.length;
   if (theme.messageViewOverride && theme.messageViewOverride.value !== MESSAGE_VIEW.messageColumns) {
     nbColumnsInForm = 0;
@@ -41,9 +40,7 @@ const getMessageColumnsVariables = (theme, client) => {
         titleEntries: convertToEntries(theme.multiColumns.messageColumns[index].title),
         nameEntries: convertToEntries(theme.multiColumns.messageColumns[index].name),
         color: theme.multiColumns.messageColumns[index].color || '#000000',
-        columnSynthesisSubject: theme.multiColumns.messageColumns[index].columnSynthesis.subject
-          ? convertToEntries(theme.multiColumns.messageColumns[index].columnSynthesis.subject)
-          : [],
+        columnSynthesisSubject: theme.multiColumns.messageColumns[index].columnSynthesis.subject ? convertToEntries(theme.multiColumns.messageColumns[index].columnSynthesis.subject) : [],
         columnSynthesisBody: bodyEntries
       };
     })
@@ -61,14 +58,10 @@ const getChildrenVariables = (client, thematic, initialTheme): Array<Promise<mix
         const bodyVars = await convertRichTextToVariables(t.announcement.body, client);
         const { attachments: bodyAttachments, entries: bodyEntries } = bodyVars;
         const titleEntries = convertToEntries(t.announcement.title);
-        const quote = await (t.announcement.quote &&
-          t.messageViewOverride &&
-          t.messageViewOverride.value === MESSAGE_VIEW.survey
+        const quote = await (t.announcement.quote && t.messageViewOverride && t.messageViewOverride.value === MESSAGE_VIEW.survey
           ? convertRichTextToVariables(t.announcement.quote, client)
           : Promise.resolve({ attachments: [], entries: [] }));
-        const summary = await (t.announcement.summary
-          ? convertRichTextToVariables(t.announcement.summary, client)
-          : Promise.resolve({ attachments: [], entries: [] }));
+        const summary = await (t.announcement.summary ? convertRichTextToVariables(t.announcement.summary, client) : Promise.resolve({ attachments: [], entries: [] }));
         if (titleEntries.length > 0) {
           announcement = {
             titleEntries: titleEntries,
@@ -101,14 +94,10 @@ async function getIdeaInput(client, theme, initialTheme, order): Promise<mixed> 
     const bodyVars = await convertRichTextToVariables(theme.announcement.body, client);
     const { attachments: bodyAttachments, entries: bodyEntries } = bodyVars;
     const titleEntries = convertToEntries(theme.announcement.title);
-    const quote = await (theme.announcement.quote &&
-    theme.messageViewOverride &&
-    theme.messageViewOverride.value === MESSAGE_VIEW.survey
+    const quote = await (theme.announcement.quote && theme.messageViewOverride && theme.messageViewOverride.value === MESSAGE_VIEW.survey
       ? convertRichTextToVariables(theme.announcement.quote, client)
       : Promise.resolve({ attachments: [], entries: [] }));
-    const summary = await (theme.announcement.summary
-      ? convertRichTextToVariables(theme.announcement.summary, client)
-      : Promise.resolve({ attachments: [], entries: [] }));
+    const summary = await (theme.announcement.summary ? convertRichTextToVariables(theme.announcement.summary, client) : Promise.resolve({ attachments: [], entries: [] }));
     if (titleEntries.length > 0) {
       announcement = {
         titleEntries: titleEntries,
@@ -146,7 +135,8 @@ export const createMutationsPromises = (client: ApolloClient, discussionPhaseId:
   // $FlowFixMe specifying the type here trigger "Recursion limit exceeded" */
   initialValues
   // initialValues: ThemesAdminValues
-): Array<() => Promise<mixed>> => {
+): Array<(
+) => Promise<mixed>> => {
   const allMutations = [];
   let createUpdateMutation;
   const initialThemes = initialValues.themes;
@@ -160,8 +150,7 @@ export const createMutationsPromises = (client: ApolloClient, discussionPhaseId:
             discussionPhaseId: discussionPhaseId,
             ideas: ideas
           }
-        })
-      );
+        }));
   } else {
     createUpdateMutation = () => Promise.resolve();
   }

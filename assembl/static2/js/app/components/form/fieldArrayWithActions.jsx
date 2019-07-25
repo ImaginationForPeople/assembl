@@ -214,12 +214,7 @@ export class Fields extends React.PureComponent<FieldsProps, State> {
           const removeField = () => this.remove(idx);
           const removeConfirmationData = { field: fieldValue, index: fieldIndex };
           const removeWithConfirmation = confirmDeletion
-            ? () =>
-              confirmDeletionModal(
-                confirmDeletionTitle(removeConfirmationData),
-                confirmDeletionBody(removeConfirmationData),
-                removeField
-              )
+            ? () => confirmDeletionModal(confirmDeletionTitle(removeConfirmationData), confirmDeletionBody(removeConfirmationData), removeField)
             : removeField;
           return (
             <div
@@ -259,10 +254,7 @@ export class Fields extends React.PureComponent<FieldsProps, State> {
                     </OverlayTrigger>
                   ) : null}
                   {!hideDeleteBtn ? (
-                    <OverlayTrigger
-                      placement="top"
-                      overlay={!enableDeleteBtn && deleteDisabled ? deleteDisabled() : deleteTooltip()}
-                    >
+                    <OverlayTrigger placement="top" overlay={!enableDeleteBtn && deleteDisabled ? deleteDisabled() : deleteTooltip()}>
                       <Button disabled={!enableDeleteBtn} onClick={removeWithConfirmation} className="admin-icons">
                         <span className="assembl-icon-delete grey" />
                       </Button>

@@ -30,15 +30,15 @@ exports[`Storyshots DeletedFictionComment default 1`] = `
             999 réponses
           </span>
         </p>
-        <a
-          className="action-toggle"
+        <button
+          className="action-toggle no-border no-background"
           onClick={[Function]}
-          style={Object {}}
+          type="button"
         >
           <span
             className="assembl-icon-up-open"
           />
-        </a>
+        </button>
       </div>
     </footer>
   </div>
@@ -75,15 +75,15 @@ exports[`Storyshots DeletedFictionComment playground 1`] = `
             999 réponses
           </span>
         </p>
-        <a
-          className="action-toggle"
+        <button
+          className="action-toggle no-border no-background"
           onClick={[Function]}
-          style={Object {}}
+          type="button"
         >
           <span
             className="assembl-icon-up-open"
           />
-        </a>
+        </button>
       </div>
     </footer>
   </div>

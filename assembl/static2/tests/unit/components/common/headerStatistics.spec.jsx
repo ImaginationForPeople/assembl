@@ -1,12 +1,7 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import HeaderStatistics, {
-  statContributions,
-  statMessages,
-  statParticipants,
-  statParticipations
-} from '../../../../js/app/components/common/headerStatistics';
+import HeaderStatistics, { statContributions, statMessages, statParticipants, statParticipations } from '../../../../js/app/components/common/headerStatistics';
 
 describe('HeaderStatistics component', () => {
   it('should match HeaderStatistics snapshot', () => {

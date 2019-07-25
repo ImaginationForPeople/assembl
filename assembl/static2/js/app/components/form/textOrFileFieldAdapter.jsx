@@ -32,13 +32,7 @@ type Props = {
   label: string
 } & FieldRenderProps;
 
-const TextOrFileFieldAdapter = ({
-  fileFieldLabel,
-  input: { name, onChange, value, ...otherListeners },
-  label,
-  meta: { error, touched },
-  ...rest
-}: Props) => {
+const TextOrFileFieldAdapter = ({ fileFieldLabel, input: { name, onChange, value, ...otherListeners }, label, meta: { error, touched }, ...rest }: Props) => {
   const onTextChange = event =>
     onChange({
       htmlCode: event.target.value,

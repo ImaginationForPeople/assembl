@@ -7,7 +7,7 @@ import { form, FormGroup, FormControl, Button } from 'react-bootstrap';
 import { Link } from 'react-router';
 import * as lodashGet from 'lodash/get';
 // Route helper import
-import { browserHistory } from '../../../app/router';
+import { browserHistory } from '../../router';
 
 import { signupAction } from '../../actions/authenticationActions';
 import { getDiscussionSlug } from '../../utils/globalFunctions';
@@ -15,14 +15,14 @@ import { get, getContextual } from '../../utils/routeMap';
 import inputHandler from '../../utils/inputHandler';
 import { displayAlert, displayCustomModal } from '../../utils/utilityManager';
 import FormControlWithLabel from '../common/formControlWithLabel';
-import manageErrorAndLoading from '../../components/common/manageErrorAndLoading';
-import mergeLoadingAndError from '../../components/common/mergeLoadingAndError';
+import manageErrorAndLoading from '../common/manageErrorAndLoading';
+import mergeLoadingAndError from '../common/mergeLoadingAndError';
 import TabsConditionQuery from '../../graphql/TabsConditionQuery.graphql';
 import TextFieldsQuery from '../../graphql/TextFields.graphql';
 import LegalContentsQuery from '../../graphql/LegalContents.graphql';
 import LegalForm from './legalForm';
 import SignupCheckbox from './signupCheckbox';
-import BackButton from '../../../app/components/debate/common/backButton';
+import BackButton from '../debate/common/backButton';
 import Helper from '../common/helper';
 import PasswordRequirements from '../common/passwordRequirements';
 
@@ -121,14 +121,7 @@ class SignupForm extends React.Component<Props, State> {
   };
 
   displayLegalFormModal = (checked: boolean, text: string, legalContentsType: string) => {
-    const modalContent = (
-      <LegalForm
-        handleAcceptButton={this.handleAcceptButton}
-        checked={checked}
-        text={text}
-        legalContentsType={legalContentsType}
-      />
-    );
+    const modalContent = <LegalForm handleAcceptButton={this.handleAcceptButton} checked={checked} text={text} legalContentsType={legalContentsType} />;
     displayCustomModal(modalContent, true, 'modal-large');
   };
 
@@ -138,15 +131,7 @@ class SignupForm extends React.Component<Props, State> {
 
   render() {
     const slug = getDiscussionSlug();
-    const {
-      hasTermsAndConditions,
-      hasPrivacyPolicy,
-      hasUserGuidelines,
-      textFields,
-      termsAndConditionsText,
-      privacyPolicyText,
-      userGuidelinesText
-    } = this.props;
+    const { hasTermsAndConditions, hasPrivacyPolicy, hasUserGuidelines, textFields, termsAndConditionsText, privacyPolicyText, userGuidelinesText } = this.props;
     const { privacyPolicyIsChecked, termsAndConditionsIsChecked, userGuidelinesIsChecked } = this.state;
     const legalContentsType = {
       termsAndConditions: 'termsAndConditions',
@@ -238,12 +223,7 @@ class SignupForm extends React.Component<Props, State> {
             )}
             <div className="center">
               <FormGroup>
-                <Button
-                  type="submit"
-                  name="register"
-                  value={I18n.t('login.signUp')}
-                  className="button-submit button-dark button-signup"
-                >
+                <Button type="submit" name="register" value={I18n.t('login.signUp')} className="button-submit button-dark button-signup">
                   <Translate value="login.signUp" />
                 </Button>
               </FormGroup>

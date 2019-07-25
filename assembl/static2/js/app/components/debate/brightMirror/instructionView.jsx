@@ -29,26 +29,12 @@ export type InstructionViewProps = {
   semanticAnalysisForThematicData: SemanticAnalysisForThematicQuery
 };
 
-const InstructionView = ({
-  isUserConnected,
-  ideaId,
-  refetchIdea,
-  posts,
-  announcementContent,
-  timeline,
-  identifier,
-  phaseId,
-  lang,
-  semanticAnalysisForThematicData
-}: InstructionViewProps) => {
+const InstructionView = ({ isUserConnected, ideaId, refetchIdea, posts, announcementContent, timeline, identifier, phaseId, lang, semanticAnalysisForThematicData }: InstructionViewProps) => {
   // Check permission
   const canPost = isUserConnected && connectedUserCan(Permissions.ADD_POST) && !getIsPhaseCompletedById(timeline, phaseId);
 
   // Filter out DELETED_BY_USER and DELETED_BY_ADMIN posts
-  const filteredPosts = posts.filter(
-    post =>
-      post.publicationState !== PublicationStates.DELETED_BY_ADMIN && post.publicationState !== PublicationStates.DELETED_BY_USER
-  );
+  const filteredPosts = posts.filter(post => post.publicationState !== PublicationStates.DELETED_BY_ADMIN && post.publicationState !== PublicationStates.DELETED_BY_USER);
 
   const topPostFormContainer = canPost ? (
     <TopPostFormContainer
@@ -76,9 +62,7 @@ const InstructionView = ({
       />
       <div>
         {topPostFormContainer}
-        {filteredPosts.length > 0 ? (
-          <FictionsList posts={filteredPosts} identifier={identifier} themeId={ideaId} refetchIdea={refetchIdea} lang={lang} />
-        ) : null}
+        {filteredPosts.length > 0 ? <FictionsList posts={filteredPosts} identifier={identifier} themeId={ideaId} refetchIdea={refetchIdea} lang={lang} /> : null}
       </div>
     </div>
   );

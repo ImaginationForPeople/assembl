@@ -67,14 +67,7 @@ class Link extends React.PureComponent<Props, State> {
       url: formatedHref
     };
     return (
-      <a
-        onClick={e => this.openModal(e, initialValues)}
-        className={className}
-        title={title}
-        href={formatedHref}
-        target={target}
-        rel="noopener noreferrer"
-      >
+      <a onClick={e => this.openModal(e, initialValues)} className={className} title={title} href={formatedHref} target={target} rel="noopener noreferrer">
         {children}
       </a>
     );

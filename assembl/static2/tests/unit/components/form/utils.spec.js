@@ -66,11 +66,7 @@ describe('richTextI18nValueIsEmpty function', () => {
 describe('convertEntriesToI18nValue function', () => {
   const { convertEntriesToI18nValue } = utils;
   it('should convert langstring entries to an i18n value for forms', () => {
-    const input = [
-      { localeCode: 'en', value: 'Hello' },
-      { localeCode: 'es', value: 'Hola' },
-      { localeCode: 'fr', value: 'Salut' }
-    ];
+    const input = [{ localeCode: 'en', value: 'Hello' }, { localeCode: 'es', value: 'Hola' }, { localeCode: 'fr', value: 'Salut' }];
     const expected = {
       en: 'Hello',
       es: 'Hola',
@@ -83,11 +79,7 @@ describe('convertEntriesToI18nValue function', () => {
 describe('convertEntriesToI18nRichText function', () => {
   const { convertEntriesToI18nRichText } = utils;
   it('should convert langstring entries to an i18n value for forms', () => {
-    const input = [
-      { localeCode: 'en', value: '<p>Hello</p>' },
-      { localeCode: 'es', value: '<p>Hola</p>' },
-      { localeCode: 'fr', value: '<p>Salut</p>' }
-    ];
+    const input = [{ localeCode: 'en', value: '<p>Hello</p>' }, { localeCode: 'es', value: '<p>Hola</p>' }, { localeCode: 'fr', value: '<p>Salut</p>' }];
     const actual = convertEntriesToI18nRichText(input);
     expect(actual.en.getCurrentContent().getPlainText()).toEqual('Hello');
     expect(actual.fr.getCurrentContent().getPlainText()).toEqual('Salut');
@@ -117,12 +109,7 @@ describe('createSave function', () => {
 
   it('should return a save function to be used in LoadSaveReinitializeForm with KO status', async () => {
     const save = createSave('no');
-    const promises = [
-      () =>
-        Promise.reject({
-          message: 'houston we have a problem'
-        })
-    ];
+    const promises = [() => Promise.reject(new TypeError('houston we have a problem'))];
     const status = await save(promises);
     expect(status).toEqual('KO');
     expect(displayAlert).toHaveBeenCalledWith('danger', 'houston we have a problem', false, 30000);

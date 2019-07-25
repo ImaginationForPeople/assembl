@@ -1,6 +1,5 @@
 // @flow
 import React from 'react';
-import { Link } from 'react-router';
 /* eslint-disable import/no-extraneous-dependencies */
 import initStoryshots from '@storybook/addon-storyshots';
 import { configure, shallow } from 'enzyme';
@@ -29,7 +28,7 @@ describe('<ReplyToCommentButton /> - with shallow', () => {
   });
 
   it('should render one Link with a reply icon embedded with a tooltip', () => {
-    expect(wrapper.find(Link)).toHaveLength(1);
+    expect(wrapper.find('button[className="action-reply no-border no-background"]')).toHaveLength(1);
     expect(wrapper.find(ResponsiveOverlayTrigger)).toHaveLength(1);
     expect(wrapper.find('span[className="assembl-icon-back-arrow"]')).toHaveLength(1);
   });
@@ -37,7 +36,7 @@ describe('<ReplyToCommentButton /> - with shallow', () => {
   it('should execute onClickHandler when clicking on the component', () => {
     const onClickHandler = jest.fn();
     wrapper.setProps({ onClickCallback: onClickHandler });
-    wrapper.find(Link).simulate('click');
+    wrapper.find('button[className="action-reply no-border no-background"]').simulate('click');
 
     expect(onClickHandler).toHaveBeenCalledTimes(1);
   });

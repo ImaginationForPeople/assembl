@@ -5,16 +5,7 @@ import moment from 'moment';
 import { I18n } from 'react-redux-i18n';
 import flatMap from 'lodash/flatMap';
 
-import type {
-  CheckboxListValue,
-  I18nValue,
-  FileValue,
-  FileVariable,
-  MutationsPromises,
-  I18nRichTextValue,
-  SaveStatus,
-  DatePickerInput
-} from './types.flow';
+import type { CheckboxListValue, I18nValue, FileValue, FileVariable, MutationsPromises, I18nRichTextValue, SaveStatus, DatePickerInput } from './types.flow';
 import { convertEditorStateToHTML, convertEntriesToEditorState, uploadNewAttachments } from '../../utils/draftjs';
 import { displayAlert } from '../../utils/utilityManager';
 import { runSerial } from '../administration/saveButton';
@@ -113,10 +104,7 @@ type RichTextVariables = {
 /*
   Upload new attachments and return variables for mutation
 */
-export async function convertRichTextToVariables(
-  valuesByLocale: I18nRichTextValue,
-  client: ApolloClient
-): Promise<RichTextVariables> {
+export async function convertRichTextToVariables(valuesByLocale: I18nRichTextValue, client: ApolloClient): Promise<RichTextVariables> {
   const uploadDocument = options => client.mutate({ mutation: UploadDocument, ...options });
   const results = Object.keys(valuesByLocale).map(async (locale) => {
     const result = await uploadNewAttachments(valuesByLocale[locale], uploadDocument);
@@ -157,14 +145,7 @@ export function convertCheckboxListValueToVariable(values: CheckboxListValue): A
 }
 export function compareEditorState(a: mixed, b: mixed): ?boolean {
   // compare two richtext EditorState to be used as third param of lodash isEqualWith
-  if (
-    a !== null &&
-    typeof a === 'object' &&
-    typeof a.getCurrentContent !== 'undefined' &&
-    b !== null &&
-    typeof b === 'object' &&
-    typeof b.getCurrentContent !== 'undefined'
-  ) {
+  if (a !== null && typeof a === 'object' && typeof a.getCurrentContent !== 'undefined' && b !== null && typeof b === 'object' && typeof b.getCurrentContent !== 'undefined') {
     // $FlowFixMe
     return a.getCurrentContent() === b.getCurrentContent();
   }

@@ -114,10 +114,20 @@ export class SemanticAnalysis extends Component<Props, State> {
     const informationKeywordTooltip = (
       <div>
         <p>
-          <strong>{occurenceTitle}:</strong> {occurenceDefinition}
+          <strong>
+            {occurenceTitle}
+:
+          </strong>
+          {' '}
+          {occurenceDefinition}
         </p>
         <p>
-          <strong>{relevanceTitle}:</strong> {relevanceDefinition}
+          <strong>
+            {relevanceTitle}
+:
+          </strong>
+          {' '}
+          {relevanceDefinition}
         </p>
       </div>
     );

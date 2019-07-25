@@ -74,8 +74,7 @@ export class Question extends React.Component<Props, State> {
           this.setState({
             buttonDisabled: false
           });
-        })
-    );
+        }));
   };
 
   updateBody = (newValue: EditorState) => {
@@ -115,20 +114,11 @@ export class Question extends React.Component<Props, State> {
               <h1 className="dark-title-5">{questionTitle}</h1>
             </div>
             <Col xs={12} md={9} className="col-centered">
-              <RichTextEditor
-                editorState={this.state.postBody}
-                onChange={this.updateBody}
-                placeholder={I18n.t('debate.survey.txtAreaPh')}
-                handleInputFocus={this.redirectToLogin}
-              />
+              <RichTextEditor editorState={this.state.postBody} onChange={this.updateBody} placeholder={I18n.t('debate.survey.txtAreaPh')} handleInputFocus={this.redirectToLogin} />
               <Button
                 onClick={this.createPost}
                 disabled={this.getPostBodyCharCount() > MINIMUM_BODY_LENGTH ? this.state.buttonDisabled : true}
-                className={
-                  this.getPostBodyCharCount() > MINIMUM_BODY_LENGTH
-                    ? 'button-submit button-dark right margin-l clear'
-                    : 'button-submit button-disable right margin-l clear'
-                }
+                className={this.getPostBodyCharCount() > MINIMUM_BODY_LENGTH ? 'button-submit button-dark right margin-l clear' : 'button-submit button-disable right margin-l clear'}
               >
                 <Translate value="debate.survey.submit" />
               </Button>
@@ -144,11 +134,7 @@ const mapStateToProps = state => ({
   contentLocale: state.i18n.locale
 });
 
-const QuestionWithContext = props => (
-  <DebateContext.Consumer>
-    {({ isDebateModerated }) => <Question {...props} isDebateModerated={isDebateModerated} />}
-  </DebateContext.Consumer>
-);
+const QuestionWithContext = props => <DebateContext.Consumer>{({ isDebateModerated }) => <Question {...props} isDebateModerated={isDebateModerated} />}</DebateContext.Consumer>;
 
 export default compose(
   connect(mapStateToProps),

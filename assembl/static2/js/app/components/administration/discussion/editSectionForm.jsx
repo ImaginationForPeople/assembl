@@ -6,14 +6,7 @@ import { FormGroup, Checkbox, OverlayTrigger, Button } from 'react-bootstrap';
 import { getEntryValueForLocale } from '../../../utils/i18n';
 import FormControlWithLabel from '../../common/formControlWithLabel';
 import { deleteSectionTooltip, upTooltip, downTooltip } from '../../common/tooltips';
-import {
-  updateSectionTitle,
-  updateSectionUrl,
-  toggleExternalPage,
-  deleteSection,
-  moveSectionUp,
-  moveSectionDown
-} from '../../../actions/adminActions/adminSections';
+import { updateSectionTitle, updateSectionUrl, toggleExternalPage, deleteSection, moveSectionUp, moveSectionDown } from '../../../actions/adminActions/adminSections';
 
 type EditSectionFormProps = {
   url: string,
@@ -79,9 +72,7 @@ const DumbEditSectionForm = ({
         ) : null}
       </div>
       <div className="clear" />
-      {type !== 'HOMEPAGE' ? (
-        <FormControlWithLabel label={titlePh} onChange={handleTitleChange} type="text" value={title} />
-      ) : null}
+      {type !== 'HOMEPAGE' ? <FormControlWithLabel label={titlePh} onChange={handleTitleChange} type="text" value={title} /> : null}
       {type === 'HOMEPAGE' ? (
         <FormGroup>
           <Checkbox checked={hasUrl} onChange={toggleExternalPageField}>
@@ -89,9 +80,7 @@ const DumbEditSectionForm = ({
           </Checkbox>
         </FormGroup>
       ) : null}
-      {(type === 'HOMEPAGE' && hasUrl) || type === 'CUSTOM' ? (
-        <FormControlWithLabel label={urlPh} onChange={handleUrlChange} type="text" value={url} />
-      ) : null}
+      {(type === 'HOMEPAGE' && hasUrl) || type === 'CUSTOM' ? <FormControlWithLabel label={urlPh} onChange={handleUrlChange} type="text" value={url} /> : null}
       <div className="separator" />
     </div>
   );

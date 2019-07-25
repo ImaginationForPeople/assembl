@@ -22,16 +22,7 @@ class PhaseMenu extends React.PureComponent<Props> {
     const { sectionId, subMenu, title, component } = menuItem;
     if (component) {
       const MenuItemComponent = component;
-      return (
-        <MenuItemComponent
-          key={phase.id + sectionId}
-          rootSectionId={rootSectionId}
-          menuItem={menuItem}
-          slug={slug}
-          phase={phase}
-          locale={locale}
-        />
-      );
+      return <MenuItemComponent key={phase.id + sectionId} rootSectionId={rootSectionId} menuItem={menuItem} slug={slug} phase={phase} locale={locale} />;
     }
     const sectionIndex = rootSectionId ? `${rootSectionId}.${sectionId}` : sectionId;
     const sectionQuery = sectionIndex ? { section: sectionIndex } : {};
@@ -41,9 +32,7 @@ class PhaseMenu extends React.PureComponent<Props> {
         <Link to={`${get('administration', { ...slug, id: phase.identifier }, sectionQuery)}`} activeClassName="active">
           <Translate value={title} />
         </Link>
-        {subMenu && subMenuIds.length > 0 ? (
-          <ul className="admin-sub-menu">{subMenuIds.map(subKey => this.renderSubMenuItem(subMenu[subKey], sectionIndex))}</ul>
-        ) : null}
+        {subMenu && subMenuIds.length > 0 ? <ul className="admin-sub-menu">{subMenuIds.map(subKey => this.renderSubMenuItem(subMenu[subKey], sectionIndex))}</ul> : null}
       </li>
     );
   };
@@ -59,11 +48,7 @@ class PhaseMenu extends React.PureComponent<Props> {
         <Link to={`${get('administration', { ...slug, id: phase.identifier }, sectionQuery)}`} activeClassName="active">
           <Translate value="administration.menu.phase" count={index + 1} description={phase.title} />
         </Link>
-        {subMenuIds.length > 0 ? (
-          <ul className={classNames('admin-menu2', { shown: isActive, hidden: !isActive })}>
-            {subMenuIds.map(key => this.renderSubMenuItem(subMenu[key]))}
-          </ul>
-        ) : null}
+        {subMenuIds.length > 0 ? <ul className={classNames('admin-menu2', { shown: isActive, hidden: !isActive })}>{subMenuIds.map(key => this.renderSubMenuItem(subMenu[key]))}</ul> : null}
       </li>
     );
   }

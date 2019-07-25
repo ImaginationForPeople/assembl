@@ -53,15 +53,7 @@ const DumbSurveyAdminForm = ({ client, phaseIdentifier, section, thematicId, dis
             <div className="admin-content">
               <AdminForm handleSubmit={handleSubmit} pristine={pristine} submitting={submitting}>
                 {section === '1' && <Step1 editLocale={editLocale} locale={locale} discussionPhaseId={discussionPhaseId} />}
-                {section === 'configThematics' && (
-                  <ConfigureThematicForm
-                    pristine={pristine}
-                    phaseIdentifier={phaseIdentifier}
-                    thematicId={thematicId}
-                    editLocale={editLocale}
-                    values={values}
-                  />
-                )}
+                {section === 'configThematics' && <ConfigureThematicForm pristine={pristine} phaseIdentifier={phaseIdentifier} thematicId={thematicId} editLocale={editLocale} values={values} />}
               </AdminForm>
             </div>
           </React.Fragment>

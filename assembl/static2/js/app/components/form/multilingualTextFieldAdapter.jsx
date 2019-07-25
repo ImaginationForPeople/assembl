@@ -27,27 +27,13 @@ type Props = {
   required: boolean
 } & FieldRenderProps;
 
-const MultilingualTextFieldAdapter = ({
-  editLocale,
-  input: { name, onChange, value, ...otherListeners },
-  label,
-  meta: { error, touched },
-  required,
-  ...rest
-}: Props) => {
+const MultilingualTextFieldAdapter = ({ editLocale, input: { name, onChange, value, ...otherListeners }, label, meta: { error, touched }, required, ...rest }: Props) => {
   const decoratedLabel = required ? `${label} *` : label;
   const valueInLocale = value ? value[editLocale] || '' : '';
   return (
     <FormGroup controlId={name} validationState={getValidationState(error, touched)}>
       <ControlLabel>{decoratedLabel}</ControlLabel>
-      <FormControl
-        {...otherListeners}
-        {...rest}
-        onChange={event => onChange({ ...value, [editLocale]: event.target.value })}
-        placeholder={decoratedLabel}
-        required={required}
-        value={valueInLocale}
-      />
+      <FormControl {...otherListeners} {...rest} onChange={event => onChange({ ...value, [editLocale]: event.target.value })} placeholder={decoratedLabel} required={required} value={valueInLocale} />
       <Error name={name} />
     </FormGroup>
   );

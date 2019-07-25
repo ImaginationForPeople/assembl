@@ -51,10 +51,7 @@ export class DumbCookiesSelectorContainer extends React.Component<Props, State> 
           : // otherwise, we take it from the browser
           cookiesFromBrowser;
 
-      const missingCookies = COOKIE_TYPES.filter(
-        cookie =>
-          !cookiesList.includes(cookie) && !cookie.startsWith('REJECT') && !cookiesList.includes(this.toggleCookieType(cookie))
-      );
+      const missingCookies = COOKIE_TYPES.filter(cookie => !cookiesList.includes(cookie) && !cookie.startsWith('REJECT') && !cookiesList.includes(this.toggleCookieType(cookie)));
       const fullCookiesList = storedCookies && [...storedCookies, ...missingCookies];
       const cookiesArray =
         fullCookiesList &&
@@ -125,15 +122,12 @@ export class DumbCookiesSelectorContainer extends React.Component<Props, State> 
       Object.keys(cookies)
         .map(cookie => cookies[cookie])
         .reduce((flat, next) => flat.concat(next), []);
-    const updatedCookiesArray = cookiesArray.map((cookie: CookieObject) =>
-      (cookie.name === updatedCookie.name ? { ...updatedCookie, cookieType: this.toggleCookieType(cookie.cookieType) } : cookie)
-    );
+    const updatedCookiesArray = cookiesArray.map((cookie: CookieObject) => (cookie.name === updatedCookie.name ? { ...updatedCookie, cookieType: this.toggleCookieType(cookie.cookieType) } : cookie));
     const updatedCookiesByCategory = this.getCookiesObjectFromArray(updatedCookiesArray);
     this.setState({ cookies: updatedCookiesByCategory, settingsHaveChanged: true });
   };
 
-  toggleCookieType = (cookie: string): string =>
-    (cookie.startsWith('ACCEPT') ? cookie.replace('ACCEPT', 'REJECT') : cookie.replace('REJECT', 'ACCEPT'));
+  toggleCookieType = (cookie: string): string => (cookie.startsWith('ACCEPT') ? cookie.replace('ACCEPT', 'REJECT') : cookie.replace('REJECT', 'ACCEPT'));
 
   saveChanges = () => {
     const { cookies } = this.state;

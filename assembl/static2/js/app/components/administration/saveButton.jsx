@@ -54,16 +54,7 @@ export const runSerial = (tasks: MutationsPromises) => {
 
 /* Utility that creates create/delete/update mutations for a list of items */
 export const getMutationsPromises = (params: Params) => {
-  const {
-    items,
-    variablesCreator,
-    deleteVariablesCreator,
-    createMutation,
-    deleteMutation,
-    updateMutation,
-    refetchQueries,
-    lang
-  } = params;
+  const { items, variablesCreator, deleteVariablesCreator, createMutation, deleteMutation, updateMutation, refetchQueries, lang } = params;
   const promises = [];
   items.forEach((item, index) => {
     if (item._isNew && item._toDelete) {

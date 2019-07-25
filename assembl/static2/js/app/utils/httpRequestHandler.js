@@ -12,9 +12,7 @@ const getResponseContentType = xhr =>
   // eslint-disable-line no-unused-vars
   xhr.getResponseHeader('Content-Type').split(';')[0];
 
-const useCSRFProtection = document.getElementById('useCSRFProtection')
-  ? document.getElementById('useCSRFProtection').value
-  : 'false';
+const useCSRFProtection = document.getElementById('useCSRFProtection') ? document.getElementById('useCSRFProtection').value : 'false';
 
 /*
   A global async method that returns a Promisified ajax call

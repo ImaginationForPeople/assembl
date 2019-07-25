@@ -11,14 +11,7 @@ type Props = {
 const ProposalsResults = (props: Props) => (
   <div>
     {props.proposals.map(proposal => (
-      <ProposalResults
-        key={proposal.id}
-        id={proposal.id}
-        title={proposal.title}
-        description={proposal.description}
-        modules={proposal.modules}
-        numParticipants={proposal.voteResults.numParticipants}
-      />
+      <ProposalResults key={proposal.id} id={proposal.id} title={proposal.title} description={proposal.description} modules={proposal.modules} numParticipants={proposal.voteResults.numParticipants} />
     ))}
   </div>
 );

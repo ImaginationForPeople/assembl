@@ -10,8 +10,7 @@ const MultiColumns = ({ children }: Props) => {
   const newChildren = React.Children.map(children, child =>
     React.cloneElement(child, {
       width: width
-    })
-  );
+    }));
   return (
     <div id="multi-column" className="multi-column-container">
       {newChildren}

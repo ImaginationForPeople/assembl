@@ -6,9 +6,7 @@ import { withKnobs } from '@storybook/addon-knobs';
 import { action } from '@storybook/addon-actions';
 /* eslint-enable */
 
-import SideCommentAnchor, {
-  type Props as SideCommentAnchorProps
-} from '../../../../../components/debate/brightMirror/sideComment/sideCommentAnchor';
+import SideCommentAnchor, { type Props as SideCommentAnchorProps } from '../../../../../components/debate/brightMirror/sideComment/sideCommentAnchor';
 
 export const defaultSideCommentAnchor: SideCommentAnchorProps = {
   anchorPosition: { x: 50, y: 50 },

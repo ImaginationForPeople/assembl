@@ -34,14 +34,11 @@ type State<TOriginalValues, TInitialValues> = {
   originalValues: ?TOriginalValues
 };
 
-export default class LoadSaveReinitializeForm<TO: { [string]: any }, TI: { [string]: any }> extends React.Component<
-  Props<TO, TI>,
-  State<TO, TI>
-> {
+export default class LoadSaveReinitializeForm<TO: { [string]: any }, TI: { [string]: any }> extends React.Component<Props<TO, TI>, State<TO, TI>> {
   state: State<TO, TI> = {
     initialValues: undefined,
     isLoading: false,
-    originalValues: undefined
+    originalValues: undefined /* eslint react/no-unused-state: 0 */
   };
 
   componentDidMount() {
@@ -76,8 +73,7 @@ export default class LoadSaveReinitializeForm<TO: { [string]: any }, TI: { [stri
     const { withWarningModal, warningValues, warningMessageKey } = this.props;
     const { initialValues } = this.state;
     // We check if any of the values that need to be warned about have been changed
-    const warningValuesHaveChanged =
-      warningValues && initialValues && warningValues.some(value => values[value] !== initialValues[value]);
+    const warningValuesHaveChanged = warningValues && initialValues && warningValues.some(value => values[value] !== initialValues[value]);
     if (withWarningModal && warningValuesHaveChanged && warningMessageKey) {
       return displayConfirmationModal(() => this.runMutations(values), warningMessageKey);
     }

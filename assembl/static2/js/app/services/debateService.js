@@ -1,8 +1,7 @@
 import { xmlHttpRequest } from '../utils/httpRequestHandler';
 
 export const buildDebateData = (debateData, prefs, socialShare) => {
-  const headerBackgroundUrl =
-    prefs.extra_json && prefs.extra_json.headerBackgroundUrl ? prefs.extra_json.headerBackgroundUrl : null;
+  const headerBackgroundUrl = prefs.extra_json && prefs.extra_json.headerBackgroundUrl ? prefs.extra_json.headerBackgroundUrl : null;
   const headerLogoUrl = prefs.extra_json && prefs.extra_json.headerLogoUrl ? prefs.extra_json.headerLogoUrl : null;
   const topic = prefs.extra_json && prefs.extra_json.topic ? prefs.extra_json.topic : null;
   const introduction = prefs.extra_json && prefs.extra_json.introduction ? prefs.extra_json.introduction : null;
@@ -19,9 +18,7 @@ export const buildDebateData = (debateData, prefs, socialShare) => {
   const requireSecureConnection = debateData.require_secure_connection ? debateData.require_secure_connection : null;
 
   const customHtmlCodeLandingPage = prefs.custom_html_code_landing_page ? prefs.custom_html_code_landing_page : null;
-  const customHtmlCodeRegistrationPage = prefs.custom_html_code_user_registration_page
-    ? prefs.custom_html_code_user_registration_page
-    : null;
+  const customHtmlCodeRegistrationPage = prefs.custom_html_code_user_registration_page ? prefs.custom_html_code_user_registration_page : null;
 
   return {
     translationEnabled: !!debateData.translation_service_class,

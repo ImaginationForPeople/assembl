@@ -2,13 +2,7 @@
 import React from 'react';
 import { Button, FormGroup, FormControl, OverlayTrigger } from 'react-bootstrap';
 
-import {
-  deleteTextFieldTooltip,
-  upTooltip,
-  downTooltip,
-  textFieldToggleOptionalTooltip,
-  textFieldToggleRequiredTooltip
-} from '../../common/tooltips';
+import { deleteTextFieldTooltip, upTooltip, downTooltip, textFieldToggleOptionalTooltip, textFieldToggleRequiredTooltip } from '../../common/tooltips';
 import SwitchButton from '../../common/switchButton';
 import SelectFieldOptions from './selectFieldOptions';
 
@@ -30,21 +24,7 @@ type Props = {
 
 const undeletableFieldTypes = ['EMAIL', 'PASSWORD'];
 
-const TextField = ({
-  deleteField,
-  fieldType,
-  id,
-  identifier,
-  isFirst,
-  isLast,
-  moveDown,
-  moveUp,
-  isSelectField,
-  title,
-  required,
-  toggleRequired,
-  updateTitle
-}: Props) => (
+const TextField = ({ deleteField, fieldType, id, identifier, isFirst, isLast, moveDown, moveUp, isSelectField, title, required, toggleRequired, updateTitle }: Props) => (
   <FormGroup bsClass="margin-s profile-options-field">
     <div className="flex">
       <FormControl type="text" onChange={e => updateTitle(e.target.value)} value={title} />

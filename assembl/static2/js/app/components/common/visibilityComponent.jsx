@@ -7,8 +7,6 @@ type Props = {
   children: React.Node
 };
 
-const VisibilityComponent = ({ classname, isVisible, children }: Props) => (
-  <div className={isVisible ? classname : 'hidden'}>{children}</div>
-);
+const VisibilityComponent = ({ classname, isVisible, children }: Props) => <div className={isVisible ? classname : 'hidden'}>{children}</div>;
 
 export default VisibilityComponent;

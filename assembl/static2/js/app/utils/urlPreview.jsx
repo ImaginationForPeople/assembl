@@ -62,9 +62,7 @@ export const EMBED_PROVIDERS = {
       if (result) {
         const isSkfb = result[1] === 'skfb.ly';
         const id = result[3];
-        const embedUrl = isSkfb
-          ? `${url}?autostart=1&autospin=0.5`
-          : `https://sketchfab.com/models/${id}/embed?autostart=1&autospin=0.5`;
+        const embedUrl = isSkfb ? `${url}?autostart=1&autospin=0.5` : `https://sketchfab.com/models/${id}/embed?autostart=1&autospin=0.5`;
 
         return {
           providerName: 'Sketchfab',

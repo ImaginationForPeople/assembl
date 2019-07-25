@@ -57,17 +57,9 @@ const Objectives = ({ debate, timeline, lang, buttonLabel }: Props) => {
                 {haveOneImage && (
                   <Col xs={12} sm={12} md={haveTwoImages ? 6 : 3} className="container-objectives-img objectives">
                     {objectives.images.img1Url && (
-                      <div
-                        className={classNames('objectives-img', haveTwoImages ? 'margin-right size-two-img' : 'size-single-img')}
-                        style={{ backgroundImage: `url(${objectives.images.img1Url})` }}
-                      />
+                      <div className={classNames('objectives-img', haveTwoImages ? 'margin-right size-two-img' : 'size-single-img')} style={{ backgroundImage: `url(${objectives.images.img1Url})` }} />
                     )}
-                    {objectives.images.img2Url && (
-                      <div
-                        className={classNames('objectives-img', 'size-two-img')}
-                        style={{ backgroundImage: `url(${objectives.images.img2Url})` }}
-                      />
-                    )}
+                    {objectives.images.img2Url && <div className={classNames('objectives-img', 'size-two-img')} style={{ backgroundImage: `url(${objectives.images.img2Url})` }} />}
                   </Col>
                 )}
               </Row>

@@ -9,9 +9,9 @@ import { type ApolloClient, graphql, compose, withApollo } from 'react-apollo';
 import isEqualWith from 'lodash/isEqualWith';
 
 import TimelineQuery from '../../../../graphql/Timeline.graphql';
-import SectionTitle from '../../../../components/administration/sectionTitle';
-import AdminForm from '../../../../components/form/adminForm';
-import LoadSaveReinitializeForm from '../../../../components/form/LoadSaveReinitializeForm';
+import SectionTitle from '../../sectionTitle';
+import AdminForm from '../../../form/adminForm';
+import LoadSaveReinitializeForm from '../../../form/LoadSaveReinitializeForm';
 import { load, postLoadFormat } from './load';
 import { createMutationsPromises, save } from './save';
 import validate from './validate';
@@ -41,9 +41,7 @@ const hasConflictingDates = (phase, phases) => {
   const phaseIndex = phases.findIndex(p => p.id === id);
   const previousPhase = phases[phaseIndex - 1];
   const nextPhase = phases[phaseIndex + 1];
-  const res =
-    (start && previousPhase && previousPhase.end && start.isBefore(previousPhase.end.time)) ||
-    (end && nextPhase && nextPhase.start && end.isAfter(nextPhase.start.time));
+  const res = (start && previousPhase && previousPhase.end && start.isBefore(previousPhase.end.time)) || (end && nextPhase && nextPhase.start && end.isAfter(nextPhase.start.time));
   return res || false;
 };
 
@@ -52,10 +50,7 @@ class TimelineFields extends React.Component<Props> {
     const { client, editLocale, lang } = this.props;
     return (
       <div className="timeline-admin admin-box">
-        <SectionTitle
-          title={I18n.t('administration.discussion.5')}
-          annotation={I18n.t('administration.timelineAdmin.annotation')}
-        />
+        <SectionTitle title={I18n.t('administration.discussion.5')} annotation={I18n.t('administration.timelineAdmin.annotation')} />
         <div className="admin-content">
           <LoadSaveReinitializeForm
             load={(fetchPolicy: FetchPolicy) => load(client, fetchPolicy, lang)}
@@ -89,7 +84,10 @@ class TimelineFields extends React.Component<Props> {
                         const title = fieldValue && fieldValue.title ? fieldValue.title[editLocale] || '' : '';
                         return (
                           <span>
-                            <Translate value={titleMsgId} count={idx + 1} /> &mdash; {title}
+                            <Translate value={titleMsgId} count={idx + 1} />
+                            {' '}
+&mdash;
+                            {title}
                           </span>
                         );
                       }}
@@ -159,12 +157,7 @@ class TimelineFields extends React.Component<Props> {
                               helperText={I18n.t('administration.helpers.timelinePhases')}
                               classname="title"
                             />
-                            <Field
-                              className="admin-content"
-                              name={`${name}.image`}
-                              component={FileUploaderFieldAdapter}
-                              label={I18n.t('administration.landingPage.timeline.imageDescription')}
-                            />
+                            <Field className="admin-content" name={`${name}.image`} component={FileUploaderFieldAdapter} label={I18n.t('administration.landingPage.timeline.imageDescription')} />
                             <Helper
                               label={I18n.t('administration.timelineAdmin.instruction5')}
                               helperUrl="/static2/img/helpers/landing_page_admin/timeline_phase.png"

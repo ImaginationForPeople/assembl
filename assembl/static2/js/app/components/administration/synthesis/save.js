@@ -23,10 +23,7 @@ const getVariables = async (client: ApolloClient, values: SynthesisFormValues, i
   };
 };
 
-export const createMutationsPromises = (client: ApolloClient, lang: string, synthesisPostId?: string) => (
-  values: SynthesisFormValues,
-  initialValues: SynthesisFormValues
-) => [
+export const createMutationsPromises = (client: ApolloClient, lang: string, synthesisPostId?: string) => (values: SynthesisFormValues, initialValues: SynthesisFormValues) => [
   (): Promise<any> => {
     const vars = getVariables(client, values, initialValues);
     const refetchQueries = [
@@ -45,8 +42,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string, synt
             ...variables
           },
           refetchQueries: refetchQueries
-        })
-      );
+        }));
     }
     return vars.then(variables =>
       client.mutate({
@@ -65,8 +61,7 @@ export const createMutationsPromises = (client: ApolloClient, lang: string, synt
             }
           }
         ]
-      })
-    );
+      }));
   }
 ];
 

@@ -2,12 +2,7 @@
 import * as React from 'react';
 
 import Proposal from './proposal';
-import {
-  type Proposal as ProposalType,
-  type RemainingTokensByCategory,
-  type UserTokenVotes,
-  type UserGaugeVotes
-} from '../../pages/voteSession';
+import { type Proposal as ProposalType, type RemainingTokensByCategory, type UserTokenVotes, type UserGaugeVotes } from '../../pages/voteSession';
 
 type Props = {
   proposals: Array<ProposalType>,

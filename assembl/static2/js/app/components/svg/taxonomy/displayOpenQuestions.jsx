@@ -19,14 +19,7 @@ const DisplayOpenQuestions = ({ backgroundColor, color }: Props) => (
           strokeLinejoin="round"
         >
           <rect id="Rectangle-19" x="0.707106781" y="0.292893219" width="1" height="6.8137085" />
-          <rect
-            id="Rectangle-19-Copy"
-            transform="translate(4.113961, 6.849523) rotate(90.000000) translate(-4.113961, -6.849523) "
-            x="3.61396103"
-            y="3.44266875"
-            width="1"
-            height="6.8137085"
-          />
+          <rect id="Rectangle-19-Copy" transform="translate(4.113961, 6.849523) rotate(90.000000) translate(-4.113961, -6.849523) " x="3.61396103" y="3.44266875" width="1" height="6.8137085" />
         </g>
       </g>
     </g>

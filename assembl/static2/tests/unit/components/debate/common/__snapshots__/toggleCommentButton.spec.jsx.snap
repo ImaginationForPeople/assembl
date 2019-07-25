@@ -1,25 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Storyshots ToggleCommentButton default 1`] = `
-<a
-  className="action-toggle"
+<button
+  className="action-toggle no-border no-background"
   onClick={[Function]}
-  style={Object {}}
+  type="button"
 >
   <span
     className="assembl-icon-up-open"
   />
-</a>
+</button>
 `;
 
 exports[`Storyshots ToggleCommentButton playground 1`] = `
-<a
-  className="action-toggle"
+<button
+  className="action-toggle no-border no-background"
   onClick={[Function]}
-  style={Object {}}
+  type="button"
 >
   <span
     className="assembl-icon-up-open"
   />
-</a>
+</button>
 `;

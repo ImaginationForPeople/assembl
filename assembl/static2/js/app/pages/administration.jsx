@@ -24,7 +24,7 @@ import { getPhaseId } from '../utils/timeline';
 import { fromGlobalId } from '../utils/globalFunctions';
 import { addEnumSuffixToModuleTitles } from '../components/administration/landingPage/addEnumSuffixToModuleTitles';
 
-import { SECTION_PERSONALIZE_INTERFACE, SECTION_DISCUSSION_PREFERENCES, SECTION_PROFILE_OPTIONS } from './../constants';
+import { SECTION_PERSONALIZE_INTERFACE, SECTION_DISCUSSION_PREFERENCES, SECTION_PROFILE_OPTIONS } from '../constants';
 
 const SECTIONS_WITHOUT_LANGUAGEMENU = [SECTION_PERSONALIZE_INTERFACE, SECTION_DISCUSSION_PREFERENCES];
 
@@ -54,15 +54,7 @@ type Props = {
   identifier: string
 };
 
-type State = {
-  showLanguageMenu: boolean
-};
-
-class Administration extends React.Component<Props, State> {
-  state = {
-    showLanguageMenu: true
-  };
-
+class Administration extends React.Component<Props> {
   componentDidMount() {
     // we need to use the redux store for administration data to be able to use a
     // "global" save button that will do all the mutations "at once"
@@ -71,9 +63,7 @@ class Administration extends React.Component<Props, State> {
     this.putVoteSessionInStore(voteSession);
     this.putVoteModulesInStore(voteSession);
     this.putVoteProposalsInStore(voteSession);
-    const isHidden =
-      (identifier === 'discussion' && SECTIONS_WITHOUT_LANGUAGEMENU.includes(location.query.section)) ||
-      identifier === 'exportDebateData';
+    const isHidden = (identifier === 'discussion' && SECTIONS_WITHOUT_LANGUAGEMENU.includes(location.query.section)) || identifier === 'exportDebateData';
     this.props.displayLanguageMenu(isHidden);
     this.putLandingPageModulesInStore(landingPageModules);
     this.putTextFieldsInStore(textFields);
@@ -95,9 +85,7 @@ class Administration extends React.Component<Props, State> {
       this.putLandingPageModulesInStore(landingPageModules);
     }
 
-    const isHidden =
-      (identifier === 'discussion' && SECTIONS_WITHOUT_LANGUAGEMENU.includes(location.query.section)) ||
-      identifier === 'exportDebateData';
+    const isHidden = (identifier === 'discussion' && SECTIONS_WITHOUT_LANGUAGEMENU.includes(location.query.section)) || identifier === 'exportDebateData';
     this.props.displayLanguageMenu(isHidden);
 
     if (textFields !== this.props.textFields) {
@@ -118,8 +106,7 @@ class Administration extends React.Component<Props, State> {
 
   putVoteModulesInStore = (voteSession) => {
     const filteredVoteSession = filter(VoteSessionQuery, { voteSession: voteSession });
-    const modules =
-      filteredVoteSession.voteSession && filteredVoteSession.voteSession.modules ? filteredVoteSession.voteSession.modules : [];
+    const modules = filteredVoteSession.voteSession && filteredVoteSession.voteSession.modules ? filteredVoteSession.voteSession.modules : [];
     this.props.updateVoteModules(modules);
   };
 
@@ -157,19 +144,7 @@ class Administration extends React.Component<Props, State> {
   }
 
   render() {
-    const {
-      children,
-      locale,
-      location,
-      params,
-      refetchTabsConditions,
-      refetchSections,
-      refetchVoteSession,
-      refetchLandingPageModules,
-      refetchTextFields,
-      refetchTimeline,
-      timeline
-    } = this.props;
+    const { children, locale, location, params, refetchTabsConditions, refetchSections, refetchVoteSession, refetchLandingPageModules, refetchTextFields, refetchTimeline, timeline } = this.props;
     const { phase } = params;
     const phaseId = getPhaseId(timeline, phase);
     const discussionPhaseId = phaseId ? fromGlobalId(phaseId) : null;
@@ -183,8 +158,7 @@ class Administration extends React.Component<Props, State> {
         refetchLandingPageModules: refetchLandingPageModules,
         refetchTextFields: refetchTextFields,
         refetchTimeline: refetchTimeline
-      })
-    );
+      }));
     return (
       <div className="administration">
         <div className="max-container">
@@ -192,13 +166,7 @@ class Administration extends React.Component<Props, State> {
             <Row className="margin-container">
               <Col xs={3} className="admin-menu-sticky">
                 <div className="admin-menu-container">
-                  <Menu
-                    timeline={timeline}
-                    locale={locale}
-                    requestedPhase={phase}
-                    thematicId={location.query.thematicId}
-                    goBackPhaseIdentifier={location.query.goBackPhaseIdentifier}
-                  />
+                  <Menu timeline={timeline} locale={locale} requestedPhase={phase} thematicId={location.query.thematicId} goBackPhaseIdentifier={location.query.goBackPhaseIdentifier} />
                 </div>
               </Col>
               <Col xs={8}>
@@ -355,8 +323,7 @@ export default compose(
         textFields: data.textFields
       };
     },
-    skip: props =>
-      isNotInDiscussionAdmin(props) || props.router.getCurrentLocation().search !== `?section=${SECTION_PROFILE_OPTIONS}`
+    skip: props => isNotInDiscussionAdmin(props) || props.router.getCurrentLocation().search !== `?section=${SECTION_PROFILE_OPTIONS}`
   }),
   mergeLoadingAndError(['voteSessionMetadata', 'sectionsMetadata', 'landingPageModulesMetadata', 'textFieldsMetadata']),
   manageErrorAndLoading({ displayLoader: true })

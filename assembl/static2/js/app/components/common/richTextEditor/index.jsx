@@ -29,7 +29,6 @@ type Props = {
 };
 
 type State = {
-  editorHasFocus: boolean,
   toolbarOffset: number
 };
 
@@ -109,7 +108,6 @@ export default class RichTextEditor extends React.Component<Props, State> {
     this.plugins = plugins;
 
     this.state = {
-      editorHasFocus: false,
       toolbarOffset: 0
     };
   }
@@ -136,12 +134,7 @@ export default class RichTextEditor extends React.Component<Props, State> {
 
   handleEditorFocus = () => {
     const { handleInputFocus } = this.props;
-    this.setState(
-      {
-        editorHasFocus: true
-      },
-      handleInputFocus
-    );
+    this.setState(handleInputFocus);
   };
 
   shouldHidePlaceholder(): boolean {
@@ -191,11 +184,7 @@ export default class RichTextEditor extends React.Component<Props, State> {
       <div ref={this.toolbarRef}>
         <div className={divClassName} ref={textareaRef}>
           <div className="editor-header">
-            {editorState.getCurrentContent().hasText() && placeholder ? (
-              <div className="editor-label form-label">{placeholder}</div>
-            ) : (
-              <div className="editor-label form-label">&nbsp;</div>
-            )}
+            {editorState.getCurrentContent().hasText() && placeholder ? <div className="editor-label form-label">{placeholder}</div> : <div className="editor-label form-label">&nbsp;</div>}
             <div className="clear" />
           </div>
           <Modal />

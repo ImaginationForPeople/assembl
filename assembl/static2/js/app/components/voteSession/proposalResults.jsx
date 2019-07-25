@@ -30,12 +30,7 @@ class ProposalResults extends React.Component<Props> {
           </Col>
           <Col xs={12} md={5} className="proposal-vote-modules">
             {tokenVoteModule && tokenCategories.length > 0 && (
-              <TokenVotesResults
-                categories={tokenCategories}
-                tokenVotes={tokenVoteModule.tokenVotes}
-                numVotes={tokenVoteModule.numVotes}
-                titleMsgId="debate.voteSession.tokenDistribution"
-              />
+              <TokenVotesResults categories={tokenCategories} tokenVotes={tokenVoteModule.tokenVotes} numVotes={tokenVoteModule.numVotes} titleMsgId="debate.voteSession.tokenDistribution" />
             )}
 
             {modules &&
@@ -43,17 +38,11 @@ class ProposalResults extends React.Component<Props> {
                 if (module.voteType === 'gauge_vote_specification') {
                   return (
                     <div key={`${id}-GaugeVoteForProposal-${module.id}`}>
-                      <ChoiceGaugeVoteForProposal
-                        id={module.id}
-                        disabled
-                        instructions={module.instructions}
-                        choices={module.choices}
-                        proposalId={id}
-                        value={module.averageResult}
-                      />
+                      <ChoiceGaugeVoteForProposal id={module.id} disabled instructions={module.instructions} choices={module.choices} proposalId={id} value={module.averageResult} />
                     </div>
                   );
-                } else if (module.voteType === 'number_gauge_vote_specification') {
+                }
+                if (module.voteType === 'number_gauge_vote_specification') {
                   return (
                     <div key={`${id}-NumberGaugeVoteForProposal-${module.id}`}>
                       <NumberGaugeVoteForProposal

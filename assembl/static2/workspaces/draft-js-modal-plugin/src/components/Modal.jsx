@@ -26,7 +26,7 @@ class Modal extends React.Component<Props> {
           <div className="modal-backdrop fade in" />
           <div className="insertion-box">
             <div className="modal-header">
-              <button title={I18n.t('common.editor.closeModal')} onClick={close} className="close">
+              <button type="button" title={I18n.t('common.editor.closeModal')} onClick={close} className="close">
                 <span className="assembl-icon-cancel" />
               </button>
               <h4 className="modal-title">{title}</h4>

@@ -25,7 +25,6 @@ type TopPostFormContainerProps = {
 };
 
 type TopPostFormContainerState = {
-  sticky: boolean,
   expanded: boolean,
   topPostFormOffset: number
 };
@@ -44,7 +43,7 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
 
   constructor(props: TopPostFormContainerProps) {
     super(props);
-    this.state = { sticky: false, expanded: false, topPostFormOffset: 0 };
+    this.state = { expanded: false, topPostFormOffset: 0 };
   }
 
   componentWillMount() {
@@ -64,9 +63,9 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
   setFormPosition = debounce(() => {
     if (!this.state.expanded) {
       if (this.state.topPostFormOffset <= window.pageYOffset && window.innerHeight > SMALL_SCREEN_HEIGHT) {
-        this.setState({ sticky: true });
+        this.setState({});
       } else {
-        this.setState({ sticky: false });
+        this.setState({});
       }
     }
   }, 100);
@@ -118,16 +117,8 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
             <Row>
               <div className={this.getClassNames()}>
                 {columnsInfos.map(column => (
-                  <Col
-                    xs={12}
-                    md={12 / columnsInfos.length}
-                    key={column.messageClassifier}
-                    style={isColumnViewInline ? { width: MIN_WIDTH_COLUMN } : {}}
-                  >
-                    <div
-                      className="top-post-form"
-                      style={messageColumns.length > 1 ? { backgroundColor: `rgba(${hexToRgb(column.color)},0.2)` } : {}}
-                    >
+                  <Col xs={12} md={12 / columnsInfos.length} key={column.messageClassifier} style={isColumnViewInline ? { width: MIN_WIDTH_COLUMN } : {}}>
+                    <div className="top-post-form" style={messageColumns.length > 1 ? { backgroundColor: `rgba(${hexToRgb(column.color)},0.2)` } : {}}>
                       <Row>
                         <Col
                           xs={12}
@@ -141,27 +132,15 @@ class TopPostFormContainer extends React.Component<TopPostFormContainerProps, To
                             <div className="start-discussion-icon">
                               <span className="assembl-icon-discussion color" />
                             </div>
-                            <div
-                              className={
-                                messageColumns.length > 1 ? 'start-discussion start-discussion-multicol' : 'start-discussion'
-                              }
-                            >
-                              <h3 className="dark-title-3 no-margin">
-                                {messageColumns.length > 1 ? column.name : <Translate value={instructionLabelMsgId} />}
-                              </h3>
+                            <div className={messageColumns.length > 1 ? 'start-discussion start-discussion-multicol' : 'start-discussion'}>
+                              <h3 className="dark-title-3 no-margin">{messageColumns.length > 1 ? column.name : <Translate value={instructionLabelMsgId} />}</h3>
                             </div>
                           </div>
                         </Col>
-                        <Col
-                          xs={12}
-                          sm={messageColumns.length > 1 ? 10 : 7}
-                          md={messageColumns.length > 1 ? 10 : formMdSize}
-                          mdOffset={messageColumns.length > 1 ? 1 : 0}
-                          className="no-padding"
-                        >
+                        <Col xs={12} sm={messageColumns.length > 1 ? 10 : 7} md={messageColumns.length > 1 ? 10 : formMdSize} mdOffset={messageColumns.length > 1 ? 1 : 0} className="no-padding">
                           <TopPostForm
                             onDisplayForm={(isActive) => {
-                              this.setState({ sticky: !isActive, expanded: isActive });
+                              this.setState({ expanded: isActive });
                             }}
                             ideaId={ideaId}
                             refetchIdea={refetchIdea}

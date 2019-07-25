@@ -38,10 +38,4 @@ const playground = {
 storiesOf('FictionToolbar', module)
   .addDecorator(withKnobs)
   .add('default', () => <FictionToolbar {...defaultFictionToolbar} />)
-  .add('playground', () => (
-    <FictionToolbar
-      {...playground}
-      userCanDelete={boolean('userCanDelete', playground.userCanDelete)}
-      userCanEdit={boolean('userCanEdit', playground.userCanEdit)}
-    />
-  ));
+  .add('playground', () => <FictionToolbar {...playground} userCanDelete={boolean('userCanDelete', playground.userCanDelete)} userCanEdit={boolean('userCanEdit', playground.userCanEdit)} />);

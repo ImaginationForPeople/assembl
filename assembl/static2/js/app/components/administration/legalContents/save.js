@@ -45,8 +45,7 @@ export const createMutationsPromises = (client: ApolloClient) => (values: LegalC
         variables: {
           ...variables
         }
-      })
-    )
+      }))
 ];
 
 export const save = createSave('administration.legalContents.successSave');

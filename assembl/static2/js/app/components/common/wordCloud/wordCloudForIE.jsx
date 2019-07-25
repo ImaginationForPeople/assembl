@@ -40,7 +40,7 @@ const computeFontSize = (score: number) => {
  */
 const keyword = (k: Keyword, i: number, onKeywordClick: (word: Keyword) => void) => (
   <div key={i} style={{ ...style, fontSize: `${computeFontSize(k.score)}px` }} onClick={() => onKeywordClick(k)}>
-    <a>{k.value}</a>
+    <a href={k.value}>{k.value}</a>
   </div>
 );
 

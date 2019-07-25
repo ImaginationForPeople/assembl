@@ -23,15 +23,7 @@ type Props = {
   withAttachmentButton: boolean
 } & FieldRenderProps;
 
-const RichTextFieldAdapter = ({
-  editLocale,
-  withAttachmentButton,
-  toolbarPosition,
-  input: { name, onBlur, onChange, value, ...otherListeners },
-  label,
-  meta: { error, touched },
-  ...rest
-}: Props) => {
+const RichTextFieldAdapter = ({ editLocale, withAttachmentButton, toolbarPosition, input: { name, onBlur, onChange, value, ...otherListeners }, label, meta: { error, touched }, ...rest }: Props) => {
   const valueInLocale = value[editLocale] || EditorState.createEmpty();
   return (
     <FormGroup controlId={name} validationState={getValidationState(error, touched)}>

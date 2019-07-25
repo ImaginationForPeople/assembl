@@ -8,14 +8,7 @@ import { renderRichtext } from '../../utils/linkify';
 import TokenVoteForProposal from './tokenVoteForProposal';
 import { ChoiceGaugeVoteForProposal, NumberGaugeVoteForProposal } from './gaugeVoteForProposal';
 import VotesInProgress from './votesInProgress';
-import {
-  findTokenVoteModule,
-  filterGaugeVoteModules,
-  type RemainingTokensByCategory,
-  type UserTokenVotes,
-  type UserGaugeVotes,
-  type VoteSpecification
-} from '../../pages/voteSession';
+import { findTokenVoteModule, filterGaugeVoteModules, type RemainingTokensByCategory, type UserTokenVotes, type UserGaugeVotes, type VoteSpecification } from '../../pages/voteSession';
 
 type Props = {
   description: ?string,
@@ -44,25 +37,13 @@ class Proposal extends React.Component<Props, State> {
   }
 
   toggleShowVotesInProgress = () => {
-    this.setState({
-      showVotesInProgress: !this.state.showVotesInProgress
+    this.setState((prevState) => {
+      !prevState.showVotesInProgress; /* eslint no-unused-expressions: 0 */
     });
   };
 
   render() {
-    const {
-      description,
-      id,
-      modules,
-      numParticipants,
-      remainingTokensByCategory,
-      seeCurrentVotes,
-      title,
-      userGaugeVotes,
-      userTokenVotes,
-      voteForProposalToken,
-      voteForProposalGauge
-    } = this.props;
+    const { description, id, modules, numParticipants, remainingTokensByCategory, seeCurrentVotes, title, userGaugeVotes, userTokenVotes, voteForProposalToken, voteForProposalGauge } = this.props;
     const tokenVoteModule = modules ? findTokenVoteModule(modules) : null;
     return (
       <div className="theme-box">
@@ -98,7 +79,8 @@ class Proposal extends React.Component<Props, State> {
                       value={userGaugeVotes.getIn([id, module.id], null)}
                     />
                   );
-                } else if (module.voteType === 'number_gauge_vote_specification') {
+                }
+                if (module.voteType === 'number_gauge_vote_specification') {
                   return (
                     <NumberGaugeVoteForProposal
                       key={`${id}-NumberGaugeVoteForProposal-${module.id}`}

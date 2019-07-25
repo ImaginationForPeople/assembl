@@ -89,15 +89,7 @@ class IdeaSynthesisTree extends React.Component<IdeaSynthesisTreeProps, IdeaSynt
     const { rootIdea, index, parents, hasSiblings, slug } = this.props;
     const level = parents.length + 1;
     return (
-      <Section
-        displayIndex
-        title={rootIdea.title}
-        index={index}
-        parents={parents}
-        className="idea-synthesis-section"
-        id={rootIdea.id}
-        innerRef={this.selectNode}
-      >
+      <Section displayIndex title={rootIdea.title} index={index} parents={parents} className="idea-synthesis-section" id={rootIdea.id} innerRef={this.selectNode}>
         <IdeaSynthesis hasSiblings={hasSiblings} level={level} idea={rootIdea} slug={slug} />
         {this.getTree()}
       </Section>

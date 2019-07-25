@@ -22,11 +22,7 @@ import TagOnPost from '../../../js/app/components/tagOnPost/tagOnPost';
 // Constant imports
 import { PublicationStates } from '../../../js/app/constants';
 // Type imports
-import type {
-  BrightMirrorFictionProps,
-  BrightMirrorFictionData,
-  IdeaWithCommentsData
-} from '../../../js/app/pages/brightMirrorFiction';
+import type { BrightMirrorFictionProps, BrightMirrorFictionData, IdeaWithCommentsData } from '../../../js/app/pages/brightMirrorFiction';
 
 // Separate the snapshots in directories next to each component
 // Name should match with the story name
@@ -104,11 +100,7 @@ const ideaWithCommentsDataTemplate = {
     id: 'aaaaaaaaaa',
     numPosts: 999,
     posts: {
-      edges: [
-        { node: { id: 'aaaaaaaaaa', parentId: 'fictionId' } },
-        { node: { id: 'bbbbbbbbbb', parentId: 'fictionId' } },
-        { node: { id: 'cccccccccc', parentId: 'fictionId' } }
-      ]
+      edges: [{ node: { id: 'aaaaaaaaaa', parentId: 'fictionId' } }, { node: { id: 'bbbbbbbbbb', parentId: 'fictionId' } }, { node: { id: 'cccccccccc', parentId: 'fictionId' } }]
     }
   }
 };

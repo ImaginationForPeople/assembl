@@ -72,16 +72,7 @@ export class DumbAnswerForm extends React.PureComponent<Props, State> {
   };
 
   handleSubmit = () => {
-    const {
-      createPost,
-      contentLocale,
-      parentId,
-      ideaId,
-      refetchIdea,
-      hideAnswerForm,
-      uploadDocument,
-      isDebateModerated
-    } = this.props;
+    const { createPost, contentLocale, parentId, ideaId, refetchIdea, hideAnswerForm, uploadDocument, isDebateModerated } = this.props;
     const { body } = this.state;
     this.setState({ submitting: true });
     const bodyIsEmpty = !body || editorStateIsEmpty(body);
@@ -185,11 +176,7 @@ const mapStateToProps = state => ({
   timeline: state.timeline
 });
 
-const DumbAnswerFormWithContext = props => (
-  <DebateContext.Consumer>
-    {({ isDebateModerated }) => <DumbAnswerForm {...props} isDebateModerated={isDebateModerated} />}
-  </DebateContext.Consumer>
-);
+const DumbAnswerFormWithContext = props => <DebateContext.Consumer>{({ isDebateModerated }) => <DumbAnswerForm {...props} isDebateModerated={isDebateModerated} />}</DebateContext.Consumer>;
 
 export default compose(
   connect(mapStateToProps),

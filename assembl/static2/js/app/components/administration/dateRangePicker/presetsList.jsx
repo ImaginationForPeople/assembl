@@ -15,9 +15,7 @@ const PresetsList = ({ onPresetSelect, presets, selectedPreset }: Props) => {
   return (
     <DropdownButton
       drop="up"
-      title={
-        selectedPreset ? I18n.t(selectedPreset.labelTranslationKey, { count: selectedPhaseNumber }) : selectedPresetPlaceHolder
-      }
+      title={selectedPreset ? I18n.t(selectedPreset.labelTranslationKey, { count: selectedPhaseNumber }) : selectedPresetPlaceHolder}
       id="presets-dropdown"
       onSelect={onPresetSelect}
     >

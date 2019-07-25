@@ -15,14 +15,7 @@ export const load = async (client: ApolloClient, fetchPolicy: FetchPolicy, local
 };
 
 export const postLoadFormat = (data: LegalContentsQuery): LegalContentsFormValues => {
-  const {
-    legalNoticeEntries,
-    termsAndConditionsEntries,
-    cookiesPolicyEntries,
-    privacyPolicyEntries,
-    userGuidelinesEntries,
-    mandatoryLegalContentsValidation
-  } = data.legalContents;
+  const { legalNoticeEntries, termsAndConditionsEntries, cookiesPolicyEntries, privacyPolicyEntries, userGuidelinesEntries, mandatoryLegalContentsValidation } = data.legalContents;
   return {
     legalNotice: legalNoticeEntries ? convertEntriesToI18nRichText(legalNoticeEntries) : {},
     termsAndConditions: termsAndConditionsEntries ? convertEntriesToI18nRichText(termsAndConditionsEntries) : {},

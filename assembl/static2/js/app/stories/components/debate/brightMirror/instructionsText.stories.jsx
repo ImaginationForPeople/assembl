@@ -27,10 +27,4 @@ export const customInstructionsText: InstructionsTextProps = {
 storiesOf('InstructionsText', module)
   .addDecorator(withKnobs)
   .add('default', () => <InstructionsText {...customInstructionsText} />)
-  .add('playground', () => (
-    <InstructionsText
-      {...customInstructionsText}
-      title={text('title', customInstructionsText.title)}
-      body={text('body', customInstructionsText.body)}
-    />
-  ));
+  .add('playground', () => <InstructionsText {...customInstructionsText} title={text('title', customInstructionsText.title)} body={text('body', customInstructionsText.body)} />);

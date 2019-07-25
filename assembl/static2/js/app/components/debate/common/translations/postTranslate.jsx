@@ -25,19 +25,10 @@ type PostTranslateProps = {
   onTranslate?: (from: string, into: string) => void
 };
 
-type PostTranslateState = {
-  isTranslated: boolean
-};
+type PostTranslateState = {};
 
 class PostTranslate extends React.Component<PostTranslateProps, PostTranslateState> {
   originalLocaleLabel: '';
-
-  constructor() {
-    super();
-    this.state = {
-      isTranslated: false
-    };
-  }
 
   componentWillMount() {
     this.updateOriginalLocaleLabel(this.props);
@@ -124,17 +115,11 @@ class PostTranslate extends React.Component<PostTranslateProps, PostTranslateSta
       <div className="translate">
         {displayPostLanguage ? (
           <p>
-            <Translate
-              value={translate ? 'debate.thread.messageTranslatedFrom' : 'debate.thread.messageOriginallyIn'}
-              language={this.originalLocaleLabel}
-            />
+            <Translate value={translate ? 'debate.thread.messageTranslatedFrom' : 'debate.thread.messageOriginallyIn'} language={this.originalLocaleLabel} />
           </p>
         ) : null}
         <span className="translate-button" onClick={this.handleSubmit}>
-          <Translate
-            value={translate ? 'debate.thread.removeTranslation' : 'debate.thread.translate'}
-            ref={this.props.afterLoad}
-          />
+          <Translate value={translate ? 'debate.thread.removeTranslation' : 'debate.thread.translate'} ref={this.props.afterLoad} />
         </span>
       </div>
     );

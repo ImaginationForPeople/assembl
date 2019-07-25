@@ -21,9 +21,4 @@ const playground = {
 storiesOf('ToggleCommentButton', module)
   .addDecorator(withKnobs)
   .add('default', () => <ToggleCommentButton {...defaultToggleCommentButton} />)
-  .add('playground', () => (
-    <ToggleCommentButton
-      isExpanded={boolean('Expanded flag', playground.isExpanded)}
-      onClickCallback={playground.onClickCallback}
-    />
-  ));
+  .add('playground', () => <ToggleCommentButton isExpanded={boolean('Expanded flag', playground.isExpanded)} onClickCallback={playground.onClickCallback} />);

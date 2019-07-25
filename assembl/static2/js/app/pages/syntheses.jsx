@@ -60,11 +60,7 @@ export class DumbSyntheses extends React.Component<SynthesesProps> {
           <div className="page-body">
             {!hasSyntheses ? (
               <div className="center margin-left-xxl syntheses-no-synthesis">
-                {canCreate ? (
-                  <Translate value="synthesis.noSynthesisYetCanCreate" />
-                ) : (
-                  <Translate value="synthesis.noSynthesisYet" />
-                )}
+                {canCreate ? <Translate value="synthesis.noSynthesisYetCanCreate" /> : <Translate value="synthesis.noSynthesisYet" />}
               </div>
             ) : (
               <SynthesesList syntheses={syntheses} refetchQueries={refetchQueries} />

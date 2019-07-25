@@ -37,10 +37,4 @@ storiesOf('Checkbox101', module)
   .add('default', () => <Checkbox101 {...defaultCheckbox} />)
   .add('checked', () => <Checkbox101 {...checkedCheckbox} />)
   .add('custom label', () => <Checkbox101 {...customLabelCheckbox} />)
-  .add('playground', () => (
-    <Checkbox101
-      label={text('label', playground.label)}
-      isDone={boolean('isDone', playground.isDone)}
-      onChangeHandler={actions.onChangeHandler}
-    />
-  ));
+  .add('playground', () => <Checkbox101 label={text('label', playground.label)} isDone={boolean('isDone', playground.isDone)} onChangeHandler={actions.onChangeHandler} />);

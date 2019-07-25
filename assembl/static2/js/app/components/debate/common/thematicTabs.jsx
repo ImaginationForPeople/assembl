@@ -55,9 +55,7 @@ const ThematicTabs = ({ guidelinesContent, summary, semanticAnalysisForThematicD
     <Tab eventKey={ANNOUNCEMENT_TAB_ITEM_ID.SUMMARY} title={summaryTabTitle}>
       {summary ? (
         <div className="announcement">
-          <div className="announcement-media announcement-text-only">
-            {activeHtml(summary && (isMobile ? summary : addIframeForMindMapping(summary)), postBodyReplacementComponents())}
-          </div>
+          <div className="announcement-media announcement-text-only">{activeHtml(summary && (isMobile ? summary : addIframeForMindMapping(summary)), postBodyReplacementComponents())}</div>
         </div>
       ) : null}
     </Tab>
@@ -73,12 +71,7 @@ const ThematicTabs = ({ guidelinesContent, summary, semanticAnalysisForThematicD
   const classNameTabs = topKeywordsLength > 0 && guidelinesTabAndContent ? '' : 'single-tab';
 
   return (
-    <Tabs
-      id="announcement-tabs-id"
-      justified
-      defaultActiveKey={ANNOUNCEMENT_TAB_ITEM_ID.GUIDELINES}
-      className={classnames('announcement-menu', classNameTabs)}
-    >
+    <Tabs id="announcement-tabs-id" justified defaultActiveKey={ANNOUNCEMENT_TAB_ITEM_ID.GUIDELINES} className={classnames('announcement-menu', classNameTabs)}>
       {guidelinesTabAndContent}
       {richTextBodyIsEmpty(summary) ? null : summaryTabAndContent}
       {topKeywordsLength > 0 ? semanticAnalysisTabAndContent : null}

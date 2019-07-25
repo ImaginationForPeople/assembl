@@ -47,9 +47,7 @@ class TagOnPost extends Component<Props, State> {
 
     // Difference between tagList and suggestedTagList to hide in SuggestionContainer manually added suggested tags
     const formattedTagList = tagList.map(tag => tag.text.toLowerCase());
-    const filteredSuggestedTagList = suggestedTagList.filter(
-      suggestedTag => !formattedTagList.includes(suggestedTag.toLowerCase())
-    );
+    const filteredSuggestedTagList = suggestedTagList.filter(suggestedTag => !formattedTagList.includes(suggestedTag.toLowerCase()));
 
     const suggestionContainerProps: SuggestionContainerProps = {
       suggestionContainerTitle: I18n.t('debate.tagOnPost.suggestionContainerTitle'),
@@ -60,8 +58,7 @@ class TagOnPost extends Component<Props, State> {
     const displayTagContainer = tagList.length > 0 || isAdmin ? <TagContainer {...tagContainerProps} /> : null;
 
     // Display suggestion container when there are suggested tags to display
-    const displaySuggestionContainer =
-      filteredSuggestedTagList.length > 0 && isAdmin ? <SuggestionContainer {...suggestionContainerProps} /> : null;
+    const displaySuggestionContainer = filteredSuggestedTagList.length > 0 && isAdmin ? <SuggestionContainer {...suggestionContainerProps} /> : null;
 
     return (
       <div className="tag-on-post-container">

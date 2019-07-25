@@ -88,10 +88,10 @@ export class DumbCustomizeGaugeForm extends React.Component<Props, State> {
   };
 
   toggleApplyToAllProposals = () => {
-    this.setState({
-      applyToAllProposals: !this.state.applyToAllProposals,
+    this.setState(prevState => ({
+      applyToAllProposals: !prevState.applyToAllProposals,
       _hasChanged: true
-    });
+    }));
   };
 
   updateInstructions = (value: string): void => {
@@ -135,7 +135,10 @@ export class DumbCustomizeGaugeForm extends React.Component<Props, State> {
   };
 
   updateIsNumberGauge = (value: boolean): void =>
-    this.setState(prevState => ({ _hasChanged: true, gaugeParams: { ...prevState.gaugeParams, isNumberGauge: value } }));
+    this.setState(prevState => ({
+      _hasChanged: true,
+      gaugeParams: { ...prevState.gaugeParams, isNumberGauge: value }
+    }));
 
   handleMinChange = (value: number): void =>
     this.setState(prevState => ({
@@ -178,8 +181,7 @@ export class DumbCustomizeGaugeForm extends React.Component<Props, State> {
     });
   };
 
-  getNbTicks = (): number =>
-    (this.state.gaugeParams.isNumberGauge ? this.state.gaugeParams.nbTicks : this.state.gaugeParams.choices.size);
+  getNbTicks = (): number => (this.state.gaugeParams.isNumberGauge ? this.state.gaugeParams.nbTicks : this.state.gaugeParams.choices.size);
 
   render() {
     const { gaugeModuleId } = this.props;
@@ -212,12 +214,7 @@ export class DumbCustomizeGaugeForm extends React.Component<Props, State> {
           <Checkbox id="apply-to-all-button" onClick={this.toggleApplyToAllProposals} checked={this.state.applyToAllProposals}>
             <Translate value="administration.gaugeModal.applyToAllProposalsCheckboxLabel" />
           </Checkbox>
-          <Button
-            id="modify-gauge-button"
-            className="button-submit button-dark full-size"
-            disabled={!this.state._hasChanged || this.state.saving}
-            onClick={this.handleSubmit}
-          >
+          <Button id="modify-gauge-button" className="button-submit button-dark full-size" disabled={!this.state._hasChanged || this.state.saving} onClick={this.handleSubmit}>
             <Translate value="administration.voteProposals.edit" />
           </Button>
         </div>

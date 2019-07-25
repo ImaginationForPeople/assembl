@@ -28,16 +28,7 @@ type Props = {
   voteForProposal: Function
 };
 
-const TokenVoteForProposal = ({
-  exclusiveCategories,
-  instructions,
-  moduleId,
-  proposalId,
-  remainingTokensByCategory,
-  tokenCategories,
-  userTokenVotesForProposal,
-  voteForProposal
-}: Props) => (
+const TokenVoteForProposal = ({ exclusiveCategories, instructions, moduleId, proposalId, remainingTokensByCategory, tokenCategories, userTokenVotesForProposal, voteForProposal }: Props) => (
   <div className="margin-m">
     <p>{instructions}</p>
     {tokenCategories &&

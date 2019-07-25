@@ -6,9 +6,7 @@ type QueryMetadata = {
   loading: boolean
 };
 
-export default (queryMetadatasNames: Array<string>) => (WrappedComponent: React.ComponentType<any>) => (
-  props: Object
-): React.Node => {
+export default (queryMetadatasNames: Array<string>) => (WrappedComponent: React.ComponentType<any>) => (props: Object): React.Node => {
   const queryMetadatas: Array<QueryMetadata> = queryMetadatasNames.map(name => props[name]).filter(metadata => metadata);
   const firstMetadataWithError = queryMetadatas.find(metadata => metadata.error);
   const error = firstMetadataWithError ? firstMetadataWithError.error : undefined;

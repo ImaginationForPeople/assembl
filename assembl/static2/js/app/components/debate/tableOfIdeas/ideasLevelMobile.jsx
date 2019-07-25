@@ -82,19 +82,9 @@ class IdeasLevelMobile extends React.Component<Props, State> {
         style={isSubLevel ? { height: '140px' } : null}
         id={`slider-${ideaLevel}`}
       >
-        <div
-          className={classnames('slider', { 'thumbnails-slider': isSubLevel })}
-          style={isSubLevel ? { width: thumbnailsSliderWidth } : { width: sliderWidth }}
-        >
+        <div className={classnames('slider', { 'thumbnails-slider': isSubLevel })} style={isSubLevel ? { width: thumbnailsSliderWidth } : { width: sliderWidth }}>
           {ideas.map((idea, index) => (
-            <Col
-              style={isSubLevel ? { width: thumbnailsWidth, height: '110px' } : { width: previewWidth }}
-              className="theme theme-inline"
-              xs={12}
-              md={12}
-              sm={12}
-              key={`ideas-level-mob-${index}`}
-            >
+            <Col style={isSubLevel ? { width: thumbnailsWidth, height: '110px' } : { width: previewWidth }} className="theme theme-inline" xs={12} md={12} sm={12} key={`ideas-level-mob-${index}`}>
               <div className="left">
                 <IdeaPreview
                   imgUrl={idea.img ? idea.img.externalUrl : ''}
