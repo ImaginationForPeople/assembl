@@ -78,7 +78,7 @@
 
     @media screen and (min-width: $screen-xl-min) {
       .rich-text-editor .public-DraftEditor-content {
-        height: 600px;
+        height: 500px;
       }
     }
   }
@@ -91,13 +91,14 @@
     overflow: hidden;
     position: absolute;
     left: 50%;
-    top: 50%;
+    top: 70%;
     transform: translate(-50%, -50%);
   }
 }
 
 @media screen and (min-width: $screen-xl-min) {
   .fiction-edit-modal {
-    height: 950px;
+    height: 850px;
+    top: 70%;
   }
 }
