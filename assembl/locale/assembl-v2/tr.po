@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2019-06-07T17:09:08.454Z\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2019-10-03 12:44+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: tr_TR\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Accept
 #: messages.json
 msgid "accept"
-msgstr ""
+msgstr "Kabul"
 
 #. [accountDeleted]
 #. defaultMessage is:
@@ -54,9 +54,7 @@ msgstr "Bir tema ekleyin"
 #. An error occured during save. Please check that you filled all the required fields.
 #: messages.json
 msgid "administration.anErrorOccured"
-msgstr ""
-"Kaydetme işlemi sırasında bir hata oluştu. Lütfen gerekli tüm alanları "
-"doldurduğunuzdan emin olun."
+msgstr "Kaydetme işlemi sırasında bir hata oluştu. Lütfen gerekli tüm alanları doldurduğunuzdan emin olun."
 
 #. [administration.annotation]
 #. defaultMessage is:
@@ -159,8 +157,7 @@ msgstr "Silmeyi onayla"
 #. You have unsaved changes. Are you sure you want to leave this page?
 #: messages.json
 msgid "administration.confirmUnsavedChanges"
-msgstr ""
-"Değişiklikleri kaydetmediniz. Bu sayfadan çıkmak istediğinize emin misiniz?"
+msgstr "Değişiklikleri kaydetmediniz. Bu sayfadan çıkmak istediğinize emin misiniz?"
 
 #. [administration.defineGaugeNumer]
 #. defaultMessage is:
@@ -175,7 +172,7 @@ msgstr "Sayaç sayısını tanımla"
 #: messages.json
 #, fuzzy
 msgid "administration.deleteAssociatedFile"
-msgstr "Soruyu sil"
+msgstr "İlgili dosyayı sil"
 
 #. [administration.deleteQuestion]
 #. defaultMessage is:
@@ -190,7 +187,7 @@ msgstr "Soruyu sil"
 #: messages.json
 #, fuzzy
 msgid "administration.deleteSubThematicDisabled"
-msgstr "Temayı sil"
+msgstr "Alt tematik özellikli bir temayı silemezsiniz."
 
 #. [administration.deleteThematic]
 #. defaultMessage is:
@@ -211,14 +208,14 @@ msgstr "Bu temayla ilişkilendirilen görseli sil"
 #. Discussion preferences
 #: messages.json
 msgid "administration.discussion.0"
-msgstr "Tartışma Dilleri"
+msgstr "Tartışma tercihleri"
 
 #. [administration.discussion.3]
 #. defaultMessage is:
 #. Registration options
 #: messages.json
 msgid "administration.discussion.3"
-msgstr "Hüküm ve Koşullar ve Yasal Uyarı"
+msgstr "Kayıt seçenekleri"
 
 #. [administration.discussion.4]
 #. defaultMessage is:
@@ -226,7 +223,7 @@ msgstr "Hüküm ve Koşullar ve Yasal Uyarı"
 #: messages.json
 #, fuzzy
 msgid "administration.discussion.4"
-msgstr "Tartışma Dilleri"
+msgstr "Yasak içerikler"
 
 #. [administration.discussion.5]
 #. defaultMessage is:
@@ -234,7 +231,7 @@ msgstr "Tartışma Dilleri"
 #: messages.json
 #, fuzzy
 msgid "administration.discussion.5"
-msgstr "Tartışma Dilleri"
+msgstr "Süreç düzenlemesi"
 
 #. [administration.discussion.6]
 #. defaultMessage is:
@@ -242,7 +239,7 @@ msgstr "Tartışma Dilleri"
 #: messages.json
 #, fuzzy
 msgid "administration.discussion.6"
-msgstr "Tartışma Dilleri"
+msgstr "Arayüzü kişiselleştirme"
 
 #. [administration.discussionPreferences.debateLogoLabel]
 #. defaultMessage is:
@@ -250,7 +247,7 @@ msgstr "Tartışma Dilleri"
 #: messages.json
 #, fuzzy
 msgid "administration.discussionPreferences.debateLogoLabel"
-msgstr "Video/slayt"
+msgstr "Tartışma logosu"
 
 #. [administration.discussionSlug]
 #. defaultMessage is:
@@ -258,7 +255,7 @@ msgstr "Video/slayt"
 #: messages.json
 #, fuzzy
 msgid "administration.discussionSlug"
-msgstr "Tartışma Dilleri"
+msgstr "Tartışma bağlantısı"
 
 #. [administration.down]
 #. defaultMessage is:
@@ -364,8 +361,7 @@ msgstr "Tartışma verilerini dışa aktar"
 #: messages.json
 #, fuzzy
 msgid "administration.export.presets.lastMonth"
-msgstr ""
-"Tüm anket modülü verisini dışa aktarmak için Dışa Aktar butonuna tıklayın"
+msgstr "Tüm anket modülü verisini dışa aktarmak için Dışa Aktar butonuna tıklayın"
 
 #. [administration.export.presets.lastWeek]
 #. defaultMessage is:
@@ -413,8 +409,7 @@ msgstr "Tartışma verilerini dışa aktar"
 #: messages.json
 #, fuzzy
 msgid "administration.export.taxonomyAnnotation"
-msgstr ""
-"Tüm anket modülü verisini dışa aktarmak için Dışa Aktar butonuna tıklayın"
+msgstr "Tüm anket modülü verisini dışa aktarmak için Dışa Aktar butonuna tıklayın"
 
 #. [administration.export.taxonomySectionTitle]
 #. defaultMessage is:
@@ -444,8 +439,7 @@ msgstr "Mesajları şu dile çevir:"
 #: messages.json
 #, fuzzy
 msgid "administration.export.translation"
-msgstr ""
-"Tüm anket modülü verisini dışa aktarmak için Dışa Aktar butonuna tıklayın"
+msgstr "Tüm anket modülü verisini dışa aktarmak için Dışa Aktar butonuna tıklayın"
 
 #. [administration.export.vote.extractCsvVoters]
 #. defaultMessage is:
@@ -453,8 +447,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.export.vote.extractCsvVoters"
-msgstr ""
-"Tüm oylama oturumu verisini dışa aktarmak için Dışa Aktar düğmesine basın"
+msgstr "Tüm oylama oturumu verisini dışa aktarmak için Dışa Aktar düğmesine basın"
 
 #. [administration.export.vote.voteResultsCsv]
 #. defaultMessage is:
@@ -483,9 +476,7 @@ msgstr "Bu değişiklikleri tüm tekliflere uygula"
 #. You are about to modify the settings on this gauge only. If you wish to modify all of the gauges, please check the box at the end of the form.
 #: messages.json
 msgid "administration.gaugeModal.subTitle"
-msgstr ""
-"Yalnızca bu sayacın ayarlarını değiştirmek üzeresiniz. Tüm sayaçları "
-"değiştirmek istiyorsanız, lütfen formun altındaki kutuyu işaretleyin."
+msgstr "Yalnızca bu sayacın ayarlarını değiştirmek üzeresiniz. Tüm sayaçları değiştirmek istiyorsanız, lütfen formun altındaki kutuyu işaretleyin."
 
 #. [administration.gaugeModal.title]
 #. defaultMessage is:
@@ -535,103 +526,98 @@ msgstr "Üst sayfa üstbilgisi yapılandırma"
 #. You can decide wether the participant can distribute a single type of token (exclusive) or several types of token per proposal.
 #: messages.json
 msgid "administration.helpers.exclusive"
-msgstr ""
-"Katılımcının teklif başına tek bir jeton türü (özel) veya birkaç jeton türü "
-"dağıtmasına karar verebilirsiniz."
+msgstr "Katılımcının teklif başına tek bir jeton türü (özel) veya birkaç jeton türü dağıtmasına karar verebilirsiniz."
 
 #. [administration.helpers.gaugeVoteInstructions]
 #. defaultMessage is:
 #. Depending on the objective of the gauge module, incite the participants to take action.
 #: messages.json
 msgid "administration.helpers.gaugeVoteInstructions"
-msgstr ""
-"Sayaç modülünün amacına göre katılımcıları harekete geçmeye davet edin."
+msgstr "Sayaç modülünün amacına göre katılımcıları harekete geçmeye davet edin."
 
 #. [administration.helpers.landingPage.chatbot]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.chatbot"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.contact]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.contact"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.data]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.data"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.footer]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.footer"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.header]
 #. defaultMessage is:
 #. Top page header. It contains the consultation's title and subtitle and a button to access to the consultation.
 #: messages.json
 msgid "administration.helpers.landingPage.header"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim butonunu içerir."
 
 #. [administration.helpers.landingPage.introduction]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.introduction"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.news]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.news"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.partners]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.partners"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.timeline]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.timeline"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.top_thematics]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.top_thematics"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.tweets]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.tweets"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.video]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.video"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.surveyQuestion]
 #. defaultMessage is:
@@ -647,9 +633,7 @@ msgstr "Soruyu sil"
 #: messages.json
 #, fuzzy
 msgid "administration.helpers.timelinePhases"
-msgstr ""
-"Katılımcının teklif başına tek bir jeton türü (özel) veya birkaç jeton türü "
-"dağıtmasına karar verebilirsiniz."
+msgstr "Açılış sayfasında görüntülenen tartışmanın her aşaması için bir açıklama ve resim seçin"
 
 #. [administration.helpers.timelineTitle]
 #. defaultMessage is:
@@ -657,9 +641,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.helpers.timelineTitle"
-msgstr ""
-"Katılımcının teklif başına tek bir jeton türü (özel) veya birkaç jeton türü "
-"dağıtmasına karar verebilirsiniz."
+msgstr "Açılış sayfasında görüntülenen zaman çizelgesi bölümünün başlığını ve alt başlığını yapılandırın"
 
 #. [administration.helpers.tokenCategoryNumber]
 #. defaultMessage is:
@@ -673,17 +655,14 @@ msgstr "Bu oylama için jeton türü sayısını seçin"
 #. Depending on the objective of the token module, incite the participants to take action.
 #: messages.json
 msgid "administration.helpers.tokenVoteInstructions"
-msgstr ""
-"Jeton modülünün amacına göre katılımcıları harekete geçmeye davet edin."
+msgstr "Jeton modülünün amacına göre katılımcıları harekete geçmeye davet edin."
 
 #. [administration.helpers.voteSessionProposalSection]
 #. defaultMessage is:
 #. The proposals section is introduced by a title. You define the title based on the proposal content.
 #: messages.json
 msgid "administration.helpers.voteSessionProposalSection"
-msgstr ""
-"Teklifler bölümü bir başlık içerir. Başlık teklifin içeriğine göre "
-"belirlenir."
+msgstr "Teklifler bölümü bir başlık içerir. Başlık teklifin içeriğine göre belirlenir."
 
 #. [administration.informationOfTheDebate]
 #. defaultMessage is:
@@ -691,7 +670,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.informationOfTheDebate"
-msgstr "* Alanlar zorunludur."
+msgstr "Tartışma bilgisi"
 
 #. [administration.instructions]
 #. defaultMessage is:
@@ -706,7 +685,7 @@ msgstr "Talimatlar bölümü yapılandırma"
 #: messages.json
 #, fuzzy
 msgid "administration.invalidSlug"
-msgstr "Minimum değer"
+msgstr "Özel karakterlere izin verilmemektedir"
 
 #. [administration.landingPage.header.buttonLabel]
 #. defaultMessage is:
@@ -714,9 +693,7 @@ msgstr "Minimum değer"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.buttonLabel"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Tartışmaya yönlendirme düğmesinin adı"
 
 #. [administration.landingPage.header.dateDescription]
 #. defaultMessage is:
@@ -724,9 +701,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.dateDescription"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Lütfen tartışmanın tarih aralığını giriniz. Tarih seçilmemişse, tarihler oluşturulan zaman çizgilerinden çıkarılır."
 
 #. [administration.landingPage.header.dateLabel]
 #. defaultMessage is:
@@ -734,7 +709,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.dateLabel"
-msgstr "Modülleri yönet"
+msgstr "Başlıkta görünen tartışmanın tarihini girin."
 
 #. [administration.landingPage.header.endDate]
 #. defaultMessage is:
@@ -742,7 +717,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.endDate"
-msgstr "Modülleri yönet"
+msgstr "Bitiş"
 
 #. [administration.landingPage.header.endDateError]
 #. defaultMessage is:
@@ -750,7 +725,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.endDateError"
-msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını seçin."
+msgstr "Bitiş tarihi, başlangıç ​​tarihinden sonra olamaz"
 
 #. [administration.landingPage.header.headerDescription]
 #. defaultMessage is:
@@ -758,9 +733,7 @@ msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını se�
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.headerDescription"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Görüntü 480 piksel yüksekliğe ve 1480 piksel genişliğe sahip olmalıdır. Boyut 300kbyi geçmemelidir."
 
 #. [administration.landingPage.header.headerImage]
 #. defaultMessage is:
@@ -768,9 +741,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.headerImage"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Başlık resmini seçin"
 
 #. [administration.landingPage.header.helper]
 #. defaultMessage is:
@@ -778,7 +749,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.helper"
-msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını seçin."
+msgstr "Başlık görünümünü özelleştir."
 
 #. [administration.landingPage.header.logoDescription]
 #. defaultMessage is:
@@ -786,9 +757,7 @@ msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını se�
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.logoDescription"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Logo maksimum 78px yüksekliğe ve maksimum 200px genişliğe sahip olmalıdır. Boyut 1 MB'ı geçmemelidir. Arkaplan şeffaf olmalıdır."
 
 #. [administration.landingPage.header.logoHelper]
 #. defaultMessage is:
@@ -796,7 +765,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.logoHelper"
-msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını seçin."
+msgstr "Başlığın içindeki logoyu seçin"
 
 #. [administration.landingPage.header.logoImage]
 #. defaultMessage is:
@@ -804,9 +773,7 @@ msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını se�
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.logoImage"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Başlık logosunu seçin"
 
 #. [administration.landingPage.header.startDate]
 #. defaultMessage is:
@@ -814,7 +781,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.startDate"
-msgstr "Modülleri yönet"
+msgstr "Başlangıç"
 
 #. [administration.landingPage.header.startDateError]
 #. defaultMessage is:
@@ -822,7 +789,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.startDateError"
-msgstr "Modülleri yönet"
+msgstr "Başlangıç tarihi, bitiş tarihinden sonra olamaz"
 
 #. [administration.landingPage.header.subtitleLabel]
 #. defaultMessage is:
@@ -830,7 +797,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.subtitleLabel"
-msgstr "Modülleri yönet"
+msgstr "Tartışma alt başlığı"
 
 #. [administration.landingPage.header.successSave]
 #. defaultMessage is:
@@ -838,7 +805,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.successSave"
-msgstr "Modüller başarıyla kaydedildi!"
+msgstr "Başlık başarıyla güncellendi!"
 
 #. [administration.landingPage.header.timePlaceholder]
 #. defaultMessage is:
@@ -846,7 +813,7 @@ msgstr "Modüller başarıyla kaydedildi!"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.timePlaceholder"
-msgstr "Modülleri yönet"
+msgstr "İsteğe bağlı: Tartışma tarihlerini girin"
 
 #. [administration.landingPage.header.title]
 #. defaultMessage is:
@@ -854,7 +821,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.title"
-msgstr "Modülleri yönet"
+msgstr "Başlık"
 
 #. [administration.landingPage.header.titleLabel]
 #. defaultMessage is:
@@ -862,7 +829,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.titleLabel"
-msgstr "Modülleri yönet"
+msgstr "Tartışma başlığı"
 
 #. [administration.landingPage.headerSuccessSave]
 #. defaultMessage is:
@@ -870,7 +837,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.headerSuccessSave"
-msgstr "Modüller başarıyla kaydedildi!"
+msgstr "Ana sayfa başlığı başarıyla kaydedildi!"
 
 #. [administration.landingPage.manageModules.confirmationModal]
 #. defaultMessage is:
@@ -878,7 +845,7 @@ msgstr "Modüller başarıyla kaydedildi!"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.manageModules.confirmationModal"
-msgstr "Modülleri yönet"
+msgstr "Açılış sayfasına bir Metin ve Multimedya modülü eklemek istediğinizden emin misiniz?"
 
 #. [administration.landingPage.manageModules.helper]
 #. defaultMessage is:
@@ -893,7 +860,7 @@ msgstr "Varış sayfasında görmek istediğiniz modülleri ve konumlarını se�
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.manageModules.textAndMultimedia"
-msgstr "Modülleri yönet"
+msgstr "Metin ve Multimedya"
 
 #. [administration.landingPage.manageModules.textAndMultimediaBtn]
 #. defaultMessage is:
@@ -901,7 +868,7 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.manageModules.textAndMultimediaBtn"
-msgstr "Modülleri yönet"
+msgstr "Metin ve Multimedya modülü ekle"
 
 #. [administration.landingPage.manageModules.title]
 #. defaultMessage is:
@@ -923,9 +890,7 @@ msgstr "Modüller başarıyla kaydedildi!"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.timeline.image"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Bu süreç için resim seçin"
 
 #. [administration.landingPage.timeline.imageDescription]
 #. defaultMessage is:
@@ -933,9 +898,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.timeline.imageDescription"
-msgstr ""
-"Sayfa üstbilgisi. Müzakerenin başlığını, alt başlığını ve müzakereye erişim "
-"butonunu içerir."
+msgstr "Resmin yüksekliği 500 piksel ve genişliği 400 piksel olmalıdır."
 
 #. [administration.landingPage.timeline.sectionTitle]
 #. defaultMessage is:
@@ -943,7 +906,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.timeline.sectionTitle"
-msgstr "Modülleri yönet"
+msgstr "Bölümün başlığını ve alt başlığını yapılandır"
 
 #. [administration.landingPage.timeline.title]
 #. defaultMessage is:
@@ -951,14 +914,14 @@ msgstr "Modülleri yönet"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.timeline.title"
-msgstr "Modülleri yönet"
+msgstr "Açılış sayfasında zaman çizelgesi"
 
 #. [administration.landingpage]
 #. defaultMessage is:
 #. Landing page
 #: messages.json
 msgid "administration.landingpage"
-msgstr "Varış sayfası"
+msgstr "Açılış sayfası"
 
 #. [administration.languageChoice]
 #. defaultMessage is:
@@ -1226,8 +1189,7 @@ msgstr "Sayı Değeri"
 #: messages.json
 #, fuzzy
 msgid "administration.personalizeInterface.favicon"
-msgstr ""
-"Jeton modülünün amacına göre katılımcıları harekete geçmeye davet edin."
+msgstr "Jeton modülünün amacına göre katılımcıları harekete geçmeye davet edin."
 
 #. [administration.personalizeInterface.faviconInstruction]
 #. defaultMessage is:
@@ -1235,9 +1197,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.personalizeInterface.faviconInstruction"
-msgstr ""
-"Talimatlar bölümü bir başlık ve katılımcıları katkıları için yönlendirecek "
-"bir açıklama içermelidir."
+msgstr "Talimatlar bölümü bir başlık ve katılımcıları katkıları için yönlendirecek bir açıklama içermelidir."
 
 #. [administration.personalizeInterface.icoRequired]
 #. defaultMessage is:
@@ -1253,8 +1213,7 @@ msgstr "Dışarıdan sayfa kullan"
 #: messages.json
 #, fuzzy
 msgid "administration.personalizeInterface.logoInstruction"
-msgstr ""
-"Jeton modülünün amacına göre katılımcıları harekete geçmeye davet edin."
+msgstr "Jeton modülünün amacına göre katılımcıları harekete geçmeye davet edin."
 
 #. [administration.personalizeInterface.success]
 #. defaultMessage is:
@@ -1685,7 +1644,7 @@ msgstr "Başlık"
 #: messages.json
 #, fuzzy
 msgid "administration.slugWarning"
-msgstr "Varış sayfası"
+msgstr "Bu değişiklik tartışmanın adresinde bir değişikliğe neden olur. Lütfen bu değişikliği sonreki iletişimlerde dikkate alın. Hizmetin sürekliliğini sağlamak için önceki adres hala çalışıyor olacak."
 
 #. [administration.step_x_total]
 #. defaultMessage is:
@@ -1700,7 +1659,7 @@ msgstr "Bölüm %{num} / %{total}"
 #: messages.json
 #, fuzzy
 msgid "administration.successDiscussionPreference"
-msgstr "Tartışma dili tercihleri başarıyla kaydedildi!"
+msgstr "Tartışma tercihleri başarıyla kaydedildi!"
 
 #. [administration.successThemeCreation]
 #. defaultMessage is:
@@ -2115,10 +2074,7 @@ msgstr "Jeton başlığı"
 #. The token vote module allows you to select propositions proportionnaly. Each participant has a certain amount of tokens et will have to spread them on the different propositions
 #: messages.json
 msgid "administration.tokenVoteCheckbox"
-msgstr ""
-"Jetonla oylama modülü, önerileri orantısal olarak seçmenize olanak tanır. "
-"Her katılımcının belirli bir miktar jetonu vardır ve bunları farklı "
-"tekliflere dağıtması gerekir"
+msgstr "Jetonla oylama modülü, önerileri orantısal olarak seçmenize olanak tanır. Her katılımcının belirli bir miktar jetonu vardır ve bunları farklı tekliflere dağıtması gerekir"
 
 #. [administration.tokenVoteInstructions]
 #. defaultMessage is:
@@ -2177,9 +2133,7 @@ msgstr "Değer başlığı"
 #. *Authorized video links: "https://www.youtube.com/embed/[videoId]" or "https://player.vimeo.com/video/[videoId]?"
 #: messages.json
 msgid "administration.videoHelp"
-msgstr ""
-"*İzin verilmiş video bağlantıları: \"https://www.youtube.com/embed/"
-"[videoId]\" veya \"https://player.vimeo.com/video/[videoId]?\""
+msgstr "*İzin verilmiş video bağlantıları: \"https://www.youtube.com/embed/[videoId]\" veya \"https://player.vimeo.com/video/[videoId]?\""
 
 #. [administration.voteProposals.addProposal]
 #. defaultMessage is:
@@ -2349,7 +2303,7 @@ msgstr "Jeton oyu"
 #.  and 
 #: messages.json
 msgid "and"
-msgstr ""
+msgstr "ve"
 
 #. [cancel]
 #. defaultMessage is:
@@ -2443,7 +2397,7 @@ msgstr "Madde işaretli liste"
 #. Open link in new tab
 #: messages.json
 msgid "common.editor.linkPlugin.openInNewTab"
-msgstr ""
+msgstr "Sekmeyi yeni pencerede aç"
 
 #. [common.editor.linkPlugin.text]
 #. defaultMessage is:
@@ -2528,14 +2482,14 @@ msgstr "Yüklenecek dosya seçin"
 #. TO BE DEFINED %{words}
 #: messages.json
 msgid "common.wordCountInformation.msg"
-msgstr ""
+msgstr "BELİRLENECEK %{words}"
 
 #. [common.wordCountInformation.words]
 #. defaultMessage is:
 #. <span class='words-watson'>%{wordCount} words</span>
 #: messages.json
 msgid "common.wordCountInformation.words"
-msgstr ""
+msgstr "Silmeyi onayla"
 
 #. [community.panelTitle]
 #. defaultMessage is:
@@ -2556,14 +2510,14 @@ msgstr "Sonuç"
 #. Terms and conditions
 #: messages.json
 msgid "cookies.cgu"
-msgstr ""
+msgstr "Kayıt ve şartlar"
 
 #. [cookies.cguHelper]
 #. defaultMessage is:
 #. This cookie registers that you have accepted the terms and conditions of the consultation.
 #: messages.json
 msgid "cookies.cguHelper"
-msgstr ""
+msgstr "Bu çerez konsültasyon kayıt ve şartlarını kabul ettiğinizi kaydeder."
 
 #. [cookies.locale]
 #. defaultMessage is:
@@ -2578,35 +2532,35 @@ msgstr "Yasal Uyarı"
 #. This cookie is necessary to display the texts in the language of your browser or the one you selected in the navigation bar.
 #: messages.json
 msgid "cookies.localeHelper"
-msgstr ""
+msgstr "Bu çerez, metinleri tarayıcınızın dilinde veya navigasyon çubuğunda seçtiğiniz dilde görüntülemek için gereklidir."
 
 #. [cookies.matomo]
 #. defaultMessage is:
 #. Matomo
 #: messages.json
 msgid "cookies.matomo"
-msgstr ""
+msgstr "Matomo"
 
 #. [cookies.matomoHelper]
 #. defaultMessage is:
 #. This cookie is used for stasticial purposes regarding the participants of the consultation.
 #: messages.json
 msgid "cookies.matomoHelper"
-msgstr ""
+msgstr "Bu çerez konsültasyon katılımcılarına ilişkin istatistiksel amaçlı olarak kullanılır."
 
 #. [cookies.matomoSettings]
 #. defaultMessage is:
 #. To modify this cookie's setting please click here
 #: messages.json
 msgid "cookies.matomoSettings"
-msgstr ""
+msgstr "Bu çerez ayarını değiştirmek için lütfen buraya tıklayın"
 
 #. [cookies.privacyPolicy]
 #. defaultMessage is:
 #. Privacy policy
 #: messages.json
 msgid "cookies.privacyPolicy"
-msgstr ""
+msgstr "Gizlilik politikası"
 
 #. [cookies.privacyPolicyHelper]
 #. defaultMessage is:
@@ -2629,49 +2583,49 @@ msgstr "Bu alan zorunludur."
 #. User Guidelines
 #: messages.json
 msgid "cookies.userGuideline"
-msgstr ""
+msgstr "Kullanıcı Kuralları"
 
 #. [cookies.userGuidelineHelper]
 #. defaultMessage is:
 #. This cookie registers that you have accepted the user guidelines of the consultation.
 #: messages.json
 msgid "cookies.userGuidelineHelper"
-msgstr ""
+msgstr "Bu çerez, konsültasyonun kullanıcı kurallarını kabul ettiğinizi kaydeder."
 
 #. [cookies.userSession]
 #. defaultMessage is:
 #. User Session
 #: messages.json
 msgid "cookies.userSession"
-msgstr ""
+msgstr "Kullanıcı Oturumu"
 
 #. [cookies.userSessionHelper]
 #. defaultMessage is:
 #. This cookie is necessary to maintain the user connected on Assembl.
 #: messages.json
 msgid "cookies.userSessionHelper"
-msgstr ""
+msgstr "Bu çerez, kullanıcıyı Assembl'e bağlı tutmak için gereklidir."
 
 #. [cookiesBar.accept]
 #. defaultMessage is:
 #. I agree
 #: messages.json
 msgid "cookiesBar.accept"
-msgstr ""
+msgstr "Onaylıyorum"
 
 #. [cookiesBar.cookiesNotice]
 #. defaultMessage is:
 #. Assembl uses cookies to offer you the best possible experience. To use Assembl, you have to agree to the cookies policy of the debate.
 #: messages.json
 msgid "cookiesBar.cookiesNotice"
-msgstr ""
+msgstr "Assembl, size mümkün olan en iyi deneyimi sunmak için çerezleri kullanır. Assembl'i kullanmak için, tartışmanın çerez politikasını kabul etmeniz gerekir."
 
 #. [cookiesBar.seeCookiesPolicy]
 #. defaultMessage is:
 #. See more
 #: messages.json
 msgid "cookiesBar.seeCookiesPolicy"
-msgstr ""
+msgstr "Daha fazlasını gör"
 
 #. [cookiesPolicy.analytics]
 #. defaultMessage is:
@@ -2741,7 +2695,7 @@ msgstr "LL"
 #. YYYY-MM-DD
 #: messages.json
 msgid "date.format2"
-msgstr "L"
+msgstr "YYYY-AA-GG"
 
 #. [date.format3]
 #. defaultMessage is:
@@ -2785,168 +2739,168 @@ msgstr "Beğen"
 #. Cancel
 #: messages.json
 msgid "debate.brightMirror.commentFiction.cancel"
-msgstr ""
+msgstr "İptal"
 
 #. [debate.brightMirror.commentFiction.commentHelper]
 #. defaultMessage is:
 #. Comment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.commentHelper"
-msgstr ""
+msgstr "Yorum"
 
 #. [debate.brightMirror.commentFiction.deleteComment]
 #. defaultMessage is:
 #. Delete this message
 #: messages.json
 msgid "debate.brightMirror.commentFiction.deleteComment"
-msgstr ""
+msgstr "Bu mesajı sil"
 
 #. [debate.brightMirror.commentFiction.deleteCommentBodyMessage]
 #. defaultMessage is:
 #. Are you sure you want to delete this message?
 #: messages.json
 msgid "debate.brightMirror.commentFiction.deleteCommentBodyMessage"
-msgstr ""
+msgstr "Bu mesajı silmek istediğinize emin misiniz?"
 
 #. [debate.brightMirror.commentFiction.editComment]
 #. defaultMessage is:
 #. Edit this message
 #: messages.json
 msgid "debate.brightMirror.commentFiction.editComment"
-msgstr ""
+msgstr "Bu mesajı düzenle"
 
 #. [debate.brightMirror.commentFiction.imageAlt]
 #. defaultMessage is:
 #. Let's talk illustration
 #: messages.json
 msgid "debate.brightMirror.commentFiction.imageAlt"
-msgstr ""
+msgstr "İlüstrasyondan bahsedelim"
 
 #. [debate.brightMirror.commentFiction.label]
 #. defaultMessage is:
 #. Comments
 #: messages.json
 msgid "debate.brightMirror.commentFiction.label"
-msgstr ""
+msgstr "Yorumlar"
 
 #. [debate.brightMirror.commentFiction.modal.instructionList]
 #. defaultMessage is:
 #. You can comment the text:
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionList"
-msgstr ""
+msgstr "Metni yorumlayabilirsiniz:"
 
 #. [debate.brightMirror.commentFiction.modal.instructionListOne]
 #. defaultMessage is:
 #. Underligne a quote
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionListOne"
-msgstr ""
+msgstr "Bir alıntının altını çiz"
 
 #. [debate.brightMirror.commentFiction.modal.instructionListThree]
 #. defaultMessage is:
 #. Write your comment, add an image or video and validate
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionListThree"
-msgstr ""
+msgstr "Yorumunuzu yazın, bir resim veya video ekleyin ve doğrulayın"
 
 #. [debate.brightMirror.commentFiction.modal.instructionListTwo]
 #. defaultMessage is:
 #. Click “Suggest” to open an input box
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionListTwo"
-msgstr ""
+msgstr "Bir giriş kutusu açmak için “Öner”e tıklayın"
 
 #. [debate.brightMirror.commentFiction.modal.title]
 #. defaultMessage is:
 #. Comment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.title"
-msgstr ""
+msgstr "Açıklama"
 
 #. [debate.brightMirror.commentFiction.numberOfComments]
 #. defaultMessage is:
 #. %{count} messages
 #: messages.json
 msgid "debate.brightMirror.commentFiction.numberOfComments"
-msgstr ""
+msgstr "%{count} mesaj"
 
 #. [debate.brightMirror.commentFiction.numberOfComments_0]
 #. defaultMessage is:
 #. No message at the moment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.numberOfComments_0"
-msgstr ""
+msgstr "Şu anda mesaj yok"
 
 #. [debate.brightMirror.commentFiction.numberOfComments_1]
 #. defaultMessage is:
 #. %{count} message
 #: messages.json
 msgid "debate.brightMirror.commentFiction.numberOfComments_1"
-msgstr ""
+msgstr "%{count} mesaj"
 
 #. [debate.brightMirror.commentFiction.placeholder]
 #. defaultMessage is:
 #. Join the debate...
 #: messages.json
 msgid "debate.brightMirror.commentFiction.placeholder"
-msgstr ""
+msgstr "Tartışmaya katıl..."
 
 #. [debate.brightMirror.commentFiction.strongTitle]
 #. defaultMessage is:
 #. Let's talk!
 #: messages.json
 msgid "debate.brightMirror.commentFiction.strongTitle"
-msgstr ""
+msgstr "Konuşalım!"
 
 #. [debate.brightMirror.commentFiction.submit]
 #. defaultMessage is:
 #. Comment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.submit"
-msgstr ""
+msgstr "Açıklama"
 
 #. [debate.brightMirror.commentFiction.title]
 #. defaultMessage is:
 #. Comment or debate on the text above
 #: messages.json
 msgid "debate.brightMirror.commentFiction.title"
-msgstr ""
+msgstr "Yukarıdaki metin üzerine yorum yap veya tartış"
 
 #. [debate.brightMirror.deleteFiction]
 #. defaultMessage is:
 #. Delete your text
 #: messages.json
 msgid "debate.brightMirror.deleteFiction"
-msgstr ""
+msgstr "Metnini sil"
 
 #. [debate.brightMirror.deleteFictionModalBody]
 #. defaultMessage is:
 #. Are you sure you want to delete this text?
 #: messages.json
 msgid "debate.brightMirror.deleteFictionModalBody"
-msgstr ""
+msgstr "Bu metni silmek istediğinizden emin misiniz?"
 
 #. [debate.brightMirror.deleteFictionSuccessMsg]
 #. defaultMessage is:
 #. Your text was deleted
 #: messages.json
 msgid "debate.brightMirror.deleteFictionSuccessMsg"
-msgstr ""
+msgstr "Metniniz silindi"
 
 #. [debate.brightMirror.draftEmptyTitle]
 #. defaultMessage is:
 #. Untitled
 #: messages.json
 msgid "debate.brightMirror.draftEmptyTitle"
-msgstr ""
+msgstr "Başlık yok"
 
 #. [debate.brightMirror.draftLabel]
 #. defaultMessage is:
 #. Draft
 #: messages.json
 msgid "debate.brightMirror.draftLabel"
-msgstr ""
+msgstr "Taslak"
 
 #. [debate.brightMirror.draftSuccessMsg]
 #. defaultMessage is:
@@ -2961,14 +2915,14 @@ msgstr "Katılımınız için teşekkürler. Yorumunuz gönderildi!"
 #. Edit your text
 #: messages.json
 msgid "debate.brightMirror.editFiction"
-msgstr ""
+msgstr "Metnini düzenle"
 
 #. [debate.brightMirror.fiction]
 #. defaultMessage is:
 #. text
 #: messages.json
 msgid "debate.brightMirror.fiction"
-msgstr ""
+msgstr "metin"
 
 #. [debate.brightMirror.fillBodyLabel]
 #. defaultMessage is:
@@ -2983,28 +2937,28 @@ msgstr "Lütfen bir yorum yazın"
 #. Please, write a title or a text
 #: messages.json
 msgid "debate.brightMirror.fillEitherTitleContent"
-msgstr ""
+msgstr "Lütfen bir başlık veya bir metin yazın"
 
 #. [debate.brightMirror.noAuthorSpecified]
 #. defaultMessage is:
 #. No author specified
 #: messages.json
 msgid "debate.brightMirror.noAuthorSpecified"
-msgstr ""
+msgstr "Yazar belirtilmedi"
 
 #. [debate.brightMirror.noContentSpecified]
 #. defaultMessage is:
 #. No content specified
 #: messages.json
 msgid "debate.brightMirror.noContentSpecified"
-msgstr ""
+msgstr "İçerik belirtilmedi"
 
 #. [debate.brightMirror.noTitleSpecified]
 #. defaultMessage is:
 #. No title specified
 #: messages.json
 msgid "debate.brightMirror.noTitleSpecified"
-msgstr ""
+msgstr "Başlık belirtilmedi"
 
 #. [debate.brightMirror.numberOfFictions]
 #. defaultMessage is:
@@ -3059,14 +3013,14 @@ msgstr "Katılımınız için teşekkürler. Yorumunuz gönderildi!"
 #. Save
 #: messages.json
 msgid "debate.brightMirror.saveDraft"
-msgstr ""
+msgstr "Kaydet"
 
 #. [debate.brightMirror.sentiment.dislike]
 #. defaultMessage is:
 #. Scary
 #: messages.json
 msgid "debate.brightMirror.sentiment.dislike"
-msgstr ""
+msgstr "Korkunç"
 
 #. [debate.brightMirror.sentiment.dontUnderstand]
 #. defaultMessage is:
@@ -3081,91 +3035,91 @@ msgstr "Anlamadım"
 #. Inspiring!
 #: messages.json
 msgid "debate.brightMirror.sentiment.like"
-msgstr ""
+msgstr "Etkileyici!"
 
 #. [debate.brightMirror.sentiment.moreInfo]
 #. defaultMessage is:
 #. Enrich the style
 #: messages.json
 msgid "debate.brightMirror.sentiment.moreInfo"
-msgstr ""
+msgstr "Tarzı zenginleştir"
 
 #. [debate.brightMirror.shareFiction]
 #. defaultMessage is:
 #. Share a short story
 #: messages.json
 msgid "debate.brightMirror.shareFiction"
-msgstr ""
+msgstr "Kısa bir hikaye paylaş"
 
 #. [debate.brightMirror.sideComment.commentLabel]
 #. defaultMessage is:
 #. Your comment
 #: messages.json
 msgid "debate.brightMirror.sideComment.commentLabel"
-msgstr ""
+msgstr "Sizin yorumunuz"
 
 #. [debate.brightMirror.sideComment.commenterSingleParticipation]
 #. defaultMessage is:
 #. 1 participant commented a quote.
 #: messages.json
 msgid "debate.brightMirror.sideComment.commenterSingleParticipation"
-msgstr ""
+msgstr "Bir alıntıya 1 katılımcı yorum yaptı."
 
 #. [debate.brightMirror.sideComment.commentersParticipation]
 #. defaultMessage is:
 #. %{count} participants commented quotes.
 #: messages.json
 msgid "debate.brightMirror.sideComment.commentersParticipation"
-msgstr ""
+msgstr "Alıntılara %{count} katılımcı yorum yaptı."
 
 #. [debate.brightMirror.sideComment.commentersParticipation_1]
 #. defaultMessage is:
 #. %{count} participant commented quotes.
 #: messages.json
 msgid "debate.brightMirror.sideComment.commentersParticipation_1"
-msgstr ""
+msgstr "Alıntılara %{count} katılımcı yorum yaptı."
 
 #. [debate.brightMirror.sideComment.confirmDeleteMsg]
 #. defaultMessage is:
 #. Are you sure you would like to delete this comment?
 #: messages.json
 msgid "debate.brightMirror.sideComment.confirmDeleteMsg"
-msgstr ""
+msgstr "Bu yorumu silmek istediğinize emin misiniz?"
 
 #. [debate.brightMirror.sideComment.deleteSuccessMsg]
 #. defaultMessage is:
 #. Your comment has been deleted successfully!
 #: messages.json
 msgid "debate.brightMirror.sideComment.deleteSuccessMsg"
-msgstr ""
+msgstr "Yorumunuz başarıyla silindi!"
 
 #. [debate.brightMirror.sideComment.deleteTooltip]
 #. defaultMessage is:
 #. Delete
 #: messages.json
 msgid "debate.brightMirror.sideComment.deleteTooltip"
-msgstr ""
+msgstr "Sil"
 
 #. [debate.brightMirror.sideComment.editSuccessMsg]
 #. defaultMessage is:
 #. Your comment has been edited successfully!
 #: messages.json
 msgid "debate.brightMirror.sideComment.editSuccessMsg"
-msgstr ""
+msgstr "Yorumunuz başarıyla düzenlendi!"
 
 #. [debate.brightMirror.sideComment.editTooltip]
 #. defaultMessage is:
 #. Edit
 #: messages.json
 msgid "debate.brightMirror.sideComment.editTooltip"
-msgstr ""
+msgstr "Düzenle"
 
 #. [debate.brightMirror.sideComment.submitSuccessMsg]
 #. defaultMessage is:
 #. Your comment has been published successfully!
 #: messages.json
 msgid "debate.brightMirror.sideComment.submitSuccessMsg"
-msgstr ""
+msgstr "Yorumunuz başarıyla yayınlandı!"
 
 #. [debate.brightMirror.startFictionLabel]
 #. defaultMessage is:
@@ -3381,91 +3335,91 @@ msgstr "Kullanılabilir karakter sayısı %{nbCharacters}"
 #. Information on keywords
 #: messages.json
 msgid "debate.semanticAnalysis.informationKeyword"
-msgstr ""
+msgstr "Anahtar sözcüklerle ilgili bilgi"
 
 #. [debate.semanticAnalysis.keywordCloud]
 #. defaultMessage is:
 #. Keyword cloud
 #: messages.json
 msgid "debate.semanticAnalysis.keywordCloud"
-msgstr ""
+msgstr "Anahtar sözcük bulutu"
 
 #. [debate.semanticAnalysis.keywordCloudDefinition]
 #. defaultMessage is:
 #. The following keyword cloud is a visual representation of the most frequently used keywords in the debate (or "in the conversations related to the theme being addressed" when the analysis is done on a particular thematic). The importance of each keyword is shown with font size.
 #: messages.json
 msgid "debate.semanticAnalysis.keywordCloudDefinition"
-msgstr ""
+msgstr "Aşağıdaki anahtar sözcük bulutu, tartışmada (veya belirli bir tematik analiz yapıldığında \"ele alınan temayla ilgili konuşmalarda\") en sık kullanılan anahtar sözcüklerin görsel bir temsilidir. Her bir anahtar sözcüğün önemi, yazı tipi boyutuyla gösterilir."
 
 #. [debate.semanticAnalysis.long]
 #. defaultMessage is:
 #. Analysis
 #: messages.json
 msgid "debate.semanticAnalysis.long"
-msgstr ""
+msgstr "Analizler"
 
 #. [debate.semanticAnalysis.noKeywordSelected]
 #. defaultMessage is:
 #. Select your keyword
 #: messages.json
 msgid "debate.semanticAnalysis.noKeywordSelected"
-msgstr ""
+msgstr "Anahtar sözcüğünüzü seçin"
 
 #. [debate.semanticAnalysis.numberKeyword]
 #. defaultMessage is:
 #. Number of keywords
 #: messages.json
 msgid "debate.semanticAnalysis.numberKeyword"
-msgstr ""
+msgstr "Anahtar sözcüklerin sayısı"
 
 #. [debate.semanticAnalysis.occurence]
 #. defaultMessage is:
 #. Occurence
 #: messages.json
 msgid "debate.semanticAnalysis.occurence"
-msgstr ""
+msgstr "Sıklık"
 
 #. [debate.semanticAnalysis.occurenceDefinition]
 #. defaultMessage is:
 #. frequency of keywords throughout the debate or throughout the discussions related to the theme being addressed.
 #: messages.json
 msgid "debate.semanticAnalysis.occurenceDefinition"
-msgstr ""
+msgstr "Tartışma dahilinde dile getirilen veya ele alınan temayla ilgili tartışmalar boyunca değinilen anahtar sözcüklerin sıklığı."
 
 #. [debate.semanticAnalysis.relevance]
 #. defaultMessage is:
 #. Relevance
 #: messages.json
 msgid "debate.semanticAnalysis.relevance"
-msgstr ""
+msgstr "İlgi"
 
 #. [debate.semanticAnalysis.relevanceDefinition]
 #. defaultMessage is:
 #. measures how important the keyword is in order to understand the general meaning of the text. The score varies from 0 to 1, from weak to strong.
 #: messages.json
 msgid "debate.semanticAnalysis.relevanceDefinition"
-msgstr ""
+msgstr "Metnin genel anlamını anlamak için anahtar sözcüklerin ne kadar önemli olduğunu ölçer. Skor zayıftan güçlüye doğru 0 ile 1 arasında değişmektedir."
 
 #. [debate.semanticAnalysis.sentimentAnalysis]
 #. defaultMessage is:
 #. Sentiment analysis
 #: messages.json
 msgid "debate.semanticAnalysis.sentimentAnalysis"
-msgstr ""
+msgstr "Duyarlılık analizleri"
 
 #. [debate.semanticAnalysis.sentimentAnalysisDefinition]
 #. defaultMessage is:
 #. The sentiment analysis score qualifies the positive or negative tonality of the discussions in the debate (or in the discussions related to the theme being addressed).
 #: messages.json
 msgid "debate.semanticAnalysis.sentimentAnalysisDefinition"
-msgstr ""
+msgstr "Duyarlılık analizi puanı, tartışmadaki (ya da ele alınan temayla ilgili istişarelerdeki) tartışmaların olumlu ya da olumsuz yönünü nitelemektedir."
 
 #. [debate.semanticAnalysis.short]
 #. defaultMessage is:
 #. Semantic
 #: messages.json
 msgid "debate.semanticAnalysis.short"
-msgstr ""
+msgstr "Anlamsal"
 
 #. [debate.share]
 #. defaultMessage is:
@@ -3797,28 +3751,28 @@ msgstr "Sentezler"
 #. Already added
 #: messages.json
 msgid "debate.tagOnPost.alreadyAddedWarningMessage"
-msgstr ""
+msgstr "Önceden eklendi"
 
 #. [debate.tagOnPost.suggestionContainerTitle]
 #. defaultMessage is:
 #. Suggested keywords:
 #: messages.json
 msgid "debate.tagOnPost.suggestionContainerTitle"
-msgstr ""
+msgstr "Önerilen anahtar sözcükler:"
 
 #. [debate.tagOnPost.tagContainerAdminTitle]
 #. defaultMessage is:
 #. Add post-related keywords:
 #: messages.json
 msgid "debate.tagOnPost.tagContainerAdminTitle"
-msgstr ""
+msgstr "Gönderiyle ilgili anahtar sözcük ekle:"
 
 #. [debate.tagOnPost.tagContainerTitle]
 #. defaultMessage is:
 #. Keywords in post:
 #: messages.json
 msgid "debate.tagOnPost.tagContainerTitle"
-msgstr ""
+msgstr "Gönderideki anahtar sözcükler:"
 
 #. [debate.themes]
 #. defaultMessage is:
@@ -4153,9 +4107,7 @@ msgstr "%{count} katılımcı oy kullandı"
 #. Thank you for your participation! Your vote has been set. You can modify this vote during the entire duration of the vote session.
 #: messages.json
 msgid "debate.voteSession.postSuccess"
-msgstr ""
-"Katılımınız için teşekkür ederiz. Oyunuz gönderildi. Oyunuzu tüm oylama "
-"oturumu süresince değiştirebilirsiniz."
+msgstr "Katılımınız için teşekkür ederiz. Oyunuz gönderildi. Oyunuzu tüm oylama oturumu süresince değiştirebilirsiniz."
 
 #. [debate.voteSession.remainingTokens]
 #. defaultMessage is:
@@ -4239,7 +4191,7 @@ msgstr "Oylar"
 #. Delete
 #: messages.json
 msgid "delete"
-msgstr ""
+msgstr "Sil"
 
 #. [deleteConfirmation.confirmDeletionBody]
 #. defaultMessage is:
@@ -4262,7 +4214,7 @@ msgstr "Silmeyi onayla"
 #. Deleted user account
 #: messages.json
 msgid "deletedUser"
-msgstr ""
+msgstr "Silinmiş kullanıcı hesabı"
 
 #. [duration.format]
 #. defaultMessage is:
@@ -4297,7 +4249,7 @@ msgstr "Bu alan zorunludur."
 #. Cookies
 #: messages.json
 msgid "footer.cookiesPolicy"
-msgstr ""
+msgstr "Çerezler"
 
 #. [footer.legalNotice]
 #. defaultMessage is:
@@ -4311,7 +4263,7 @@ msgstr "Yasal Uyarı"
 #. Privacy Policy
 #: messages.json
 msgid "footer.privacyPolicy"
-msgstr ""
+msgstr "Gizlilik Politikası"
 
 #. [footer.socialMedias]
 #. defaultMessage is:
@@ -4340,14 +4292,14 @@ msgstr "Şartlar ve Koşullar"
 #. Create '%{option}'
 #: messages.json
 msgid "form.select.newOption"
-msgstr ""
+msgstr "'%{option}' Oluştur"
 
 #. [form.select.noOptions]
 #. defaultMessage is:
 #. No options
 #: messages.json
 msgid "form.select.noOptions"
-msgstr ""
+msgstr "Seçenek yok"
 
 #. [form.select.placeholder]
 #. defaultMessage is:
@@ -4362,7 +4314,7 @@ msgstr "Arama"
 #. Something went wrong. Please try again later.
 #: messages.json
 msgid "globalError"
-msgstr ""
+msgstr "Bir şeyler yanlış gitti. Lütfen daha sonra tekrar deneyiniz."
 
 #. [harvesting.confirm]
 #. defaultMessage is:
@@ -4539,7 +4491,7 @@ msgstr "Kaldır"
 #: messages.json
 #, fuzzy
 msgid "harvesting.submit"
-msgstr "Kaldır"
+msgstr "Gönder"
 
 #. [harvesting.tags.addTagSuccessMsg]
 #. defaultMessage is:
@@ -4555,7 +4507,7 @@ msgstr "Alıntı başarıyla güncellendi."
 #: messages.json
 #, fuzzy
 msgid "harvesting.tags.cancel"
-msgstr "Şimdi"
+msgstr "İptal"
 
 #. [harvesting.tags.deleteConfirmation.confirmDeletionBody]
 #. defaultMessage is:
@@ -4627,7 +4579,7 @@ msgstr "Alıntı başarıyla silindi."
 #: messages.json
 #, fuzzy
 msgid "harvesting.tags.validate"
-msgstr "Hasatlama onaylandı"
+msgstr "Onayla"
 
 #. [harvesting.validateExtract]
 #. defaultMessage is:
@@ -4648,7 +4600,7 @@ msgstr "Hasatlama onaylandı"
 #. here
 #: messages.json
 msgid "here"
-msgstr ""
+msgstr "burada"
 
 #. [home.accessButton]
 #. defaultMessage is:
@@ -4907,21 +4859,21 @@ msgstr "Giriş"
 #. I have read and accepted 
 #: messages.json
 msgid "legalContentsModal.iAccept"
-msgstr ""
+msgstr "Okudum ve kabul ediyorum"
 
 #. [legalContentsModal.ofThePlatform]
 #. defaultMessage is:
 #.  of the platform.
 #: messages.json
 msgid "legalContentsModal.ofThePlatform"
-msgstr ""
+msgstr "kabul ediyorum."
 
 #. [legalContentsModal.title]
 #. defaultMessage is:
 #. Accept the legal contents
 #: messages.json
 msgid "legalContentsModal.title"
-msgstr ""
+msgstr "Platformdaki yasal içeriği "
 
 #. [legalNotice.headerTitle]
 #. defaultMessage is:
@@ -4949,11 +4901,7 @@ msgstr "Hesabınız oluşturuldu."
 #. A confirmation e-mail has been sent to your account and should be in your inbox in a few minutes. It contains a confirmation link, please click on it in order to confirm your e-mail address. Check your spam folder if you did not receive a confirmation e-mail.
 #: messages.json
 msgid "login.accountCreatedMsg"
-msgstr ""
-"Birkaç dakika içinde gelen kutunuza varacak olan bir doğrulama e-postası "
-"hesabınıza gönderildi. Lütfen e-posta adresinizi doğrulamak için bu e-posta "
-"ile gönderilen onay bağlantısına tıklayın. Eğer doğrulama e-postası "
-"almadıysanız, lütfen gereksiz e-posta kutunuzu kontrol edin."
+msgstr "Birkaç dakika içinde gelen kutunuza varacak olan bir doğrulama e-postası hesabınıza gönderildi. Lütfen e-posta adresinizi doğrulamak için bu e-posta ile gönderilen onay bağlantısına tıklayın. Eğer doğrulama e-postası almadıysanız, lütfen gereksiz e-posta kutunuzu kontrol edin."
 
 #. [login.alreadyAccount]
 #. defaultMessage is:
@@ -5139,17 +5087,14 @@ msgstr "Parolayı tekrarla"
 #. Oh oh! There seems to be a problem on our end. Please try again later.
 #: messages.json
 msgid "login.passwordChangeRequestError"
-msgstr ""
-"Tüh! Bizden kaynaklanan bir sorun oluştu. Lütfen daha sonra tekrar deneyin."
+msgstr "Tüh! Bizden kaynaklanan bir sorun oluştu. Lütfen daha sonra tekrar deneyin."
 
 #. [login.passwordChangeRequestSuccess]
 #. defaultMessage is:
 #. Great! An email has been sent to your account. Make sure to check your spam folder as well
 #: messages.json
 msgid "login.passwordChangeRequestSuccess"
-msgstr ""
-"Harika! Hesabınıza bir e-posta gönderilmiştir. Lütfen gereksiz e-posta "
-"kutunuzu da kontrol edin"
+msgstr "Harika! Hesabınıza bir e-posta gönderilmiştir. Lütfen gereksiz e-posta kutunuzu da kontrol edin"
 
 #. [login.passwordRequirementIntro]
 #. defaultMessage is:
@@ -5157,8 +5102,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "login.passwordRequirementIntro"
-msgstr ""
-"Tüh! Bizden kaynaklanan bir sorun oluştu. Lütfen daha sonra tekrar deneyin."
+msgstr "Tüh! Bizden kaynaklanan bir sorun oluştu. Lütfen daha sonra tekrar deneyin."
 
 #. [login.resend]
 #. defaultMessage is:
@@ -5186,11 +5130,7 @@ msgstr "Parola değiştirme talebi"
 #. We have sent you an email with a temporary connection link. Please use that link to log in and change your password. Make sure to check your spam folder if an email is not in your inbox
 #: messages.json
 msgid "login.sendPwdMsg"
-msgstr ""
-"Geçici bir bağlantı içeren bir e-posta adresinize gönderildi. Lütfen oturum "
-"açmak ve parolanızı değiştirmek için bu bağlantıyı kullanın. Bu e-postayı "
-"gelen kutunuzda bulamazsanız, lütfen gereksiz e-posta kutunuzu da kontrol "
-"edin"
+msgstr "Geçici bir bağlantı içeren bir e-posta adresinize gönderildi. Lütfen oturum açmak ve parolanızı değiştirmek için bu bağlantıyı kullanın. Bu e-postayı gelen kutunuzda bulamazsanız, lütfen gereksiz e-posta kutunuzu da kontrol edin"
 
 #. [login.signUp]
 #. defaultMessage is:
@@ -5325,7 +5265,7 @@ msgstr "Üzgünüz, bu sayfa bulunamadı"
 #. Something went wrong when loading this post.
 #: messages.json
 msgid "postLoadError"
-msgstr ""
+msgstr "Bu gönderi yüklenirken bir şeyler ters gitti."
 
 #. [privacyPolicy.headerTitle]
 #. defaultMessage is:
@@ -5379,21 +5319,21 @@ msgstr "Hesap oluştur"
 #. Delete my account and my data
 #: messages.json
 msgid "profile.deleteMyAccountConfirmation"
-msgstr ""
+msgstr "Hesabımı ve verilerimi sil"
 
 #. [profile.deleteMyAccountModal]
 #. defaultMessage is:
 #. Are you sure you want to permanently delete your account and all of your personal data? By validating, you will no longer be able to contribute to the consultation.
 #: messages.json
 msgid "profile.deleteMyAccountModal"
-msgstr ""
+msgstr "Hesabınızı ve tüm kişisel verilerinizi kalıcı olarak silmek istediğinizden emin misiniz? Onaylayarak artık konsültasyona katkıda bulunamazsınız."
 
 #. [profile.deleteMyAccountText]
 #. defaultMessage is:
 #. By deleting your account, you permanently delete all of your personal data and your account. You will no longer be able to contribute to the debate without an account.
 #: messages.json
 msgid "profile.deleteMyAccountText"
-msgstr ""
+msgstr "Hesabınızı silerek, tüm kişisel verilerinizi ve hesabınızı kalıcı olarak silmiş olursunuz. Artık hesap olmadan konsültasyona katkıda bulunamazsınız."
 
 #. [profile.email]
 #. defaultMessage is:
@@ -5534,7 +5474,7 @@ msgstr "Kişisel bilgiler"
 #. Refuse
 #: messages.json
 msgid "refuse"
-msgstr ""
+msgstr "Reddet"
 
 #. [resourcesCenter.defaultHeaderTitle]
 #. defaultMessage is:
@@ -6188,9 +6128,7 @@ msgstr "Ana sayfaya dön"
 #. You are not authorized to access the administration section. Please contact the administrator of the website.
 #: messages.json
 msgid "unauthorizedAdministration.unauthorizedMessage"
-msgstr ""
-"Yönetici bölümüne erişim yetkiniz bulunmamakta. Lütfen internet sitesinin "
-"yöneticisiyle iletişime geçin."
+msgstr "Yönetici bölümüne erişim yetkiniz bulunmamakta. Lütfen internet sitesinin yöneticisiyle iletişime geçin."
 
 #. [userGuidelines.headerTitle]
 #. defaultMessage is:
@@ -6205,14 +6143,14 @@ msgstr "Yasal Uyarı"
 #. I have read and I accept the 
 #: messages.json
 msgid "userGuidelines.iAccept"
-msgstr ""
+msgstr "Kullanıcı kurallarını"
 
 #. [userGuidelines.link]
 #. defaultMessage is:
 #. the user guidelines
 #: messages.json
 msgid "userGuidelines.link"
-msgstr ""
+msgstr "okudum ve kabul ediyorum"
 
 #. [validate]
 #. defaultMessage is:

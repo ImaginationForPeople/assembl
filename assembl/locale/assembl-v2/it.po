@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2019-06-07T17:09:08.454Z\n"
-"PO-Revision-Date: \n"
+"PO-Revision-Date: 2019-10-08 12:36+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: it_IT\n"
@@ -17,7 +17,7 @@ msgstr ""
 #. Accept
 #: messages.json
 msgid "accept"
-msgstr ""
+msgstr "Accetta"
 
 #. [accountDeleted]
 #. defaultMessage is:
@@ -54,9 +54,7 @@ msgstr "Aggiungi un tema"
 #. An error occured during save. Please check that you filled all the required fields.
 #: messages.json
 msgid "administration.anErrorOccured"
-msgstr ""
-"Si è verificato un errore durante il salvataggio. Verifica di aver compilato "
-"tutti i campi obbligatori."
+msgstr "Si è verificato un errore durante il salvataggio. Verifica di aver compilato tutti i campi obbligatori."
 
 #. [administration.annotation]
 #. defaultMessage is:
@@ -159,9 +157,7 @@ msgstr "Conferma eliminazione"
 #. You have unsaved changes. Are you sure you want to leave this page?
 #: messages.json
 msgid "administration.confirmUnsavedChanges"
-msgstr ""
-"Sono presenti delle modifiche non salvate. Sei sicuro di voler abbandonare "
-"la pagina?"
+msgstr "Sono presenti delle modifiche non salvate. Sei sicuro di voler abbandonare la pagina?"
 
 #. [administration.defineGaugeNumer]
 #. defaultMessage is:
@@ -365,8 +361,7 @@ msgstr "Esporta i dati del dibattito"
 #: messages.json
 #, fuzzy
 msgid "administration.export.presets.lastMonth"
-msgstr ""
-"Puoi esportare tutti i dati del modulo sondaggio cliccando sul tasto Esporta"
+msgstr "Puoi esportare tutti i dati del modulo sondaggio cliccando sul tasto Esporta"
 
 #. [administration.export.presets.lastWeek]
 #. defaultMessage is:
@@ -414,8 +409,7 @@ msgstr "Esporta i dati del dibattito"
 #: messages.json
 #, fuzzy
 msgid "administration.export.taxonomyAnnotation"
-msgstr ""
-"Puoi esportare tutti i dati del modulo sondaggio cliccando sul tasto Esporta"
+msgstr "Puoi esportare tutti i dati del modulo sondaggio cliccando sul tasto Esporta"
 
 #. [administration.export.taxonomySectionTitle]
 #. defaultMessage is:
@@ -445,8 +439,7 @@ msgstr "Traduci i messaggi in:"
 #: messages.json
 #, fuzzy
 msgid "administration.export.translation"
-msgstr ""
-"Puoi esportare tutti i dati del modulo sondaggio cliccando sul tasto Esporta"
+msgstr "Puoi esportare tutti i dati del modulo sondaggio cliccando sul tasto Esporta"
 
 #. [administration.export.vote.extractCsvVoters]
 #. defaultMessage is:
@@ -454,9 +447,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.export.vote.extractCsvVoters"
-msgstr ""
-"Puoi esportare tutti i dati della sessione di voto cliccando sul tasto "
-"Esporta"
+msgstr "Puoi esportare tutti i dati della sessione di voto cliccando sul tasto Esporta"
 
 #. [administration.export.vote.voteResultsCsv]
 #. defaultMessage is:
@@ -485,9 +476,7 @@ msgstr "Applica queste modifiche a tutte le proposte"
 #. You are about to modify the settings on this gauge only. If you wish to modify all of the gauges, please check the box at the end of the form.
 #: messages.json
 msgid "administration.gaugeModal.subTitle"
-msgstr ""
-"Stai per modificare le impostazioni solo su questo indicatore. Se desideri "
-"modificare tutti gli indicatori, seleziona la casella alla fine del modulo."
+msgstr "Stai per modificare le impostazioni solo su questo indicatore. Se desideri modificare tutti gli indicatori, seleziona la casella alla fine del modulo."
 
 #. [administration.gaugeModal.title]
 #. defaultMessage is:
@@ -537,104 +526,98 @@ msgstr "Configurazione Intestazione di inizio pagine"
 #. You can decide wether the participant can distribute a single type of token (exclusive) or several types of token per proposal.
 #: messages.json
 msgid "administration.helpers.exclusive"
-msgstr ""
-"Puoi decidere se il partecipante può distribuire un solo tipo di token "
-"(esclusivo) o diversi tipi di token per proposta."
+msgstr "Puoi decidere se il partecipante può distribuire un solo tipo di token (esclusivo) o diversi tipi di token per proposta."
 
 #. [administration.helpers.gaugeVoteInstructions]
 #. defaultMessage is:
 #. Depending on the objective of the gauge module, incite the participants to take action.
 #: messages.json
 msgid "administration.helpers.gaugeVoteInstructions"
-msgstr ""
-"A seconda dell’obiettivo del modulo con indicatore, incita i partecipanti ad "
-"agire."
+msgstr "A seconda dell’obiettivo del modulo con indicatore, incita i partecipanti ad agire."
 
 #. [administration.helpers.landingPage.chatbot]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.chatbot"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.contact]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.contact"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.data]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.data"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.footer]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.footer"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.header]
 #. defaultMessage is:
 #. Top page header. It contains the consultation's title and subtitle and a button to access to the consultation.
 #: messages.json
 msgid "administration.helpers.landingPage.header"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.helpers.landingPage.introduction]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.introduction"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.news]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.news"
-msgstr ""
+msgstr "  "
 
 #. [administration.helpers.landingPage.partners]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.partners"
-msgstr ""
+msgstr "   "
 
 #. [administration.helpers.landingPage.timeline]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.timeline"
-msgstr ""
+msgstr "   "
 
 #. [administration.helpers.landingPage.top_thematics]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.top_thematics"
-msgstr ""
+msgstr " "
 
 #. [administration.helpers.landingPage.tweets]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.tweets"
-msgstr ""
+msgstr "   "
 
 #. [administration.helpers.landingPage.video]
 #. defaultMessage is:
 #.  
 #: messages.json
 msgid "administration.helpers.landingPage.video"
-msgstr ""
+msgstr "    "
 
 #. [administration.helpers.surveyQuestion]
 #. defaultMessage is:
@@ -650,9 +633,7 @@ msgstr "Cancella la domanda"
 #: messages.json
 #, fuzzy
 msgid "administration.helpers.timelinePhases"
-msgstr ""
-"Puoi decidere se il partecipante può distribuire un solo tipo di token "
-"(esclusivo) o diversi tipi di token per proposta."
+msgstr "Puoi decidere se il partecipante può distribuire un solo tipo di token (esclusivo) o diversi tipi di token per proposta."
 
 #. [administration.helpers.timelineTitle]
 #. defaultMessage is:
@@ -660,9 +641,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.helpers.timelineTitle"
-msgstr ""
-"Puoi decidere se il partecipante può distribuire un solo tipo di token "
-"(esclusivo) o diversi tipi di token per proposta."
+msgstr "Puoi decidere se il partecipante può distribuire un solo tipo di token (esclusivo) o diversi tipi di token per proposta."
 
 #. [administration.helpers.tokenCategoryNumber]
 #. defaultMessage is:
@@ -676,17 +655,14 @@ msgstr "Seleziona il numero di tipi di token diversi per questo voto."
 #. Depending on the objective of the token module, incite the participants to take action.
 #: messages.json
 msgid "administration.helpers.tokenVoteInstructions"
-msgstr ""
-"A seconda dell’obiettivo del modulo token, incita i partecipanti ad agire."
+msgstr "A seconda dell’obiettivo del modulo token, incita i partecipanti ad agire."
 
 #. [administration.helpers.voteSessionProposalSection]
 #. defaultMessage is:
 #. The proposals section is introduced by a title. You define the title based on the proposal content.
 #: messages.json
 msgid "administration.helpers.voteSessionProposalSection"
-msgstr ""
-"La sezione proposte è introdotta da un titolo. Definisci il titolo in base "
-"al contenuto della proposta."
+msgstr "La sezione proposte è introdotta da un titolo. Definisci il titolo in base al contenuto della proposta."
 
 #. [administration.informationOfTheDebate]
 #. defaultMessage is:
@@ -717,9 +693,7 @@ msgstr "Valore minimo"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.buttonLabel"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.header.dateDescription]
 #. defaultMessage is:
@@ -727,9 +701,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.dateDescription"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.header.dateLabel]
 #. defaultMessage is:
@@ -753,9 +725,7 @@ msgstr "Gestisci i moduli"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.endDateError"
-msgstr ""
-"Scegli i moduli che desideri visualizzare nella landing page e la loro "
-"posizione."
+msgstr "Scegli i moduli che desideri visualizzare nella landing page e la loro posizione."
 
 #. [administration.landingPage.header.headerDescription]
 #. defaultMessage is:
@@ -763,9 +733,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.headerDescription"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.header.headerImage]
 #. defaultMessage is:
@@ -773,9 +741,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.headerImage"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.header.helper]
 #. defaultMessage is:
@@ -783,9 +749,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.helper"
-msgstr ""
-"Scegli i moduli che desideri visualizzare nella landing page e la loro "
-"posizione."
+msgstr "Scegli i moduli che desideri visualizzare nella landing page e la loro posizione."
 
 #. [administration.landingPage.header.logoDescription]
 #. defaultMessage is:
@@ -793,9 +757,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.logoDescription"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.header.logoHelper]
 #. defaultMessage is:
@@ -803,9 +765,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.logoHelper"
-msgstr ""
-"Scegli i moduli che desideri visualizzare nella landing page e la loro "
-"posizione."
+msgstr "Scegli i moduli che desideri visualizzare nella landing page e la loro posizione."
 
 #. [administration.landingPage.header.logoImage]
 #. defaultMessage is:
@@ -813,9 +773,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.header.logoImage"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.header.startDate]
 #. defaultMessage is:
@@ -894,9 +852,7 @@ msgstr "Gestisci i moduli"
 #. Choose the modules you want to see in the landing page and their position.
 #: messages.json
 msgid "administration.landingPage.manageModules.helper"
-msgstr ""
-"Scegli i moduli che desideri visualizzare nella landing page e la loro "
-"posizione."
+msgstr "Scegli i moduli che desideri visualizzare nella landing page e la loro posizione."
 
 #. [administration.landingPage.manageModules.textAndMultimedia]
 #. defaultMessage is:
@@ -934,9 +890,7 @@ msgstr "I moduli sono stati salvati correttamente!"
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.timeline.image"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.timeline.imageDescription]
 #. defaultMessage is:
@@ -944,9 +898,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.landingPage.timeline.imageDescription"
-msgstr ""
-"Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della "
-"consultazione e un tasto per accedere alla consultazione."
+msgstr "Intestazione di inizio pagina. Contiene il titolo e il sottotitolo della consultazione e un tasto per accedere alla consultazione."
 
 #. [administration.landingPage.timeline.sectionTitle]
 #. defaultMessage is:
@@ -1237,8 +1189,7 @@ msgstr "Valore numero"
 #: messages.json
 #, fuzzy
 msgid "administration.personalizeInterface.favicon"
-msgstr ""
-"A seconda dell’obiettivo del modulo token, incita i partecipanti ad agire."
+msgstr "A seconda dell’obiettivo del modulo token, incita i partecipanti ad agire."
 
 #. [administration.personalizeInterface.faviconInstruction]
 #. defaultMessage is:
@@ -1246,9 +1197,7 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "administration.personalizeInterface.faviconInstruction"
-msgstr ""
-"La sezione istruzioni deve contenere un titolo e una descrizione che guiderà "
-"i partecipanti nel loro contributo."
+msgstr "La sezione istruzioni deve contenere un titolo e una descrizione che guiderà i partecipanti nel loro contributo."
 
 #. [administration.personalizeInterface.icoRequired]
 #. defaultMessage is:
@@ -1264,8 +1213,7 @@ msgstr "Usa pagina esterna"
 #: messages.json
 #, fuzzy
 msgid "administration.personalizeInterface.logoInstruction"
-msgstr ""
-"A seconda dell’obiettivo del modulo token, incita i partecipanti ad agire."
+msgstr "A seconda dell’obiettivo del modulo token, incita i partecipanti ad agire."
 
 #. [administration.personalizeInterface.success]
 #. defaultMessage is:
@@ -1711,8 +1659,7 @@ msgstr "Sezione %{num} di %{total}"
 #: messages.json
 #, fuzzy
 msgid "administration.successDiscussionPreference"
-msgstr ""
-"Le preferenze sulla lingua di discussione sono state salvate correttamente!"
+msgstr "Le preferenze sulla lingua di discussione sono state salvate correttamente!"
 
 #. [administration.successThemeCreation]
 #. defaultMessage is:
@@ -2127,10 +2074,7 @@ msgstr "Titolo token"
 #. The token vote module allows you to select propositions proportionnaly. Each participant has a certain amount of tokens et will have to spread them on the different propositions
 #: messages.json
 msgid "administration.tokenVoteCheckbox"
-msgstr ""
-"Il modulo di voto con token ti permette di selezionare le proposte in "
-"maniera proporzionale. Ogni partecipante ha un certo numero di token e dovrà "
-"distribuirli sulle diverse proposte"
+msgstr "Il modulo di voto con token ti permette di selezionare le proposte in maniera proporzionale. Ogni partecipante ha un certo numero di token e dovrà distribuirli sulle diverse proposte"
 
 #. [administration.tokenVoteInstructions]
 #. defaultMessage is:
@@ -2189,9 +2133,7 @@ msgstr "Titolo valore"
 #. *Authorized video links: "https://www.youtube.com/embed/[videoId]" or "https://player.vimeo.com/video/[videoId]?"
 #: messages.json
 msgid "administration.videoHelp"
-msgstr ""
-"*Link video autorizzati: \"https://www.youtube.com/embed/[videoId]\" o "
-"\"https://player.vimeo.com/video/[videoId]?\""
+msgstr "*Link video autorizzati: \"https://www.youtube.com/embed/[videoId]\" o \"https://player.vimeo.com/video/[videoId]?\""
 
 #. [administration.voteProposals.addProposal]
 #. defaultMessage is:
@@ -2361,7 +2303,7 @@ msgstr "Voto con token"
 #.  and 
 #: messages.json
 msgid "and"
-msgstr ""
+msgstr "e"
 
 #. [cancel]
 #. defaultMessage is:
@@ -2455,7 +2397,7 @@ msgstr "Elenco puntato"
 #. Open link in new tab
 #: messages.json
 msgid "common.editor.linkPlugin.openInNewTab"
-msgstr ""
+msgstr "Apri link in una nuova scheda"
 
 #. [common.editor.linkPlugin.text]
 #. defaultMessage is:
@@ -2540,14 +2482,14 @@ msgstr "Scegli un file da caricare"
 #. TO BE DEFINED %{words}
 #: messages.json
 msgid "common.wordCountInformation.msg"
-msgstr ""
+msgstr "DA DEFINIRE %{words}"
 
 #. [common.wordCountInformation.words]
 #. defaultMessage is:
 #. <span class='words-watson'>%{wordCount} words</span>
 #: messages.json
 msgid "common.wordCountInformation.words"
-msgstr ""
+msgstr "%{wordCount} parole"
 
 #. [community.panelTitle]
 #. defaultMessage is:
@@ -2568,14 +2510,14 @@ msgstr "Conclusione"
 #. Terms and conditions
 #: messages.json
 msgid "cookies.cgu"
-msgstr ""
+msgstr "Termini e condizioni"
 
 #. [cookies.cguHelper]
 #. defaultMessage is:
 #. This cookie registers that you have accepted the terms and conditions of the consultation.
 #: messages.json
 msgid "cookies.cguHelper"
-msgstr ""
+msgstr "Questo cookie registra che hai accettato i termini e le condizioni della concertazione."
 
 #. [cookies.locale]
 #. defaultMessage is:
@@ -2590,35 +2532,35 @@ msgstr "Note legali"
 #. This cookie is necessary to display the texts in the language of your browser or the one you selected in the navigation bar.
 #: messages.json
 msgid "cookies.localeHelper"
-msgstr ""
+msgstr "Questo cookie è necessario per visualizzare il testo nella lingua del tuo browser o in quella che hai selezionato nella barra di navigazione."
 
 #. [cookies.matomo]
 #. defaultMessage is:
 #. Matomo
 #: messages.json
 msgid "cookies.matomo"
-msgstr ""
+msgstr "Matomo"
 
 #. [cookies.matomoHelper]
 #. defaultMessage is:
 #. This cookie is used for stasticial purposes regarding the participants of the consultation.
 #: messages.json
 msgid "cookies.matomoHelper"
-msgstr ""
+msgstr "Questo cookie viene utilizzato per scopi statistici relativi ai partecipanti alla concertazione."
 
 #. [cookies.matomoSettings]
 #. defaultMessage is:
 #. To modify this cookie's setting please click here
 #: messages.json
 msgid "cookies.matomoSettings"
-msgstr ""
+msgstr "Per modificare l’impostazione di questo cookie, clicca qui"
 
 #. [cookies.privacyPolicy]
 #. defaultMessage is:
 #. Privacy policy
 #: messages.json
 msgid "cookies.privacyPolicy"
-msgstr ""
+msgstr "Informativa sulla privacy"
 
 #. [cookies.privacyPolicyHelper]
 #. defaultMessage is:
@@ -2641,49 +2583,49 @@ msgstr "Questo campo è obbligatorio."
 #. User Guidelines
 #: messages.json
 msgid "cookies.userGuideline"
-msgstr ""
+msgstr "Linee guida per l’utente"
 
 #. [cookies.userGuidelineHelper]
 #. defaultMessage is:
 #. This cookie registers that you have accepted the user guidelines of the consultation.
 #: messages.json
 msgid "cookies.userGuidelineHelper"
-msgstr ""
+msgstr "Questo cookie registra che hai accettato le linee guida per l’utente della concertazione."
 
 #. [cookies.userSession]
 #. defaultMessage is:
 #. User Session
 #: messages.json
 msgid "cookies.userSession"
-msgstr ""
+msgstr "Sessione utente"
 
 #. [cookies.userSessionHelper]
 #. defaultMessage is:
 #. This cookie is necessary to maintain the user connected on Assembl.
 #: messages.json
 msgid "cookies.userSessionHelper"
-msgstr ""
+msgstr "Questo cookie è necessario per mantenere l’utente collegato ad Assembl."
 
 #. [cookiesBar.accept]
 #. defaultMessage is:
 #. I agree
 #: messages.json
 msgid "cookiesBar.accept"
-msgstr ""
+msgstr "Accetto"
 
 #. [cookiesBar.cookiesNotice]
 #. defaultMessage is:
 #. Assembl uses cookies to offer you the best possible experience. To use Assembl, you have to agree to the cookies policy of the debate.
 #: messages.json
 msgid "cookiesBar.cookiesNotice"
-msgstr ""
+msgstr "Assembl utilizza i cookie per offrirti la migliore esperienza possibile. Per poter usare Assembl, devi accettare la politica sui cookie del dibattito."
 
 #. [cookiesBar.seeCookiesPolicy]
 #. defaultMessage is:
 #. See more
 #: messages.json
 msgid "cookiesBar.seeCookiesPolicy"
-msgstr ""
+msgstr "Mostra altro"
 
 #. [cookiesPolicy.analytics]
 #. defaultMessage is:
@@ -2797,168 +2739,168 @@ msgstr "Mi piace"
 #. Cancel
 #: messages.json
 msgid "debate.brightMirror.commentFiction.cancel"
-msgstr ""
+msgstr "Annulla"
 
 #. [debate.brightMirror.commentFiction.commentHelper]
 #. defaultMessage is:
 #. Comment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.commentHelper"
-msgstr ""
+msgstr "Commento"
 
 #. [debate.brightMirror.commentFiction.deleteComment]
 #. defaultMessage is:
 #. Delete this message
 #: messages.json
 msgid "debate.brightMirror.commentFiction.deleteComment"
-msgstr ""
+msgstr "Elimina questo messaggio"
 
 #. [debate.brightMirror.commentFiction.deleteCommentBodyMessage]
 #. defaultMessage is:
 #. Are you sure you want to delete this message?
 #: messages.json
 msgid "debate.brightMirror.commentFiction.deleteCommentBodyMessage"
-msgstr ""
+msgstr "Vuoi davvero eliminare questo messaggio?"
 
 #. [debate.brightMirror.commentFiction.editComment]
 #. defaultMessage is:
 #. Edit this message
 #: messages.json
 msgid "debate.brightMirror.commentFiction.editComment"
-msgstr ""
+msgstr "Modifica questo messaggio"
 
 #. [debate.brightMirror.commentFiction.imageAlt]
 #. defaultMessage is:
 #. Let's talk illustration
 #: messages.json
 msgid "debate.brightMirror.commentFiction.imageAlt"
-msgstr ""
+msgstr "Vediamo l’immagine"
 
 #. [debate.brightMirror.commentFiction.label]
 #. defaultMessage is:
 #. Comments
 #: messages.json
 msgid "debate.brightMirror.commentFiction.label"
-msgstr ""
+msgstr "Commenti"
 
 #. [debate.brightMirror.commentFiction.modal.instructionList]
 #. defaultMessage is:
 #. You can comment the text:
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionList"
-msgstr ""
+msgstr "Puoi commentare il testo:"
 
 #. [debate.brightMirror.commentFiction.modal.instructionListOne]
 #. defaultMessage is:
 #. Underligne a quote
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionListOne"
-msgstr ""
+msgstr "Sottolinea una citazione"
 
 #. [debate.brightMirror.commentFiction.modal.instructionListThree]
 #. defaultMessage is:
 #. Write your comment, add an image or video and validate
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionListThree"
-msgstr ""
+msgstr "Scrivi un commento, aggiungi un’immagine o un video e convalida"
 
 #. [debate.brightMirror.commentFiction.modal.instructionListTwo]
 #. defaultMessage is:
 #. Click “Suggest” to open an input box
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.instructionListTwo"
-msgstr ""
+msgstr "Clicca su “Suggeisci” per aprire una finestra di input"
 
 #. [debate.brightMirror.commentFiction.modal.title]
 #. defaultMessage is:
 #. Comment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.modal.title"
-msgstr ""
+msgstr "Commento"
 
 #. [debate.brightMirror.commentFiction.numberOfComments]
 #. defaultMessage is:
 #. %{count} messages
 #: messages.json
 msgid "debate.brightMirror.commentFiction.numberOfComments"
-msgstr ""
+msgstr "%{count} messaggi"
 
 #. [debate.brightMirror.commentFiction.numberOfComments_0]
 #. defaultMessage is:
 #. No message at the moment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.numberOfComments_0"
-msgstr ""
+msgstr "Nessun messaggio al momento"
 
 #. [debate.brightMirror.commentFiction.numberOfComments_1]
 #. defaultMessage is:
 #. %{count} message
 #: messages.json
 msgid "debate.brightMirror.commentFiction.numberOfComments_1"
-msgstr ""
+msgstr "%{count} messaggio"
 
 #. [debate.brightMirror.commentFiction.placeholder]
 #. defaultMessage is:
 #. Join the debate...
 #: messages.json
 msgid "debate.brightMirror.commentFiction.placeholder"
-msgstr ""
+msgstr "Partecipa al dibattito..."
 
 #. [debate.brightMirror.commentFiction.strongTitle]
 #. defaultMessage is:
 #. Let's talk!
 #: messages.json
 msgid "debate.brightMirror.commentFiction.strongTitle"
-msgstr ""
+msgstr "Parliamone!"
 
 #. [debate.brightMirror.commentFiction.submit]
 #. defaultMessage is:
 #. Comment
 #: messages.json
 msgid "debate.brightMirror.commentFiction.submit"
-msgstr ""
+msgstr "Commento"
 
 #. [debate.brightMirror.commentFiction.title]
 #. defaultMessage is:
 #. Comment or debate on the text above
 #: messages.json
 msgid "debate.brightMirror.commentFiction.title"
-msgstr ""
+msgstr "Commenta o discuti del testo riportato sopra"
 
 #. [debate.brightMirror.deleteFiction]
 #. defaultMessage is:
 #. Delete your text
 #: messages.json
 msgid "debate.brightMirror.deleteFiction"
-msgstr ""
+msgstr "Elimina il tuo testo"
 
 #. [debate.brightMirror.deleteFictionModalBody]
 #. defaultMessage is:
 #. Are you sure you want to delete this text?
 #: messages.json
 msgid "debate.brightMirror.deleteFictionModalBody"
-msgstr ""
+msgstr "Vuoi davvero eliminare questo testo?"
 
 #. [debate.brightMirror.deleteFictionSuccessMsg]
 #. defaultMessage is:
 #. Your text was deleted
 #: messages.json
 msgid "debate.brightMirror.deleteFictionSuccessMsg"
-msgstr ""
+msgstr "Il tuo testo è stato eliminato"
 
 #. [debate.brightMirror.draftEmptyTitle]
 #. defaultMessage is:
 #. Untitled
 #: messages.json
 msgid "debate.brightMirror.draftEmptyTitle"
-msgstr ""
+msgstr "Senza titolo"
 
 #. [debate.brightMirror.draftLabel]
 #. defaultMessage is:
 #. Draft
 #: messages.json
 msgid "debate.brightMirror.draftLabel"
-msgstr ""
+msgstr "Bozza"
 
 #. [debate.brightMirror.draftSuccessMsg]
 #. defaultMessage is:
@@ -2973,14 +2915,14 @@ msgstr "Grazie per aver partecipato. Il tuo commento è stato inviato!"
 #. Edit your text
 #: messages.json
 msgid "debate.brightMirror.editFiction"
-msgstr ""
+msgstr "Modifica il tuo testo"
 
 #. [debate.brightMirror.fiction]
 #. defaultMessage is:
 #. text
 #: messages.json
 msgid "debate.brightMirror.fiction"
-msgstr ""
+msgstr "testo"
 
 #. [debate.brightMirror.fillBodyLabel]
 #. defaultMessage is:
@@ -2988,35 +2930,35 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "debate.brightMirror.fillBodyLabel"
-msgstr "Scrivi un commento"
+msgstr "Scrivi il tuo testo"
 
 #. [debate.brightMirror.fillEitherTitleContent]
 #. defaultMessage is:
 #. Please, write a title or a text
 #: messages.json
 msgid "debate.brightMirror.fillEitherTitleContent"
-msgstr ""
+msgstr "Scrivi un titolo o un testo"
 
 #. [debate.brightMirror.noAuthorSpecified]
 #. defaultMessage is:
 #. No author specified
 #: messages.json
 msgid "debate.brightMirror.noAuthorSpecified"
-msgstr ""
+msgstr "Non è stato specificato alcun autore"
 
 #. [debate.brightMirror.noContentSpecified]
 #. defaultMessage is:
 #. No content specified
 #: messages.json
 msgid "debate.brightMirror.noContentSpecified"
-msgstr ""
+msgstr "Non è stato specificato alcun contenuto"
 
 #. [debate.brightMirror.noTitleSpecified]
 #. defaultMessage is:
 #. No title specified
 #: messages.json
 msgid "debate.brightMirror.noTitleSpecified"
-msgstr ""
+msgstr "Non è stato specificato alcun titolo"
 
 #. [debate.brightMirror.numberOfFictions]
 #. defaultMessage is:
@@ -3071,14 +3013,14 @@ msgstr "Grazie per aver partecipato. Il tuo commento è stato inviato!"
 #. Save
 #: messages.json
 msgid "debate.brightMirror.saveDraft"
-msgstr ""
+msgstr "Salva"
 
 #. [debate.brightMirror.sentiment.dislike]
 #. defaultMessage is:
 #. Scary
 #: messages.json
 msgid "debate.brightMirror.sentiment.dislike"
-msgstr ""
+msgstr "Spaventoso"
 
 #. [debate.brightMirror.sentiment.dontUnderstand]
 #. defaultMessage is:
@@ -3093,91 +3035,91 @@ msgstr "Non ho capito"
 #. Inspiring!
 #: messages.json
 msgid "debate.brightMirror.sentiment.like"
-msgstr ""
+msgstr "Interessante!"
 
 #. [debate.brightMirror.sentiment.moreInfo]
 #. defaultMessage is:
 #. Enrich the style
 #: messages.json
 msgid "debate.brightMirror.sentiment.moreInfo"
-msgstr ""
+msgstr "Arricchisci"
 
 #. [debate.brightMirror.shareFiction]
 #. defaultMessage is:
 #. Share a short story
 #: messages.json
 msgid "debate.brightMirror.shareFiction"
-msgstr ""
+msgstr "Condividi una breve storia"
 
 #. [debate.brightMirror.sideComment.commentLabel]
 #. defaultMessage is:
 #. Your comment
 #: messages.json
 msgid "debate.brightMirror.sideComment.commentLabel"
-msgstr ""
+msgstr "Il tuo commento"
 
 #. [debate.brightMirror.sideComment.commenterSingleParticipation]
 #. defaultMessage is:
 #. 1 participant commented a quote.
 #: messages.json
 msgid "debate.brightMirror.sideComment.commenterSingleParticipation"
-msgstr ""
+msgstr "1 partecipante ha commentato una citazione."
 
 #. [debate.brightMirror.sideComment.commentersParticipation]
 #. defaultMessage is:
 #. %{count} participants commented quotes.
 #: messages.json
 msgid "debate.brightMirror.sideComment.commentersParticipation"
-msgstr ""
+msgstr "%{count} partecipanti hanno commentato delle citazioni."
 
 #. [debate.brightMirror.sideComment.commentersParticipation_1]
 #. defaultMessage is:
 #. %{count} participant commented quotes.
 #: messages.json
 msgid "debate.brightMirror.sideComment.commentersParticipation_1"
-msgstr ""
+msgstr "%{count} partecipante ha commentato delle citazioni."
 
 #. [debate.brightMirror.sideComment.confirmDeleteMsg]
 #. defaultMessage is:
 #. Are you sure you would like to delete this comment?
 #: messages.json
 msgid "debate.brightMirror.sideComment.confirmDeleteMsg"
-msgstr ""
+msgstr "Vuoi davvero eliminare questo commento?"
 
 #. [debate.brightMirror.sideComment.deleteSuccessMsg]
 #. defaultMessage is:
 #. Your comment has been deleted successfully!
 #: messages.json
 msgid "debate.brightMirror.sideComment.deleteSuccessMsg"
-msgstr ""
+msgstr "Il tuo commento è stato eliminato!"
 
 #. [debate.brightMirror.sideComment.deleteTooltip]
 #. defaultMessage is:
 #. Delete
 #: messages.json
 msgid "debate.brightMirror.sideComment.deleteTooltip"
-msgstr ""
+msgstr "Elimina"
 
 #. [debate.brightMirror.sideComment.editSuccessMsg]
 #. defaultMessage is:
 #. Your comment has been edited successfully!
 #: messages.json
 msgid "debate.brightMirror.sideComment.editSuccessMsg"
-msgstr ""
+msgstr "Il tuo commento è stato modificato!"
 
 #. [debate.brightMirror.sideComment.editTooltip]
 #. defaultMessage is:
 #. Edit
 #: messages.json
 msgid "debate.brightMirror.sideComment.editTooltip"
-msgstr ""
+msgstr "Modifica"
 
 #. [debate.brightMirror.sideComment.submitSuccessMsg]
 #. defaultMessage is:
 #. Your comment has been published successfully!
 #: messages.json
 msgid "debate.brightMirror.sideComment.submitSuccessMsg"
-msgstr ""
+msgstr "Il tuo commento è stato pubblicato!"
 
 #. [debate.brightMirror.startFictionLabel]
 #. defaultMessage is:
@@ -3393,91 +3335,91 @@ msgstr "Ti rimangono %{nbCharacters} caratteri"
 #. Information on keywords
 #: messages.json
 msgid "debate.semanticAnalysis.informationKeyword"
-msgstr ""
+msgstr "Informazioni sulle parole chiave"
 
 #. [debate.semanticAnalysis.keywordCloud]
 #. defaultMessage is:
 #. Keyword cloud
 #: messages.json
 msgid "debate.semanticAnalysis.keywordCloud"
-msgstr ""
+msgstr "Nuvola di parole chiave"
 
 #. [debate.semanticAnalysis.keywordCloudDefinition]
 #. defaultMessage is:
 #. The following keyword cloud is a visual representation of the most frequently used keywords in the debate (or "in the conversations related to the theme being addressed" when the analysis is done on a particular thematic). The importance of each keyword is shown with font size.
 #: messages.json
 msgid "debate.semanticAnalysis.keywordCloudDefinition"
-msgstr ""
+msgstr "La nuvola di parole chiave seguente è una rappresentazione visiva delle parole chiave più usate nel dibattito (o “nelle conversazioni correlate al tema trattato\" quando si analizza una particolare tematica). L’importanza di ciascuna parola è indicata dalle dimensioni del carattere."
 
 #. [debate.semanticAnalysis.long]
 #. defaultMessage is:
 #. Analysis
 #: messages.json
 msgid "debate.semanticAnalysis.long"
-msgstr ""
+msgstr "Analisi"
 
 #. [debate.semanticAnalysis.noKeywordSelected]
 #. defaultMessage is:
 #. Select your keyword
 #: messages.json
 msgid "debate.semanticAnalysis.noKeywordSelected"
-msgstr ""
+msgstr "Seleziona la tua parola chiave"
 
 #. [debate.semanticAnalysis.numberKeyword]
 #. defaultMessage is:
 #. Number of keywords
 #: messages.json
 msgid "debate.semanticAnalysis.numberKeyword"
-msgstr ""
+msgstr "Numero di parole chiave"
 
 #. [debate.semanticAnalysis.occurence]
 #. defaultMessage is:
 #. Occurence
 #: messages.json
 msgid "debate.semanticAnalysis.occurence"
-msgstr ""
+msgstr "Occorrenza"
 
 #. [debate.semanticAnalysis.occurenceDefinition]
 #. defaultMessage is:
 #. frequency of keywords throughout the debate or throughout the discussions related to the theme being addressed.
 #: messages.json
 msgid "debate.semanticAnalysis.occurenceDefinition"
-msgstr ""
+msgstr "Frequenza di utilizzo delle parole nel dibattito o nelle discussioni correlate al tema trattato."
 
 #. [debate.semanticAnalysis.relevance]
 #. defaultMessage is:
 #. Relevance
 #: messages.json
 msgid "debate.semanticAnalysis.relevance"
-msgstr ""
+msgstr "Rilevanza"
 
 #. [debate.semanticAnalysis.relevanceDefinition]
 #. defaultMessage is:
 #. measures how important the keyword is in order to understand the general meaning of the text. The score varies from 0 to 1, from weak to strong.
 #: messages.json
 msgid "debate.semanticAnalysis.relevanceDefinition"
-msgstr ""
+msgstr "Misura l’importanza della parola chiave per capire il significato generale del testo. Il punteggio varia da 0 a 1, da debole a forte."
 
 #. [debate.semanticAnalysis.sentimentAnalysis]
 #. defaultMessage is:
 #. Sentiment analysis
 #: messages.json
 msgid "debate.semanticAnalysis.sentimentAnalysis"
-msgstr ""
+msgstr "Analisi del sentimento"
 
 #. [debate.semanticAnalysis.sentimentAnalysisDefinition]
 #. defaultMessage is:
 #. The sentiment analysis score qualifies the positive or negative tonality of the discussions in the debate (or in the discussions related to the theme being addressed).
 #: messages.json
 msgid "debate.semanticAnalysis.sentimentAnalysisDefinition"
-msgstr ""
+msgstr "Il punteggio di analisi del sentimento qualifica il tono positivo o negativo delle discussioni condotte nell’ambito del dibattito (o delle discussioni correlate al tema trattato)."
 
 #. [debate.semanticAnalysis.short]
 #. defaultMessage is:
 #. Semantic
 #: messages.json
 msgid "debate.semanticAnalysis.short"
-msgstr ""
+msgstr "Semantica"
 
 #. [debate.share]
 #. defaultMessage is:
@@ -3809,28 +3751,28 @@ msgstr "Sintesi"
 #. Already added
 #: messages.json
 msgid "debate.tagOnPost.alreadyAddedWarningMessage"
-msgstr ""
+msgstr "Già aggiunto"
 
 #. [debate.tagOnPost.suggestionContainerTitle]
 #. defaultMessage is:
 #. Suggested keywords:
 #: messages.json
 msgid "debate.tagOnPost.suggestionContainerTitle"
-msgstr ""
+msgstr "Parole chiave suggerite:"
 
 #. [debate.tagOnPost.tagContainerAdminTitle]
 #. defaultMessage is:
 #. Add post-related keywords:
 #: messages.json
 msgid "debate.tagOnPost.tagContainerAdminTitle"
-msgstr ""
+msgstr "Aggiungi parole chiave correlate al post:"
 
 #. [debate.tagOnPost.tagContainerTitle]
 #. defaultMessage is:
 #. Keywords in post:
 #: messages.json
 msgid "debate.tagOnPost.tagContainerTitle"
-msgstr ""
+msgstr "Parole chiave nel post:"
 
 #. [debate.themes]
 #. defaultMessage is:
@@ -4165,9 +4107,7 @@ msgstr "%{count} partecipante ha votato"
 #. Thank you for your participation! Your vote has been set. You can modify this vote during the entire duration of the vote session.
 #: messages.json
 msgid "debate.voteSession.postSuccess"
-msgstr ""
-"Grazie per aver partecipato! Il tuo voto è stato assegnato. Puoi modificare "
-"questo voto durante tutta la durata della sessione di voto."
+msgstr "Grazie per aver partecipato! Il tuo voto è stato assegnato. Puoi modificare questo voto durante tutta la durata della sessione di voto."
 
 #. [debate.voteSession.remainingTokens]
 #. defaultMessage is:
@@ -4251,7 +4191,7 @@ msgstr "Voti"
 #. Delete
 #: messages.json
 msgid "delete"
-msgstr ""
+msgstr "Elimina"
 
 #. [deleteConfirmation.confirmDeletionBody]
 #. defaultMessage is:
@@ -4274,7 +4214,7 @@ msgstr "Conferma eliminazione"
 #. Deleted user account
 #: messages.json
 msgid "deletedUser"
-msgstr ""
+msgstr "Account utente eliminato"
 
 #. [duration.format]
 #. defaultMessage is:
@@ -4309,7 +4249,7 @@ msgstr "Questo campo è obbligatorio."
 #. Cookies
 #: messages.json
 msgid "footer.cookiesPolicy"
-msgstr ""
+msgstr "Cookie"
 
 #. [footer.legalNotice]
 #. defaultMessage is:
@@ -4323,7 +4263,7 @@ msgstr "Note legali"
 #. Privacy Policy
 #: messages.json
 msgid "footer.privacyPolicy"
-msgstr ""
+msgstr "Informativa sulla privacy"
 
 #. [footer.socialMedias]
 #. defaultMessage is:
@@ -4352,14 +4292,14 @@ msgstr "Condizioni d’uso"
 #. Create '%{option}'
 #: messages.json
 msgid "form.select.newOption"
-msgstr ""
+msgstr "Crea '%{option}'"
 
 #. [form.select.noOptions]
 #. defaultMessage is:
 #. No options
 #: messages.json
 msgid "form.select.noOptions"
-msgstr ""
+msgstr "Nessuna opzione"
 
 #. [form.select.placeholder]
 #. defaultMessage is:
@@ -4367,14 +4307,14 @@ msgstr ""
 #: messages.json
 #, fuzzy
 msgid "form.select.placeholder"
-msgstr "Cerca"
+msgstr "Seleziona..."
 
 #. [globalError]
 #. defaultMessage is:
 #. Something went wrong. Please try again later.
 #: messages.json
 msgid "globalError"
-msgstr ""
+msgstr "Qualcosa è andato storto. Riprova più tardi."
 
 #. [harvesting.confirm]
 #. defaultMessage is:
@@ -4660,7 +4600,7 @@ msgstr "Raccolta confermata"
 #. here
 #: messages.json
 msgid "here"
-msgstr ""
+msgstr "qui"
 
 #. [home.accessButton]
 #. defaultMessage is:
@@ -4863,9 +4803,7 @@ msgstr "tempo globale dedicato"
 #. Find your most controversial and highly acclaimed discussions on the front page
 #: messages.json
 msgid "home.themesSubtitle"
-msgstr ""
-"Trova le discussioni più controverse e quelle che riscuotono maggiore "
-"consenso sulla pagina riepilogativa"
+msgstr "Trova le discussioni più controverse e quelle che riscuotono maggiore consenso sulla pagina riepilogativa"
 
 #. [home.themesTitle]
 #. defaultMessage is:
@@ -4921,21 +4859,21 @@ msgstr "Introduzione"
 #. I have read and accepted 
 #: messages.json
 msgid "legalContentsModal.iAccept"
-msgstr ""
+msgstr "Ho letto e accettato"
 
 #. [legalContentsModal.ofThePlatform]
 #. defaultMessage is:
 #.  of the platform.
 #: messages.json
 msgid "legalContentsModal.ofThePlatform"
-msgstr ""
+msgstr "della piattaforma."
 
 #. [legalContentsModal.title]
 #. defaultMessage is:
 #. Accept the legal contents
 #: messages.json
 msgid "legalContentsModal.title"
-msgstr ""
+msgstr "Accetto i contenuti legali"
 
 #. [legalNotice.headerTitle]
 #. defaultMessage is:
@@ -4963,11 +4901,7 @@ msgstr "Il tuo account è stato creato"
 #. A confirmation e-mail has been sent to your account and should be in your inbox in a few minutes. It contains a confirmation link, please click on it in order to confirm your e-mail address. Check your spam folder if you did not receive a confirmation e-mail.
 #: messages.json
 msgid "login.accountCreatedMsg"
-msgstr ""
-"Ti abbiamo inviato un’e-mail di conferma e dovresti riceverla nella tua "
-"casella di posta tra alcuni minuti. Contiene un link di conferma, cliccaci "
-"sopra per confermare il tuo indirizzo e-mail. Verifica la casella di posta "
-"indesiderata se non hai ricevuto nessuna e-mail di conferma."
+msgstr "Ti abbiamo inviato un’e-mail di conferma e dovresti riceverla nella tua casella di posta tra alcuni minuti. Contiene un link di conferma, cliccaci sopra per confermare il tuo indirizzo e-mail. Verifica la casella di posta indesiderata se non hai ricevuto nessuna e-mail di conferma."
 
 #. [login.alreadyAccount]
 #. defaultMessage is:
@@ -5160,9 +5094,7 @@ msgstr "Ops! Sembra esserci un problema da parte nostra. Riprova."
 #. Great! An email has been sent to your account. Make sure to check your spam folder as well
 #: messages.json
 msgid "login.passwordChangeRequestSuccess"
-msgstr ""
-"Ottimo! Ti abbiamo inviato un’e-mail. Controlla anche la casella di posta "
-"indesiderata"
+msgstr "Ottimo! Ti abbiamo inviato un’e-mail. Controlla anche la casella di posta indesiderata"
 
 #. [login.passwordRequirementIntro]
 #. defaultMessage is:
@@ -5198,10 +5130,7 @@ msgstr "Richiesta di modifica password"
 #. We have sent you an email with a temporary connection link. Please use that link to log in and change your password. Make sure to check your spam folder if an email is not in your inbox
 #: messages.json
 msgid "login.sendPwdMsg"
-msgstr ""
-"Ti abbiamo inviato un’e-mail con un link di connessione temporaneo. Usa "
-"questo link per accedere e modificare la password. Verifica la casella di "
-"posta indesiderata se non hai ricevuto nessuna e-mail"
+msgstr "Ti abbiamo inviato un’e-mail con un link di connessione temporaneo. Usa questo link per accedere e modificare la password. Verifica la casella di posta indesiderata se non hai ricevuto nessuna e-mail"
 
 #. [login.signUp]
 #. defaultMessage is:
@@ -5336,7 +5265,7 @@ msgstr "Spiacente, questa pagina non esiste"
 #. Something went wrong when loading this post.
 #: messages.json
 msgid "postLoadError"
-msgstr ""
+msgstr "Qualcosa è andato storto nel caricare questo post."
 
 #. [privacyPolicy.headerTitle]
 #. defaultMessage is:
@@ -5390,21 +5319,21 @@ msgstr "Crea un account"
 #. Delete my account and my data
 #: messages.json
 msgid "profile.deleteMyAccountConfirmation"
-msgstr ""
+msgstr "Elimina il mio account e i miei dati"
 
 #. [profile.deleteMyAccountModal]
 #. defaultMessage is:
 #. Are you sure you want to permanently delete your account and all of your personal data? By validating, you will no longer be able to contribute to the consultation.
 #: messages.json
 msgid "profile.deleteMyAccountModal"
-msgstr ""
+msgstr "Vuoi davvero eliminare definitivamente il tuo account e tutti i tuoi dati personali? Se confermi non potrai più contribuire alla concertazione."
 
 #. [profile.deleteMyAccountText]
 #. defaultMessage is:
 #. By deleting your account, you permanently delete all of your personal data and your account. You will no longer be able to contribute to the debate without an account.
 #: messages.json
 msgid "profile.deleteMyAccountText"
-msgstr ""
+msgstr "Eliminando il tuo account, elimini definitivamente tutti i tuoi dati personali oltre al tuo account. Senza un account non potrai più contribuire al dibattito."
 
 #. [profile.email]
 #. defaultMessage is:
@@ -5523,8 +5452,7 @@ msgstr "La nuova password deve essere diversa dalla password attuale."
 #. The new password has to be different than the last 5 passwords you set.
 #: messages.json
 msgid "profile.updateUser.errorMessage.5"
-msgstr ""
-"La nuova password deve essere diversa dalle ultima 5 password impostate."
+msgstr "La nuova password deve essere diversa dalle ultima 5 password impostate."
 
 #. [profile.userName]
 #. defaultMessage is:
@@ -5546,7 +5474,7 @@ msgstr "Informazioni personali"
 #. Refuse
 #: messages.json
 msgid "refuse"
-msgstr ""
+msgstr "Rifiuto"
 
 #. [resourcesCenter.defaultHeaderTitle]
 #. defaultMessage is:
@@ -5708,8 +5636,7 @@ msgstr "Non è stato trovato nessun risultato per {query}."
 #. No results found for {query}. Did you mean {suggestion}?
 #: messages.json
 msgid "search.NoHits.NoResultsFoundDidYouMean"
-msgstr ""
-"Non è stato trovato nessun risultato per {query}. Intendevi {suggestion}?"
+msgstr "Non è stato trovato nessun risultato per {query}. Intendevi {suggestion}?"
 
 #. [search.NoHits.SearchWithoutFilters]
 #. defaultMessage is:
@@ -5960,8 +5887,7 @@ msgstr "Ricerca eseguita nella sezione “annuncio” di questa discussione"
 #. Search done in the "What you need to know" section of this discussion
 #: messages.json
 msgid "search.search_come_from_what_you_need_to_know"
-msgstr ""
-"Ricerca eseguita nella sezione “Cosa devi sapere” di questa discussione"
+msgstr "Ricerca eseguita nella sezione “Cosa devi sapere” di questa discussione"
 
 #. [search.searchbox.placeholder]
 #. defaultMessage is:
@@ -6202,9 +6128,7 @@ msgstr "Torna alla home"
 #. You are not authorized to access the administration section. Please contact the administrator of the website.
 #: messages.json
 msgid "unauthorizedAdministration.unauthorizedMessage"
-msgstr ""
-"Non sei autorizzato ad accedere alla sezione amministrativa. Contatta "
-"l’amministratore del sito."
+msgstr "Non sei autorizzato ad accedere alla sezione amministrativa. Contatta l’amministratore del sito."
 
 #. [userGuidelines.headerTitle]
 #. defaultMessage is:
@@ -6219,14 +6143,14 @@ msgstr "Note legali"
 #. I have read and I accept the 
 #: messages.json
 msgid "userGuidelines.iAccept"
-msgstr ""
+msgstr "Ho letto e accetto"
 
 #. [userGuidelines.link]
 #. defaultMessage is:
 #. the user guidelines
 #: messages.json
 msgid "userGuidelines.link"
-msgstr ""
+msgstr "le linee guida per l’utente"
 
 #. [validate]
 #. defaultMessage is:
