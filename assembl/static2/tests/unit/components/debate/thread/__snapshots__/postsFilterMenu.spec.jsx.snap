@@ -74,6 +74,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-reverseChronologicalTop-input"
             name="postsOrder"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -102,6 +103,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={true}
             id="postsFilterItem-reverseChronologicalLast-input"
             name="postsOrder"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -130,6 +132,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-chronologicalTop-input"
             name="postsOrder"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -158,6 +161,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-reverseChronologicalFlat-input"
             name="postsOrder"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -186,6 +190,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-popularityFlat-input"
             name="postsOrder"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -232,6 +237,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={true}
             id="postsFilterItem-display-full-input"
             name="postsDisplay"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -260,6 +266,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-display-summary-input"
             name="postsDisplay"
+            onChange={[Function]}
             type="radio"
           />
            
@@ -306,6 +313,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-filter-onlyMyPosts-input"
             name="onlyMyPosts"
+            onChange={[Function]}
             type="checkbox"
           />
            
@@ -334,6 +342,7 @@ exports[`PostsFilterMenu component should render a filter with sort by recently 
             checked={false}
             id="postsFilterItem-filter-myPostsAndAnswers-input"
             name="myPostsAndAnswers"
+            onChange={[Function]}
             type="checkbox"
           />
            

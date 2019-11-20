@@ -1,12 +1,13 @@
 // @flow
 import React from 'react';
 import { Button } from 'react-bootstrap';
-import { graphql, type DocumentNode, type TVariables } from 'react-apollo';
+import { compose, type DocumentNode, graphql, type TVariables } from 'react-apollo';
 import { Translate } from 'react-redux-i18n';
+import { withRouter } from 'react-router';
 
-import { displayModal, closeModal } from '../../../utils/utilityManager';
+import { closeModal, displayModal } from '../../../utils/utilityManager';
 import deletePostMutation from '../../../graphql/mutations/deletePost.graphql';
-
+import HashtagsQuery from '../../../graphql/HashtagsQuery.graphql';
 import DeletePostIcon from '../../common/icons/deletePostIcon/deletePostIcon';
 
 type RefetchQuery = {
@@ -87,4 +88,21 @@ DeletePostButton.defaultProps = {
   onDeleteCallback: null
 };
 
-export default graphql(deletePostMutation, { name: 'deletePost' })(DeletePostButton);
+export default compose(
+  withRouter,
+  graphql(deletePostMutation, {
+    name: 'deletePost',
+    options: (props) => {
+      const ideaId = props.questionId
+        || props.themeId
+        || (props.params
+          && (props.params.themeId || props.params.questionId));
+      return {
+        refetchQueries: [{
+          query: HashtagsQuery,
+          variables: { ideaId: ideaId }
+        }]
+      };
+    }
+  })
+)(DeletePostButton);

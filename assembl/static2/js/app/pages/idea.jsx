@@ -35,6 +35,7 @@ import VoteSession from './voteSession';
 import { displayAlert } from '../utils/utilityManager';
 import { DebateContext } from '../app';
 import { defaultOrderPolicy } from '../components/debate/common/postsFilter/policies';
+import { setThreadPostsFilterHashtags } from '../actions/threadFilterActions';
 
 const deletedPublicationStates = Object.keys(DeletedPublicationStates);
 
@@ -51,6 +52,7 @@ type Props = {
   isHarvesting: boolean,
   lang: string,
   location: { state: { callback: string } },
+  onHashtagClick: ((href: string) => void) | null,
   phaseId: string,
   postsDisplayPolicy: PostsDisplayPolicy,
   postsMustBeRefetched: boolean,
@@ -221,17 +223,21 @@ class Idea extends React.Component<Props> {
     const { hash } = window.location;
     if (hash !== '') {
       const id = hash.split('#')[1].split('?')[0];
-      const allPosts = {};
+      const allPosts: {[key: string]: (Post | null)} = {};
       edges.forEach((e) => {
         allPosts[e.node.id] = e.node;
       });
-      let post = allPosts[id];
-      if (!post) {
+      if (!allPosts[id]) {
         return null;
       }
 
+      let post: Post = allPosts[id];
       while (post.parentId) {
-        post = allPosts[post.parentId];
+        if (allPosts[post.parentId]) {
+          post = allPosts[post.parentId];
+        } else {
+          break;
+        }
       }
       const topPostId = post.id;
       const index = topPosts.findIndex(value => value.id === topPostId);
@@ -272,6 +278,7 @@ class Idea extends React.Component<Props> {
       ideaWithPostsData,
       identifier,
       messageViewOverride,
+      onHashtagClick,
       phaseId,
       routerParams,
       semanticAnalysisForThematicData,
@@ -311,6 +318,7 @@ class Idea extends React.Component<Props> {
       messageColumns: messageColumns,
       messageViewOverride: messageViewOverride,
       noRowsRenderer: noRowsRenderer,
+      onHashtagClick: onHashtagClick,
       phaseId: phaseId,
       postsDisplayPolicy: this.props.threadFilter.postsDisplayPolicy,
       refetchIdea: refetchIdea,
@@ -389,7 +397,8 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   updateContentLocaleMapping: info => dispatch(updateContentLocale(info)),
   toggleHarvesting: () => dispatch(toggleHarvestingAction()),
-  putTagsInStore: tags => dispatch(updateTags(tags))
+  putTagsInStore: tags => dispatch(updateTags(tags)),
+  setPostsFilterHashtags: (hashtag: string) => dispatch(setThreadPostsFilterHashtags([hashtag]))
 });
 
 const IdeaWithPosts = compose(
@@ -403,7 +412,8 @@ type SwitchViewProps = {
   isHarvestable: boolean,
   messageViewOverride: string,
   modifyContext: (newState: Object) => void,
-  threadFilter: PostsFilterState
+  threadFilter: PostsFilterState,
+  setPostsFilterHashtags: Function
 };
 
 class SwitchView extends React.Component<SwitchViewProps> {
@@ -434,9 +444,11 @@ class SwitchView extends React.Component<SwitchViewProps> {
     return (
       <IdeaWithPosts
         {...props}
+        onHashtagClick={props.setPostsFilterHashtags}
         postsOrder={props.threadFilter.postsOrderPolicy.graphqlPostsOrder}
         onlyMyPosts={props.threadFilter.postsFiltersStatus.onlyMyPosts} // fixme: more generic
         myPostsAndAnswers={props.threadFilter.postsFiltersStatus.myPostsAndAnswers} // fixme: more generic
+        hashtags={props.threadFilter.postsFiltersStatus.hashtags} // fixme: more generic
         additionalFields={props.messageViewOverride === MESSAGE_VIEW.brightMirror}
       />
     );

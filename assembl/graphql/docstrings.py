@@ -70,6 +70,11 @@ class SchemaTags:
     limit = "An integer to define the number of tags to retrieve"
 
 
+class SchemaHashtags:
+    __doc__ = """The list of hashtags available on the idea."""
+    idea_id = "The id of the idea"
+
+
 class Discussion:
     __doc__ = """The Discussion object. This object describes certain parts of the core state of the debate."""
     id = Default.object_id % ("Discussion",)
@@ -426,6 +431,7 @@ class Idea:
     posts_order = "Order of the posts to get"
     only_my_posts = "Get posts created by authenticated user only"
     my_posts_and_answers = "Get posts created by authenticated user and their answers"
+    hashtags = "Get posts that contain those hashtags"
     synthesis_title = Default.string_entry % ("Synthesis title",)
     children = """A list of all immediate child Ideas on the Idea, exluding any hidden Ideas. The RootIdea will not be shown here, for example.
     The subchildren of each subIdea is not shown here."""
@@ -444,16 +450,17 @@ class Idea:
 class Question:
     __doc__ = """A Question is a subtype of a Thematic, where each Thematic can ask multiple Questions in the Survey Phase.
     Each Question can have many Posts associated to it as a response."""
+    has_pending_posts = """Whether the question has pending posts or not."""
+    hashtags = "Get posts that contain those hashtags"
     id = Default.object_id % ("Question",)
     num_posts = IdeaInterface.num_posts
     num_contributors = IdeaInterface.num_contributors
+    only_my_posts = "Get posts created by authenticated user only"
+    posts = """The list of all posts under the Question."""
+    posts_order = "Order of the posts to get"
     title = """The Question to be asked itself, in the language given."""
     title_entries = Default.langstring_entries % ("")
-    posts = """The list of all posts under the Question."""
     total_sentiments = """The count of total sentiments """
-    has_pending_posts = """Whether the question has pending posts or not."""
-    only_my_posts = "Get posts created by authenticated user only"
-    posts_order = "Order of the posts to get"
 
 
 class QuestionInput:

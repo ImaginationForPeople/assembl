@@ -448,6 +448,10 @@ const Translations = {
         backToQuestions: "Retour aux questions"
       },
       thread: {
+        hashtagsFilter: {
+          noOption: "Aucun tag n'a encore été utilisé dans cette section",
+          placeholder: "Recherche ta ville, ton pays. Exemple #Lille..."
+        },
         messageTranslatedFrom: "Ce message a été traduit du texte %{language}.",
         messageOriginallyIn: "Ce message a été rédigé en %{language}.",
         translateAllMessagesIn: "Je souhaite traduire tous les messages rédigés en %{language}.",
@@ -466,6 +470,7 @@ const Translations = {
           summary: "Aperçu des messages"
         },
         postsFilters: {
+          hashtags: "Hashtags",
           myPostsAndAnswers: "Messages en réponse à mes contributions",
           onlyMyPosts: "Mes contributions"
         },
@@ -2677,6 +2682,10 @@ const Translations = {
         backToQuestions: "Back to questions"
       },
       thread: {
+        hashtagsFilter: {
+          noOption: "No tag have been used in this section for the moment",
+          placeholder: "Search for your city, your country, etc. For instance, #Lille ..."
+        },
         messageTranslatedFrom: "This message has been translated from %{language}.",
         messageOriginallyIn: "This message has been written in %{language}",
         translateAllMessagesIn: "Translate all messages posted in %{language}.",
@@ -2695,6 +2704,7 @@ const Translations = {
           summary: "Message previews"
         },
         postsFilters: {
+          hashtags: "Hashtags",
           myPostsAndAnswers: "Answers to my posts",
           onlyMyPosts: "My posts"
         },
