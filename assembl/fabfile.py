@@ -346,7 +346,15 @@ def create_backup_rc():
 
 
 @task
-def create_local_ini():
+def create_local_ini_and_restart():
+    """Update configuration and dependent files; restart supervisor"""
+    create_local_ini(True)
+    create_supervisor_ini()
+    supervisor_restart()
+
+
+@task
+def create_local_ini(will_restart=False):
     """Replace the local.ini file with one composed from the current .rc file"""
     if not running_locally():
         execute(update_vendor_config)
@@ -392,6 +400,8 @@ def create_local_ini():
         finally:
             os.unlink(random_file_name)
             os.unlink(local_file_name)
+    if not will_restart:
+        print "Do not forget to restart supervisor!"
 
 
 def get_random_templates():
@@ -1424,6 +1434,12 @@ def restart_bluenove_actionable():
 
 
 @task
+def create_supervisor_ini():
+    """Create the supervisor_ini file from the local.ini file"""
+    venvcmd('assembl-ini-files populate %s' % (env.ini_file))
+
+
+@task
 def app_setup(backup=False):
     """Setup the environment so the application can run"""
     if not env.package_install:
@@ -1432,7 +1448,7 @@ def app_setup(backup=False):
     if not exists(env.ini_file):
         execute(create_local_ini)
     if not backup:
-        venvcmd('assembl-ini-files populate %s' % (env.ini_file))
+        create_supervisor_ini()
     if not env.is_production_env:
         with cd(env.projectpath):
             has_pre_commit = run('cat requirements.txt|grep pre-commit', warn_only=True)
@@ -2799,7 +2815,7 @@ def docker_startup():
     if not exists(env.ini_file):
         execute(create_local_ini)
     if not exists("supervisord.conf"):
-        venvcmd('assembl-ini-files populate %s' % (env.ini_file))
+        create_supervisor_ini()
     # Copy the static file. This needs improvements.
     copied = False
     if not exists("/opt/assembl_static/static"):
