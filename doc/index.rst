@@ -21,6 +21,7 @@ Installation and administration
    themes
    install_sentry
    install_matomo
+   bigdatext
 
 Stack and architecture
 ----------------------
